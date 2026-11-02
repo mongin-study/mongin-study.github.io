@@ -137,9 +137,9 @@
       if (letters.some(function (ch, i) { return letters.indexOf(ch) !== i; })) return null;
       q.kind = "order";
       q.hint = "Tap the letters";
-      q.tokens = letters.map(function (ch, i) {
+      q.tokens = HV.util.shuffle(letters.map(function (ch, i) {
         return { id: "t" + i, text: ch.toUpperCase(), order: i };
-      });
+      }));
       return q;
     }
     if (kind === "order") {
