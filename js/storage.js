@@ -227,7 +227,8 @@
 
   function resetChild(child) {
     if (!data().kids[child]) return;
-    data().kids[child] = { daily: {} };
+    var epoch = Number(data().kids[child].resetEpoch) || 0;
+    data().kids[child] = { daily: {}, resetEpoch: epoch };
     save();
   }
 
@@ -286,40 +287,55 @@
     };
   }
 
+  function itemKey(item) {
+    if (item && item.nonce) return "n:" + item.nonce;
+    return ["a", item.at || 0, item.id || "", item.correct || 0, item.total || 0, item.stars || 0].join("|");
+  }
+
+  function cleanItem(item) {
+    return {
+      id: String(item.id || ""),
+      title: String(item.title || ""),
+      category: String(item.category || ""),
+      correct: Math.max(0, Number(item.correct) || 0),
+      total: Math.max(0, Number(item.total) || 0),
+      stars: U.clamp(Number(item.stars) || 0, 0, 3),
+      at: Number(item.at) || 0,
+      nonce: String(item.nonce || "")
+    };
+  }
+
   function importPayload(obj) {
     validate(obj);
-    var next = emptyData();
+    var current = data();
     var settings = obj.data.settings || {};
-    next.settings.sound = typeof settings.sound === "boolean" ? settings.sound : true;
-    next.settings.speech = typeof settings.speech === "boolean" ? settings.speech : true;
+    if (typeof settings.sound === "boolean") current.settings.sound = settings.sound;
+    if (typeof settings.speech === "boolean") current.settings.speech = settings.speech;
     if (settings.targets && validTargets(settings.targets.mon)) {
-      next.settings.targets.mon = settings.targets.mon.map(Number);
+      current.settings.targets.mon = settings.targets.mon.map(Number);
     }
     if (settings.targets && validTargets(settings.targets.gin)) {
-      next.settings.targets.gin = settings.targets.gin.map(Number);
+      current.settings.targets.gin = settings.targets.gin.map(Number);
     }
     ["mon", "gin"].forEach(function (id) {
-      var daily = {};
-      var src = obj.data.kids[id].daily;
+      var kid = current.kids[id];
+      if (!kid.daily || typeof kid.daily !== "object") kid.daily = {};
+      var src = obj.data.kids[id].daily || {};
       Object.keys(src).forEach(function (date) {
-        daily[date] = {
-          items: src[date].items.slice(0, 200).map(function (item) {
-            return {
-              id: String(item.id || ""),
-              title: String(item.title || ""),
-              category: String(item.category || ""),
-              correct: Math.max(0, Number(item.correct) || 0),
-              total: Math.max(0, Number(item.total) || 0),
-              stars: U.clamp(Number(item.stars) || 0, 0, 3),
-              at: Number(item.at) || 0,
-              nonce: String(item.nonce || "")
-            };
-          })
-        };
+        var map = {};
+        var existing = (kid.daily[date] && kid.daily[date].items) || [];
+        existing.forEach(function (item) { map[itemKey(item)] = item; });
+        src[date].items.slice(0, 200).forEach(function (item) {
+          var clean = cleanItem(item);
+          map[itemKey(clean)] = clean;
+        });
+        var list = Object.keys(map).map(function (k) { return map[k]; });
+        list.sort(function (a, b) { return (a.at || 0) - (b.at || 0); });
+        kid.daily[date] = { items: list };
       });
-      next.kids[id] = { daily: daily };
+      var importedEpoch = Number(obj.data.kids[id].resetEpoch) || 0;
+      if (importedEpoch > (Number(kid.resetEpoch) || 0)) kid.resetEpoch = importedEpoch;
     });
-    mem = next;
     if (!save()) throw new Error("Không lưu được trên máy này.");
   }
 

@@ -63,6 +63,16 @@
     return child === "gin" ? { rate: 0.86, pitch: 1.12 } : { rate: 0.95, pitch: 1.02 };
   }
 
+  function kidPhoto(child, size) {
+    return el("img", {
+      class: "avatar avatar-" + size,
+      src: "assets/kids/" + child + ".webp",
+      alt: "",
+      width: "512",
+      height: "512"
+    });
+  }
+
   function cleanup() {
     state.timers.forEach(function (t) { clearTimeout(t); });
     state.timers = [];
@@ -108,6 +118,7 @@
       opts.back
         ? el("button", { class: "icon-btn", "data-go": opts.back, "aria-label": "Quay lại", text: "←" })
         : el("span", { class: "icon-spacer" }),
+      opts.child === "mon" || opts.child === "gin" ? kidPhoto(opts.child, "sm") : null,
       el("div", { class: "top-title" }, [
         el("strong", { text: opts.title }),
         opts.sub ? el("span", { text: opts.sub }) : null
@@ -175,10 +186,10 @@
     if (id === "mon") HV.art.flakes(btn, 10);
     var art = el("div", { class: "card-art" });
     if (id === "mon") {
-      art.appendChild(HV.art.princess());
+      art.appendChild(kidPhoto("mon", "lg"));
       art.appendChild(HV.art.puppy());
     } else {
-      art.appendChild(HV.art.tiger());
+      art.appendChild(kidPhoto("gin", "lg"));
       art.appendChild(HV.art.car());
     }
     btn.appendChild(art);
@@ -481,11 +492,11 @@
     hero.appendChild(copy);
     var cast = el("div", { class: "board-cast" });
     if (child === "mon") {
-      cast.appendChild(HV.art.princess());
+      cast.appendChild(kidPhoto("mon", "board"));
       cast.appendChild(HV.art.tower());
       cast.appendChild(HV.art.puppy());
     } else {
-      cast.appendChild(HV.art.tiger());
+      cast.appendChild(kidPhoto("gin", "board"));
       cast.appendChild(HV.art.car());
     }
     hero.appendChild(cast);
@@ -735,7 +746,13 @@
   function onClick(e) {
     var goEl = e.target.closest("[data-go]");
     if (goEl) {
-      location.hash = goEl.getAttribute("data-go");
+      var dest = goEl.getAttribute("data-go");
+      if (state.session && state.session.phase === "quiz") {
+        state.pendingExit = dest;
+        openModal({ type: "quit" });
+        return;
+      }
+      location.hash = dest;
       return;
     }
     var actEl = e.target.closest("[data-act]");
@@ -760,13 +777,19 @@
       return;
     }
     if (act === "modal-close") {
+      state.pendingExit = null;
       closeModal();
       return;
     }
     if (act === "quit-yes") {
+      var dest = state.pendingExit;
+      state.pendingExit = null;
       closeModal();
-      var backChild = state.session && state.session.entry ? state.session.entry.child : "";
-      location.hash = backChild ? "#/c/" + backChild : "#/";
+      if (!dest) {
+        var backChild = state.session && state.session.entry ? state.session.entry.child : "";
+        dest = backChild ? "#/c/" + backChild : "#/";
+      }
+      location.hash = dest;
       return;
     }
     if (act === "replay") {
@@ -892,7 +915,10 @@
   };
 
   function boot() {
-    document.addEventListener("pointerdown", function () { HV.audio.unlock(); }, { passive: true });
+    document.addEventListener("pointerdown", function () {
+      HV.audio.unlock();
+      if (HV.speech.unlock) HV.speech.unlock();
+    }, { passive: true });
     window.addEventListener("hashchange", onRoute);
     var app = document.getElementById("app");
     app.addEventListener("click", onClick);

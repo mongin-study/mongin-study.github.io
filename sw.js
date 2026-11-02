@@ -1,4 +1,4 @@
-var CACHE = "hoc-vui-v2";
+var CACHE = "hoc-vui-v3";
 var ASSETS = [
   "./",
   "./index.html",
@@ -22,7 +22,10 @@ var ASSETS = [
   "./fonts/nunito-700-latin.woff2",
   "./fonts/nunito-700-vietnamese.woff2",
   "./fonts/nunito-800-latin.woff2",
-  "./fonts/nunito-800-vietnamese.woff2"
+  "./fonts/nunito-800-vietnamese.woff2",
+  "./assets/kids/mon.webp",
+  "./assets/kids/gin.webp",
+  "./assets/audio/manifest.json"
 ];
 
 self.addEventListener("install", function (event) {

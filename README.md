@@ -119,7 +119,7 @@ Question kinds:
 
 `scene.layout` may be `equation`, `digit`, `emojis`, `shapes`, `pattern`, `mirror`, `zones`, `sides`, `blocks`, `pairs`, or `bond`. Text is shown as text, not HTML.
 
-`speak` is read with the Web Speech API (`vi-VN`) when the tablet has a Vietnamese voice. Sounds are synthesized with the Web Audio API.
+The speaker button plays recorded Vietnamese (voice HoaiMy) from `assets/audio/`. Questions are full clips or stitched from number and phrase clips, so an iPad does not read Vietnamese with an English voice. If a line cannot be built from clips, the app waits for `speechSynthesis` voices and speaks only with a `vi` voice (iOS: Linh). `+`, `−`, `=`, `?`, emoji, and digits are turned into Vietnamese words before anything is spoken. Other sounds use the Web Audio API.
 
 ## GitHub Pages
 
@@ -145,7 +145,7 @@ firestore.rules         read/write for signed-in users under /families/{fam}/**
 sw.js                   offline cache
 ```
 
-Original drawings only: an ice princess, a golden puppy, a stone tower with a golden braid and lanterns, a tiger, and a toy car. No studio artwork.
+Mon and Gin’s photos are the round avatars on the choose-child screen, in each child’s header, and on the leaderboard (`assets/kids/mon.webp`, `assets/kids/gin.webp`). The golden puppy and the tower stay with Mon, and the toy car stays with Gin. The ice princess and the tiger still show when a round is finished. No studio artwork.
 
 Nunito is under the SIL Open Font License (`fonts/OFL.txt`).
 

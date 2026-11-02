@@ -155,6 +155,12 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .illu-princess, .illu-tiger { width: min(46%, 180px); }
 .illu-puppy, .illu-car { width: min(42%, 170px); }
 .illu svg { width: 100%; height: auto; display: block; }
+.illu-shape { width: max-content; max-width: 100%; }
+.illu-shape svg { width: auto; height: auto; max-width: 100%; }
+.avatar { display: block; flex: none; height: auto; }
+.avatar-lg { width: min(46%, 200px); }
+.avatar-sm { width: 56px; height: 56px; }
+.avatar-board { width: 148px; }
 .kid-kicker { margin-top: 8px; font-weight: 800; }
 .kid-card h2 { font-size: clamp(42px, 5vw, 64px); }
 .kid-age { font-size: 20px; font-weight: 800; opacity: 0.8; }
@@ -391,9 +397,10 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
   animation: fall linear infinite;
 }
 .lanterns { position: absolute; inset: 0; pointer-events: none; }
+.board-hero, .board-copy, .day-row, .miles, .past { position: relative; z-index: 1; }
 .lanterns i {
   position: absolute;
-  top: 74px;
+  top: 132px;
   width: 16px;
   height: 22px;
   background: #f6d56a;

@@ -362,11 +362,7 @@
         var total = cfg.total || 10;
         var known = rnd(0, total - 1);
         var ans = total - known;
-        var flipped = Math.random() < 0.5;
-        var text = flipped ? "? + " + known + " = " + total : known + " + ? = " + total;
-        var speak = flipped
-          ? "Số nào cộng " + read(known) + " bằng " + read(total) + "?"
-          : read(known) + " cộng số nào bằng " + read(total) + "?";
+        var speak = read(known) + " cộng số nào bằng " + read(total) + "?";
         return qKey({
           prompt: "Điền số còn thiếu",
           speak: speak,
@@ -918,7 +914,7 @@
         var correctA = mode === "less" ? a < b : a > b;
         return qChoice({
           prompt: prompt,
-          speak: prompt.replace("?", "") + " nào?",
+          speak: prompt,
           variant: "cards",
           explain: "Một bên có " + a + ", bên kia có " + b + ".",
           options: [
