@@ -1,4 +1,4 @@
-var CACHE = "hoc-vui-v5";
+var CACHE = "hoc-vui-v6";
 var ASSETS = [
   "./",
   "./index.html",
@@ -11,6 +11,7 @@ var ASSETS = [
   "./js/art.js",
   "./js/generators.js",
   "./js/catalog.js",
+  "./js/learn.js",
   "./js/engine.js",
   "./js/app.js",
   "./js/firebase-sync.js",
@@ -25,7 +26,8 @@ var ASSETS = [
   "./fonts/nunito-800-vietnamese.woff2",
   "./assets/kids/mon.webp",
   "./assets/kids/gin.webp",
-  "./assets/audio/manifest.json"
+  "./assets/audio/manifest.json",
+  "./assets/audio/en/manifest.json"
 ];
 
 self.addEventListener("install", function (event) {

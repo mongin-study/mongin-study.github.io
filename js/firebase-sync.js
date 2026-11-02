@@ -56,6 +56,7 @@ function plainItem(item) {
     id: String(item.id || ""),
     title: String(item.title || ""),
     category: String(item.category || ""),
+    subject: item.subject === "english" || item.subject === "vietnamese" ? item.subject : "math",
     correct: Number(item.correct) || 0,
     total: Number(item.total) || 0,
     stars: Math.max(0, Math.min(3, Number(item.stars) || 0)),

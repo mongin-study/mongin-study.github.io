@@ -7,6 +7,8 @@
   var manifest = null;
   var manifestKeys = [];
   var loading = null;
+  var enManifest = null;
+  var enLoading = null;
   var buffers = {};
   var voiceCache = null;
   var last = { mode: "", norm: "", keys: [] };
@@ -57,6 +59,30 @@
         return manifest;
       });
     return loading;
+  }
+
+  function normalizeEn(text) {
+    var s = String(text || "").normalize("NFC");
+    s = s.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F1E6}-\u{1F1FF}\uFE0F\u200D]/gu, " ");
+    s = s.replace(/[?？!！.,;:"'“”‘’()[\]{}]/g, " ");
+    s = s.replace(/\s+/g, " ").trim().toLowerCase();
+    return s;
+  }
+
+  function loadEn() {
+    if (enManifest) return Promise.resolve(enManifest);
+    if (enLoading) return enLoading;
+    enLoading = fetch(assetUrl("assets/audio/en/manifest.json"))
+      .then(function (res) { return res.ok ? res.json() : { clips: {} }; })
+      .then(function (json) {
+        enManifest = (json && json.clips) || {};
+        return enManifest;
+      })
+      .catch(function () {
+        enManifest = {};
+        return enManifest;
+      });
+    return enLoading;
   }
 
   function tokenize(norm) {
@@ -129,12 +155,13 @@
     return 1;
   }
 
-  function playKeys(keys, opts, my, norm) {
+  function playKeys(keys, opts, my, norm, clipMap) {
+    var map = clipMap || manifest;
     var c = context();
     if (!c) return Promise.reject(new Error("no audio"));
     var rate = clipRate(opts);
     return Promise.all(keys.map(function (key) {
-      return loadBuffer(assetUrl(manifest[key]));
+      return loadBuffer(assetUrl(map[key]));
     })).then(function (bufs) {
       if (my !== epoch) return;
       if (c.state === "suspended") c.resume().catch(function () {});
@@ -151,7 +178,7 @@
         if (idx + 1 < keys.length && isNumberKey(keys[idx]) && isNumberKey(keys[idx + 1])) gap = 0.09;
         t += buf.duration / rate + gap;
       });
-      last = { mode: "clips", norm: norm, keys: keys.slice() };
+      last = { mode: "clips", lang: (opts && opts.lang) || "vi", norm: norm, keys: keys.slice() };
     });
   }
 
@@ -230,6 +257,46 @@
     });
   }
 
+  function pickEnVoice(voices) {
+    var list = [];
+    (voices || []).forEach(function (v) {
+      var lang = String(v.lang || "").toLowerCase().replace("_", "-");
+      if (lang.indexOf("en") === 0) list.push(v);
+    });
+    if (!list.length) return null;
+    var ana = null;
+    var us = null;
+    list.forEach(function (v) {
+      var name = String(v.name || "").toLowerCase();
+      var lang = String(v.lang || "").toLowerCase().replace("_", "-");
+      if (name.indexOf("ana") >= 0) ana = ana || v;
+      if (lang === "en-us") us = us || v;
+    });
+    return ana || us || list[0];
+  }
+
+  function speakEnVoice(norm, opts, my) {
+    if (!window.speechSynthesis || !norm) return;
+    whenVoices().then(function (voices) {
+      if (my !== epoch) return;
+      var voice = pickEnVoice(voices);
+      if (!voice) return;
+      var lang = String(voice.lang || "").toLowerCase();
+      if (lang.indexOf("en") !== 0) return;
+      try {
+        window.speechSynthesis.cancel();
+        var u = new SpeechSynthesisUtterance(norm);
+        u.lang = "en-US";
+        u.voice = voice;
+        u.rate = opts && opts.rate ? opts.rate : 0.92;
+        u.pitch = opts && opts.pitch ? opts.pitch : 1.02;
+        u.onerror = function () {};
+        window.speechSynthesis.speak(u);
+        last = { mode: "en", norm: norm, keys: [], voice: voice.name || voice.lang };
+      } catch (e) {}
+    });
+  }
+
   function speak(text, opts) {
     if (!enabled() || !text) {
       cancel();
@@ -237,6 +304,24 @@
     }
     cancel();
     var my = epoch;
+    var lang = opts && opts.lang === "en" ? "en" : "vi";
+    if (lang === "en") {
+      var enNorm = normalizeEn(text);
+      if (!enNorm) return;
+      loadEn().then(function () {
+        if (my !== epoch) return;
+        if (enManifest[enNorm]) {
+          playKeys([enNorm], opts, my, enNorm, enManifest).catch(function () {
+            if (my === epoch) speakEnVoice(enNorm, opts, my);
+          });
+          return;
+        }
+        speakEnVoice(enNorm, opts, my);
+      }).catch(function () {
+        if (my === epoch) speakEnVoice(enNorm, opts, my);
+      });
+      return;
+    }
     var norm = normalize(text);
     if (!norm) return;
     loadManifest().then(function () {
@@ -265,6 +350,7 @@
   if (typeof window !== "undefined") {
     window.addEventListener("pointerdown", unlock, { passive: true });
     loadManifest();
+    loadEn();
     whenVoices();
   }
 
@@ -273,7 +359,9 @@
     cancel: cancel,
     unlock: unlock,
     pickVoice: pickVoice,
+    pickEnVoice: pickEnVoice,
     normalize: normalize,
+    normalizeEn: normalizeEn,
     tokenize: function (text) { return tokenize(normalize(text)); },
     last: function () { return last; },
     supported: function () { return typeof window !== "undefined" && (!!window.speechSynthesis || !!manifest); }

@@ -62,13 +62,34 @@
     }
   }
 
+  function subjectId(item) {
+    return item && (item.subject === "english" || item.subject === "vietnamese") ? item.subject : "math";
+  }
+
+  function emptySubjectBucket() {
+    return {
+      math: { stars: 0, correct: 0, answered: 0, exercisesDone: 0 },
+      english: { stars: 0, correct: 0, answered: 0, exercisesDone: 0 },
+      vietnamese: { stars: 0, correct: 0, answered: 0, exercisesDone: 0 }
+    };
+  }
+
   function dayStats(bucket) {
     var items = bucket && Array.isArray(bucket.items) ? bucket.items : [];
+    var bySubject = emptySubjectBucket();
+    items.forEach(function (item) {
+      var slot = bySubject[subjectId(item)];
+      slot.stars += Number(item.stars) || 0;
+      slot.correct += Number(item.correct) || 0;
+      slot.answered += Number(item.total) || 0;
+      slot.exercisesDone += 1;
+    });
     return {
       exercisesDone: items.length,
       correct: items.reduce(function (s, i) { return s + (Number(i.correct) || 0); }, 0),
       answered: items.reduce(function (s, i) { return s + (Number(i.total) || 0); }, 0),
       stars: items.reduce(function (s, i) { return s + (Number(i.stars) || 0); }, 0),
+      bySubject: bySubject,
       items: items
     };
   }
@@ -80,6 +101,7 @@
     var correct = 0;
     var answered = 0;
     var exercisesDone = 0;
+    var bySubject = emptySubjectBucket();
     for (var i = 0; i < 7; i++) {
       var date = U.addDays(weekStart, i);
       var stats = dayStats(kid.daily[date]);
@@ -88,6 +110,12 @@
       correct += stats.correct;
       answered += stats.answered;
       exercisesDone += stats.exercisesDone;
+      ["math", "english", "vietnamese"].forEach(function (id) {
+        bySubject[id].stars += stats.bySubject[id].stars;
+        bySubject[id].correct += stats.bySubject[id].correct;
+        bySubject[id].answered += stats.bySubject[id].answered;
+        bySubject[id].exercisesDone += stats.bySubject[id].exercisesDone;
+      });
     }
     return {
       weekStart: weekStart,
@@ -96,6 +124,7 @@
       correct: correct,
       answered: answered,
       exercisesDone: exercisesDone,
+      bySubject: bySubject,
       days: days
     };
   }
@@ -121,6 +150,7 @@
     var correct = 0;
     var answered = 0;
     var rounds = 0;
+    var bySubject = emptySubjectBucket();
     Object.keys(kid.daily).forEach(function (date) {
       var stats = dayStats(kid.daily[date]);
       stars += stats.stars;
@@ -128,11 +158,17 @@
       answered += stats.answered;
       rounds += stats.exercisesDone;
       stats.items.forEach(function (item) {
+        var sid = subjectId(item);
+        bySubject[sid].stars += Number(item.stars) || 0;
+        bySubject[sid].correct += Number(item.correct) || 0;
+        bySubject[sid].answered += Number(item.total) || 0;
+        bySubject[sid].exercisesDone += 1;
         recent.push({
           date: date,
           id: item.id,
           title: item.title,
           category: item.category,
+          subject: sid,
           correct: Number(item.correct) || 0,
           total: Number(item.total) || 0,
           stars: Number(item.stars) || 0,
@@ -155,12 +191,12 @@
         b.lastAt = Math.max(b.lastAt, Number(item.at) || 0);
         b.title = item.title || b.title;
         byExercise[item.id] = b;
-        var c = byCategory[item.category] || { correct: 0, answered: 0, stars: 0, played: 0 };
+        var c = byCategory[sid + ":" + (item.category || "")] || { correct: 0, answered: 0, stars: 0, played: 0 };
+        byCategory[sid + ":" + (item.category || "")] = c;
         c.correct += Number(item.correct) || 0;
         c.answered += Number(item.total) || 0;
         c.stars += Number(item.stars) || 0;
         c.played += 1;
-        byCategory[item.category] = c;
       });
     });
     recent.sort(function (a, b) { return (b.at || 0) - (a.at || 0); });
@@ -171,6 +207,7 @@
       rounds: rounds,
       byExercise: byExercise,
       byCategory: byCategory,
+      bySubject: bySubject,
       recent: recent.slice(0, 40)
     };
   }
@@ -192,6 +229,7 @@
       id: String(round.id || ""),
       title: String(round.title || ""),
       category: String(round.category || ""),
+      subject: round.subject === "english" || round.subject === "vietnamese" ? round.subject : "math",
       correct: Number(round.correct) || 0,
       total: Number(round.total) || 0,
       stars: U.clamp(Number(round.stars) || 0, 0, 3),
@@ -297,6 +335,7 @@
       id: String(item.id || ""),
       title: String(item.title || ""),
       category: String(item.category || ""),
+      subject: item.subject === "english" || item.subject === "vietnamese" ? item.subject : "math",
       correct: Math.max(0, Number(item.correct) || 0),
       total: Math.max(0, Number(item.total) || 0),
       stars: U.clamp(Number(item.stars) || 0, 0, 3),

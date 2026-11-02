@@ -15,10 +15,22 @@
           "speak": "Mon có năm bông tuyết, được thêm ba bông. Có tất cả bao nhiêu?",
           "explain": "5 cộng 3 bằng 8.",
           "choices": [
-            { "text": "8", "correct": true },
-            { "text": "7", "correct": false },
-            { "text": "9", "correct": false },
-            { "text": "6", "correct": false }
+            {
+              "text": "8",
+              "correct": true
+            },
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "9",
+              "correct": false
+            },
+            {
+              "text": "6",
+              "correct": false
+            }
           ]
         },
         {
@@ -27,17 +39,32 @@
           "speak": "Cún Vàng mang sáu bông, Mon mang sáu bông. Có tất cả bao nhiêu?",
           "explain": "6 cộng 6 bằng 12.",
           "choices": [
-            { "text": "10", "correct": false },
-            { "text": "12", "correct": true },
-            { "text": "11", "correct": false },
-            { "text": "13", "correct": false }
+            {
+              "text": "10",
+              "correct": false
+            },
+            {
+              "text": "12",
+              "correct": true
+            },
+            {
+              "text": "11",
+              "correct": false
+            },
+            {
+              "text": "13",
+              "correct": false
+            }
           ]
         },
         {
           "kind": "keypad",
           "prompt": "Tính rồi điền số",
           "speak": "Bảy cộng tám bằng mấy?",
-          "scene": { "layout": "equation", "text": "7 + 8 = ?" },
+          "scene": {
+            "layout": "equation",
+            "text": "7 + 8 = ?"
+          },
           "answer": 15,
           "maxDigits": 2,
           "explain": "7 + 8 = 15."
@@ -46,12 +73,16 @@
           "kind": "keypad",
           "prompt": "Tính rồi điền số",
           "speak": "Mười bốn trừ năm bằng mấy?",
-          "scene": { "layout": "equation", "text": "14 − 5 = ?" },
+          "scene": {
+            "layout": "equation",
+            "text": "14 − 5 = ?"
+          },
           "answer": 9,
           "maxDigits": 2,
           "explain": "14 − 5 = 9."
         }
-      ]
+      ],
+      "subject": "math"
     },
     {
       "id": "daily-2026-11-02-mon-even",
@@ -65,25 +96,44 @@
           "kind": "choice",
           "prompt": "Số 8 là số chẵn hay số lẻ?",
           "speak": "Số tám là số chẵn hay số lẻ?",
-          "scene": { "layout": "pairs", "count": 8 },
+          "scene": {
+            "layout": "pairs",
+            "count": 8
+          },
           "explain": "8 chia hết thành từng cặp, nên là số chẵn.",
           "choices": [
-            { "text": "Chẵn", "correct": true },
-            { "text": "Lẻ", "correct": false }
+            {
+              "text": "Chẵn",
+              "correct": true
+            },
+            {
+              "text": "Lẻ",
+              "correct": false
+            }
           ]
         },
         {
           "kind": "choice",
           "prompt": "Số 11 là số chẵn hay số lẻ?",
           "speak": "Số mười một là số chẵn hay số lẻ?",
-          "scene": { "layout": "pairs", "count": 11 },
+          "scene": {
+            "layout": "pairs",
+            "count": 11
+          },
           "explain": "11 còn thừa 1 chấm, nên là số lẻ.",
           "choices": [
-            { "text": "Chẵn", "correct": false },
-            { "text": "Lẻ", "correct": true }
+            {
+              "text": "Chẵn",
+              "correct": false
+            },
+            {
+              "text": "Lẻ",
+              "correct": true
+            }
           ]
         }
-      ]
+      ],
+      "subject": "math"
     },
     {
       "id": "daily-2026-11-02-mon-seq",
@@ -93,7 +143,18 @@
       "subtitle": "Bài tạo tự động hôm nay",
       "icon": "➡️",
       "generator": "sequence",
-      "config": { "count": 4, "steps": [2, 5, 10], "length": 4, "max": 80, "input": "choice" }
+      "config": {
+        "count": 4,
+        "steps": [
+          2,
+          5,
+          10
+        ],
+        "length": 4,
+        "max": 80,
+        "input": "choice"
+      },
+      "subject": "math"
     },
     {
       "id": "daily-2026-11-02-gin-cars",
@@ -107,26 +168,57 @@
           "kind": "choice",
           "prompt": "Có bao nhiêu chiếc xe?",
           "speak": "Đếm các chiếc xe. Có bao nhiêu?",
-          "scene": { "layout": "emojis", "items": ["🚗", "🚗", "🚗"] },
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🚗",
+              "🚗",
+              "🚗"
+            ]
+          },
           "explain": "Có 3 chiếc xe.",
           "columns": 3,
           "choices": [
-            { "text": "2", "correct": false },
-            { "text": "3", "correct": true },
-            { "text": "4", "correct": false }
+            {
+              "text": "2",
+              "correct": false
+            },
+            {
+              "text": "3",
+              "correct": true
+            },
+            {
+              "text": "4",
+              "correct": false
+            }
           ]
         },
         {
           "kind": "choice",
           "prompt": "Có bao nhiêu chú cún?",
           "speak": "Đếm các chú cún. Có bao nhiêu?",
-          "scene": { "layout": "emojis", "items": ["🐶", "🐶"] },
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🐶",
+              "🐶"
+            ]
+          },
           "explain": "Có 2 chú cún.",
           "columns": 3,
           "choices": [
-            { "text": "1", "correct": false },
-            { "text": "2", "correct": true },
-            { "text": "3", "correct": false }
+            {
+              "text": "1",
+              "correct": false
+            },
+            {
+              "text": "2",
+              "correct": true
+            },
+            {
+              "text": "3",
+              "correct": false
+            }
           ]
         },
         {
@@ -137,7 +229,8 @@
           "answer": 3,
           "explain": "Đủ 3 ngôi sao rồi."
         }
-      ]
+      ],
+      "subject": "math"
     },
     {
       "id": "daily-2026-11-02-gin-shapes",
@@ -154,9 +247,24 @@
           "columns": 3,
           "explain": "Đó là hình tròn.",
           "choices": [
-            { "shape": "triangle", "color": "#22c55e", "size": 92, "correct": false },
-            { "shape": "circle", "color": "#3b82f6", "size": 92, "correct": true },
-            { "shape": "square", "color": "#f97316", "size": 92, "correct": false }
+            {
+              "shape": "triangle",
+              "color": "#22c55e",
+              "size": 92,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 92,
+              "correct": true
+            },
+            {
+              "shape": "square",
+              "color": "#f97316",
+              "size": 92,
+              "correct": false
+            }
           ]
         },
         {
@@ -166,12 +274,28 @@
           "columns": 3,
           "explain": "Đó là hình tam giác.",
           "choices": [
-            { "shape": "square", "color": "#eab308", "size": 92, "correct": false },
-            { "shape": "star", "color": "#a855f7", "size": 92, "correct": false },
-            { "shape": "triangle", "color": "#ef4444", "size": 92, "correct": true }
+            {
+              "shape": "square",
+              "color": "#eab308",
+              "size": 92,
+              "correct": false
+            },
+            {
+              "shape": "star",
+              "color": "#a855f7",
+              "size": 92,
+              "correct": false
+            },
+            {
+              "shape": "triangle",
+              "color": "#ef4444",
+              "size": 92,
+              "correct": true
+            }
           ]
         }
-      ]
+      ],
+      "subject": "math"
     },
     {
       "id": "daily-2026-11-02-gin-size",
@@ -188,8 +312,18 @@
           "speak": "Cái nào to hơn?",
           "explain": "Cái to hơn là cái lớn.",
           "choices": [
-            { "shape": "circle", "color": "#3b82f6", "size": 120, "correct": true },
-            { "shape": "circle", "color": "#3b82f6", "size": 62, "correct": false }
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 120,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 62,
+              "correct": false
+            }
           ]
         },
         {
@@ -199,8 +333,223 @@
           "speak": "Bên nào nhiều hơn?",
           "explain": "Một bên có 4, bên kia có 2.",
           "choices": [
-            { "emojis": ["🍎", "🍎"], "correct": false },
-            { "emojis": ["🍎", "🍎", "🍎", "🍎"], "correct": true }
+            {
+              "emojis": [
+                "🍎",
+                "🍎"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "🍎",
+                "🍎",
+                "🍎",
+                "🍎"
+              ],
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "subject": "math"
+    },
+    {
+      "id": "daily-2026-11-02-mon-vi-spell",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Đánh vần bà",
+      "subtitle": "Bài mới hôm nay",
+      "icon": "✨",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "bờ a ba huyền bà",
+          "explain": "bờ a ba huyền bà.",
+          "scene": {
+            "layout": "equation",
+            "text": "b + a + huyền"
+          },
+          "choices": [
+            {
+              "text": "bà",
+              "correct": true
+            },
+            {
+              "text": "ba",
+              "correct": false
+            },
+            {
+              "text": "bá",
+              "correct": false
+            },
+            {
+              "text": "bả",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ m. Âm mờ.",
+          "scene": {
+            "layout": "digit",
+            "text": "m"
+          },
+          "choices": [
+            {
+              "text": "m",
+              "correct": true
+            },
+            {
+              "text": "n",
+              "correct": false
+            },
+            {
+              "text": "b",
+              "correct": false
+            },
+            {
+              "text": "l",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-02-mon-en-listen",
+      "child": "mon",
+      "subject": "english",
+      "category": "listen",
+      "title": "Nghe con mèo",
+      "subtitle": "Tap what you hear",
+      "icon": "🎧",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the cat.",
+          "explain": "It is the cat.",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🐱",
+              "correct": true
+            },
+            {
+              "emoji": "🐶",
+              "correct": false
+            },
+            {
+              "emoji": "🐟",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "What color is this?",
+          "speak": "What color is this?",
+          "explain": "It is red.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🔴"
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "red",
+              "correct": true
+            },
+            {
+              "text": "blue",
+              "correct": false
+            },
+            {
+              "text": "yellow",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-02-gin-vi-letter",
+      "child": "gin",
+      "subject": "vietnamese",
+      "category": "letters",
+      "title": "Chữ a",
+      "subtitle": "Bài mới hôm nay",
+      "icon": "🅰️",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ a. Âm a.",
+          "scene": {
+            "layout": "digit",
+            "text": "a"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "a",
+              "correct": true
+            },
+            {
+              "text": "o",
+              "correct": false
+            },
+            {
+              "text": "e",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-02-gin-en-dog",
+      "child": "gin",
+      "subject": "english",
+      "category": "listen",
+      "title": "Nghe con chó",
+      "subtitle": "Listen and tap",
+      "icon": "🎧",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the dog.",
+          "explain": "It is the dog.",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🐶",
+              "correct": true
+            },
+            {
+              "emoji": "🐱",
+              "correct": false
+            },
+            {
+              "emoji": "🐦",
+              "correct": false
+            }
           ]
         }
       ]

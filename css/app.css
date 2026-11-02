@@ -230,6 +230,38 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .text-link.danger, .btn-danger { color: white; background: var(--bad); }
 
 .cat-grid, .ex-list, .today-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.subject-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+.subject-card {
+  border: 0;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  text-align: left;
+  padding: 18px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #24324a;
+}
+.subject-math { background: linear-gradient(165deg, #f7fcff, #c5e6ff); }
+.subject-english { background: linear-gradient(165deg, #fff7ed, #fed7aa); }
+.subject-vietnamese { background: linear-gradient(165deg, #f0fdf4, #bbf7d0); }
+.today-subject {
+  align-self: flex-start;
+  background: rgba(36, 50, 74, 0.08);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
+.sub-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.sub-pill {
+  background: white;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+}
 .cat-card, .ex-card, .today-card {
   border: 0;
   background: var(--card);
@@ -594,7 +626,7 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
 }
 
 @media (max-width: 860px), (orientation: portrait) and (max-width: 1000px) {
-  .kid-grid, .parents-grid, .board-hero { grid-template-columns: 1fr; }
+  .kid-grid, .parents-grid, .board-hero, .subject-grid { grid-template-columns: 1fr; }
   .kid-card { min-height: 320px; }
 }
 @media (max-width: 720px) {

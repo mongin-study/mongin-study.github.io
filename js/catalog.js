@@ -102,4 +102,34 @@
     mon: { name: "Mon", age: "6 tuổi", tagline: "Băng tuyết và Cún Vàng" },
     gin: { name: "Gin", age: "3 tuổi", tagline: "Xe hơi và thú" }
   };
+
+  HV.catalog.forEach(function (ex) {
+    if (!ex.subject) ex.subject = "math";
+  });
+
+  HV.subjects = [
+    {
+      id: "math",
+      title: "Toán",
+      short: "Toán",
+      icon: "🔢",
+      blurb: { mon: "Số, phép tính và hình", gin: "Đếm, so và hình" }
+    },
+    {
+      id: "english",
+      title: "Tiếng Anh",
+      short: "Anh",
+      icon: "🔤",
+      blurb: { mon: "Chữ, từ và nghe", gin: "Màu, con vật và nghe" }
+    },
+    {
+      id: "vietnamese",
+      title: "Tiếng Việt",
+      short: "Việt",
+      icon: "📖",
+      blurb: { mon: "Chữ, vần và đánh vần", gin: "Nhận mặt chữ cái" }
+    }
+  ];
+
+  HV.subjectCategories = { math: HV.categories };
 })(globalThis.HV = globalThis.HV || {});

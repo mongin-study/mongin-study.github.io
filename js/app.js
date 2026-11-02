@@ -32,15 +32,41 @@
     return id === "mon" || id === "gin";
   }
 
+  function knownSubject(id) {
+    return id === "math" || id === "english" || id === "vietnamese";
+  }
+
+  function categoriesFor(subject) {
+    var map = HV.subjectCategories || {};
+    if (map[subject]) return map[subject];
+    if (subject === "math") return HV.categories;
+    return [];
+  }
+
+  function findCategory(subject, id) {
+    return categoriesFor(subject).filter(function (c) { return c.id === id; })[0] || null;
+  }
+
+  function subjectOf(ex) {
+    return ex && knownSubject(ex.subject) ? ex.subject : "math";
+  }
+
   function parseRoute() {
     var raw = (location.hash || "").replace(/^#/, "");
     var parts = raw.split("/").filter(Boolean);
     if (!parts.length) return { name: "home" };
     if (parts[0] === "c" && knownChild(parts[1])) {
-      if (parts[2] && HV.categories.some(function (c) { return c.id === parts[2]; })) {
-        return { name: "category", child: parts[1], category: parts[2] };
+      var child = parts[1];
+      if (parts[2] && knownSubject(parts[2])) {
+        if (parts[3] && findCategory(parts[2], parts[3])) {
+          return { name: "category", child: child, subject: parts[2], category: parts[3] };
+        }
+        return { name: "subject", child: child, subject: parts[2] };
       }
-      return { name: "menu", child: parts[1] };
+      if (parts[2] && findCategory("math", parts[2])) {
+        return { name: "category", child: child, subject: "math", category: parts[2] };
+      }
+      return { name: "menu", child: child };
     }
     if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
     if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
@@ -200,22 +226,35 @@
     return btn;
   }
 
+  function subjectMeta(id) {
+    return (HV.subjects || []).filter(function (s) { return s.id === id; })[0] || { id: id, title: id, short: id, icon: "📘", blurb: { mon: "", gin: "" } };
+  }
+
+  function subjectPills(by) {
+    var row = el("div", { class: "sub-pills" });
+    (HV.subjects || []).forEach(function (sub) {
+      var stars = by && by[sub.id] ? by[sub.id].stars : 0;
+      row.appendChild(el("span", { class: "sub-pill", text: sub.icon + " " + sub.short + " " + stars }));
+    });
+    return row;
+  }
+
   function viewMenu(child) {
     var meta = HV.kids[child];
     var root = el("section", { class: "menu" });
+    var stats = S.allTime(child);
     root.appendChild(topbar({ title: "Chào " + meta.name, sub: "Hôm nay mình học gì?", back: "#/", child: child }));
     root.appendChild(syncLine());
     root.appendChild(todayBlock(child));
-    var grid = el("div", { class: "cat-grid" });
-    var stats = S.allTime(child);
-    HV.categories.forEach(function (cat) {
-      var catStats = stats.byCategory[cat.id] || { stars: 0, played: 0 };
-      var count = HV.catalog.filter(function (ex) { return ex.child === child && ex.category === cat.id; }).length;
-      grid.appendChild(el("button", { class: "cat-card", "data-go": "#/c/" + child + "/" + cat.id }, [
-        el("span", { class: "cat-icon", text: cat.icon }),
-        el("span", { class: "cat-name", text: cat.title }),
-        el("span", { class: "cat-blurb", text: cat.blurb[child] }),
-        el("span", { class: "cat-meta", text: count + " bài · " + catStats.stars + " sao" })
+    var grid = el("div", { class: "subject-grid" });
+    (HV.subjects || []).forEach(function (sub) {
+      var count = HV.catalog.filter(function (ex) { return ex.child === child && subjectOf(ex) === sub.id; }).length;
+      var stars = stats.bySubject && stats.bySubject[sub.id] ? stats.bySubject[sub.id].stars : 0;
+      grid.appendChild(el("button", { class: "subject-card subject-" + sub.id, "data-go": "#/c/" + child + "/" + sub.id }, [
+        el("span", { class: "cat-icon", text: sub.icon }),
+        el("span", { class: "cat-name", text: sub.title }),
+        el("span", { class: "cat-blurb", text: sub.blurb[child] || "" }),
+        el("span", { class: "cat-meta", text: count + " bài · " + stars + " sao" })
       ]));
     });
     root.appendChild(grid);
@@ -223,9 +262,35 @@
     return root;
   }
 
-  function todayBlock(child) {
+  function viewSubject(child, subject) {
+    var meta = subjectMeta(subject);
+    var root = el("section", { class: "menu" });
+    var stats = S.allTime(child);
+    root.appendChild(topbar({ title: meta.title, sub: meta.blurb[child] || HV.kids[child].name, back: "#/c/" + child, child: child }));
+    root.appendChild(syncLine());
+    root.appendChild(todayBlock(child, subject));
+    var grid = el("div", { class: "cat-grid" });
+    categoriesFor(subject).forEach(function (cat) {
+      if (cat.kids && cat.kids.indexOf(child) < 0) return;
+      var count = HV.catalog.filter(function (ex) {
+        return ex.child === child && subjectOf(ex) === subject && ex.category === cat.id;
+      }).length;
+      if (!count) return;
+      var catStats = stats.byCategory[subject + ":" + cat.id] || { stars: 0 };
+      grid.appendChild(el("button", { class: "cat-card", "data-go": "#/c/" + child + "/" + subject + "/" + cat.id }, [
+        el("span", { class: "cat-icon", text: cat.icon }),
+        el("span", { class: "cat-name", text: cat.title }),
+        el("span", { class: "cat-blurb", text: (cat.blurb && cat.blurb[child]) || "" }),
+        el("span", { class: "cat-meta", text: count + " bài · " + catStats.stars + " sao" })
+      ]));
+    });
+    root.appendChild(grid);
+    return root;
+  }
+
+  function todayBlock(child, subject) {
     var wrap = el("section", { class: "today" });
-    wrap.appendChild(el("h2", { text: "Bài mới hôm nay" }));
+    wrap.appendChild(el("h2", { text: subject ? "Bài mới · " + subjectMeta(subject).title : "Bài mới hôm nay" }));
     if (state.daily.pending) {
       wrap.appendChild(el("p", { class: "muted", text: "Đang mở bài mới..." }));
       return wrap;
@@ -234,7 +299,9 @@
       wrap.appendChild(el("p", { class: "muted", text: "Chưa tải được bài mới. Các bài sẵn có vẫn chơi được." }));
       return wrap;
     }
-    var list = state.daily.exercises.filter(function (ex) { return ex.child === child; });
+    var list = state.daily.exercises.filter(function (ex) {
+      return ex.child === child && (!subject || subjectOf(ex) === subject);
+    });
     if (!list.length) {
       wrap.appendChild(el("p", { class: "muted", text: "Hôm nay chưa có bài mới." }));
       return wrap;
@@ -245,6 +312,7 @@
       row.appendChild(el("button", { class: "today-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
         el("span", { class: "ribbon", text: best == null ? "Mới" : "Đã chơi" }),
         el("span", { class: "today-icon", text: ex.icon || "✨" }),
+        el("span", { class: "today-subject", text: subjectMeta(subjectOf(ex)).short }),
         el("span", { class: "today-title", text: ex.title }),
         el("span", { class: "stars", text: best == null ? "Chưa có sao" : U.starText(best) })
       ]));
@@ -253,13 +321,19 @@
     return wrap;
   }
 
-  function viewCategory(child, category) {
-    var cat = HV.categories.filter(function (c) { return c.id === category; })[0];
+  function viewCategory(child, subject, category) {
+    var cat = findCategory(subject, category);
     var stats = S.allTime(child);
     var root = el("section", { class: "category" });
-    root.appendChild(topbar({ title: cat.title, sub: cat.blurb[child], back: "#/c/" + child, child: child }));
+    if (!cat) {
+      root.appendChild(topbar({ title: "Không thấy mục", back: "#/c/" + child, child: child }));
+      return root;
+    }
+    root.appendChild(topbar({ title: cat.title, sub: (cat.blurb && cat.blurb[child]) || "", back: "#/c/" + child + "/" + subject, child: child }));
     var list = el("div", { class: "ex-list" });
-    HV.catalog.filter(function (ex) { return ex.child === child && ex.category === category; }).forEach(function (ex) {
+    HV.catalog.filter(function (ex) {
+      return ex.child === child && subjectOf(ex) === subject && ex.category === category;
+    }).forEach(function (ex) {
       var best = stats.byExercise[ex.id] ? stats.byExercise[ex.id].bestStars : 0;
       list.appendChild(el("button", { class: "ex-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
         el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
@@ -329,7 +403,7 @@
     root.appendChild(topbar({
       title: session.entry.title,
       sub: "Câu " + (session.index + 1) + " / " + session.questions.length,
-      back: "#/c/" + child + "/" + session.entry.category,
+      back: "#/c/" + child + "/" + subjectOf(session.entry) + "/" + session.entry.category,
       child: child
     }));
     var dots = el("div", { class: "dots", id: "dots" });
@@ -370,7 +444,9 @@
       track: function (t) { state.timers.push(t); },
       onDone: onQuestionDone
     });
-    HV.speech.speak(q.speak, voiceFor(session.entry.child));
+    var voice = voiceFor(session.entry.child);
+    voice.lang = q.lang === "en" ? "en" : "vi";
+    HV.speech.speak(q.speak, voice);
   }
 
   function onQuestionDone(first) {
@@ -395,6 +471,7 @@
         id: session.entry.id,
         title: session.entry.title,
         category: session.entry.category,
+        subject: subjectOf(session.entry),
         correct: correct,
         total: total,
         stars: stars
@@ -438,7 +515,7 @@
     }
     card.appendChild(el("div", { class: "result-actions" }, [
       el("button", { class: "btn btn-primary", "data-act": "replay", text: "Chơi lại" }),
-      el("button", { class: "btn", "data-go": "#/c/" + child, text: "Bài khác" }),
+      el("button", { class: "btn", "data-go": "#/c/" + child + "/" + subjectOf(session.entry), text: "Bài khác" }),
       el("button", { class: "btn", "data-go": "#/board/" + child, text: "Bảng xếp hạng" })
     ]));
     root.appendChild(card);
@@ -488,7 +565,8 @@
     copy.appendChild(el("p", { class: "kicker", text: "Tuần này · thứ Hai đến Chủ nhật" }));
     copy.appendChild(el("h1", { text: week.stars + " sao" }));
     copy.appendChild(el("p", { class: "lede", text: week.exercisesDone + " bài · đúng " + week.correct + "/" + week.answered }));
-    copy.appendChild(el("p", { class: "fine", text: "Bố mẹ xem cuối tuần để thưởng." }));
+    copy.appendChild(subjectPills(week.bySubject));
+    copy.appendChild(el("p", { class: "fine", text: "Bố mẹ xem cuối tuần để thưởng. Mốc thưởng tính tổng sao mọi môn." }));
     hero.appendChild(copy);
     var cast = el("div", { class: "board-cast" });
     if (child === "mon") {
@@ -572,6 +650,7 @@
     var all = S.allTime(child);
     var card = el("article", { class: "parent-card kid-tint-" + child });
     card.appendChild(el("h2", { text: meta.name + " · tuần này " + week.stars + " sao" }));
+    card.appendChild(subjectPills(week.bySubject));
     card.appendChild(el("p", { class: "muted", text: "Tất cả: " + all.stars + " sao · " + all.rounds + " bài · đúng " + all.correct + "/" + all.answered }));
     card.appendChild(el("h3", { text: "Mốc thưởng tuần" }));
     var editor = el("div", { class: "target-editor" });
@@ -593,7 +672,7 @@
       } else {
         block.appendChild(el("p", { text: day.stats.exercisesDone + " bài · đúng " + day.stats.correct + "/" + day.stats.answered + " · " + day.stats.stars + " sao" }));
         day.stats.items.forEach(function (item) {
-          block.appendChild(el("p", { class: "log-item", text: "• " + (item.title || item.id) + " — " + item.stars + " sao (" + item.correct + "/" + item.total + ")" }));
+          block.appendChild(el("p", { class: "log-item", text: "• " + subjectMeta(item.subject || "math").short + " — " + (item.title || item.id) + " — " + item.stars + " sao (" + item.correct + "/" + item.total + ")" }));
         });
       }
       card.appendChild(block);
@@ -690,7 +769,8 @@
     clear(root);
     var shell = el("main", { class: "shell", "data-screen": route.name });
     if (route.name === "menu") shell.appendChild(viewMenu(route.child));
-    else if (route.name === "category") shell.appendChild(viewCategory(route.child, route.category));
+    else if (route.name === "subject") shell.appendChild(viewSubject(route.child, route.subject));
+    else if (route.name === "category") shell.appendChild(viewCategory(route.child, route.subject, route.category));
     else if (route.name === "play") shell.appendChild(viewPlay());
     else if (route.name === "board") shell.appendChild(viewBoard(route.child));
     else if (route.name === "parents") shell.appendChild(viewParents());
@@ -768,7 +848,9 @@
     if (act === "replay-speech") {
       var session = state.session;
       if (session && session.phase === "quiz") {
-        HV.speech.speak(session.questions[session.index].speak, voiceFor(session.entry.child));
+        var again = voiceFor(session.entry.child);
+        again.lang = session.questions[session.index].lang === "en" ? "en" : "vi";
+        HV.speech.speak(session.questions[session.index].speak, again);
       }
       return;
     }
@@ -787,7 +869,7 @@
       closeModal();
       if (!dest) {
         var backChild = state.session && state.session.entry ? state.session.entry.child : "";
-        dest = backChild ? "#/c/" + backChild : "#/";
+        dest = backChild ? "#/c/" + backChild + (state.session.entry ? "/" + subjectOf(state.session.entry) : "") : "#/";
       }
       location.hash = dest;
       return;
@@ -888,7 +970,11 @@
       if (!res.ok) return { date: date, exercises: [], pending: false, error: true };
       return res.json().then(function (json) {
         var exercises = Array.isArray(json.exercises) ? json.exercises.filter(function (ex) {
-          return ex && ex.id && knownChild(ex.child) && ex.title && (ex.generator || (ex.questions && ex.questions.length));
+          if (!ex || !ex.id || !knownChild(ex.child) || !ex.title) return false;
+          if (!(ex.generator || (ex.questions && ex.questions.length))) return false;
+          if (ex.subject && ex.subject !== "math" && ex.subject !== "english" && ex.subject !== "vietnamese") return false;
+          ex.subject = ex.subject || "math";
+          return true;
         }) : [];
         return { date: date, exercises: exercises, pending: false, error: false };
       });

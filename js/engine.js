@@ -91,6 +91,7 @@
     var kind = raw.kind;
     var q = {
       kind: kind,
+      lang: raw.lang === "en" ? "en" : "vi",
       prompt: String(raw.prompt || "").slice(0, 280),
       speak: String(raw.speak || raw.prompt || "").slice(0, 320),
       explain: raw.explain ? String(raw.explain).slice(0, 220) : "",
@@ -274,10 +275,10 @@
     return bits;
   }
 
-  function praise(child) {
-    var list = child === "gin"
-      ? ["Đúng rồi!", "Giỏi quá!", "Tuyệt!"]
-      : ["Đúng rồi!", "Giỏi quá!", "Chính xác!", "Tuyệt lắm!"];
+  function praise(child, lang) {
+    var list = lang === "en"
+      ? (child === "gin" ? ["Yes!", "Great!", "Yay!"] : ["Yes!", "Great!", "Correct!", "Wonderful!"])
+      : (child === "gin" ? ["Đúng rồi!", "Giỏi quá!", "Tuyệt!"] : ["Đúng rồi!", "Giỏi quá!", "Chính xác!", "Tuyệt lắm!"]);
     return list[Math.floor(Math.random() * list.length)];
   }
 
@@ -288,6 +289,7 @@
   function mount(container, question, opts) {
     clear(container);
     var child = opts.child || "mon";
+    var lang = question.lang === "en" ? "en" : "vi";
     var attempts = 0;
     var settled = false;
     var busy = false;
@@ -316,23 +318,29 @@
       });
     }
 
+    function speakNow(text) {
+      var optsVoice = voiceFor(child);
+      optsVoice.lang = lang;
+      HV.speech.speak(text, optsVoice);
+    }
+
     function showFeedback(good, text, first) {
       lockInputs();
       firstSuccess = !!first;
       var bar = el("div", { class: "feedback " + (good ? "is-good" : "is-bad"), role: "status" }, [
-        el("strong", { text: good ? praise(child) : "Chưa đúng" }),
+        el("strong", { text: good ? praise(child, lang) : (lang === "en" ? "Not quite" : "Chưa đúng") }),
         text ? el("p", { text: text }) : null,
         el("button", {
           class: "btn btn-next",
-          text: opts.isLast ? "Xem sao" : "Tiếp tục",
+          text: opts.isLast ? (lang === "en" ? "See stars" : "Xem sao") : (lang === "en" ? "Next" : "Tiếp tục"),
           onClick: function () { finish(firstSuccess); }
         })
       ]);
       container.appendChild(bar);
       if (good) HV.audio.correct();
       else HV.audio.wrong();
-      var say = good ? bar.querySelector("strong").textContent : (text || "Chưa đúng, mình xem đáp án nhé");
-      HV.speech.speak(say, voiceFor(child));
+      var sayText = good ? bar.querySelector("strong").textContent : (text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"));
+      speakNow(sayText);
       pending = setTimeout(function () { finish(firstSuccess); }, good ? 1100 : 2400);
       if (opts.track) opts.track(pending);
     }
@@ -342,7 +350,7 @@
       busy = true;
       if (node) node.classList.add("is-wrong");
       HV.audio.wrong();
-      HV.speech.speak(say || "Thử lại nhé", voiceFor(child));
+      speakNow(say || (lang === "en" ? "Try again." : "Thử lại nhé"));
       setTimeout(function () {
         busy = false;
         if (node) node.classList.remove("is-wrong");
@@ -412,7 +420,7 @@
           busy = true;
           display.classList.add("is-shake");
           HV.audio.wrong();
-          HV.speech.speak("Chưa đúng, thử lại nhé", voiceFor(child));
+          speakNow(lang === "en" ? "Try again." : "Chưa đúng, thử lại nhé");
           setTimeout(function () {
             busy = false;
             entry = "";
@@ -591,7 +599,7 @@
           attempts += 1;
           tray.classList.add("is-shake");
           HV.audio.wrong();
-          HV.speech.speak("Chưa đúng thứ tự, thử lại nhé", voiceFor(child));
+          speakNow(lang === "en" ? "Try again." : "Chưa đúng thứ tự, thử lại nhé");
           setTimeout(function () {
             pool = question.tokens.slice();
             placed = [];

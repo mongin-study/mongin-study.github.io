@@ -1,9 +1,9 @@
 # Học vui
 
-Math practice for two children on a shared pair of iPads. The whole site is static HTML, CSS, and JavaScript: open `index.html` with any static server, or host it on GitHub Pages. There is no build step.
+Learning practice for two children on a shared pair of iPads. After a child is chosen, the app offers three subjects: **Toán**, **Tiếng Anh**, and **Tiếng Việt** (đánh vần). The whole site is static HTML, CSS, and JavaScript: open `index.html` with any static server, or host it on GitHub Pages. There is no build step. Regenerating spoken clips is optional (`scripts/build-audio.py`, `scripts/build-en-audio.py`).
 
-- **Mon** (6) — ice, snow, and a golden puppy. Addition and subtraction, number bonds, sequences, odd and even, shapes.
-- **Gin** (3) — cars and animals. Counting, matching, bigger and smaller, simple patterns. Prompts can be read aloud in Vietnamese.
+- **Mon** (6, tiền tiểu học) — ice, snow, and a golden puppy. Balanced math, English, and Vietnamese grade-1 phonics (chữ cái, dấu thanh, vần, đánh vần).
+- **Gin** (3) — cars and animals. Counting and shapes, plus very simple letters, colors, and animals.
 
 Live site: [https://mongin-study.github.io](https://mongin-study.github.io)
 
@@ -68,7 +68,9 @@ In Firebase console → Authentication → Settings → Authorized domains, incl
 
 ## Add today’s exercises
 
-Drop a file at `content/daily/YYYY-MM-DD.json`. The menu section **Bài mới hôm nay** loads the file for the device’s local date. No code change is required. A daily job can commit that file.
+Drop a file at `content/daily/YYYY-MM-DD.json`. The subject picker section **Bài mới hôm nay** loads the file for the device’s local date and shows every subject. Each subject menu shows only that subject’s new items. No code change is required. A daily job can commit that file.
+
+`subject` is `math`, `english`, or `vietnamese`. If it is omitted, the exercise is treated as math. `category` must match a category of that subject (`arithmetic`, `logic`, `number`, `geometry` for math; `letters`, `tones`, `rhymes`, `spell`, `words` for Vietnamese; `letters`, `phonics`, `colors`, `numbers`, `animals`, `family`, `fruits`, `body`, `listen` for English). Set `lang` to `en` on English questions so they are spoken with the English clips, not a Vietnamese voice.
 
 ```json
 {
@@ -77,17 +79,39 @@ Drop a file at `content/daily/YYYY-MM-DD.json`. The menu section **Bài mới h�
     {
       "id": "daily-2026-11-02-mon-snow",
       "child": "mon",
+      "subject": "math",
       "category": "arithmetic",
       "title": "Cộng bông tuyết",
       "icon": "❄️",
       "questions": [
         {
           "kind": "choice",
+          "lang": "vi",
           "prompt": "5 + 3 = ?",
           "speak": "Năm cộng ba bằng mấy?",
           "choices": [
             { "text": "8", "correct": true },
             { "text": "7", "correct": false }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-02-mon-en",
+      "child": "mon",
+      "subject": "english",
+      "category": "listen",
+      "title": "Nghe con mèo",
+      "icon": "🐱",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the cat.",
+          "choices": [
+            { "emoji": "🐱", "correct": true },
+            { "emoji": "🐶", "correct": false }
           ]
         }
       ]
@@ -105,7 +129,7 @@ Drop a file at `content/daily/YYYY-MM-DD.json`. The menu section **Bài mới h�
 }
 ```
 
-`child` is `mon` or `gin`. `category` is `arithmetic`, `logic`, `number`, or `geometry`. Use either a `questions` array or a `generator` name plus `config`.
+`child` is `mon` or `gin`. Use either a `questions` array or a `generator` name plus `config`. Stars from every subject add into the same weekly total. The leaderboard and the parent view also show Toán, Tiếng Anh, and Tiếng Việt separately. Reward targets use the total.
 
 Generator names: `addition`, `subtraction`, `nextPrev`, `wordProblem`, `numberBond`, `missingPart`, `sequence`, `oddOneOut`, `compareExpr`, `orderNumbers`, `oddEven`, `compareNumbers`, `skipCount`, `placeValue`, `shapeName`, `countSides`, `countVertices`, `symmetry`, `position`, `moreSides`, `countObjects`, `matchNumberGroup`, `maker`, `moreLess`, `sizeCompare`, `patternNext`, `findShape`, `matchShape`, `colorMatch`, `sameColor`.
 
@@ -119,7 +143,7 @@ Question kinds:
 
 `scene.layout` may be `equation`, `digit`, `emojis`, `shapes`, `pattern`, `mirror`, `zones`, `sides`, `blocks`, `pairs`, or `bond`. Text is shown as text, not HTML.
 
-The speaker button plays recorded Vietnamese (voice HoaiMy) from `assets/audio/`. Questions are full clips or stitched from number and phrase clips, so an iPad does not read Vietnamese with an English voice. If a line cannot be built from clips, the app waits for `speechSynthesis` voices and speaks only with a `vi` voice (iOS: Linh). `+`, `−`, `=`, `?`, emoji, and digits are turned into Vietnamese words before anything is spoken. Other sounds use the Web Audio API.
+Vietnamese is spoken with recorded HoaiMy clips in `assets/audio/`. English questions (`lang: "en"`) use recorded Ana clips in `assets/audio/en/`. A line is never read with the other language’s voice. If a clip is missing, the app waits for `speechSynthesis` and uses only a `vi` voice (iOS: Linh) or an `en-US` voice (Ana). `+`, `−`, `=`, `?`, emoji, and digits in Vietnamese lines are turned into Vietnamese words before anything is spoken.
 
 ## GitHub Pages
 

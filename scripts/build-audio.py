@@ -347,6 +347,9 @@ async def main():
         clips.setdefault(word, word)
     for phrase in PHRASES:
         add(phrase)
+    if len(sys.argv) > 2:
+        for phrase in json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")):
+            add(phrase)
     # Dynamic lines are composed from number and phrase clips.
     # Keep every word so an unseen sentence can still be spoken from clips.
     for line in corpus:
