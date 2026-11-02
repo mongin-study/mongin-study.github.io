@@ -246,6 +246,21 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .subject-math { background: linear-gradient(165deg, #f7fcff, #c5e6ff); }
 .subject-english { background: linear-gradient(165deg, #fff7ed, #fed7aa); }
 .subject-vietnamese { background: linear-gradient(165deg, #f0fdf4, #bbf7d0); }
+.level-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.level-card {
+  border: 0;
+  background: white;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  text-align: left;
+  padding: 16px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.level-card.is-now { outline: 3px solid var(--accent); }
+.level-card.is-locked { opacity: 0.55; }
 .today-subject {
   align-self: flex-start;
   background: rgba(36, 50, 74, 0.08);

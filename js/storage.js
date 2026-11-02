@@ -212,6 +212,50 @@
     };
   }
 
+  function englishLevels(child) {
+    var gates = { 2: 12, 3: 30, 4: 60 };
+    var levels = {
+      1: { stars: 0, correct: 0, answered: 0 },
+      2: { stars: 0, correct: 0, answered: 0 },
+      3: { stars: 0, correct: 0, answered: 0 },
+      4: { stars: 0, correct: 0, answered: 0 }
+    };
+    var totalStars = 0;
+    var kid = data().kids[child];
+    if (kid && kid.daily) {
+      Object.keys(kid.daily).forEach(function (date) {
+        var items = (kid.daily[date] && kid.daily[date].items) || [];
+        items.forEach(function (item) {
+          if (subjectId(item) !== "english") return;
+          var lv = Number(item.level);
+          if (!(lv >= 1 && lv <= 4)) lv = 1;
+          levels[lv].stars += Number(item.stars) || 0;
+          levels[lv].correct += Number(item.correct) || 0;
+          levels[lv].answered += Number(item.total) || 0;
+          totalStars += Number(item.stars) || 0;
+        });
+      });
+    }
+    var unlocked = { 1: true, 2: false, 3: false, 4: false };
+    var reason = { 1: "open", 2: "", 3: "", 4: "" };
+    for (var n = 2; n <= 4; n++) {
+      var prev = levels[n - 1];
+      var acc = prev.answered ? prev.correct / prev.answered : 0;
+      if (totalStars >= gates[n]) {
+        unlocked[n] = true;
+        reason[n] = "stars";
+      } else if (prev.answered >= 8 && acc > 0.85) {
+        unlocked[n] = true;
+        reason[n] = "accuracy";
+      }
+    }
+    var suggested = 1;
+    for (var k = 4; k >= 1; k--) {
+      if (unlocked[k]) { suggested = k; break; }
+    }
+    return { levels: levels, unlocked: unlocked, reason: reason, gates: gates, totalStars: totalStars, suggested: suggested };
+  }
+
   function starsFor(correct, total) {
     if (!total || correct <= 0) return 0;
     var r = correct / total;
@@ -230,6 +274,7 @@
       title: String(round.title || ""),
       category: String(round.category || ""),
       subject: round.subject === "english" || round.subject === "vietnamese" ? round.subject : "math",
+      level: Math.max(0, Math.min(4, Number(round.level) || 0)),
       correct: Number(round.correct) || 0,
       total: Number(round.total) || 0,
       stars: U.clamp(Number(round.stars) || 0, 0, 3),
@@ -336,6 +381,7 @@
       title: String(item.title || ""),
       category: String(item.category || ""),
       subject: item.subject === "english" || item.subject === "vietnamese" ? item.subject : "math",
+      level: Math.max(0, Math.min(4, Number(item.level) || 0)),
       correct: Math.max(0, Number(item.correct) || 0),
       total: Math.max(0, Number(item.total) || 0),
       stars: U.clamp(Number(item.stars) || 0, 0, 3),
@@ -398,6 +444,7 @@
     allTime: allTime,
     dayStats: dayStats,
     starsFor: starsFor,
+    englishLevels: englishLevels,
     todayBest: todayBest,
     setTargets: setTargets,
     setSetting: setSetting,

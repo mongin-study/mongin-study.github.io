@@ -58,6 +58,9 @@
     if (parts[0] === "c" && knownChild(parts[1])) {
       var child = parts[1];
       if (parts[2] && knownSubject(parts[2])) {
+        if (parts[3] === "lv" && /^[1-4]$/.test(parts[4] || "")) {
+          return { name: "level", child: child, subject: parts[2], level: Number(parts[4]) };
+        }
         if (parts[3] && findCategory(parts[2], parts[3])) {
           return { name: "category", child: child, subject: parts[2], category: parts[3] };
         }
@@ -262,7 +265,79 @@
     return root;
   }
 
+  function practiceHome(entry) {
+    if (!entry) return "#/";
+    if (entry.child === "mon" && subjectOf(entry) === "english" && entry.level) {
+      return "#/c/mon/english/lv/" + entry.level;
+    }
+    return "#/c/" + entry.child + "/" + subjectOf(entry);
+  }
+
+  function viewMonEnglish(child) {
+    var prog = S.englishLevels(child);
+    var root = el("section", { class: "menu" });
+    root.appendChild(topbar({ title: "Tiếng Anh", sub: "Cấp gợi ý: " + prog.suggested, back: "#/c/" + child, child: child }));
+    root.appendChild(syncLine());
+    root.appendChild(todayBlock(child, "english"));
+    root.appendChild(el("p", { class: "lede", text: "Cấp mở khi đủ sao tiếng Anh, hoặc khi cấp trước đúng hơn 85% (ít nhất 8 câu)." }));
+    var grid = el("div", { class: "level-grid" });
+    (HV.englishLevelsInfo || []).forEach(function (info) {
+      var open = prog.unlocked[info.level];
+      var stats = prog.levels[info.level];
+      var acc = stats.answered ? Math.round((stats.correct / stats.answered) * 100) : 0;
+      var gate = prog.gates[info.level];
+      var note = open
+        ? (prog.reason[info.level] === "accuracy" ? "Mở vì đúng " + acc + "%" : stats.stars + " sao · đúng " + acc + "%")
+        : "Cần " + gate + " sao Anh, hoặc đúng hơn 85% ở cấp " + (info.level - 1);
+      var card = el("button", {
+        class: "level-card" + (open ? "" : " is-locked") + (prog.suggested === info.level ? " is-now" : ""),
+        "data-go": open ? "#/c/mon/english/lv/" + info.level : "",
+        disabled: open ? null : true
+      }, [
+        el("span", { class: "cat-name", text: (open ? "" : "🔒 ") + info.title }),
+        el("span", { class: "cat-blurb", text: info.blurb }),
+        el("span", { class: "cat-meta", text: note })
+      ]);
+      grid.appendChild(card);
+    });
+    root.appendChild(grid);
+    return root;
+  }
+
+  function viewEnglishLevel(child, level) {
+    var prog = S.englishLevels(child);
+    var info = (HV.englishLevelsInfo || []).filter(function (x) { return x.level === level; })[0];
+    var root = el("section", { class: "menu" });
+    root.appendChild(topbar({
+      title: info ? info.title : "Cấp " + level,
+      sub: "Tiếng Anh",
+      back: "#/c/" + child + "/english",
+      child: child
+    }));
+    if (!prog.unlocked[level]) {
+      root.appendChild(el("p", { class: "lede", text: "Cấp này chưa mở. Học cấp trước thật đúng, hoặc gom thêm sao tiếng Anh." }));
+      return root;
+    }
+    var list = el("div", { class: "ex-list" });
+    HV.catalog.filter(function (ex) {
+      return ex.child === "mon" && subjectOf(ex) === "english" && (ex.level || 1) === level;
+    }).forEach(function (ex) {
+      var best = S.allTime(child).byExercise[ex.id] ? S.allTime(child).byExercise[ex.id].bestStars : 0;
+      list.appendChild(el("button", { class: "ex-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
+        el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
+        el("span", { class: "ex-copy" }, [
+          el("strong", { text: ex.title }),
+          el("small", { text: ex.subtitle || "" })
+        ]),
+        el("span", { class: "stars", text: U.starText(best) })
+      ]));
+    });
+    root.appendChild(list);
+    return root;
+  }
+
   function viewSubject(child, subject) {
+    if (subject === "english" && child === "mon") return viewMonEnglish(child);
     var meta = subjectMeta(subject);
     var root = el("section", { class: "menu" });
     var stats = S.allTime(child);
@@ -403,7 +478,9 @@
     root.appendChild(topbar({
       title: session.entry.title,
       sub: "Câu " + (session.index + 1) + " / " + session.questions.length,
-      back: "#/c/" + child + "/" + subjectOf(session.entry) + "/" + session.entry.category,
+      back: practiceHome(session.entry) === "#/c/" + child + "/" + subjectOf(session.entry)
+        ? "#/c/" + child + "/" + subjectOf(session.entry) + "/" + session.entry.category
+        : practiceHome(session.entry),
       child: child
     }));
     var dots = el("div", { class: "dots", id: "dots" });
@@ -472,6 +549,7 @@
         title: session.entry.title,
         category: session.entry.category,
         subject: subjectOf(session.entry),
+        level: Number(session.entry.level) || 0,
         correct: correct,
         total: total,
         stars: stars
@@ -515,7 +593,7 @@
     }
     card.appendChild(el("div", { class: "result-actions" }, [
       el("button", { class: "btn btn-primary", "data-act": "replay", text: "Chơi lại" }),
-      el("button", { class: "btn", "data-go": "#/c/" + child + "/" + subjectOf(session.entry), text: "Bài khác" }),
+      el("button", { class: "btn", "data-go": practiceHome(session.entry), text: "Bài khác" }),
       el("button", { class: "btn", "data-go": "#/board/" + child, text: "Bảng xếp hạng" })
     ]));
     root.appendChild(card);
@@ -770,6 +848,7 @@
     var shell = el("main", { class: "shell", "data-screen": route.name });
     if (route.name === "menu") shell.appendChild(viewMenu(route.child));
     else if (route.name === "subject") shell.appendChild(viewSubject(route.child, route.subject));
+    else if (route.name === "level") shell.appendChild(viewEnglishLevel(route.child, route.level));
     else if (route.name === "category") shell.appendChild(viewCategory(route.child, route.subject, route.category));
     else if (route.name === "play") shell.appendChild(viewPlay());
     else if (route.name === "board") shell.appendChild(viewBoard(route.child));

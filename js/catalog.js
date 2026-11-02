@@ -120,7 +120,7 @@
       title: "Tiếng Anh",
       short: "Anh",
       icon: "🔤",
-      blurb: { mon: "Chữ, từ và nghe", gin: "Màu, con vật và nghe" }
+      blurb: { mon: "Đọc CVC, câu và 300 từ", gin: "Màu, con vật và nghe" }
     },
     {
       id: "vietnamese",

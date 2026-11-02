@@ -553,6 +553,52 @@
           ]
         }
       ]
+    },
+    {
+      "id": "daily-2026-11-02-mon-en-cvc",
+      "child": "mon",
+      "subject": "english",
+      "category": "reading",
+      "level": 2,
+      "title": "Read: cat",
+      "subtitle": "CVC",
+      "icon": "🔤",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Read the word. Tap the picture.",
+          "speak": "Read this word.",
+          "explain": "It says cat.",
+          "scene": {
+            "layout": "digit",
+            "text": "cat"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🐱",
+              "correct": true
+            },
+            {
+              "emoji": "☀️",
+              "correct": false
+            },
+            {
+              "emoji": "🐷",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "spell",
+          "lang": "en",
+          "word": "sun",
+          "prompt": "Listen and spell",
+          "speak": "Spell sun.",
+          "explain": "S U N spells sun."
+        }
+      ]
     }
   ]
 }

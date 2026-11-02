@@ -131,6 +131,17 @@
       q.emoji = String(raw.emoji || "⭐").slice(0, 8);
       return q;
     }
+    if (kind === "spell") {
+      var letters = String(raw.word || "").toLowerCase().replace(/[^a-z]/g, "").split("");
+      if (letters.length < 2 || letters.length > 7) return null;
+      if (letters.some(function (ch, i) { return letters.indexOf(ch) !== i; })) return null;
+      q.kind = "order";
+      q.hint = "Tap the letters";
+      q.tokens = letters.map(function (ch, i) {
+        return { id: "t" + i, text: ch.toUpperCase(), order: i };
+      });
+      return q;
+    }
     if (kind === "order") {
       var tokens = (raw.tokens || []).map(function (t, i) {
         return {
@@ -141,6 +152,7 @@
       }).filter(function (t) { return t.text; });
       if (tokens.length < 2 || tokens.some(function (t) { return !isFinite(t.order); })) return null;
       q.tokens = tokens;
+      q.hint = raw.hint ? String(raw.hint).slice(0, 40) : "";
       return q;
     }
     if (kind === "select") {
@@ -571,7 +583,7 @@
       function paint() {
         clear(tray);
         clear(bank);
-        if (!placed.length) tray.appendChild(el("span", { class: "tray-hint", text: "Số bé đứng trước" }));
+        if (!placed.length) tray.appendChild(el("span", { class: "tray-hint", text: question.hint || "Số bé đứng trước" }));
         placed.forEach(function (tok) {
           tray.appendChild(el("span", { class: "token is-placed", text: tok.text }));
         });
@@ -617,7 +629,7 @@
       }
       var reset = el("button", {
         class: "btn order-reset",
-        text: "Làm lại",
+        text: lang === "en" ? "Again" : "Làm lại",
         onClick: function () {
           if (locked || settled || !placed.length) return;
           pool = question.tokens.slice();
