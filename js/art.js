@@ -43,22 +43,28 @@
 
   function puppy() {
     return inline(
-      '<svg viewBox="0 0 190 150">' +
-        '<path d="M148 96q28-10 22-36" fill="none" stroke="#e0a04a" stroke-width="10" stroke-linecap="round"/>' +
-        '<ellipse cx="104" cy="100" rx="50" ry="32" fill="#f0b429"/>' +
-        '<ellipse cx="108" cy="110" rx="24" ry="16" fill="#ffe3b0"/>' +
-        '<rect x="70" y="112" width="16" height="26" rx="8" fill="#e09a2e"/>' +
-        '<rect x="118" y="112" width="16" height="26" rx="8" fill="#e09a2e"/>' +
-        '<circle cx="52" cy="78" r="32" fill="#f2c14e"/>' +
-        '<ellipse cx="26" cy="74" rx="14" ry="22" fill="#d8922c" transform="rotate(-18 26 74)"/>' +
-        '<ellipse cx="74" cy="58" rx="12" ry="20" fill="#d8922c" transform="rotate(18 74 58)"/>' +
-        '<ellipse cx="34" cy="90" rx="16" ry="12" fill="#ffe7b8"/>' +
-        '<ellipse cx="24" cy="88" rx="5" ry="3.6" fill="#3a2a22"/>' +
-        '<circle cx="44" cy="70" r="4.2" fill="#2b2118"/>' +
-        '<circle cx="62" cy="68" r="4.2" fill="#2b2118"/>' +
-        '<circle cx="45.4" cy="68.4" r="1.4" fill="#fff"/>' +
-        '<circle cx="63.4" cy="66.4" r="1.4" fill="#fff"/>' +
-        '<path d="M30 98q6 12 12 0" fill="#ff8fa3"/>' +
+      '<svg viewBox="0 0 190 160">' +
+        '<g class="pup-hearts">' +
+          '<path class="pup-heart" d="M48 36c-3.2-5-12-3.2-12 3.4 0 5 12 12 12 12s12-7 12-12c0-6.6-8.8-8.4-12-3.4z"/>' +
+          '<path class="pup-heart" d="M86 22c-2.6-4-9.4-2.4-9.4 2.8 0 4 9.4 9.6 9.4 9.6s9.4-5.6 9.4-9.6c0-5.2-6.8-6.8-9.4-2.8z"/>' +
+        "</g>" +
+        '<g class="pup-hop">' +
+          '<path class="pup-tail" d="M148 96q28-10 22-36" fill="none" stroke="#e0a04a" stroke-width="10" stroke-linecap="round"/>' +
+          '<ellipse cx="104" cy="100" rx="50" ry="32" fill="#f0b429"/>' +
+          '<ellipse cx="108" cy="110" rx="24" ry="16" fill="#ffe3b0"/>' +
+          '<rect x="70" y="112" width="16" height="26" rx="8" fill="#e09a2e"/>' +
+          '<rect x="118" y="112" width="16" height="26" rx="8" fill="#e09a2e"/>' +
+          '<circle cx="52" cy="78" r="32" fill="#f2c14e"/>' +
+          '<g class="pup-ear pup-ear-l"><ellipse cx="26" cy="74" rx="14" ry="22" fill="#d8922c" transform="rotate(-18 26 74)"/></g>' +
+          '<g class="pup-ear pup-ear-r"><ellipse cx="74" cy="58" rx="12" ry="20" fill="#d8922c" transform="rotate(18 74 58)"/></g>' +
+          '<ellipse cx="34" cy="90" rx="16" ry="12" fill="#ffe7b8"/>' +
+          '<ellipse cx="24" cy="88" rx="5" ry="3.6" fill="#3a2a22"/>' +
+          '<circle cx="44" cy="70" r="4.2" fill="#2b2118"/>' +
+          '<circle cx="62" cy="68" r="4.2" fill="#2b2118"/>' +
+          '<circle cx="45.4" cy="68.4" r="1.4" fill="#fff"/>' +
+          '<circle cx="63.4" cy="66.4" r="1.4" fill="#fff"/>' +
+          '<path d="M30 98q6 12 12 0" fill="#ff8fa3"/>' +
+        "</g>" +
       "</svg>",
       "illu-puppy"
     );
@@ -87,19 +93,27 @@
 
   function car() {
     return inline(
-      '<svg viewBox="0 0 200 130">' +
-        '<rect x="28" y="58" width="146" height="42" rx="18" fill="#ef4444"/>' +
-        '<path d="M62 58l16-26h52l18 26" fill="#fb7185"/>' +
-        '<path d="M78 40h48l10 16H70z" fill="#dbeafe"/>' +
-        '<circle cx="62" cy="102" r="16" fill="#1f2937"/>' +
-        '<circle cx="146" cy="102" r="16" fill="#1f2937"/>' +
-        '<circle cx="62" cy="102" r="7" fill="#f8fafc"/>' +
-        '<circle cx="146" cy="102" r="7" fill="#f8fafc"/>' +
-        '<circle cx="92" cy="74" r="3" fill="#1f2937"/>' +
-        '<circle cx="108" cy="74" r="3" fill="#1f2937"/>' +
-        '<path d="M94 84q8 6 16 0" fill="none" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>' +
-        '<circle cx="40" cy="74" r="4" fill="#fde68a"/>' +
-        '<circle cx="162" cy="74" r="4" fill="#fde68a"/>' +
+      '<svg viewBox="0 0 200 140">' +
+        '<g class="car-bob">' +
+          '<rect x="28" y="58" width="146" height="42" rx="18" fill="#ef4444"/>' +
+          '<path d="M62 58l16-26h52l18 26" fill="#fb7185"/>' +
+          '<path d="M78 40h48l10 16H70z" fill="#dbeafe"/>' +
+          '<g class="wheel">' +
+            '<circle cx="62" cy="102" r="16" fill="#1f2937"/>' +
+            '<circle cx="62" cy="102" r="7" fill="#f8fafc"/>' +
+            '<rect x="60.2" y="88" width="3.6" height="9" rx="1" fill="#f8fafc"/>' +
+          "</g>" +
+          '<g class="wheel">' +
+            '<circle cx="146" cy="102" r="16" fill="#1f2937"/>' +
+            '<circle cx="146" cy="102" r="7" fill="#f8fafc"/>' +
+            '<rect x="144.2" y="88" width="3.6" height="9" rx="1" fill="#f8fafc"/>' +
+          "</g>" +
+          '<circle cx="92" cy="74" r="3" fill="#1f2937"/>' +
+          '<circle cx="108" cy="74" r="3" fill="#1f2937"/>' +
+          '<path d="M94 84q8 6 16 0" fill="none" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>' +
+          '<circle cx="40" cy="74" r="4" fill="#fde68a"/>' +
+          '<circle cx="162" cy="74" r="4" fill="#fde68a"/>' +
+        "</g>" +
       "</svg>",
       "illu-car"
     );

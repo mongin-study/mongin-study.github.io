@@ -160,7 +160,7 @@
     var gin = S.allTime("gin");
     var root = el("section", { class: "home" });
     root.appendChild(el("div", { class: "home-hero" }, [
-      el("p", { class: "kicker", text: "Toán cho Mon và Gin" }),
+      el("p", { class: "kicker", text: "Học cùng Mon và Gin" }),
       el("h1", { text: "Học vui" }),
       el("p", { class: "lede", text: "Chạm vào bạn nào học hôm nay." })
     ]));

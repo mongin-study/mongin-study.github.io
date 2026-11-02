@@ -152,6 +152,51 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .kid-mon { background: linear-gradient(165deg, #f7fcff 0%, #c5e6ff 58%, #8ec9f5 100%); color: #16324f; }
 .kid-gin { background: linear-gradient(165deg, #fff8e4 0%, #ffd56a 48%, #ffb703 100%); color: #4a2c00; }
 .card-art { display: flex; align-items: flex-end; gap: 4px; width: 100%; min-height: 180px; }
+.kid-gin .card-art { container-type: inline-size; position: relative; }
+.kid-gin .illu-car {
+  position: absolute;
+  left: 46%;
+  bottom: 0;
+  width: min(40%, 150px);
+  z-index: 1;
+  animation: car-drive 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+.kid-gin .car-bob {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: car-bounce 0.32s ease-in-out infinite;
+}
+.kid-gin .wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wheel-spin 0.38s linear infinite;
+}
+.kid-mon .pup-hop {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: pup-hop 0.85s cubic-bezier(.33, .7, .35, 1) infinite;
+  will-change: transform;
+}
+.kid-mon .pup-tail {
+  transform-box: fill-box;
+  transform-origin: 15% 100%;
+  animation: pup-wag 0.22s ease-in-out infinite alternate;
+}
+.kid-mon .pup-ear {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: pup-flop 0.42s ease-in-out infinite;
+}
+.kid-mon .pup-ear-r { animation-delay: -0.12s; }
+.kid-mon .pup-heart {
+  fill: #fb7185;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pup-heart 0.85s ease-out infinite;
+}
+.kid-mon .pup-heart:nth-child(2) { animation-delay: 0.28s; }
 .illu-princess, .illu-tiger { width: min(46%, 180px); }
 .illu-puppy, .illu-car { width: min(42%, 170px); }
 .illu svg { width: 100%; height: auto; display: block; }
@@ -506,8 +551,46 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
 @keyframes glow {
   50% { transform: translateY(6px); filter: brightness(1.15); }
 }
+@keyframes car-drive {
+  0%, 8% { transform: translate3d(0, 0, 0) scaleX(1); }
+  42% { transform: translate3d(calc(54cqi - 100% - 12px), -3px, 0) scaleX(1); }
+  50% { transform: translate3d(calc(54cqi - 100% - 12px), 0, 0) scaleX(-1); }
+  92% { transform: translate3d(0, -3px, 0) scaleX(-1); }
+  100% { transform: translate3d(0, 0, 0) scaleX(1); }
+}
+@keyframes car-bounce {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -2.5px, 0); }
+}
+@keyframes wheel-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pup-hop {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1, 1); }
+  12% { transform: translate3d(0, 3px, 0) scale(1.08, 0.88); }
+  42% { transform: translate3d(0, -18px, 0) scale(0.94, 1.08); }
+  62% { transform: translate3d(0, 0, 0) scale(1.12, 0.84); }
+  78% { transform: translate3d(0, -5px, 0) scale(0.98, 1.04); }
+}
+@keyframes pup-wag {
+  from { transform: rotate(-16deg); }
+  to { transform: rotate(20deg); }
+}
+@keyframes pup-flop {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg); }
+}
+@keyframes pup-heart {
+  0% { opacity: 0; transform: translate3d(0, 8px, 0) scale(0.4); }
+  25% { opacity: 1; transform: translate3d(0, -2px, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -26px, 0) scale(0.85); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .flakes i, .confetti i, .lanterns i, .is-shake { animation: none; }
+  .flakes i, .confetti i, .lanterns i, .is-shake,
+  .kid-gin .illu-car, .kid-gin .car-bob, .kid-gin .wheel,
+  .kid-mon .pup-hop, .kid-mon .pup-tail, .kid-mon .pup-ear, .kid-mon .pup-heart {
+    animation: none;
+  }
 }
 
 @media (max-width: 860px), (orientation: portrait) and (max-width: 1000px) {
