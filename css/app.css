@@ -204,8 +204,27 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .ex-copy { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .ex-copy small { color: var(--muted); font-weight: 700; }
 .today { margin: 6px 0 16px; }
-.today h2 { margin-bottom: 8px; }
+.today h2 {
+  position: sticky;
+  top: 80px;
+  z-index: 16;
+  margin: 0 0 10px;
+  padding: 8px 2px;
+  background: rgba(238, 246, 255, 0.96);
+  backdrop-filter: blur(8px);
+}
+body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .today-card { position: relative; }
+@media (min-width: 721px) {
+  .today-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    min-height: 96px;
+    padding-right: 92px;
+  }
+}
 .ribbon {
   position: absolute;
   top: 12px;
