@@ -1,0 +1,915 @@
+(function (HV) {
+  "use strict";
+
+  var U = HV.util;
+  var S = HV.storage;
+  var el = U.el;
+  var clear = U.clear;
+
+  var state = {
+    route: { name: "home" },
+    daily: { date: U.todayStr(), exercises: [], pending: true, error: false },
+    session: null,
+    destroy: null,
+    timers: [],
+    modal: null,
+    toast: "",
+    toastTimer: 0,
+    draft: null,
+    pendingImport: null,
+    sync: { state: "local", detail: "Máy này" }
+  };
+
+  function syncLabel() {
+    if (state.sync.state === "online") return "Đã đồng bộ";
+    if (state.sync.state === "connecting") return "Đang nối sổ sao";
+    if (state.sync.state === "offline") return "Ngoại tuyến";
+    if (state.sync.state === "error") return "Chưa nối mạng";
+    return "Máy này";
+  }
+
+  function knownChild(id) {
+    return id === "mon" || id === "gin";
+  }
+
+  function parseRoute() {
+    var raw = (location.hash || "").replace(/^#/, "");
+    var parts = raw.split("/").filter(Boolean);
+    if (!parts.length) return { name: "home" };
+    if (parts[0] === "c" && knownChild(parts[1])) {
+      if (parts[2] && HV.categories.some(function (c) { return c.id === parts[2]; })) {
+        return { name: "category", child: parts[1], category: parts[2] };
+      }
+      return { name: "menu", child: parts[1] };
+    }
+    if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
+    if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
+    if (parts[0] === "parents") return { name: "parents" };
+    return { name: "home" };
+  }
+
+  function applyChrome(child) {
+    if (child) document.body.setAttribute("data-child", child);
+    else document.body.removeAttribute("data-child");
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", child === "gin" ? "#ffb703" : child === "mon" ? "#8ec9f5" : "#f6f1e6");
+  }
+
+  function weekStars(child) {
+    return S.summarizeWeek(child, U.weekStart(U.todayStr())).stars;
+  }
+
+  function voiceFor(child) {
+    return child === "gin" ? { rate: 0.86, pitch: 1.12 } : { rate: 0.95, pitch: 1.02 };
+  }
+
+  function cleanup() {
+    state.timers.forEach(function (t) { clearTimeout(t); });
+    state.timers = [];
+    if (state.destroy) {
+      state.destroy();
+      state.destroy = null;
+    }
+    HV.speech.cancel();
+  }
+
+  function toast(msg) {
+    state.toast = msg;
+    var old = document.querySelector(".toast");
+    if (old) old.remove();
+    var node = el("div", { class: "toast", role: "status", text: msg });
+    document.getElementById("app").appendChild(node);
+    clearTimeout(state.toastTimer);
+    state.toastTimer = setTimeout(function () {
+      state.toast = "";
+      if (node.parentNode) node.parentNode.removeChild(node);
+    }, 3200);
+  }
+
+  function openModal(modal) {
+    state.modal = modal;
+    var old = document.querySelector(".modal-back");
+    if (old) old.remove();
+    document.getElementById("app").appendChild(viewModal());
+  }
+
+  function closeModal() {
+    state.modal = null;
+    state.pendingImport = null;
+    var old = document.querySelector(".modal-back");
+    if (old) old.remove();
+  }
+
+  function topbar(opts) {
+    var settings = S.data().settings;
+    var soundOn = settings.sound !== false;
+    var speechOn = settings.speech !== false;
+    return el("header", { class: "topbar" }, [
+      opts.back
+        ? el("button", { class: "icon-btn", "data-go": opts.back, "aria-label": "Quay lại", text: "←" })
+        : el("span", { class: "icon-spacer" }),
+      el("div", { class: "top-title" }, [
+        el("strong", { text: opts.title }),
+        opts.sub ? el("span", { text: opts.sub }) : null
+      ]),
+      opts.child
+        ? el("button", { class: "star-pill", "data-go": "#/board/" + opts.child, "aria-label": "Bảng xếp hạng", text: "★ " + weekStars(opts.child) })
+        : el("span", { class: "sync-chip", "data-sync": "1", text: syncLabel() }),
+      el("button", {
+        class: "icon-btn" + (speechOn ? "" : " is-off"),
+        "data-act": "toggle-speech",
+        "data-setting": "speech",
+        "aria-pressed": String(speechOn),
+        "aria-label": speechOn ? "Tắt đọc to" : "Bật đọc to",
+        text: "🗣️"
+      }),
+      el("button", {
+        class: "icon-btn" + (soundOn ? "" : " is-off"),
+        "data-act": "toggle-sound",
+        "data-setting": "sound",
+        "aria-pressed": String(soundOn),
+        "aria-label": soundOn ? "Tắt tiếng" : "Bật tiếng",
+        text: soundOn ? "🔔" : "🔕"
+      })
+    ]);
+  }
+
+  function syncText() {
+    var label = syncLabel();
+    if (state.sync.detail && state.sync.detail !== label) return label + " · " + state.sync.detail;
+    return label;
+  }
+
+  function syncLine() {
+    return el("p", { class: "sync-line", "data-sync": "1", text: syncText() });
+  }
+
+  function viewHome() {
+    var mon = S.allTime("mon");
+    var gin = S.allTime("gin");
+    var root = el("section", { class: "home" });
+    root.appendChild(el("div", { class: "home-hero" }, [
+      el("p", { class: "kicker", text: "Toán cho Mon và Gin" }),
+      el("h1", { text: "Học vui" }),
+      el("p", { class: "lede", text: "Chạm vào bạn nào học hôm nay." })
+    ]));
+    var grid = el("div", { class: "kid-grid" });
+    grid.appendChild(kidCard("mon", mon.stars));
+    grid.appendChild(kidCard("gin", gin.stars));
+    root.appendChild(grid);
+    root.appendChild(el("div", { class: "home-foot" }, [
+      syncLine(),
+      el("button", { class: "text-link", "data-go": "#/parents", text: "Phụ huynh xem sao" }),
+      el("p", { class: "fine", text: "Không cần mật khẩu. Sao được lưu trên máy và đồng bộ khi có mạng." })
+    ]));
+    return root;
+  }
+
+  function kidCard(id, stars) {
+    var meta = HV.kids[id];
+    var btn = el("button", {
+      class: "kid-card kid-" + id,
+      "data-go": "#/c/" + id,
+      "aria-label": "Vào học cùng " + meta.name + ", " + meta.age
+    });
+    if (id === "mon") HV.art.flakes(btn, 10);
+    var art = el("div", { class: "card-art" });
+    if (id === "mon") {
+      art.appendChild(HV.art.princess());
+      art.appendChild(HV.art.puppy());
+    } else {
+      art.appendChild(HV.art.tiger());
+      art.appendChild(HV.art.car());
+    }
+    btn.appendChild(art);
+    btn.appendChild(el("p", { class: "kid-kicker", text: meta.tagline }));
+    btn.appendChild(el("h2", { text: meta.name }));
+    btn.appendChild(el("p", { class: "kid-age", text: meta.age }));
+    btn.appendChild(el("span", { class: "enter-pill", text: "★ " + stars + " sao  ·  Vào học" }));
+    return btn;
+  }
+
+  function viewMenu(child) {
+    var meta = HV.kids[child];
+    var root = el("section", { class: "menu" });
+    root.appendChild(topbar({ title: "Chào " + meta.name, sub: "Hôm nay mình học gì?", back: "#/", child: child }));
+    root.appendChild(syncLine());
+    root.appendChild(todayBlock(child));
+    var grid = el("div", { class: "cat-grid" });
+    var stats = S.allTime(child);
+    HV.categories.forEach(function (cat) {
+      var catStats = stats.byCategory[cat.id] || { stars: 0, played: 0 };
+      var count = HV.catalog.filter(function (ex) { return ex.child === child && ex.category === cat.id; }).length;
+      grid.appendChild(el("button", { class: "cat-card", "data-go": "#/c/" + child + "/" + cat.id }, [
+        el("span", { class: "cat-icon", text: cat.icon }),
+        el("span", { class: "cat-name", text: cat.title }),
+        el("span", { class: "cat-blurb", text: cat.blurb[child] }),
+        el("span", { class: "cat-meta", text: count + " bài · " + catStats.stars + " sao" })
+      ]));
+    });
+    root.appendChild(grid);
+    root.appendChild(el("button", { class: "btn btn-primary board-link", "data-go": "#/board/" + child, text: "Bảng xếp hạng tuần này" }));
+    return root;
+  }
+
+  function todayBlock(child) {
+    var wrap = el("section", { class: "today" });
+    wrap.appendChild(el("h2", { text: "Bài mới hôm nay" }));
+    if (state.daily.pending) {
+      wrap.appendChild(el("p", { class: "muted", text: "Đang mở bài mới..." }));
+      return wrap;
+    }
+    if (state.daily.error) {
+      wrap.appendChild(el("p", { class: "muted", text: "Chưa tải được bài mới. Các bài sẵn có vẫn chơi được." }));
+      return wrap;
+    }
+    var list = state.daily.exercises.filter(function (ex) { return ex.child === child; });
+    if (!list.length) {
+      wrap.appendChild(el("p", { class: "muted", text: "Hôm nay chưa có bài mới." }));
+      return wrap;
+    }
+    var row = el("div", { class: "today-row" });
+    list.forEach(function (ex) {
+      var best = S.todayBest(child, ex.id);
+      row.appendChild(el("button", { class: "today-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
+        el("span", { class: "ribbon", text: best == null ? "Mới" : "Đã chơi" }),
+        el("span", { class: "today-icon", text: ex.icon || "✨" }),
+        el("span", { class: "today-title", text: ex.title }),
+        el("span", { class: "stars", text: best == null ? "Chưa có sao" : U.starText(best) })
+      ]));
+    });
+    wrap.appendChild(row);
+    return wrap;
+  }
+
+  function viewCategory(child, category) {
+    var cat = HV.categories.filter(function (c) { return c.id === category; })[0];
+    var stats = S.allTime(child);
+    var root = el("section", { class: "category" });
+    root.appendChild(topbar({ title: cat.title, sub: cat.blurb[child], back: "#/c/" + child, child: child }));
+    var list = el("div", { class: "ex-list" });
+    HV.catalog.filter(function (ex) { return ex.child === child && ex.category === category; }).forEach(function (ex) {
+      var best = stats.byExercise[ex.id] ? stats.byExercise[ex.id].bestStars : 0;
+      list.appendChild(el("button", { class: "ex-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
+        el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
+        el("span", { class: "ex-copy" }, [
+          el("strong", { text: ex.title }),
+          el("small", { text: ex.subtitle || "" })
+        ]),
+        el("span", { class: "stars", text: U.starText(best) })
+      ]));
+    });
+    root.appendChild(list);
+    return root;
+  }
+
+  function findExercise(id) {
+    var found = HV.catalog.filter(function (ex) { return ex.id === id; })[0];
+    if (found) return found;
+    return state.daily.exercises.filter(function (ex) { return ex.id === id; })[0] || null;
+  }
+
+  function materialize(entry) {
+    try {
+      var list = [];
+      if (entry.questions && entry.questions.length) list = entry.questions;
+      else if (entry.generator && HV.generators[entry.generator]) list = HV.generators[entry.generator](entry.config || {});
+      return list.map(HV.engine.normalize).filter(Boolean);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function beginSession(id) {
+    var entry = findExercise(id);
+    if (!entry) {
+      state.session = { missing: true, id: id };
+      return;
+    }
+    var questions = materialize(entry);
+    if (!questions.length) {
+      state.session = { empty: true, entry: entry };
+      return;
+    }
+    state.session = {
+      entry: entry,
+      questions: questions,
+      index: 0,
+      first: [],
+      phase: "quiz"
+    };
+  }
+
+  function viewPlay() {
+    var session = state.session;
+    var root = el("section", { class: "play" });
+    if (!session || session.missing) {
+      root.appendChild(topbar({ title: "Không thấy bài", back: "#/", child: null }));
+      root.appendChild(el("p", { class: "muted", text: "Bài này không có. Mình về trang chọn bạn nhé." }));
+      return root;
+    }
+    if (session.empty) {
+      root.appendChild(topbar({ title: session.entry.title, back: "#/c/" + session.entry.child, child: session.entry.child }));
+      root.appendChild(el("p", { class: "muted", text: "Bài chưa có câu hỏi." }));
+      return root;
+    }
+    var child = session.entry.child;
+    if (session.phase === "result") return viewResult(root, session);
+    root.appendChild(topbar({
+      title: session.entry.title,
+      sub: "Câu " + (session.index + 1) + " / " + session.questions.length,
+      back: "#/c/" + child + "/" + session.entry.category,
+      child: child
+    }));
+    var dots = el("div", { class: "dots", id: "dots" });
+    session.questions.forEach(function (_, i) {
+      dots.appendChild(el("i", { class: i < session.index ? "is-done" : i === session.index ? "is-now" : "" }));
+    });
+    root.appendChild(dots);
+    var bubble = el("div", { class: "prompt-bubble" }, [
+      el("p", { id: "prompt-text", class: "prompt" }),
+      el("button", { class: "icon-btn speak-btn", "data-act": "replay-speech", "aria-label": "Nghe lại", text: "🗣️" })
+    ]);
+    root.appendChild(bubble);
+    root.appendChild(el("div", { id: "stage", class: "stage" }));
+    root.appendChild(el("button", { class: "text-link quit-link", "data-act": "ask-quit", text: "Dừng bài" }));
+    return root;
+  }
+
+  function mountCurrentQuestion() {
+    var session = state.session;
+    if (!session || session.phase !== "quiz") return;
+    var q = session.questions[session.index];
+    var prompt = document.getElementById("prompt-text");
+    if (prompt) prompt.textContent = q.prompt;
+    var sub = document.querySelector(".top-title span");
+    if (sub) sub.textContent = "Câu " + (session.index + 1) + " / " + session.questions.length;
+    var dots = document.getElementById("dots");
+    if (dots) {
+      Array.prototype.forEach.call(dots.children, function (dot, i) {
+        dot.className = i < session.index ? "is-done" : i === session.index ? "is-now" : "";
+      });
+    }
+    var stage = document.getElementById("stage");
+    if (!stage) return;
+    if (state.destroy) state.destroy();
+    state.destroy = HV.engine.mount(stage, q, {
+      child: session.entry.child,
+      isLast: session.index === session.questions.length - 1,
+      track: function (t) { state.timers.push(t); },
+      onDone: onQuestionDone
+    });
+    HV.speech.speak(q.speak, voiceFor(session.entry.child));
+  }
+
+  function onQuestionDone(first) {
+    var session = state.session;
+    if (!session || session.phase !== "quiz") return;
+    session.first[session.index] = !!first;
+    session.index += 1;
+    if (session.index >= session.questions.length) {
+      session.phase = "result";
+      render();
+    } else mountCurrentQuestion();
+  }
+
+  function viewResult(root, session) {
+    var child = session.entry.child;
+    var total = session.questions.length;
+    var correct = session.first.filter(Boolean).length;
+    var stars = S.starsFor(correct, total);
+    if (!session.recorded) {
+      var before = weekStars(child);
+      session.record = S.recordRound(child, {
+        id: session.entry.id,
+        title: session.entry.title,
+        category: session.entry.category,
+        correct: correct,
+        total: total,
+        stars: stars
+      });
+      session.recorded = true;
+      session.stars = stars;
+      session.correct = correct;
+      session.crossed = null;
+      if (session.record && session.record.saved !== false) {
+        var targets = S.data().settings.targets[child];
+        var after = session.record.week.stars;
+        targets.forEach(function (target, i) {
+          if (before < target && after >= target) session.crossed = HV.rewards[child][i];
+        });
+      }
+      HV.audio.fanfare();
+    }
+    root.appendChild(topbar({ title: "Xong bài rồi", sub: HV.kids[child].name, back: "#/c/" + child, child: child }));
+    var card = el("div", { class: "result-card" });
+    card.appendChild(burst());
+    if (child === "mon") {
+      var cast = el("div", { class: "result-art" });
+      cast.appendChild(HV.art.princess());
+      cast.appendChild(HV.art.puppy());
+      card.appendChild(cast);
+    } else {
+      var ginArt = el("div", { class: "result-art" });
+      ginArt.appendChild(HV.art.tiger());
+      ginArt.appendChild(HV.art.car());
+      card.appendChild(ginArt);
+    }
+    card.appendChild(el("p", { class: "result-stars", text: U.starText(session.stars) }));
+    card.appendChild(el("h2", { text: resultHeadline(session.stars, child) }));
+    card.appendChild(el("p", { class: "lede", text: "Đúng lần đầu " + session.correct + "/" + total + " câu." }));
+    card.appendChild(el("p", { class: "lede", text: "Tuần này: " + weekStars(child) + " sao." }));
+    if (session.crossed) {
+      card.appendChild(el("p", { class: "milestone-banner", text: "Đạt mốc " + session.crossed.icon + " " + session.crossed.name + "!" }));
+    }
+    if (session.record && session.record.saved === false) {
+      card.appendChild(el("p", { class: "muted", text: "Máy đầy bộ nhớ, sao chưa lưu được." }));
+    }
+    card.appendChild(el("div", { class: "result-actions" }, [
+      el("button", { class: "btn btn-primary", "data-act": "replay", text: "Chơi lại" }),
+      el("button", { class: "btn", "data-go": "#/c/" + child, text: "Bài khác" }),
+      el("button", { class: "btn", "data-go": "#/board/" + child, text: "Bảng xếp hạng" })
+    ]));
+    root.appendChild(card);
+    return root;
+  }
+
+  function resultHeadline(stars, child) {
+    if (stars >= 3) return child === "gin" ? "Giỏi quá!" : "Tuyệt lắm!";
+    if (stars === 2) return "Làm tốt lắm!";
+    if (stars === 1) return "Cố lên, mình học được rồi!";
+    return "Mình học tiếp nhé!";
+  }
+
+  function burst() {
+    var box = el("div", { class: "confetti", "aria-hidden": "true" });
+    var colors = ["#f6d56a", "#7ec8e3", "#fb7185", "#22c55e", "#a855f7", "#fff"];
+    for (var i = 0; i < 18; i++) {
+      var bit = el("i");
+      bit.style.left = (6 + (i * 5.2) % 90) + "%";
+      bit.style.background = colors[i % colors.length];
+      bit.style.animationDelay = (i * 0.04) + "s";
+      box.appendChild(bit);
+    }
+    return box;
+  }
+
+  function viewBoard(child) {
+    var meta = HV.kids[child];
+    var week = S.summarizeWeek(child, U.weekStart(U.todayStr()));
+    var miles = S.milestoneState(child, week.stars);
+    var rewards = HV.rewards[child];
+    var root = el("section", { class: "board board-" + child });
+    if (child === "mon") {
+      var lanterns = el("div", { class: "lanterns", "aria-hidden": "true" });
+      for (var i = 0; i < 5; i++) {
+        var lamp = el("i");
+        lamp.style.left = (6 + i * 18) + "%";
+        lamp.style.animationDelay = (i * 0.35) + "s";
+        lanterns.appendChild(lamp);
+      }
+      root.appendChild(lanterns);
+      HV.art.flakes(root, 12);
+    }
+    root.appendChild(topbar({ title: "Bảng xếp hạng", sub: meta.name, back: "#/c/" + child, child: child }));
+    var hero = el("div", { class: "board-hero" });
+    var copy = el("div", { class: "board-copy" });
+    copy.appendChild(el("p", { class: "kicker", text: "Tuần này · thứ Hai đến Chủ nhật" }));
+    copy.appendChild(el("h1", { text: week.stars + " sao" }));
+    copy.appendChild(el("p", { class: "lede", text: week.exercisesDone + " bài · đúng " + week.correct + "/" + week.answered }));
+    copy.appendChild(el("p", { class: "fine", text: "Bố mẹ xem cuối tuần để thưởng." }));
+    hero.appendChild(copy);
+    var cast = el("div", { class: "board-cast" });
+    if (child === "mon") {
+      cast.appendChild(HV.art.princess());
+      cast.appendChild(HV.art.tower());
+      cast.appendChild(HV.art.puppy());
+    } else {
+      cast.appendChild(HV.art.tiger());
+      cast.appendChild(HV.art.car());
+    }
+    hero.appendChild(cast);
+    root.appendChild(hero);
+    root.appendChild(dayRow(week));
+    root.appendChild(milestoneRow(rewards, miles, week.stars));
+    var past = S.listWeeks(child).filter(function (w) { return w.weekStart !== week.weekStart; });
+    var pastBox = el("section", { class: "past" });
+    pastBox.appendChild(el("h2", { text: "Các tuần trước" }));
+    if (!past.length) pastBox.appendChild(el("p", { class: "muted", text: "Chưa có tuần nào trước." }));
+    past.slice(0, 8).forEach(function (w) {
+      pastBox.appendChild(el("p", { class: "past-line", text: U.formatVi(w.weekStart) + " – " + U.formatVi(w.weekEnd) + " · " + w.stars + " sao · " + w.exercisesDone + " bài" }));
+    });
+    root.appendChild(pastBox);
+    return root;
+  }
+
+  function dayRow(week) {
+    var today = U.todayStr();
+    var row = el("div", { class: "day-row" });
+    week.days.forEach(function (day) {
+      var pill = el("div", { class: "day-pill" + (day.date === today ? " is-today" : "") + (day.stats.stars ? " has-stars" : "") });
+      pill.appendChild(el("span", { class: "dow", text: U.DOW_SHORT[day.dow] }));
+      pill.appendChild(el("strong", { text: String(day.stats.stars) }));
+      pill.appendChild(el("span", { text: "sao" }));
+      row.appendChild(pill);
+    });
+    return row;
+  }
+
+  function milestoneRow(rewards, miles, stars) {
+    var row = el("div", { class: "miles" });
+    rewards.forEach(function (reward, i) {
+      var target = miles.targets[i];
+      var reached = stars >= target;
+      var pct = Math.max(0, Math.min(100, Math.round((stars / target) * 100)));
+      var card = el("article", { class: "mile" + (reached ? " is-reached" : "") });
+      card.appendChild(el("span", { class: "mile-icon", text: reward.icon }));
+      card.appendChild(el("h3", { text: reward.name }));
+      card.appendChild(el("p", { text: target + " sao" }));
+      var bar = el("div", { class: "bar" });
+      var fill = el("span");
+      fill.style.width = pct + "%";
+      bar.appendChild(fill);
+      card.appendChild(bar);
+      card.appendChild(el("p", { class: "fine", text: reached ? "Đạt rồi" : stars + "/" + target }));
+      row.appendChild(card);
+    });
+    return row;
+  }
+
+  function viewParents() {
+    if (!state.draft) {
+      var targets = S.data().settings.targets;
+      state.draft = { mon: targets.mon.slice(), gin: targets.gin.slice() };
+    }
+    var root = el("section", { class: "parents" });
+    root.appendChild(topbar({ title: "Sổ sao của bố mẹ", sub: "Mon và Gin", back: "#/" }));
+    root.appendChild(el("p", { class: "lede", text: "Hai iPad dùng chung một sổ. Khi có mạng, sao gộp lại ở đây." }));
+    root.appendChild(syncLine());
+    var grid = el("div", { class: "parents-grid" });
+    grid.appendChild(parentKid("mon"));
+    grid.appendChild(parentKid("gin"));
+    root.appendChild(grid);
+    root.appendChild(backupBox());
+    root.appendChild(el("p", { class: "fine", text: "1 sao: đúng một phần. 2 sao: đúng từ 60%. 3 sao: đúng hết ngay lần đầu. Chơi lại vẫn được cộng sao." }));
+    return root;
+  }
+
+  function parentKid(child) {
+    var meta = HV.kids[child];
+    var week = S.summarizeWeek(child, U.weekStart(U.todayStr()));
+    var all = S.allTime(child);
+    var card = el("article", { class: "parent-card kid-tint-" + child });
+    card.appendChild(el("h2", { text: meta.name + " · tuần này " + week.stars + " sao" }));
+    card.appendChild(el("p", { class: "muted", text: "Tất cả: " + all.stars + " sao · " + all.rounds + " bài · đúng " + all.correct + "/" + all.answered }));
+    card.appendChild(el("h3", { text: "Mốc thưởng tuần" }));
+    var editor = el("div", { class: "target-editor" });
+    state.draft[child].forEach(function (value, index) {
+      editor.appendChild(el("div", { class: "stepper" }, [
+        el("button", { "data-act": "step", "data-child": child, "data-i": String(index), "data-dir": "-1", "aria-label": "Giảm mốc", text: "−" }),
+        el("span", { text: String(value) }),
+        el("button", { "data-act": "step", "data-child": child, "data-i": String(index), "data-dir": "1", "aria-label": "Tăng mốc", text: "+" })
+      ]));
+    });
+    card.appendChild(editor);
+    card.appendChild(el("button", { class: "btn btn-primary", "data-act": "save-targets", "data-child": child, text: "Lưu mốc của " + meta.name }));
+    card.appendChild(el("h3", { text: "Từng ngày tuần này" }));
+    week.days.forEach(function (day) {
+      var block = el("div", { class: "day-log" });
+      block.appendChild(el("strong", { text: U.DOW[day.dow] + " " + U.formatVi(day.date) }));
+      if (!day.stats.exercisesDone) {
+        block.appendChild(el("p", { class: "muted", text: "Chưa học" }));
+      } else {
+        block.appendChild(el("p", { text: day.stats.exercisesDone + " bài · đúng " + day.stats.correct + "/" + day.stats.answered + " · " + day.stats.stars + " sao" }));
+        day.stats.items.forEach(function (item) {
+          block.appendChild(el("p", { class: "log-item", text: "• " + (item.title || item.id) + " — " + item.stars + " sao (" + item.correct + "/" + item.total + ")" }));
+        });
+      }
+      card.appendChild(block);
+    });
+    var past = S.listWeeks(child).filter(function (w) { return w.weekStart !== week.weekStart; });
+    card.appendChild(el("h3", { text: "Tuần trước" }));
+    if (!past.length) card.appendChild(el("p", { class: "muted", text: "Chưa có." }));
+    past.forEach(function (w) {
+      card.appendChild(el("p", { class: "past-line", text: U.formatVi(w.weekStart) + "–" + U.formatVi(w.weekEnd) + ": " + w.stars + " sao, " + w.exercisesDone + " bài, đúng " + w.correct + "/" + w.answered }));
+    });
+    card.appendChild(el("button", { class: "text-link danger", "data-act": "ask-reset", "data-child": child, text: "Xóa tiến độ của " + meta.name }));
+    return card;
+  }
+
+  function backupBox() {
+    var box = el("section", { class: "backup" });
+    box.appendChild(el("h2", { text: "Bản sao lưu" }));
+    box.appendChild(el("p", { class: "muted", text: "Tải hoặc chép tệp JSON. Khôi phục sẽ gộp thêm, không xóa sao đang có." }));
+    box.appendChild(el("div", { class: "backup-actions" }, [
+      el("button", { class: "btn", "data-act": "export-file", text: "Tải tệp" }),
+      el("button", { class: "btn", "data-act": "export-copy", text: "Chép bản sao" }),
+      el("label", { class: "btn" }, [
+        "Chọn tệp",
+        el("input", { id: "import-file", type: "file", accept: "application/json,.json" })
+      ])
+    ]));
+    box.appendChild(el("label", { class: "paste-label", text: "Hoặc dán bản sao" }));
+    box.appendChild(el("textarea", { id: "import-text", rows: "4", placeholder: "Dán JSON vào đây" }));
+    box.appendChild(el("button", { class: "btn btn-primary", "data-act": "import-paste", text: "Khôi phục từ chữ dán" }));
+    return box;
+  }
+
+  function viewModal() {
+    var modal = state.modal || {};
+    var body = [];
+    if (modal.type === "quit") {
+      body = [
+        el("h2", { text: "Dừng bài này nhé?" }),
+        el("p", { text: "Sao chỉ được lưu khi làm xong bài." }),
+        el("div", { class: "modal-actions" }, [
+          el("button", { class: "btn btn-primary", "data-act": "modal-close", text: "Học tiếp" }),
+          el("button", { class: "btn", "data-act": "quit-yes", text: "Dừng" })
+        ])
+      ];
+    } else if (modal.type === "reset") {
+      var name = HV.kids[modal.child].name;
+      var stars = S.allTime(modal.child).stars;
+      body = [
+        el("h2", { text: "Xóa hết sao của " + name + "?" }),
+        el("p", { text: "Sẽ mất " + stars + " sao trên máy này và trên sổ chung." }),
+        el("div", { class: "modal-actions" }, [
+          el("button", { class: "btn", "data-act": "modal-close", text: "Giữ lại" }),
+          el("button", { class: "btn btn-danger", "data-act": "reset-yes", "data-child": modal.child, text: "Xóa" })
+        ])
+      ];
+    } else if (modal.type === "import") {
+      var preview = modal.preview;
+      body = [
+        el("h2", { text: "Gộp bản sao này?" }),
+        el("p", { text: "Mon: " + preview.mon.stars + " sao, " + preview.mon.rounds + " bài." }),
+        el("p", { text: "Gin: " + preview.gin.stars + " sao, " + preview.gin.rounds + " bài." }),
+        el("div", { class: "modal-actions" }, [
+          el("button", { class: "btn", "data-act": "modal-close", text: "Không" }),
+          el("button", { class: "btn btn-primary", "data-act": "import-yes", text: "Gộp vào" })
+        ])
+      ];
+    } else if (modal.type === "export-text") {
+      body = [
+        el("h2", { text: "Bản sao" }),
+        el("textarea", { id: "export-text", rows: "8" }),
+        el("div", { class: "modal-actions" }, [
+          el("button", { class: "btn btn-primary", "data-act": "modal-close", text: "Đóng" })
+        ])
+      ];
+    }
+    var card = el("div", { class: "modal", role: "dialog", "aria-modal": "true" }, body);
+    var back = el("div", { class: "modal-back" }, card);
+    if (modal.type === "export-text") {
+      setTimeout(function () {
+        var area = document.getElementById("export-text");
+        if (area) area.value = modal.text || "";
+      }, 0);
+    }
+    return back;
+  }
+
+  function render() {
+    cleanup();
+    var route = state.route;
+    var child = route.child || (state.session && state.session.entry && state.session.entry.child) || "";
+    applyChrome(child);
+    document.title = route.name === "home" ? "Học vui" : "Học vui · " + (child ? HV.kids[child].name : "Bố mẹ");
+    var root = document.getElementById("app");
+    clear(root);
+    var shell = el("main", { class: "shell", "data-screen": route.name });
+    if (route.name === "menu") shell.appendChild(viewMenu(route.child));
+    else if (route.name === "category") shell.appendChild(viewCategory(route.child, route.category));
+    else if (route.name === "play") shell.appendChild(viewPlay());
+    else if (route.name === "board") shell.appendChild(viewBoard(route.child));
+    else if (route.name === "parents") shell.appendChild(viewParents());
+    else shell.appendChild(viewHome());
+    root.appendChild(shell);
+    if (state.modal) root.appendChild(viewModal());
+    if (state.toast) root.appendChild(el("div", { class: "toast", role: "status", text: state.toast }));
+    if (route.name === "play" && state.session && state.session.phase === "quiz") mountCurrentQuestion();
+  }
+
+  function onRoute() {
+    var route = parseRoute();
+    var sameQuiz = route.name === "play" && state.route.name === "play" && state.route.id === route.id && state.session && state.session.phase === "quiz";
+    state.route = route;
+    if (route.name === "play") {
+      if (!sameQuiz) beginSession(route.id);
+    } else {
+      state.session = null;
+      if (route.name !== "parents") state.draft = null;
+    }
+    render();
+  }
+
+  function updateToggles() {
+    ["sound", "speech"].forEach(function (key) {
+      var on = S.data().settings[key] !== false;
+      document.querySelectorAll('[data-setting="' + key + '"]').forEach(function (btn) {
+        btn.setAttribute("aria-pressed", String(on));
+        btn.classList.toggle("is-off", !on);
+        if (key === "sound") btn.textContent = on ? "🔔" : "🔕";
+      });
+    });
+  }
+
+  function updateSyncBadge() {
+    document.querySelectorAll("[data-sync]").forEach(function (node) {
+      if (node.classList.contains("sync-line")) node.textContent = syncText();
+      else node.textContent = syncLabel();
+    });
+  }
+
+  function readImportText(text) {
+    try {
+      var json = JSON.parse(text);
+      var preview = S.previewImport(json);
+      state.pendingImport = json;
+      openModal({ type: "import", preview: preview });
+    } catch (e) {
+      toast(e && e.message ? e.message : "Tệp không đọc được.");
+    }
+  }
+
+  function onClick(e) {
+    var goEl = e.target.closest("[data-go]");
+    if (goEl) {
+      location.hash = goEl.getAttribute("data-go");
+      return;
+    }
+    var actEl = e.target.closest("[data-act]");
+    if (!actEl) return;
+    var act = actEl.getAttribute("data-act");
+    if (act === "toggle-sound" || act === "toggle-speech") {
+      var key = act === "toggle-sound" ? "sound" : "speech";
+      S.setSetting(key, S.data().settings[key] === false);
+      if (key === "speech" && S.data().settings.speech === false) HV.speech.cancel();
+      updateToggles();
+      return;
+    }
+    if (act === "replay-speech") {
+      var session = state.session;
+      if (session && session.phase === "quiz") {
+        HV.speech.speak(session.questions[session.index].speak, voiceFor(session.entry.child));
+      }
+      return;
+    }
+    if (act === "ask-quit") {
+      openModal({ type: "quit" });
+      return;
+    }
+    if (act === "modal-close") {
+      closeModal();
+      return;
+    }
+    if (act === "quit-yes") {
+      closeModal();
+      var backChild = state.session && state.session.entry ? state.session.entry.child : "";
+      location.hash = backChild ? "#/c/" + backChild : "#/";
+      return;
+    }
+    if (act === "replay") {
+      if (state.session && state.session.entry) beginSession(state.session.entry.id);
+      render();
+      return;
+    }
+    if (act === "step") {
+      var child = actEl.getAttribute("data-child");
+      var index = Number(actEl.getAttribute("data-i"));
+      var dir = Number(actEl.getAttribute("data-dir"));
+      if (!state.draft) return;
+      var next = state.draft[child].slice();
+      next[index] = U.clamp(next[index] + dir, 1, 500);
+      state.draft[child] = next;
+      render();
+      return;
+    }
+    if (act === "save-targets") {
+      var who = actEl.getAttribute("data-child");
+      var result = S.setTargets(who, state.draft[who]);
+      toast(result.ok ? "Đã lưu mốc thưởng." : result.message);
+      if (result.ok) state.draft = null;
+      render();
+      return;
+    }
+    if (act === "ask-reset") {
+      openModal({ type: "reset", child: actEl.getAttribute("data-child") });
+      return;
+    }
+    if (act === "reset-yes") {
+      var kid = actEl.getAttribute("data-child");
+      closeModal();
+      S.resetChild(kid);
+      state.draft = null;
+      toast("Đã xóa tiến độ của " + HV.kids[kid].name + ".");
+      render();
+      return;
+    }
+    if (act === "export-file") {
+      var payload = JSON.stringify(S.exportPayload(), null, 2);
+      var blob = new Blob([payload], { type: "application/json" });
+      var link = document.createElement("a");
+      var url = URL.createObjectURL(blob);
+      link.href = url;
+      link.download = "hoc-vui-sao-" + U.todayStr() + ".json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+      return;
+    }
+    if (act === "export-copy") {
+      var text = JSON.stringify(S.exportPayload(), null, 2);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          toast("Đã chép. Hãy dán vào Ghi chú để giữ.");
+        }).catch(function () {
+          openModal({ type: "export-text", text: text });
+        });
+      } else openModal({ type: "export-text", text: text });
+      return;
+    }
+    if (act === "import-paste") {
+      var area = document.getElementById("import-text");
+      readImportText(area ? area.value : "");
+      return;
+    }
+    if (act === "import-yes" && state.pendingImport) {
+      try {
+        S.importPayload(state.pendingImport);
+        closeModal();
+        state.draft = null;
+        toast("Đã gộp bản sao.");
+        render();
+      } catch (err) {
+        toast(err && err.message ? err.message : "Không khôi phục được.");
+      }
+    }
+  }
+
+  function onChange(e) {
+    if (e.target && e.target.id === "import-file" && e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function () { readImportText(String(reader.result || "")); };
+      reader.onerror = function () { toast("Không đọc được tệp."); };
+      reader.readAsText(e.target.files[0]);
+      e.target.value = "";
+    }
+  }
+
+  function loadDaily() {
+    var date = U.todayStr();
+    return fetch("content/daily/" + date + ".json", { cache: "no-cache" }).then(function (res) {
+      if (res.status === 404) return { date: date, exercises: [], pending: false, error: false };
+      if (!res.ok) return { date: date, exercises: [], pending: false, error: true };
+      return res.json().then(function (json) {
+        var exercises = Array.isArray(json.exercises) ? json.exercises.filter(function (ex) {
+          return ex && ex.id && knownChild(ex.child) && ex.title && (ex.generator || (ex.questions && ex.questions.length));
+        }) : [];
+        return { date: date, exercises: exercises, pending: false, error: false };
+      });
+    }).catch(function () {
+      return { date: date, exercises: [], pending: false, error: true };
+    });
+  }
+
+  HV.ui = {
+    setSync: function (info) {
+      state.sync = info || state.sync;
+      updateSyncBadge();
+    },
+    notify: function () {
+      if (state.session && state.session.phase === "quiz") {
+        updateSyncBadge();
+        var pill = document.querySelector(".star-pill");
+        if (pill && state.session.entry) pill.textContent = "★ " + weekStars(state.session.entry.child);
+        return;
+      }
+      if (state.route.name === "parents") state.draft = null;
+      render();
+    }
+  };
+
+  function boot() {
+    document.addEventListener("pointerdown", function () { HV.audio.unlock(); }, { passive: true });
+    window.addEventListener("hashchange", onRoute);
+    var app = document.getElementById("app");
+    app.addEventListener("click", onClick);
+    app.addEventListener("change", onChange);
+    loadDaily().then(function (daily) {
+      state.daily = daily;
+      if (state.route.name === "play" && (!state.session || state.session.missing || state.session.empty)) {
+        beginSession(state.route.id);
+      }
+      if (!(state.session && state.session.phase === "quiz" && document.getElementById("stage"))) render();
+    });
+    onRoute();
+    if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})(globalThis.HV = globalThis.HV || {});
