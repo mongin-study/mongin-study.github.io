@@ -60,7 +60,7 @@ function plainItem(item) {
     level: Math.max(0, Math.min(4, Number(item.level) || 0)),
     correct: Number(item.correct) || 0,
     total: Number(item.total) || 0,
-    stars: Math.max(0, Math.min(9, Number(item.stars) || 0)),
+    stars: Math.max(0, Math.min(20, Number(item.stars) || 0)),
     at: Number(item.at) || 0,
     nonce: String(item.nonce || "")
   };
@@ -323,6 +323,55 @@ function hookStorage() {
   };
 }
 
+function testsRef() {
+  return collection(db, "families", FAMILY, "weeklyTests");
+}
+
+function listenWeekly() {
+  onSnapshot(testsRef(), function (snap) {
+    var list = [];
+    snap.forEach(function (docSnap) {
+      var data = docSnap.data() || {};
+      data.id = docSnap.id;
+      list.push(data);
+    });
+    HV.weeklyRemote = list;
+    if (HV.ui && HV.ui.notify) HV.ui.notify();
+  }, function () {});
+}
+
+function saveWeekly(result) {
+  if (!db || !authed || !result || !result.id) return Promise.resolve();
+  var copy = {
+    id: result.id,
+    child: result.child,
+    week: result.week,
+    correct: result.correct,
+    total: result.total,
+    percent: result.percent,
+    medal: result.medal,
+    bonus: result.bonus,
+    seconds: result.seconds || 0,
+    bySubject: result.bySubject || {},
+    wrongs: result.wrongs || [],
+    rewardNote: result.rewardNote || "",
+    at: result.at || Date.now()
+  };
+  return setDoc(doc(db, "families", FAMILY, "weeklyTests", result.id), Object.assign({}, copy, {
+    updatedAt: serverTimestamp()
+  }), { merge: true }).catch(function () {});
+}
+
+function saveWeeklyNote(id, note) {
+  if (!db || !authed || !id) return Promise.resolve();
+  return setDoc(doc(db, "families", FAMILY, "weeklyTests", id), {
+    rewardNote: String(note || "").slice(0, 160),
+    updatedAt: serverTimestamp()
+  }, { merge: true }).catch(function () {});
+}
+
+HV.cloud = { saveWeekly: saveWeekly, saveWeeklyNote: saveWeeklyNote };
+
 function startListeners() {
   if (!authed) {
     authed = true;
@@ -330,6 +379,7 @@ function startListeners() {
     listenChild("mon");
     listenChild("gin");
     listenRewards();
+    listenWeekly();
     window.addEventListener("online", function () { setStatus("online", "Đã đồng bộ"); });
     window.addEventListener("offline", function () { setStatus("offline", "Ngoại tuyến, sẽ đồng bộ sau"); });
   }

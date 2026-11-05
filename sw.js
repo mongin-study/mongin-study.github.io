@@ -1,4 +1,4 @@
-var CACHE = "hoc-vui-v13";
+var CACHE = "hoc-vui-v14";
 var ASSETS = [
   "./",
   "./index.html",
@@ -15,7 +15,9 @@ var ASSETS = [
   "./js/english-bank.js",
   "./js/english-upper.js",
   "./js/engine.js",
+  "./js/weekly.js",
   "./js/app.js",
+  "./content/weekly/2026-11-07.json",
   "./js/firebase-sync.js",
   "./content/daily/2026-11-02.json",
   "./assets/icons/favicon.svg",

@@ -295,17 +295,56 @@
     "Tuyệt cú mèo!",
     "Hoan hô bé!",
     "Đỉnh của chóp!",
-    "Giỏi xuất sắc luôn!"
+    "Giỏi xuất sắc luôn!",
+    "Hay quá trời!",
+    "Úi giỏi quá đi!",
+    "Chuẩn luôn!",
+    "Xuất sắc!",
+    "Ôi đúng rồi!",
+    "Quá đỉnh!",
+    "Giỏi quá xá!",
+    "Bùng nổ luôn!",
+    "Ô kê la!",
+    "Tuyệt vời ông mặt trời!",
+    "Đúng bài quá!",
+    "Mê quá đi!",
+    "Siêu luôn!",
+    "Giỏi dữ vậy!",
+    "Trời ơi giỏi!",
+    "Đỉnh thật sự!",
+    "Hay không chịu được!",
+    "A ha đúng rồi!",
+    "Quá đã!",
+    "Giỏi hết chỗ nói!"
   ];
   var PRAISE_EXTRA = {
-    mon: ["Elsa khen Mon giỏi quá!", "Cún Vàng vẫy đuôi rồi nè!"],
-    gin: ["Siêu anh hùng Gin đỉnh quá!"]
+    mon: [
+      "Elsa khen Mon giỏi quá!",
+      "Cún Vàng vẫy đuôi rồi nè!",
+      "Mon ơi giỏi quá!",
+      "Mon đúng rồi nè!",
+      "Mẹ Vy khen Mon giỏi lắm!",
+      "Bố Hà vỗ tay cho Mon!",
+      "Cún Vàng nhảy lên vì Mon!",
+      "Mon làm được rồi!"
+    ],
+    gin: [
+      "Siêu anh hùng Gin đỉnh quá!",
+      "Gin ơi giỏi quá!",
+      "Gin đúng rồi!",
+      "Mẹ Vy khen Gin giỏi lắm!",
+      "Bố Hà cười với Gin!",
+      "Ô tô của Gin kêu bíp bíp!",
+      "Gin làm được rồi!",
+      "Cún Vàng vẫy đuôi cho Gin!"
+    ]
   };
   var praiseBag = { mon: [], gin: [] };
 
   function praise(child) {
     var key = child === "gin" ? "gin" : "mon";
-    var list = PRAISE.concat(PRAISE_EXTRA[key]);
+    var daily = Array.isArray(HV.dailyPraise) ? HV.dailyPraise : [];
+    var list = PRAISE.concat(PRAISE_EXTRA[key] || []).concat(daily);
     if (!praiseBag[key].length) praiseBag[key] = HV.util.shuffle(list);
     var line = praiseBag[key].pop();
     if (line === praiseBag.last && praiseBag[key].length) {
@@ -338,12 +377,12 @@
       document.removeEventListener("keydown", onKey);
     }
 
-    function finish(first) {
+    function finish(first, extra) {
       if (settled) return;
       settled = true;
       if (pending) clearTimeout(pending);
       document.removeEventListener("keydown", onKey);
-      opts.onDone(!!first);
+      opts.onDone(!!first, extra || null);
     }
 
     function lockInputs() {
@@ -370,26 +409,66 @@
       if (opts.track) opts.track(timer);
     }
 
+    function hopAid(scene) {
+      if (!scene || scene.layout !== "equation") return null;
+      var raw = String(scene.text || "");
+      var plus = raw.match(/(\d+)\s*\+\s*(\d+)/);
+      var minus = raw.match(/(\d+)\s*[−-]\s*(\d+)/);
+      var up = !!plus;
+      var m = plus || minus;
+      if (!m) return null;
+      var a = Number(m[1]);
+      var b = Number(m[2]);
+      if (!b || b > 8) return null;
+      var row = el("div", { class: "hop-line", "aria-hidden": "true" });
+      row.appendChild(el("i", { class: "is-start", text: String(a) }));
+      var n = a;
+      for (var i = 1; i <= b; i++) {
+        n = up ? n + 1 : n - 1;
+        row.appendChild(el("i", { text: String(n) }));
+      }
+      return row;
+    }
+
     function showFeedback(good, text, first) {
       lockInputs();
       firstSuccess = !!first;
+      var showExplain = !!text && (!good || opts.hard);
       var line = good ? praise(child) : (lang === "en" ? "Not quite" : "Chưa đúng");
+      var face = good ? el("img", {
+        class: "praise-face",
+        src: "assets/kids/" + (child === "gin" ? "gin" : "mon") + ".webp",
+        alt: ""
+      }) : null;
+      var nextLabel = !good
+        ? (lang === "en" ? "Got it" : "Hiểu rồi")
+        : (opts.isLast ? (lang === "en" ? "See stars" : "Xem sao") : (lang === "en" ? "Next" : "Tiếp tục"));
       var bar = el("div", { class: "feedback " + (good ? "is-good" : "is-bad"), role: "status" }, [
+        face,
         el("strong", { text: line }),
-        text ? el("p", { text: text }) : null,
+        showExplain ? el("p", { text: text }) : null,
+        showExplain ? hopAid(question.scene) : null,
         el("button", {
           class: "btn btn-next",
-          text: opts.isLast ? (lang === "en" ? "See stars" : "Xem sao") : (lang === "en" ? "Next" : "Tiếp tục"),
-          onClick: function () { finish(firstSuccess); }
+          text: nextLabel,
+          onClick: function () { finish(firstSuccess, good ? null : { retry: true }); }
         })
       ]);
       container.appendChild(bar);
-      var sayText = good ? line : (text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"));
       var sayLang = good ? "vi" : lang;
       afterSound(good ? HV.audio.correct : HV.audio.wrong, function () {
         if (settled) return;
-        speakNow(sayText, sayLang).then(function (sec) {
+        var firstSay = good ? speakNow(line, "vi") : speakNow(text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"), sayLang);
+        firstSay.then(function (sec) {
           if (settled) return;
+          if (good && showExplain) {
+            return speakNow(text, "vi").then(function (more) {
+              if (settled) return;
+              pending = setTimeout(function () { finish(firstSuccess); }, Math.max(700, Math.round((more || 1) * 1000) + 400));
+              if (opts.track) opts.track(pending);
+            });
+          }
+          if (!good) return;
           pending = setTimeout(function () { finish(firstSuccess); }, Math.max(600, Math.round(sec * 1000) + 400));
           if (opts.track) opts.track(pending);
         });
@@ -687,5 +766,9 @@
     return cleanup;
   }
 
-  HV.engine = { normalize: normalize, mount: mount };
+  HV.engine = {
+    normalize: normalize,
+    mount: mount,
+    resetPraise: function () { praiseBag.mon = []; praiseBag.gin = []; praiseBag.last = ""; }
+  };
 })(globalThis.HV = globalThis.HV || {});

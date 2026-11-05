@@ -423,7 +423,7 @@
       level: Math.max(0, Math.min(4, Number(round.level) || 0)),
       correct: Number(round.correct) || 0,
       total: Number(round.total) || 0,
-      stars: U.clamp(Number(round.stars) || 0, 0, child === "gin" ? 3 : 9),
+      stars: U.clamp(Number(round.stars) || 0, 0, String(round.id || "").indexOf("weekly-") === 0 ? (child === "gin" ? 8 : 20) : (child === "gin" ? 3 : 9)),
       at: Date.now(),
       nonce: Math.random().toString(36).slice(2, 10)
     });
@@ -530,7 +530,7 @@
       level: Math.max(0, Math.min(4, Number(item.level) || 0)),
       correct: Math.max(0, Number(item.correct) || 0),
       total: Math.max(0, Number(item.total) || 0),
-      stars: U.clamp(Number(item.stars) || 0, 0, 9),
+      stars: U.clamp(Number(item.stars) || 0, 0, 20),
       at: Number(item.at) || 0,
       nonce: String(item.nonce || "")
     };

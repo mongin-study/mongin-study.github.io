@@ -141,6 +141,20 @@ Story problems use the family, not Elsa or a superhero. Elsa and the superhero s
 
 Units: `cái kẹo`, `cái bánh`, `quả táo`, `chiếc ô tô đồ chơi`, `cây bút màu`, `quả bóng bay`. `speak` is that sentence with the digits as words (`hai`, not `2`). A subtraction sounds like: `Mon có 8 quả táo. Mon cho Gin 3 quả táo. Vậy Mon còn bao nhiêu quả táo?` The practice bank is `wordProblem` in `js/generators.js`. `node scripts/daily-content.mjs YYYY-MM-DD` only wires the English listening exercise; write the math stories in the daily JSON by hand in this pattern.
 
+Each question should include `explain`: one or two short Vietnamese sentences, read aloud after a wrong answer and after a correct answer on a hard exercise. For adding and subtracting small numbers, count on: `Chín cộng tám. Đếm thêm tám từ chín: mười, mười một, ... mười bảy.` Gin’s explanation stays one short sentence. Then run `scripts/build-audio.py` so HoaiMy records the new lines.
+
+### Lời khen mỗi ngày
+
+Add a top-level `praise` array of a few fresh Vietnamese cheers. They join the built-in bank for that day. Record them with the same audio script (cheerful HoaiMy, a bit slower and higher).
+
+```json
+"praise": ["Hôm nay Mon tỏa sáng quá!", "Gin ơi mẹ tự hào lắm!"]
+```
+
+### Bài kiểm tra tuần
+
+`content/weekly/YYYY-MM-DD.json` is the Saturday (Asia/Bangkok) paper. `mon` is about 25 mixed questions; `gin` is 8 listening taps. Each question needs `explain`. If the file is missing, the app builds a fallback from the generators. One try on Saturday, or Sunday if it was missed. Results go to `families/nguyen/weeklyTests` and the parent screen.
+
 Generator names: `addition`, `subtraction`, `nextPrev`, `wordProblem`, `numberBond`, `missingPart`, `sequence`, `oddOneOut`, `compareExpr`, `orderNumbers`, `oddEven`, `compareNumbers`, `skipCount`, `placeValue`, `shapeName`, `countSides`, `countVertices`, `symmetry`, `position`, `moreSides`, `countObjects`, `matchNumberGroup`, `maker`, `moreLess`, `sizeCompare`, `patternNext`, `findShape`, `matchShape`, `colorMatch`, `sameColor`.
 
 Question kinds:

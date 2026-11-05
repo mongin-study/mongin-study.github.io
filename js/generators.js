@@ -169,6 +169,35 @@
     return [A, B];
   }
 
+  function hopWords(start, steps, up) {
+    var shown = Math.min(Math.abs(steps), 8);
+    var bits = [];
+    var n = start;
+    for (var i = 1; i <= shown; i++) {
+      n = up ? n + 1 : n - 1;
+      bits.push(read(n));
+    }
+    var end = up ? start + steps : start - steps;
+    if (read(end) !== bits[bits.length - 1]) bits.push(read(end));
+    return bits.join(", ");
+  }
+
+  function capFirst(s) {
+    return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+  }
+
+  function explainAdd(a, b) {
+    var ans = a + b;
+    if (b > 8) return capFirst(read(a) + " cộng " + read(b) + " bằng " + read(ans) + ".");
+    return capFirst(read(a) + " cộng " + read(b) + ". Đếm thêm " + read(b) + " từ " + read(a) + ": " + hopWords(a, b, true) + ".");
+  }
+
+  function explainSub(a, b) {
+    var ans = a - b;
+    if (b > 8) return capFirst(read(a) + " trừ " + read(b) + " bằng " + read(ans) + ".");
+    return capFirst(read(a) + " trừ " + read(b) + ". Đếm lùi " + read(b) + " từ " + read(a) + ": " + hopWords(a, b, false) + ".");
+  }
+
   function storyAdd(nameA, nameB, unit) {
     return {
       op: "add",
@@ -247,7 +276,7 @@
         var ans = a + b;
         var speak = read(a) + " cộng " + read(b) + " bằng mấy?";
         var scene = eq(a + " + " + b + " = ?");
-        var explain = a + " + " + b + " = " + ans;
+        var explain = explainAdd(a, b);
         if (cfg.input === "choice") {
           var nums = numberChoices(ans, cfg.choiceCount || 4, 0, Math.max(within, ans + 3));
           return qChoice({
@@ -284,7 +313,7 @@
         var ans = a - b;
         var speak = read(a) + " trừ " + read(b) + " bằng mấy?";
         var scene = eq(a + " − " + b + " = ?");
-        var explain = a + " − " + b + " = " + ans;
+        var explain = explainSub(a, b);
         if (cfg.input === "choice") {
           var nums = numberChoices(ans, 4, 0, within);
           return qChoice({

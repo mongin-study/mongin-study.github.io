@@ -71,6 +71,7 @@
       }
       return { name: "menu", child: child };
     }
+    if (parts[0] === "weekly" && knownChild(parts[1])) return { name: "weekly", child: parts[1] };
     if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
     if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
     if (parts[0] === "parents") return { name: "parents" };
@@ -285,6 +286,7 @@
     var stats = S.allTime(child);
     root.appendChild(topbar({ title: "Chào " + meta.name, sub: "Hôm nay mình học gì?", back: "#/", child: child }));
     root.appendChild(syncLine());
+    if (HV.weekly) root.appendChild(HV.weekly.card(child));
     root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
@@ -650,6 +652,7 @@
     if (state.destroy) state.destroy();
     state.destroy = HV.engine.mount(stage, q, {
       child: session.entry.child,
+      hard: session.entry.child === "mon" && S.monTier(session.entry) >= 2,
       isLast: session.index === session.questions.length - 1,
       track: function (t) { state.timers.push(t); },
       onDone: onQuestionDone
@@ -659,13 +662,25 @@
     HV.speech.speak(q.speak, voice);
   }
 
-  function onQuestionDone(first) {
+  function onQuestionDone(first, extra) {
     var session = state.session;
     if (!session || session.phase !== "quiz") return;
     session.first[session.index] = !!first;
     session.index += 1;
+    var added = false;
+    if (extra && extra.retry && session.entry && session.entry.generator && (session.retries || 0) < 2) {
+      session.retries = (session.retries || 0) + 1;
+      var more = materialize(session.entry, 1);
+      if (more[0]) {
+        var at = Math.min(session.questions.length, session.index + 2);
+        session.questions.splice(at, 0, more[0]);
+        added = true;
+      }
+    }
     if (session.index >= session.questions.length) {
       session.phase = "result";
+      render();
+    } else if (added) {
       render();
     } else mountCurrentQuestion();
   }
@@ -721,17 +736,7 @@
     root.appendChild(topbar({ title: "Xong bài rồi", sub: HV.kids[child].name, back: "#/c/" + child, child: child }));
     var card = el("div", { class: "result-card" });
     card.appendChild(burst());
-    if (child === "mon") {
-      var cast = el("div", { class: "result-art" });
-      cast.appendChild(HV.art.princess());
-      cast.appendChild(HV.art.puppy());
-      card.appendChild(cast);
-    } else {
-      var ginArt = el("div", { class: "result-art" });
-      ginArt.appendChild(HV.art.tiger());
-      ginArt.appendChild(HV.art.car());
-      card.appendChild(ginArt);
-    }
+    card.appendChild(resultHero(child));
     card.appendChild(el("p", { class: "result-stars", text: U.starText(session.stars) }));
     card.appendChild(el("h2", { text: resultHeadline(session.stars, child) }));
     card.appendChild(el("p", { class: "lede", text: "Đúng lần đầu " + session.correct + "/" + total + " câu." }));
@@ -750,6 +755,19 @@
     ]));
     root.appendChild(card);
     return root;
+  }
+
+  function resultHero(child) {
+    var frame = el("div", { class: "result-photo is-" + child });
+    frame.appendChild(el("span", { class: "spark spark-a", text: "✦" }));
+    frame.appendChild(el("span", { class: "spark spark-b", text: "✦" }));
+    frame.appendChild(el("span", { class: "spark spark-c", text: "✦" }));
+    frame.appendChild(el("span", { class: child === "gin" ? "deco-cape" : "deco-crown", text: child === "gin" ? "🦸" : "👑" }));
+    frame.appendChild(kidPhoto(child, "lg"));
+    var cast = el("div", { class: "result-art" });
+    cast.appendChild(frame);
+    cast.appendChild(child === "mon" ? HV.art.puppy() : HV.art.car());
+    return cast;
   }
 
   function resultHeadline(stars, child) {
@@ -865,6 +883,7 @@
     var root = el("section", { class: "parents" });
     root.appendChild(topbar({ title: "Sổ sao của bố mẹ", sub: "Mon và Gin", back: "#/" }));
     root.appendChild(el("p", { class: "lede", text: "Hai iPad dùng chung một sổ. Khi có mạng, sao gộp lại ở đây." }));
+    if (HV.weekly) root.appendChild(HV.weekly.parentPanel());
     root.appendChild(soundSetting());
     root.appendChild(syncLine());
     var grid = el("div", { class: "parents-grid" });
@@ -1028,6 +1047,7 @@
     else if (route.name === "category") shell.appendChild(viewCategory(route.child, route.subject, route.category));
     else if (route.name === "play") shell.appendChild(viewPlay());
     else if (route.name === "board") shell.appendChild(viewBoard(route.child));
+    else if (route.name === "weekly" && HV.weekly) shell.appendChild(HV.weekly.view(route.child));
     else if (route.name === "parents") shell.appendChild(viewParents());
     else shell.appendChild(viewHome());
     root.appendChild(shell);
@@ -1242,7 +1262,12 @@
           ex.subject = ex.subject || "math";
           return true;
         }) : [];
-        return { date: date, exercises: exercises, pending: false, error: false };
+        var praise = Array.isArray(json.praise) ? json.praise.filter(function (line) {
+          return typeof line === "string" && line.trim();
+        }).map(function (line) { return line.trim(); }) : [];
+        HV.dailyPraise = praise;
+        if (HV.engine && HV.engine.resetPraise) HV.engine.resetPraise();
+        return { date: date, exercises: exercises, praise: praise, pending: false, error: false };
       });
     }).catch(function () {
       return { date: date, exercises: [], pending: false, error: true };
@@ -1250,6 +1275,7 @@
   }
 
   HV.ui = {
+    render: render,
     setSync: function (info) {
       state.sync = info || state.sync;
       updateSyncBadge();

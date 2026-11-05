@@ -46,6 +46,21 @@ function upsert(child) {
   };
 }
 
+const PRAISE_POOL = [
+  "Hôm nay Mon tỏa sáng quá!",
+  "Gin ơi mẹ tự hào lắm!",
+  "Đúng quá, Cún Vàng nhảy tưng tưng!",
+  "Bố Hà vỗ tay thật to!",
+  "Mẹ Vy ôm một cái nào!",
+  "Ôi đúng bài rồi nè!",
+  "Giỏi hơn hôm qua rồi!",
+  "Cún Vàng chạy vòng quanh!"
+];
+if (!Array.isArray(doc.praise) || !doc.praise.length) {
+  let n = 0;
+  for (const ch of date) n = (n + ch.charCodeAt(0)) % PRAISE_POOL.length;
+  doc.praise = [0, 1, 2].map(function (i) { return PRAISE_POOL[(n + i) % PRAISE_POOL.length]; });
+}
 upsert("gin");
 upsert("mon");
 fs.writeFileSync(path, JSON.stringify(doc, null, 2) + "\n");

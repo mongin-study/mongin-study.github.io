@@ -133,6 +133,9 @@ PHRASES = [
     "Chạm vào",
     "Chạm vào tất cả hình màu",
     "rồi bấm Xong",
+    "Đếm thêm",
+    "Đếm lùi",
+    "từ",
     "Mon có",
     "Gin có",
     "Mẹ Vy có",
@@ -432,9 +435,42 @@ PRAISE = [
     "Hoan hô bé!",
     "Đỉnh của chóp!",
     "Giỏi xuất sắc luôn!",
+    "Hay quá trời!",
+    "Úi giỏi quá đi!",
+    "Chuẩn luôn!",
+    "Xuất sắc!",
+    "Ôi đúng rồi!",
+    "Quá đỉnh!",
+    "Giỏi quá xá!",
+    "Bùng nổ luôn!",
+    "Ô kê la!",
+    "Tuyệt vời ông mặt trời!",
+    "Đúng bài quá!",
+    "Mê quá đi!",
+    "Siêu luôn!",
+    "Giỏi dữ vậy!",
+    "Trời ơi giỏi!",
+    "Đỉnh thật sự!",
+    "Hay không chịu được!",
+    "A ha đúng rồi!",
+    "Quá đã!",
+    "Giỏi hết chỗ nói!",
     "Elsa khen Mon giỏi quá!",
     "Cún Vàng vẫy đuôi rồi nè!",
+    "Mon ơi giỏi quá!",
+    "Mon đúng rồi nè!",
+    "Mẹ Vy khen Mon giỏi lắm!",
+    "Bố Hà vỗ tay cho Mon!",
+    "Cún Vàng nhảy lên vì Mon!",
+    "Mon làm được rồi!",
     "Siêu anh hùng Gin đỉnh quá!",
+    "Gin ơi giỏi quá!",
+    "Gin đúng rồi!",
+    "Mẹ Vy khen Gin giỏi lắm!",
+    "Bố Hà cười với Gin!",
+    "Ô tô của Gin kêu bíp bíp!",
+    "Gin làm được rồi!",
+    "Cún Vàng vẫy đuôi cho Gin!",
 ]
 PRAISE_RATE = "-10%"
 PRAISE_PITCH = "+12Hz"
@@ -481,6 +517,34 @@ async def main():
             continue
         praise_says[key] = phrase
         clips[key] = phrase
+    for path in sorted((ROOT / "content" / "daily").glob("*.json")):
+        try:
+            daily = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for line in daily.get("praise") or []:
+            key = normalize(line)
+            if not key:
+                continue
+            praise_says[key] = line
+            clips[key] = line
+    for path in sorted((ROOT / "content" / "weekly").glob("*.json")):
+        try:
+            paper = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        groups = []
+        if isinstance(paper.get("mon"), list):
+            groups.append(paper["mon"])
+        if isinstance(paper.get("gin"), list):
+            groups.append(paper["gin"])
+        if isinstance(paper.get("questions"), list):
+            groups.append(paper["questions"])
+        for group in groups:
+            for question in group:
+                add(question.get("speak"))
+                add(question.get("explain"))
+                add(question.get("prompt"))
     if len(sys.argv) > 2:
         for phrase in json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")):
             add(phrase)
