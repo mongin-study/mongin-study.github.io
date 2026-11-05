@@ -6,16 +6,16 @@
       "child": "mon",
       "subject": "math",
       "category": "arithmetic",
-      "title": "Tuyết của Elsa",
+      "title": "Kẹo nhà mình",
       "subtitle": "Cộng trừ trong 24",
-      "icon": "❄️",
+      "icon": "🍬",
       "questions": [
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Elsa có 9 bông tuyết, Rapunzel tặng thêm 8 bông. Có tất cả bao nhiêu?",
-          "speak": "Elsa có chín bông tuyết, Rapunzel tặng thêm tám bông. Có tất cả bao nhiêu?",
-          "explain": "Chín cộng tám bằng mười bảy.",
+          "prompt": "Mẹ Vy có 9 cái kẹo, Gin có 8 cái kẹo. Vậy tổng cộng có bao nhiêu cái kẹo?",
+          "speak": "Mẹ Vy có chín cái kẹo, Gin có tám cái kẹo. Vậy tổng cộng có bao nhiêu cái kẹo?",
+          "explain": "Chín cộng tám bằng mười bảy. Vậy có mười bảy cái kẹo.",
           "choices": [
             { "text": "16", "correct": false },
             { "text": "17", "correct": true },
@@ -26,9 +26,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Cún Vàng có 15 chiếc xương, ăn 7 chiếc. Còn lại bao nhiêu?",
-          "speak": "Cún Vàng có mười lăm chiếc xương, ăn bảy chiếc. Còn lại bao nhiêu?",
-          "explain": "Mười lăm trừ bảy bằng tám.",
+          "prompt": "Bố Hà có 15 quả táo, Cún Vàng ăn 7 quả táo. Vậy còn lại bao nhiêu quả táo?",
+          "speak": "Bố Hà có mười lăm quả táo, Cún Vàng ăn bảy quả táo. Vậy còn lại bao nhiêu quả táo?",
+          "explain": "Mười lăm trừ bảy bằng tám. Vậy còn tám quả táo.",
           "choices": [
             { "text": "8", "correct": true },
             { "text": "9", "correct": false },
@@ -191,9 +191,9 @@
       "child": "mon",
       "subject": "math",
       "category": "geometry",
-      "title": "Lâu đài của Elsa",
-      "subtitle": "Hình và vị trí",
-      "icon": "🏰",
+      "title": "Hình và vị trí",
+      "subtitle": "Cạnh, hình, trên dưới",
+      "icon": "🔷",
       "questions": [
         {
           "kind": "choice",
@@ -244,12 +244,12 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Ngôi sao của Elsa đang ở đâu?",
-          "speak": "Ngôi sao của Elsa đang ở đâu?",
-          "explain": "Ngôi sao ở phía trên.",
+          "prompt": "Quả bóng bay của Gin đang ở đâu?",
+          "speak": "Quả bóng bay của Gin đang ở đâu?",
+          "explain": "Quả bóng bay ở phía trên.",
           "scene": {
             "layout": "zones",
-            "zones": [{ "emoji": "⭐" }, { "emoji": "🏰" }]
+            "zones": [{ "emoji": "🎈" }, { "emoji": "🚗" }]
           },
           "choices": [
             { "text": "Ở dưới", "correct": false },
@@ -447,17 +447,17 @@
       "child": "gin",
       "subject": "math",
       "category": "arithmetic",
-      "title": "Đếm siêu anh hùng",
+      "title": "Đếm kẹo của Gin",
       "subtitle": "Chạm và đếm đến 5",
-      "icon": "🦸",
+      "icon": "🍬",
       "questions": [
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Có bao nhiêu siêu anh hùng?",
-          "speak": "Đếm các siêu anh hùng. Có bao nhiêu?",
-          "explain": "Có năm siêu anh hùng.",
-          "scene": { "layout": "emojis", "items": ["🦸", "🦸", "🦸", "🦸", "🦸"] },
+          "prompt": "Gin có những cái kẹo này. Vậy có bao nhiêu cái kẹo?",
+          "speak": "Gin có những cái kẹo này. Vậy có bao nhiêu cái kẹo?",
+          "explain": "Có năm cái kẹo.",
+          "scene": { "layout": "emojis", "items": ["🍬", "🍬", "🍬", "🍬", "🍬"] },
           "columns": 3,
           "choices": [
             { "text": "4", "correct": false },
@@ -468,10 +468,10 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Có bao nhiêu tia sét?",
-          "speak": "Đếm các tia sét. Có bao nhiêu?",
-          "explain": "Có bốn tia sét.",
-          "scene": { "layout": "emojis", "items": ["⚡", "⚡", "⚡", "⚡"] },
+          "prompt": "Mon có những quả bóng bay này. Vậy có bao nhiêu quả bóng bay?",
+          "speak": "Mon có những quả bóng bay này. Vậy có bao nhiêu quả bóng bay?",
+          "explain": "Có bốn quả bóng bay.",
+          "scene": { "layout": "emojis", "items": ["🎈", "🎈", "🎈", "🎈"] },
           "columns": 3,
           "choices": [
             { "text": "3", "correct": false },
@@ -495,7 +495,7 @@
       "child": "gin",
       "subject": "math",
       "category": "logic",
-      "title": "Quy luật anh hùng",
+      "title": "Nhìn rồi chọn",
       "subtitle": "Nhìn rồi chạm",
       "icon": "⚡",
       "questions": [
@@ -527,12 +527,12 @@
           "lang": "vi",
           "prompt": "Chạm vào cái không giống",
           "speak": "Chạm vào cái không giống các bạn",
-          "explain": "Chiếc xe khác với các siêu anh hùng.",
+          "explain": "Chiếc ô tô đồ chơi khác với các quả táo.",
           "columns": 3,
           "choices": [
-            { "emoji": "🦸", "correct": false },
+            { "emoji": "🍎", "correct": false },
             { "emoji": "🚗", "correct": true },
-            { "emoji": "🦸", "correct": false }
+            { "emoji": "🍎", "correct": false }
           ]
         },
         {
@@ -540,11 +540,11 @@
           "lang": "vi",
           "prompt": "Nhóm nào nhiều hơn?",
           "speak": "Nhóm nào nhiều hơn?",
-          "explain": "Nhóm ngôi sao có năm, nhiều hơn nhóm siêu anh hùng.",
+          "explain": "Nhóm quả táo có năm quả táo, nhiều hơn nhóm cái kẹo.",
           "variant": "cards",
           "choices": [
-            { "emojis": ["🦸", "🦸", "🦸"], "correct": false },
-            { "emojis": ["⭐", "⭐", "⭐", "⭐", "⭐"], "correct": true }
+            { "emojis": ["🍬", "🍬", "🍬"], "correct": false },
+            { "emojis": ["🍎", "🍎", "🍎", "🍎", "🍎"], "correct": true }
           ]
         }
       ]
@@ -554,7 +554,7 @@
       "child": "gin",
       "subject": "math",
       "category": "number",
-      "title": "Số của siêu nhân",
+      "title": "Số nào lớn hơn",
       "subtitle": "Lớn hơn, số sau",
       "icon": "🔢",
       "questions": [
@@ -648,12 +648,12 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Siêu anh hùng đang ở đâu?",
-          "speak": "Siêu anh hùng đang ở trên hay ở dưới?",
-          "explain": "Siêu anh hùng ở phía trên.",
+          "prompt": "Quả bóng bay của Mon đang ở đâu?",
+          "speak": "Quả bóng bay của Mon đang ở trên hay ở dưới?",
+          "explain": "Quả bóng bay ở phía trên.",
           "scene": {
             "layout": "zones",
-            "zones": [{ "emoji": "🦸" }, { "emoji": "🚗" }]
+            "zones": [{ "emoji": "🎈" }, { "emoji": "🚗" }]
           },
           "choices": [
             { "text": "Ở trên", "correct": true },

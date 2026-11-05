@@ -169,61 +169,59 @@
     return [A, B];
   }
 
+  function storyAdd(nameA, nameB, unit) {
+    return {
+      op: "add",
+      unit: unit,
+      line: function (a, b) {
+        return nameA + " có " + a + " " + unit + ", " + nameB + " có " + b + " " + unit + ". Vậy tổng cộng có bao nhiêu " + unit + "?";
+      },
+      say: function (a, b) {
+        return nameA + " có " + read(a) + " " + unit + ", " + nameB + " có " + read(b) + " " + unit + ". Vậy tổng cộng có bao nhiêu " + unit + "?";
+      }
+    };
+  }
+
+  function storyGive(nameA, nameB, unit) {
+    return {
+      op: "sub",
+      unit: unit,
+      line: function (a, b) {
+        return nameA + " có " + a + " " + unit + ". " + nameA + " cho " + nameB + " " + b + " " + unit + ". Vậy " + nameA + " còn bao nhiêu " + unit + "?";
+      },
+      say: function (a, b) {
+        return nameA + " có " + read(a) + " " + unit + ". " + nameA + " cho " + nameB + " " + b + " " + unit + ". Vậy " + nameA + " còn bao nhiêu " + unit + "?";
+      }
+    };
+  }
+
+  function storyEat(name, unit) {
+    return {
+      op: "sub",
+      unit: unit,
+      line: function (a, b) {
+        return name + " có " + a + " " + unit + ". " + name + " ăn " + b + " " + unit + ". Vậy còn lại bao nhiêu " + unit + "?";
+      },
+      say: function (a, b) {
+        return name + " có " + read(a) + " " + unit + ". " + name + " ăn " + read(b) + " " + unit + ". Vậy còn lại bao nhiêu " + unit + "?";
+      }
+    };
+  }
+
   var STORIES = [
-    {
-      op: "add",
-      line: function (a, b) {
-        return "Mon có " + a + " bông tuyết. Cún Vàng mang thêm " + b + " bông. Có tất cả bao nhiêu bông tuyết?";
-      },
-      say: function (a, b) {
-        return "Mon có " + read(a) + " bông tuyết. Cún Vàng mang thêm " + read(b) + " bông. Hỏi có tất cả bao nhiêu bông tuyết?";
-      }
-    },
-    {
-      op: "add",
-      line: function (a, b) {
-        return "Gin có " + a + " chiếc xe. Bạn tặng thêm " + b + " chiếc. Gin có tất cả bao nhiêu chiếc xe?";
-      },
-      say: function (a, b) {
-        return "Gin có " + read(a) + " chiếc xe. Bạn tặng thêm " + read(b) + " chiếc. Hỏi Gin có tất cả bao nhiêu chiếc xe?";
-      }
-    },
-    {
-      op: "add",
-      line: function (a, b) {
-        return "Đĩa có " + a + " chiếc bánh. Mẹ để thêm " + b + " chiếc. Có tất cả bao nhiêu chiếc bánh?";
-      },
-      say: function (a, b) {
-        return "Đĩa có " + read(a) + " chiếc bánh. Mẹ để thêm " + read(b) + " chiếc. Hỏi có tất cả bao nhiêu chiếc bánh?";
-      }
-    },
-    {
-      op: "sub",
-      line: function (a, b) {
-        return "Mon có " + a + " nhãn dán. Mon cho Gin " + b + " nhãn. Mon còn lại bao nhiêu nhãn?";
-      },
-      say: function (a, b) {
-        return "Mon có " + read(a) + " nhãn dán. Mon cho Gin " + read(b) + " nhãn. Hỏi Mon còn lại bao nhiêu nhãn?";
-      }
-    },
-    {
-      op: "sub",
-      line: function (a, b) {
-        return "Có " + a + " quả bóng. Các bạn lấy đi " + b + " quả. Còn lại bao nhiêu quả bóng?";
-      },
-      say: function (a, b) {
-        return "Có " + read(a) + " quả bóng. Các bạn lấy đi " + read(b) + " quả. Hỏi còn lại bao nhiêu quả bóng?";
-      }
-    },
-    {
-      op: "sub",
-      line: function (a, b) {
-        return "Cún Vàng có " + a + " chiếc bánh. Cún ăn " + b + " chiếc. Còn lại bao nhiêu chiếc bánh?";
-      },
-      say: function (a, b) {
-        return "Cún Vàng có " + read(a) + " chiếc bánh. Cún ăn " + read(b) + " chiếc. Hỏi còn lại bao nhiêu chiếc bánh?";
-      }
-    }
+    storyAdd("Mẹ Vy", "Gin", "cái kẹo"),
+    storyAdd("Bố Hà", "Mon", "cái bánh"),
+    storyAdd("Mon", "Gin", "quả táo"),
+    storyAdd("Gin", "Mon", "chiếc ô tô đồ chơi"),
+    storyAdd("bà", "Mon", "quả bóng bay"),
+    storyAdd("ông", "Gin", "cây bút màu"),
+    storyAdd("Cún Vàng", "Gin", "cái bánh"),
+    storyGive("Mon", "Gin", "quả táo"),
+    storyGive("Mẹ Vy", "Mon", "cái kẹo"),
+    storyGive("Bố Hà", "Gin", "cây bút màu"),
+    storyGive("Gin", "Mon", "quả bóng bay"),
+    storyEat("Cún Vàng", "cái bánh"),
+    storyEat("Gin", "cái kẹo")
   ];
 
   function shapeSet(name) {
@@ -348,10 +346,13 @@
           ans = a - b;
         }
         var nums = numberChoices(ans, 4, 0, 20);
+        var explain = story.op === "add"
+          ? read(a) + " cộng " + read(b) + " bằng " + read(ans) + ". Vậy có " + read(ans) + " " + story.unit + "."
+          : read(a) + " trừ " + read(b) + " bằng " + read(ans) + ". Vậy còn " + read(ans) + " " + story.unit + ".";
         return qChoice({
           prompt: story.line(a, b),
           speak: story.say(a, b),
-          explain: "Đáp án là " + ans + ".",
+          explain: explain,
           options: nums.map(function (n) { return { text: String(n), correct: n === ans }; })
         });
       });

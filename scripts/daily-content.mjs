@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 // Keep each day's English "Tap what you hear" wired to the listen bank.
 // Existing questions stay first; the generator fills the rest of the session.
+// Math word problems are not generated here. Write them in the daily JSON
+// with Mẹ Vy, Bố Hà, Mon, Gin (sometimes ông, bà, Cún Vàng) and everyday
+// units, repeating the unit and closing with "Vậy". See README.
 //
 //   node scripts/daily-content.mjs 2026-11-05
 import fs from "fs";

@@ -83,7 +83,7 @@ For Mon’s English, add `"level": 1` to `4` so the daily card sits at her curre
       "child": "mon",
       "subject": "math",
       "category": "arithmetic",
-      "title": "Cộng bông tuyết",
+      "title": "Cộng nhanh",
       "icon": "❄️",
       "questions": [
         {
@@ -132,6 +132,14 @@ For Mon’s English, add `"level": 1` to `4` so the daily card sits at her curre
 ```
 
 `child` is `mon` or `gin`. Use either a `questions` array or a `generator` name plus `config`. Stars from every subject add into the same weekly total. The leaderboard and the parent view also show Toán, Tiếng Anh, and Tiếng Việt separately. Reward targets use the total.
+
+### Bài toán có lời
+
+Story problems use the family, not Elsa or a superhero. Elsa and the superhero stay on the pictures and in praise ("Elsa khen Mon giỏi quá!"). Names: **Mẹ Vy**, **Bố Hà**, **Mon**, **Gin**, and sometimes **ông**, **bà**, or **Cún Vàng**. Mon's story may include Gin, and Gin's may include Mon. Objects are everyday things, and the question repeats the same unit noun, then closes with **Vậy**:
+
+`Mẹ Vy có 2 cái kẹo, Gin có 2 cái kẹo. Vậy tổng cộng có bao nhiêu cái kẹo?`
+
+Units: `cái kẹo`, `cái bánh`, `quả táo`, `chiếc ô tô đồ chơi`, `cây bút màu`, `quả bóng bay`. `speak` is that sentence with the digits as words (`hai`, not `2`). A subtraction sounds like: `Mon có 8 quả táo. Mon cho Gin 3 quả táo. Vậy Mon còn bao nhiêu quả táo?` The practice bank is `wordProblem` in `js/generators.js`. `node scripts/daily-content.mjs YYYY-MM-DD` only wires the English listening exercise; write the math stories in the daily JSON by hand in this pattern.
 
 Generator names: `addition`, `subtraction`, `nextPrev`, `wordProblem`, `numberBond`, `missingPart`, `sequence`, `oddOneOut`, `compareExpr`, `orderNumbers`, `oddEven`, `compareNumbers`, `skipCount`, `placeValue`, `shapeName`, `countSides`, `countVertices`, `symmetry`, `position`, `moreSides`, `countObjects`, `matchNumberGroup`, `maker`, `moreLess`, `sizeCompare`, `patternNext`, `findShape`, `matchShape`, `colorMatch`, `sameColor`.
 

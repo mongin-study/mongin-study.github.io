@@ -5,15 +5,15 @@
       "id": "daily-2026-11-02-mon-snow",
       "child": "mon",
       "category": "arithmetic",
-      "title": "Cộng bông tuyết",
+      "title": "Bánh và bóng bay",
       "subtitle": "Bài mới hôm nay",
       "icon": "❄️",
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Mon có 5 bông tuyết, được thêm 3 bông. Có tất cả bao nhiêu?",
-          "speak": "Mon có năm bông tuyết, được thêm ba bông. Có tất cả bao nhiêu?",
-          "explain": "5 cộng 3 bằng 8.",
+          "prompt": "Mẹ Vy có 5 cái bánh, Mon có 3 cái bánh. Vậy tổng cộng có bao nhiêu cái bánh?",
+          "speak": "Mẹ Vy có năm cái bánh, Mon có ba cái bánh. Vậy tổng cộng có bao nhiêu cái bánh?",
+          "explain": "Năm cộng ba bằng tám. Vậy có tám cái bánh.",
           "choices": [
             {
               "text": "8",
@@ -35,9 +35,9 @@
         },
         {
           "kind": "choice",
-          "prompt": "Cún Vàng mang 6 bông, Mon mang 6 bông. Có tất cả bao nhiêu?",
-          "speak": "Cún Vàng mang sáu bông, Mon mang sáu bông. Có tất cả bao nhiêu?",
-          "explain": "6 cộng 6 bằng 12.",
+          "prompt": "Gin có 6 quả bóng bay, ông có 6 quả bóng bay. Vậy tổng cộng có bao nhiêu quả bóng bay?",
+          "speak": "Gin có sáu quả bóng bay, ông có sáu quả bóng bay. Vậy tổng cộng có bao nhiêu quả bóng bay?",
+          "explain": "Sáu cộng sáu bằng mười hai. Vậy có mười hai quả bóng bay.",
           "choices": [
             {
               "text": "10",
@@ -88,7 +88,7 @@
       "id": "daily-2026-11-02-mon-even",
       "child": "mon",
       "category": "number",
-      "title": "Chẵn lẻ bông tuyết",
+      "title": "Chẵn hay lẻ",
       "subtitle": "Nhìn cặp chấm",
       "icon": "🔵",
       "questions": [
@@ -160,14 +160,14 @@
       "id": "daily-2026-11-02-gin-cars",
       "child": "gin",
       "category": "arithmetic",
-      "title": "Đếm xe hơi",
+      "title": "Ô tô đồ chơi",
       "subtitle": "Bài mới hôm nay",
       "icon": "🚗",
       "questions": [
         {
           "kind": "choice",
-          "prompt": "Có bao nhiêu chiếc xe?",
-          "speak": "Đếm các chiếc xe. Có bao nhiêu?",
+          "prompt": "Gin có những chiếc ô tô đồ chơi này. Vậy có bao nhiêu chiếc ô tô đồ chơi?",
+          "speak": "Gin có những chiếc ô tô đồ chơi này. Vậy có bao nhiêu chiếc ô tô đồ chơi?",
           "scene": {
             "layout": "emojis",
             "items": [
@@ -176,7 +176,7 @@
               "🚗"
             ]
           },
-          "explain": "Có 3 chiếc xe.",
+          "explain": "Có ba chiếc ô tô đồ chơi.",
           "columns": 3,
           "choices": [
             {

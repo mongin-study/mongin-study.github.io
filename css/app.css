@@ -109,7 +109,7 @@ body[data-child="mon"] .topbar { background: rgba(238, 246, 255, 0.9); }
 body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .top-title { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .top-title strong { font-size: 22px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.top-title span { color: var(--muted); font-weight: 700; font-size: 15px; }
+.top-title span { color: var(--muted); font-weight: 700; font-size: 15px; white-space: nowrap; }
 .icon-btn, .icon-spacer {
   width: 64px;
   height: 64px;
@@ -205,6 +205,21 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .avatar { display: block; flex: none; height: auto; }
 .avatar-lg { width: min(46%, 200px); }
 .avatar-sm { width: 56px; height: 56px; }
+@media (max-width: 520px) {
+  .topbar { gap: 6px; }
+  .icon-btn, .icon-spacer { width: 44px; height: 44px; border-radius: 14px; font-size: 22px; }
+  .avatar-sm { width: 40px; height: 40px; }
+  .star-pill, .sync-chip { min-height: 44px; padding: 0 10px; font-size: 16px; flex: none; }
+  .top-title strong {
+    font-size: 15px;
+    line-height: 1.2;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    display: block;
+  }
+  .top-title span { font-size: 13px; }
+}
 .avatar-board { width: 148px; }
 .kid-kicker { margin-top: 8px; font-weight: 800; }
 .kid-card h2 { font-size: clamp(42px, 5vw, 64px); }
