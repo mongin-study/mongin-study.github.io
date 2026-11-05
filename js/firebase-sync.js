@@ -60,7 +60,7 @@ function plainItem(item) {
     level: Math.max(0, Math.min(4, Number(item.level) || 0)),
     correct: Number(item.correct) || 0,
     total: Number(item.total) || 0,
-    stars: Math.max(0, Math.min(3, Number(item.stars) || 0)),
+    stars: Math.max(0, Math.min(9, Number(item.stars) || 0)),
     at: Number(item.at) || 0,
     nonce: String(item.nonce || "")
   };

@@ -264,6 +264,152 @@
     return 1;
   }
 
+  function subjectOfEntry(entry) {
+    return entry && (entry.subject === "english" || entry.subject === "vietnamese") ? entry.subject : "math";
+  }
+
+  function monTier(entry) {
+    entry = entry || {};
+    var id = String(entry.id || "");
+    var cat = String(entry.category || "");
+    var sub = subjectOfEntry(entry);
+    var level = Number(entry.level) || 0;
+    var gen = String(entry.generator || "");
+    if (HV.catalog) {
+      var found = null;
+      for (var i = 0; i < HV.catalog.length; i++) {
+        if (HV.catalog[i].id === id) { found = HV.catalog[i]; break; }
+      }
+      if (found) {
+        if (!gen) gen = found.generator || "";
+        if (!level) level = Number(found.level) || 0;
+        if (!cat) cat = found.category || "";
+        if (entry.subject !== "english" && entry.subject !== "vietnamese") sub = subjectOfEntry(found);
+      }
+    }
+    if (gen === "wordProblem" || id === "mon-word") return 3;
+    if (id === "mon-compare-expr" || id === "mon-sequence" || id === "mon-odd-one" || id === "mon-pattern-num") return 3;
+    if (cat === "spell" || cat === "spelling" || id.indexOf("spell") >= 0) return 3;
+    if (sub === "english" && level >= 4) return 3;
+    if (id.indexOf("daily-") === 0 && cat === "logic") return 3;
+    if (sub === "english" && level === 3) return 2;
+    if (id === "mon-add-100" || id === "mon-sub-100" || id === "mon-missing" || id === "mon-bond-20") return 2;
+    if (id.indexOf("daily-") === 0 && cat === "arithmetic") return 2;
+    if (cat === "logic") return 2;
+    if (sub === "vietnamese" && (cat === "words" || cat === "rhymes" || cat === "tones")) return 2;
+    if (sub === "english" && level <= 1) return 0;
+    if (sub === "vietnamese" && cat === "letters") return 0;
+    if (id === "mon-add-20" || id === "mon-sub-20" || id === "mon-next-prev" || id === "mon-odd-even" || id === "mon-compare" || id === "mon-shape-name" || id === "mon-position" || id === "mon-bond-10" || id === "mon-sides" || id === "mon-vertices") return 0;
+    if (cat === "geometry" || cat === "number") return 0;
+    return 1;
+  }
+
+  function allItems(child) {
+    var kid = data().kids[child];
+    var list = [];
+    if (!kid || !kid.daily) return list;
+    Object.keys(kid.daily).forEach(function (date) {
+      var items = (kid.daily[date] && kid.daily[date].items) || [];
+      items.forEach(function (item) { list.push(item); });
+    });
+    list.sort(function (a, b) { return (Number(b.at) || 0) - (Number(a.at) || 0); });
+    return list;
+  }
+
+  function masteryOf(child, match) {
+    var recent = allItems(child).filter(match).slice(0, 5);
+    var correct = 0;
+    var answered = 0;
+    recent.forEach(function (item) {
+      correct += Number(item.correct) || 0;
+      answered += Number(item.total) || 0;
+    });
+    return {
+      rounds: recent.length,
+      answered: answered,
+      rate: answered ? correct / answered : 0
+    };
+  }
+
+  function monMastered(child, entry) {
+    if (monTier(entry) !== 0) return false;
+    var byId = masteryOf(child, function (item) { return item.id === entry.id; });
+    if (byId.rounds >= 2 && byId.answered >= 8 && byId.rate > 0.85) return true;
+    var level = Number(entry.level) || 0;
+    if (!level && HV.catalog) {
+      for (var i = 0; i < HV.catalog.length; i++) {
+        if (HV.catalog[i].id === entry.id) level = Number(HV.catalog[i].level) || 0;
+      }
+    }
+    if (subjectOfEntry(entry) === "english" && level) {
+      var byLevel = masteryOf(child, function (item) {
+        return item.subject === "english" && Number(item.level) === level;
+      });
+      if (byLevel.rounds >= 2 && byLevel.answered >= 8 && byLevel.rate > 0.85) return true;
+    }
+    return false;
+  }
+
+  function todayList(child) {
+    var kid = data().kids[child];
+    var bucket = kid && kid.daily && kid.daily[U.todayStr()];
+    return (bucket && bucket.items) || [];
+  }
+
+  function awardFor(child, entry, correct, total) {
+    var base = starsFor(correct, total);
+    if (child !== "mon") return { stars: base, tier: 1, note: "", mastered: false };
+    var tier = monTier(entry);
+    var perfect = total > 0 && correct >= total;
+    var stars = tier === 0 ? (perfect ? 1 : 0) : base * tier;
+    var note = "";
+    var mastered = false;
+    if (tier === 0 && monMastered(child, entry)) {
+      stars = 0;
+      mastered = true;
+      note = "Đã giỏi rồi ⭐ — thử bài khó hơn nhé!";
+    } else if (tier === 0) {
+      var today = todayList(child);
+      var sub = subjectOfEntry(entry);
+      var again = today.some(function (item) { return item.id === entry.id; });
+      var catDone = today.some(function (item) {
+        return monTier(item) === 0 && item.category === entry.category && subjectOfEntry(item) === sub;
+      });
+      var easyStars = today.reduce(function (sum, item) {
+        return sum + (monTier(item) === 0 ? (Number(item.stars) || 0) : 0);
+      }, 0);
+      if (again || catDone) {
+        stars = 0;
+        note = "Bài dễ này hôm nay đã có sao. Mình thử bài khó hơn nhé!";
+      } else if (easyStars >= 2) {
+        stars = 0;
+        note = "Hôm nay sao bài dễ đã đủ rồi. Bài khó còn nhiều sao!";
+      } else if (stars > 0) {
+        stars = Math.min(stars, 2 - easyStars);
+        note = "Bài dễ chỉ được 1 sao khi đúng hết cả bài.";
+      } else {
+        note = "Bài dễ cần đúng hết mới có 1 sao.";
+      }
+    } else if (tier >= 2) {
+      note = "Nhiều sao ×" + tier + " vì bài này khó hơn.";
+    }
+    return { stars: stars, tier: tier, note: note, mastered: mastered, base: base };
+  }
+
+  function cardOffer(child, entry) {
+    if (child !== "mon") return null;
+    var tier = monTier(entry);
+    var mastered = tier === 0 && monMastered(child, entry);
+    var max = tier === 0 ? 1 : tier * 3;
+    return {
+      tier: tier,
+      max: max,
+      mastered: mastered,
+      badge: tier >= 2 ? "Nhiều sao ×" + tier : "",
+      value: mastered ? "Đã giỏi rồi ⭐ — thử bài khó hơn nhé!" : (tier === 0 ? "đúng hết được 1 sao" : "đến " + max + " sao")
+    };
+  }
+
   function recordRound(child, round) {
     var kid = data().kids[child];
     if (!kid) return null;
@@ -277,7 +423,7 @@
       level: Math.max(0, Math.min(4, Number(round.level) || 0)),
       correct: Number(round.correct) || 0,
       total: Number(round.total) || 0,
-      stars: U.clamp(Number(round.stars) || 0, 0, 3),
+      stars: U.clamp(Number(round.stars) || 0, 0, child === "gin" ? 3 : 9),
       at: Date.now(),
       nonce: Math.random().toString(36).slice(2, 10)
     });
@@ -384,7 +530,7 @@
       level: Math.max(0, Math.min(4, Number(item.level) || 0)),
       correct: Math.max(0, Number(item.correct) || 0),
       total: Math.max(0, Number(item.total) || 0),
-      stars: U.clamp(Number(item.stars) || 0, 0, 3),
+      stars: U.clamp(Number(item.stars) || 0, 0, 9),
       at: Number(item.at) || 0,
       nonce: String(item.nonce || "")
     };
@@ -444,6 +590,9 @@
     allTime: allTime,
     dayStats: dayStats,
     starsFor: starsFor,
+    awardFor: awardFor,
+    cardOffer: cardOffer,
+    monTier: monTier,
     englishLevels: englishLevels,
     todayBest: todayBest,
     setTargets: setTargets,

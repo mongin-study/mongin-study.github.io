@@ -129,8 +129,10 @@
 
   function starText(n) {
     var s = "";
-    var v = clamp(Number(n) || 0, 0, 3);
-    for (var i = 0; i < 3; i++) s += i < v ? "★" : "☆";
+    var v = Math.max(0, Math.round(Number(n) || 0));
+    var shown = Math.min(v, 3);
+    for (var i = 0; i < 3; i++) s += i < shown ? "★" : "☆";
+    if (v > 3) return s + " " + v;
     return s;
   }
 

@@ -242,6 +242,43 @@
     return row;
   }
 
+  function categoryTier(child, subject, category) {
+    var best = 1;
+    HV.catalog.forEach(function (ex) {
+      if (ex.child === child && subjectOf(ex) === subject && ex.category === category) {
+        best = Math.max(best, S.monTier(ex));
+      }
+    });
+    return best;
+  }
+
+  function orderedExercises(child, list) {
+    if (child !== "mon") return list.slice();
+    return list.slice().sort(function (a, b) {
+      var oa = S.cardOffer(child, a);
+      var ob = S.cardOffer(child, b);
+      if (oa.mastered !== ob.mastered) return oa.mastered ? 1 : -1;
+      return ob.tier - oa.tier;
+    });
+  }
+
+  function exerciseCard(child, ex, best) {
+    var offer = child === "mon" ? S.cardOffer(child, ex) : null;
+    return el("button", {
+      class: "ex-card" + (offer && offer.tier >= 2 ? " is-rich" : "") + (offer && offer.mastered ? " is-mastered" : ""),
+      "data-go": "#/play/" + encodeURIComponent(ex.id)
+    }, [
+      el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
+      el("span", { class: "ex-copy" }, [
+        el("strong", { text: ex.title }),
+        el("small", { text: ex.subtitle || "" }),
+        offer && offer.badge ? el("span", { class: "pay-badge", text: offer.badge }) : null,
+        offer ? el("small", { text: offer.value }) : null
+      ]),
+      el("span", { class: "stars", text: best == null ? "Chưa có sao" : U.starText(best) })
+    ]);
+  }
+
   function viewMenu(child) {
     var meta = HV.kids[child];
     var root = el("section", { class: "menu" });
@@ -251,13 +288,15 @@
     root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
-      var count = HV.catalog.filter(function (ex) { return ex.child === child && subjectOf(ex) === sub.id; }).length;
+      var mine = HV.catalog.filter(function (ex) { return ex.child === child && subjectOf(ex) === sub.id; });
       var stars = stats.bySubject && stats.bySubject[sub.id] ? stats.bySubject[sub.id].stars : 0;
-      grid.appendChild(el("button", { class: "subject-card subject-" + sub.id, "data-go": "#/c/" + child + "/" + sub.id }, [
+      var rich = child === "mon" && mine.some(function (ex) { return S.monTier(ex) >= 2; });
+      grid.appendChild(el("button", { class: "subject-card subject-" + sub.id + (rich ? " is-rich" : ""), "data-go": "#/c/" + child + "/" + sub.id }, [
         el("span", { class: "cat-icon", text: sub.icon }),
         el("span", { class: "cat-name", text: sub.title }),
         el("span", { class: "cat-blurb", text: sub.blurb[child] || "" }),
-        el("span", { class: "cat-meta", text: count + " bài · " + stars + " sao" })
+        rich ? el("span", { class: "pay-badge", text: "Nhiều sao" }) : null,
+        el("span", { class: "cat-meta", text: mine.length + " bài · " + stars + " sao" })
       ]));
     });
     root.appendChild(grid);
@@ -281,7 +320,7 @@
     root.appendChild(todayBlock(child, "english"));
     root.appendChild(el("p", { class: "lede", text: "Cấp mở khi đủ sao tiếng Anh, hoặc khi cấp trước đúng hơn 85% (ít nhất 8 câu)." }));
     var grid = el("div", { class: "level-grid" });
-    (HV.englishLevelsInfo || []).forEach(function (info) {
+    (HV.englishLevelsInfo || []).slice().sort(function (a, b) { return b.level - a.level; }).forEach(function (info) {
       var open = prog.unlocked[info.level];
       var stats = prog.levels[info.level];
       var acc = stats.answered ? Math.round((stats.correct / stats.answered) * 100) : 0;
@@ -289,13 +328,15 @@
       var note = open
         ? (prog.reason[info.level] === "accuracy" ? "Mở vì đúng " + acc + "%" : stats.stars + " sao · đúng " + acc + "%")
         : "Cần " + gate + " sao Anh, hoặc đúng hơn 85% ở cấp " + (info.level - 1);
+      var levelTier = info.level >= 4 ? 3 : info.level === 3 ? 2 : info.level === 1 ? 0 : 1;
       var card = el("button", {
-        class: "level-card" + (open ? "" : " is-locked") + (prog.suggested === info.level ? " is-now" : ""),
+        class: "level-card" + (open ? "" : " is-locked") + (prog.suggested === info.level ? " is-now" : "") + (levelTier >= 2 ? " is-rich" : ""),
         "data-go": open ? "#/c/mon/english/lv/" + info.level : "",
         disabled: open ? null : true
       }, [
         el("span", { class: "cat-name", text: (open ? "" : "🔒 ") + info.title }),
         el("span", { class: "cat-blurb", text: info.blurb }),
+        levelTier >= 2 ? el("span", { class: "pay-badge", text: "Nhiều sao ×" + levelTier }) : null,
         el("span", { class: "cat-meta", text: note })
       ]);
       grid.appendChild(card);
@@ -319,18 +360,12 @@
       return root;
     }
     var list = el("div", { class: "ex-list" });
-    HV.catalog.filter(function (ex) {
+    var englishHere = HV.catalog.filter(function (ex) {
       return ex.child === "mon" && subjectOf(ex) === "english" && (ex.level || 1) === level;
-    }).forEach(function (ex) {
+    });
+    orderedExercises("mon", englishHere).forEach(function (ex) {
       var best = S.allTime(child).byExercise[ex.id] ? S.allTime(child).byExercise[ex.id].bestStars : 0;
-      list.appendChild(el("button", { class: "ex-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
-        el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
-        el("span", { class: "ex-copy" }, [
-          el("strong", { text: ex.title }),
-          el("small", { text: ex.subtitle || "" })
-        ]),
-        el("span", { class: "stars", text: U.starText(best) })
-      ]));
+      list.appendChild(exerciseCard("mon", ex, best));
     });
     root.appendChild(list);
     return root;
@@ -345,17 +380,28 @@
     root.appendChild(syncLine());
     root.appendChild(todayBlock(child, subject));
     var grid = el("div", { class: "cat-grid" });
-    categoriesFor(subject).forEach(function (cat) {
-      if (cat.kids && cat.kids.indexOf(child) < 0) return;
+    var cats = categoriesFor(subject).filter(function (cat) {
+      if (cat.kids && cat.kids.indexOf(child) < 0) return false;
+      return HV.catalog.some(function (ex) {
+        return ex.child === child && subjectOf(ex) === subject && ex.category === cat.id;
+      });
+    });
+    if (child === "mon") {
+      cats.sort(function (a, b) {
+        return categoryTier(child, subject, b.id) - categoryTier(child, subject, a.id);
+      });
+    }
+    cats.forEach(function (cat) {
       var count = HV.catalog.filter(function (ex) {
         return ex.child === child && subjectOf(ex) === subject && ex.category === cat.id;
       }).length;
-      if (!count) return;
       var catStats = stats.byCategory[subject + ":" + cat.id] || { stars: 0 };
-      grid.appendChild(el("button", { class: "cat-card", "data-go": "#/c/" + child + "/" + subject + "/" + cat.id }, [
+      var tier = child === "mon" ? categoryTier(child, subject, cat.id) : 1;
+      grid.appendChild(el("button", { class: "cat-card" + (tier >= 2 ? " is-rich" : ""), "data-go": "#/c/" + child + "/" + subject + "/" + cat.id }, [
         el("span", { class: "cat-icon", text: cat.icon }),
         el("span", { class: "cat-name", text: cat.title }),
         el("span", { class: "cat-blurb", text: (cat.blurb && cat.blurb[child]) || "" }),
+        tier >= 2 ? el("span", { class: "pay-badge", text: "Nhiều sao ×" + tier }) : null,
         el("span", { class: "cat-meta", text: count + " bài · " + catStats.stars + " sao" })
       ]));
     });
@@ -382,13 +428,16 @@
       return wrap;
     }
     var row = el("div", { class: "today-row" });
-    list.forEach(function (ex) {
+    orderedExercises(child, list).forEach(function (ex) {
       var best = S.todayBest(child, ex.id);
-      row.appendChild(el("button", { class: "today-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
+      var offer = child === "mon" ? S.cardOffer(child, ex) : null;
+      row.appendChild(el("button", { class: "today-card" + (offer && offer.tier >= 2 ? " is-rich" : ""), "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
         el("span", { class: "ribbon", text: best == null ? "Mới" : "Đã chơi" }),
         el("span", { class: "today-icon", text: ex.icon || "✨" }),
         el("span", { class: "today-subject", text: subjectMeta(subjectOf(ex)).short }),
         el("span", { class: "today-title", text: ex.title }),
+        offer && offer.badge ? el("span", { class: "pay-badge", text: offer.badge }) : null,
+        offer ? el("span", { class: "fine", text: offer.value }) : null,
         el("span", { class: "stars", text: best == null ? "Chưa có sao" : U.starText(best) })
       ]));
     });
@@ -406,18 +455,12 @@
     }
     root.appendChild(topbar({ title: cat.title, sub: (cat.blurb && cat.blurb[child]) || "", back: "#/c/" + child + "/" + subject, child: child }));
     var list = el("div", { class: "ex-list" });
-    HV.catalog.filter(function (ex) {
+    var here = HV.catalog.filter(function (ex) {
       return ex.child === child && subjectOf(ex) === subject && ex.category === category;
-    }).forEach(function (ex) {
+    });
+    orderedExercises(child, here).forEach(function (ex) {
       var best = stats.byExercise[ex.id] ? stats.byExercise[ex.id].bestStars : 0;
-      list.appendChild(el("button", { class: "ex-card", "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
-        el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
-        el("span", { class: "ex-copy" }, [
-          el("strong", { text: ex.title }),
-          el("small", { text: ex.subtitle || "" })
-        ]),
-        el("span", { class: "stars", text: U.starText(best) })
-      ]));
+      list.appendChild(exerciseCard(child, ex, best));
     });
     root.appendChild(list);
     return root;
@@ -631,13 +674,17 @@
     var child = session.entry.child;
     var total = session.questions.length;
     var correct = session.first.filter(Boolean).length;
-    var stars = S.starsFor(correct, total);
     if (!session.recorded) {
+      var fresh = child === "mon"
+        ? S.awardFor(child, session.entry, correct, total)
+        : { stars: S.starsFor(correct, total), note: "", tier: 1 };
+      session.award = fresh;
       var before = weekStars(child);
       var unlockBefore = null;
       if (child === "mon" && subjectOf(session.entry) === "english") {
         unlockBefore = S.englishLevels(child).unlocked;
       }
+      var stars = session.award.stars;
       session.record = S.recordRound(child, {
         id: session.entry.id,
         title: session.entry.title,
@@ -669,6 +716,8 @@
       session.celebrate = session.crossed || unlockedNow ? "jingle" : "fanfare";
       celebrateResult(stars, session.celebrate);
     }
+    var award = session.award || { note: "" };
+    var stars = session.stars;
     root.appendChild(topbar({ title: "Xong bài rồi", sub: HV.kids[child].name, back: "#/c/" + child, child: child }));
     var card = el("div", { class: "result-card" });
     card.appendChild(burst());
@@ -686,6 +735,7 @@
     card.appendChild(el("p", { class: "result-stars", text: U.starText(session.stars) }));
     card.appendChild(el("h2", { text: resultHeadline(session.stars, child) }));
     card.appendChild(el("p", { class: "lede", text: "Đúng lần đầu " + session.correct + "/" + total + " câu." }));
+    if (award.note) card.appendChild(el("p", { class: "lede", text: award.note }));
     card.appendChild(el("p", { class: "lede", text: "Tuần này: " + weekStars(child) + " sao." }));
     if (session.crossed) {
       card.appendChild(el("p", { class: "milestone-banner", text: "Đạt mốc " + session.crossed.icon + " " + session.crossed.name + "!" }));
@@ -703,10 +753,11 @@
   }
 
   function resultHeadline(stars, child) {
+    if (stars >= 6) return "Bài khó, nhiều sao!";
     if (stars >= 3) return child === "gin" ? "Giỏi quá!" : "Tuyệt lắm!";
     if (stars === 2) return "Làm tốt lắm!";
     if (stars === 1) return "Cố lên, mình học được rồi!";
-    return "Mình học tiếp nhé!";
+    return child === "mon" ? "Mình thử bài khó hơn nhé!" : "Mình học tiếp nhé!";
   }
 
   function burst() {
@@ -821,7 +872,7 @@
     grid.appendChild(parentKid("gin"));
     root.appendChild(grid);
     root.appendChild(backupBox());
-    root.appendChild(el("p", { class: "fine", text: "1 sao: đúng một phần. 2 sao: đúng từ 60%. 3 sao: đúng hết ngay lần đầu. Chơi lại vẫn được cộng sao." }));
+    root.appendChild(el("p", { class: "fine", text: "Gin: 1 sao khi đúng một phần, 2 sao từ 60%, 3 sao khi đúng hết. Mon: bài dễ tối đa 1 sao mỗi mục trong ngày, bài khó ×2 hoặc ×3. Sao đã có không bị bớt. Mốc tuần của Mon vẫn 15, 30 và 50." }));
     return root;
   }
 

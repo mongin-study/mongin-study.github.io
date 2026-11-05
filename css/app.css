@@ -308,6 +308,20 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .cat-name, .today-title { font-size: 26px; font-weight: 800; }
 .cat-blurb, .cat-meta { color: var(--muted); font-weight: 700; }
 .ex-card { flex-direction: row; align-items: center; gap: 12px; min-height: 104px; }
+.ex-card.is-rich, .cat-card.is-rich, .subject-card.is-rich, .today-card.is-rich, .level-card.is-rich {
+  box-shadow: 0 0 0 3px #f6d56a, var(--shadow);
+}
+.ex-card.is-mastered { background: #f7f4ee; }
+.pay-badge {
+  display: inline-block;
+  margin-top: 4px;
+  background: #fff4cc;
+  color: #6b4a00;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
 .ex-copy { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .ex-copy small { color: var(--muted); font-weight: 700; }
 .today { margin: 6px 0 16px; }
