@@ -5,6 +5,29 @@
     "Gin ơi mẹ tự hào lắm!",
     "Đúng quá, Cún Vàng nhảy tưng tưng!"
   ],
+  "memory": [
+    {
+      "id": "daily-2026-11-05-gin-toys",
+      "child": "gin",
+      "title": "Đồ chơi hôm nay",
+      "pairs": [
+        { "id": "ball", "a": { "emoji": "⚽" }, "b": { "text": "bóng" } },
+        { "id": "star", "a": { "emoji": "⭐" }, "b": { "text": "sao" } },
+        { "id": "car", "a": { "emoji": "🚙" }, "b": { "text": "xe" } }
+      ]
+    },
+    {
+      "id": "daily-2026-11-05-mon-count",
+      "child": "mon",
+      "title": "Đếm đồ hôm nay",
+      "pairs": [
+        { "id": "one", "a": { "text": "1" }, "b": { "emoji": "🍬" } },
+        { "id": "two", "a": { "text": "2" }, "b": { "emoji": "🍬🍬" } },
+        { "id": "three", "a": { "text": "3" }, "b": { "emoji": "🍎🍎🍎" } },
+        { "id": "four", "a": { "text": "4" }, "b": { "emoji": "✏️✏️✏️✏️" } }
+      ]
+    }
+  ],
   "exercises": [
     {
       "id": "daily-2026-11-05-mon-arith",

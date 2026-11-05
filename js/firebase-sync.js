@@ -370,7 +370,36 @@ function saveWeeklyNote(id, note) {
   }, { merge: true }).catch(function () {});
 }
 
-HV.cloud = { saveWeekly: saveWeekly, saveWeeklyNote: saveWeeklyNote };
+function albumsRef() {
+  return collection(db, "families", FAMILY, "stickerAlbums");
+}
+
+function listenAlbums() {
+  onSnapshot(albumsRef(), function (snap) {
+    var albums = {};
+    snap.forEach(function (docSnap) {
+      albums[docSnap.id] = docSnap.data() || {};
+    });
+    HV.stickerRemote = albums;
+    if (HV.stickers && HV.stickers.ingest) HV.stickers.ingest(albums);
+    if (HV.ui && HV.ui.notify) HV.ui.notify();
+  }, function () {});
+}
+
+function saveAlbumAdd(child, stickerId, spend) {
+  if (!db || !authed || !child || !stickerId) return Promise.resolve();
+  return setDoc(doc(db, "families", FAMILY, "stickerAlbums", child), {
+    owned: arrayUnion(stickerId),
+    spends: arrayUnion(spend),
+    updatedAt: serverTimestamp()
+  }, { merge: true }).catch(function () {});
+}
+
+HV.cloud = {
+  saveWeekly: saveWeekly,
+  saveWeeklyNote: saveWeeklyNote,
+  saveAlbumAdd: saveAlbumAdd
+};
 
 function startListeners() {
   if (!authed) {
@@ -380,6 +409,7 @@ function startListeners() {
     listenChild("gin");
     listenRewards();
     listenWeekly();
+    listenAlbums();
     window.addEventListener("online", function () { setStatus("online", "Đã đồng bộ"); });
     window.addEventListener("offline", function () { setStatus("offline", "Ngoại tuyến, sẽ đồng bộ sau"); });
   }

@@ -134,6 +134,8 @@ PHRASES = [
     "Chạm vào",
     "Chạm vào tất cả hình màu",
     "rồi bấm Xong",
+    "Tìm hai thẻ giống nhau.",
+    "Đổi được sticker rồi!",
     "Đếm thêm",
     "Đếm lùi",
     "từ",

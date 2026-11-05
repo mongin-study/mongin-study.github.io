@@ -72,6 +72,8 @@
       return { name: "menu", child: child };
     }
     if (parts[0] === "weekly" && knownChild(parts[1])) return { name: "weekly", child: parts[1] };
+    if (parts[0] === "memory" && knownChild(parts[1])) return { name: "memory", child: parts[1] };
+    if (parts[0] === "stickers" && knownChild(parts[1])) return { name: "stickers", child: parts[1] };
     if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
     if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
     if (parts[0] === "parents") return { name: "parents" };
@@ -287,6 +289,8 @@
     root.appendChild(topbar({ title: "Chào " + meta.name, sub: "Hôm nay mình học gì?", back: "#/", child: child }));
     root.appendChild(syncLine());
     if (HV.weekly) root.appendChild(HV.weekly.card(child));
+    if (HV.memory) root.appendChild(HV.memory.card(child));
+    if (HV.stickers) root.appendChild(HV.stickers.card(child));
     root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
@@ -884,6 +888,7 @@
     root.appendChild(topbar({ title: "Sổ sao của bố mẹ", sub: "Mon và Gin", back: "#/" }));
     root.appendChild(el("p", { class: "lede", text: "Hai iPad dùng chung một sổ. Khi có mạng, sao gộp lại ở đây." }));
     if (HV.weekly) root.appendChild(HV.weekly.parentPanel());
+    if (HV.stickers) root.appendChild(HV.stickers.parentPanel());
     root.appendChild(soundSetting());
     root.appendChild(syncLine());
     var grid = el("div", { class: "parents-grid" });
@@ -1048,6 +1053,8 @@
     else if (route.name === "play") shell.appendChild(viewPlay());
     else if (route.name === "board") shell.appendChild(viewBoard(route.child));
     else if (route.name === "weekly" && HV.weekly) shell.appendChild(HV.weekly.view(route.child));
+    else if (route.name === "memory" && HV.memory) shell.appendChild(HV.memory.view(route.child));
+    else if (route.name === "stickers" && HV.stickers) shell.appendChild(HV.stickers.view(route.child));
     else if (route.name === "parents") shell.appendChild(viewParents());
     else shell.appendChild(viewHome());
     root.appendChild(shell);
@@ -1266,6 +1273,7 @@
           return typeof line === "string" && line.trim();
         }).map(function (line) { return line.trim(); }) : [];
         HV.dailyPraise = praise;
+        HV.dailyMemory = Array.isArray(json.memory) ? json.memory : [];
         if (HV.engine && HV.engine.resetPraise) HV.engine.resetPraise();
         return { date: date, exercises: exercises, praise: praise, pending: false, error: false };
       });

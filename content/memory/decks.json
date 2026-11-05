@@ -1,0 +1,59 @@
+{
+  "decks": [
+    {
+      "id": "gin-colors",
+      "child": "gin",
+      "title": "Màu sắc",
+      "pairs": [
+        { "id": "red", "a": { "color": "#ef4444" }, "b": { "text": "đỏ" } },
+        { "id": "yellow", "a": { "color": "#eab308" }, "b": { "text": "vàng" } },
+        { "id": "blue", "a": { "color": "#3b82f6" }, "b": { "text": "xanh" } }
+      ]
+    },
+    {
+      "id": "gin-animals",
+      "child": "gin",
+      "title": "Con vật và xe",
+      "pairs": [
+        { "id": "cat", "a": { "emoji": "🐱" }, "b": { "text": "mèo" } },
+        { "id": "dog", "a": { "emoji": "🐶" }, "b": { "text": "cún" } },
+        { "id": "car", "a": { "emoji": "🚗" }, "b": { "text": "xe" } },
+        { "id": "bus", "a": { "emoji": "🚌" }, "b": { "text": "buýt" } }
+      ]
+    },
+    {
+      "id": "mon-numbers",
+      "child": "mon",
+      "title": "Số và đồ vật",
+      "pairs": [
+        { "id": "two", "a": { "text": "2" }, "b": { "emoji": "⭐⭐" } },
+        { "id": "three", "a": { "text": "3" }, "b": { "emoji": "🍎🍎🍎" } },
+        { "id": "four", "a": { "text": "4" }, "b": { "emoji": "🚗🚗🚗🚗" } },
+        { "id": "five", "a": { "text": "5" }, "b": { "emoji": "🎈🎈🎈🎈🎈" } }
+      ]
+    },
+    {
+      "id": "mon-letters",
+      "child": "mon",
+      "title": "Chữ và âm",
+      "pairs": [
+        { "id": "b", "a": { "text": "b" }, "b": { "text": "bờ" } },
+        { "id": "m", "a": { "text": "m" }, "b": { "text": "mờ" } },
+        { "id": "a", "a": { "text": "a" }, "b": { "text": "âm a" } },
+        { "id": "o", "a": { "text": "o" }, "b": { "text": "âm o" } },
+        { "id": "e", "a": { "text": "e" }, "b": { "text": "âm e" } }
+      ]
+    },
+    {
+      "id": "mon-colors",
+      "child": "mon",
+      "title": "Màu và chữ",
+      "pairs": [
+        { "id": "red", "a": { "color": "#ef4444" }, "b": { "text": "đỏ" } },
+        { "id": "green", "a": { "color": "#22c55e" }, "b": { "text": "xanh lá" } },
+        { "id": "purple", "a": { "color": "#a855f7" }, "b": { "text": "tím" } },
+        { "id": "orange", "a": { "color": "#f97316" }, "b": { "text": "cam" } }
+      ]
+    }
+  ]
+}

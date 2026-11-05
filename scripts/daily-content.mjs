@@ -4,6 +4,8 @@
 // Math word problems are not generated here. Write them in the daily JSON
 // with Mẹ Vy, Bố Hà, Mon, Gin (sometimes ông, bà, Cún Vàng) and everyday
 // units, repeating the unit and closing with "Vậy". See README.
+// Optional "memory" array on the same file adds flip-card decks
+// ({ id, child, title, pairs: 3–6 }). It is left in place by this script.
 //
 //   node scripts/daily-content.mjs 2026-11-05
 import fs from "fs";

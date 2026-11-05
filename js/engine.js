@@ -769,6 +769,7 @@
   HV.engine = {
     normalize: normalize,
     mount: mount,
+    praise: praise,
     resetPraise: function () { praiseBag.mon = []; praiseBag.gin = []; praiseBag.last = ""; }
   };
 })(globalThis.HV = globalThis.HV || {});

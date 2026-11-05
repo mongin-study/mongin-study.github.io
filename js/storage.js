@@ -287,7 +287,7 @@
         if (entry.subject !== "english" && entry.subject !== "vietnamese") sub = subjectOfEntry(found);
       }
     }
-    if (gen === "wordProblem" || id === "mon-word") return 3;
+    if (gen === "wordProblem" || id === "mon-word" || cat === "memory" || id.indexOf("memory") === 0) return 3;
     if (id === "mon-compare-expr" || id === "mon-sequence" || id === "mon-odd-one" || id === "mon-pattern-num") return 3;
     if (cat === "spell" || cat === "spelling" || id.indexOf("spell") >= 0) return 3;
     if (sub === "english" && level >= 4) return 3;

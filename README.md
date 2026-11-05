@@ -151,6 +151,12 @@ Add a top-level `praise` array of a few fresh Vietnamese cheers. They join the b
 "praise": ["Hôm nay Mon tỏa sáng quá!", "Gin ơi mẹ tự hào lắm!"]
 ```
 
+### Lật thẻ và album sticker
+
+`content/memory/decks.json` holds the default pairs. A daily file may add more with a top-level `memory` array (`child`, `title`, `pairs` of 3 to 6). Gin’s decks stay at 3–4 pairs (colors, animals, cars). Mon’s can add letter–sound and number–picture pairs, up to 6. Memory is a hard round for Mon (×3 stars).
+
+Sticker purchases do not change saved scores or the 15/30/50 targets. The album spends only this week’s stars that have not been spent yet, stored in `families/nguyen/stickerAlbums/{mon|gin}`.
+
 ### Bài kiểm tra tuần
 
 `content/weekly/YYYY-MM-DD.json` is the Saturday (Asia/Bangkok) paper. `mon` is about 25 mixed questions; `gin` is 8 listening taps. Each question needs `explain`. If the file is missing, the app builds a fallback from the generators. One try on Saturday, or Sunday if it was missed. Results go to `families/nguyen/weeklyTests` and the parent screen.
