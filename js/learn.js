@@ -491,8 +491,12 @@
     return seededShuffle(names, rand);
   }
 
-  function ginListen(count, rand) {
+  function ginListen(count, rand, gradual) {
     var order = themeOrder(rand);
+    if (gradual) {
+      order = order.filter(function (name) { return name !== "colors"; });
+      order.unshift("colors");
+    }
     var seq = [];
     order.forEach(function (theme) {
       seededShuffle(LISTEN_THEMES[theme], rand).forEach(function (item) {
@@ -615,7 +619,7 @@
     var set = cfg.set === "mon" ? "mon" : "gin";
     var rand = makeRand(cfg.seed || "");
     if (set === "mon") return monListen(cfg.count || 12, rand, cfg.choices || 4);
-    return ginListen(cfg.count || 16, rand);
+    return ginListen(cfg.count || 16, rand, !!cfg.gradual);
   };
 
   HV.listenSpeaks = function () {

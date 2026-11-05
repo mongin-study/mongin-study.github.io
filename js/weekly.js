@@ -6,6 +6,8 @@
   var KEY = "hoc-vui-weekly";
   var session = null;
   var clock = 0;
+  var praiseLines = {};
+  var justFinished = "";
 
   function bkk() {
     var parts = {};
@@ -281,6 +283,7 @@
       });
     }
     if (HV.cloud && HV.cloud.saveWeekly) HV.cloud.saveWeekly(result);
+    justFinished = result.id;
     session = null;
     if (HV.ui && HV.ui.render) HV.ui.render();
   }
@@ -292,6 +295,20 @@
   }
 
   function report(child, result) {
+    var praiseLang = child === "gin" ? "en" : "vi";
+    if (justFinished === result.id && !praiseLines[result.id] && HV.engine && HV.engine.praise) {
+      praiseLines[result.id] = HV.engine.praise(child, praiseLang);
+      if (HV.speech) {
+        var job = HV.speech.speak(praiseLines[result.id], { lang: praiseLang });
+        var wrong = (result.wrongs || []).filter(function (w) { return w && w.explain; })[0];
+        if (wrong) {
+          Promise.resolve(job).then(function () {
+            if (!praiseLines[result.id] || !HV.speech) return;
+            HV.speech.speak(wrong.explain, { lang: wrong.subject === "english" ? "en" : "vi", chain: true });
+          });
+        }
+      }
+    }
     var root = el("section", { class: "play week-report" });
     root.appendChild(el("header", { class: "topbar" }, [
       el("button", { class: "icon-btn", "data-go": "#/c/" + child, text: "←" }),
@@ -301,6 +318,7 @@
       ])
     ]));
     root.appendChild(el("p", { class: "medal", text: (result.icon || "🌱") + " " + (result.medalName || "Chưa có huy chương") }));
+    if (praiseLines[result.id]) root.appendChild(el("h2", { text: praiseLines[result.id] }));
     root.appendChild(el("h2", { text: result.percent + "%" }));
     root.appendChild(el("p", { class: "lede", text: "Đúng " + result.correct + "/" + result.total + " câu. Thưởng " + (result.bonus || 0) + " sao." }));
     ["math", "english", "vietnamese"].forEach(function (id) {

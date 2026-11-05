@@ -1,0 +1,180 @@
+{
+  "date": "2026-11-06",
+  "praise": [
+    "Hôm nay Mon tỏa sáng quá!",
+    "Đúng quá, Cún Vàng nhảy tưng tưng!",
+    "Gin ơi mẹ tự hào lắm!"
+  ],
+  "memory": [
+    {
+      "id": "daily-2026-11-06-gin-colors",
+      "child": "gin",
+      "title": "Màu Gin nghe hôm nay",
+      "pairs": [
+        { "id": "red", "a": { "color": "#ef4444" }, "b": { "text": "đỏ" } },
+        { "id": "yellow", "a": { "color": "#eab308" }, "b": { "text": "vàng" } },
+        { "id": "blue", "a": { "color": "#3b82f6" }, "b": { "text": "xanh" } },
+        { "id": "green", "a": { "color": "#22c55e" }, "b": { "text": "lá" } }
+      ]
+    },
+    {
+      "id": "daily-2026-11-06-mon-elsa",
+      "child": "mon",
+      "title": "Elsa và Cún Vàng",
+      "pairs": [
+        { "id": "one", "a": { "text": "1" }, "b": { "emoji": "❄️" } },
+        { "id": "two", "a": { "text": "2" }, "b": { "emoji": "❄️❄️" } },
+        { "id": "three", "a": { "text": "3" }, "b": { "emoji": "🐶🐶🐶" } },
+        { "id": "b", "a": { "text": "b" }, "b": { "text": "bờ" } },
+        { "id": "a", "a": { "text": "a" }, "b": { "text": "âm a" } }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "daily-2026-11-06-mon-arith",
+      "child": "mon",
+      "subject": "math",
+      "category": "arithmetic",
+      "title": "Táo và kẹo nhà mình",
+      "subtitle": "Mẹ Vy, Bố Hà, Mon, Gin",
+      "icon": "🍎",
+      "generator": "wordProblem",
+      "config": { "count": 10 }
+    },
+    {
+      "id": "daily-2026-11-06-mon-logic",
+      "child": "mon",
+      "subject": "math",
+      "category": "logic",
+      "title": "Dãy số một chữ số",
+      "subtitle": "1, 3, 5, rồi số mấy",
+      "icon": "➡️",
+      "generator": "sequence",
+      "config": { "count": 10, "steps": [1, 2], "length": 4, "digits": 1, "max": 9, "input": "choice" }
+    },
+    {
+      "id": "daily-2026-11-06-mon-number",
+      "child": "mon",
+      "subject": "math",
+      "category": "number",
+      "title": "Chẵn hay lẻ hôm nay",
+      "subtitle": "Nhìn cặp chấm",
+      "icon": "🔵",
+      "generator": "oddEven",
+      "config": { "count": 10, "min": 1, "max": 20 }
+    },
+    {
+      "id": "daily-2026-11-06-mon-geo",
+      "child": "mon",
+      "subject": "math",
+      "category": "geometry",
+      "title": "Hình của Elsa",
+      "subtitle": "Gọi tên hình",
+      "icon": "❄️",
+      "generator": "shapeName",
+      "config": { "count": 10, "set": "all" }
+    },
+    {
+      "id": "daily-2026-11-06-mon-vi",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Đánh vần hôm nay",
+      "subtitle": "Âm, vần, rồi tiếng",
+      "icon": "✨",
+      "generator": "viSpell",
+      "config": { "count": 10 }
+    },
+    {
+      "id": "daily-2026-11-06-mon-en",
+      "child": "mon",
+      "subject": "english",
+      "category": "reading",
+      "level": 2,
+      "title": "Read a short word",
+      "subtitle": "cat, sun, map",
+      "icon": "🔤",
+      "generator": "enReadCvc",
+      "config": { "count": 10 }
+    },
+    {
+      "id": "daily-2026-11-06-mon-en-listen",
+      "child": "mon",
+      "subject": "english",
+      "category": "listen",
+      "level": 1,
+      "title": "Tap what you hear",
+      "subtitle": "Elsa's snow",
+      "icon": "🎧",
+      "generator": "enListen",
+      "config": { "set": "mon", "count": 10, "seed": "2026-11-06", "choices": 4 }
+    },
+    {
+      "id": "daily-2026-11-06-gin-arith",
+      "child": "gin",
+      "subject": "math",
+      "category": "arithmetic",
+      "title": "Đếm đồ của Gin",
+      "subtitle": "Xe, sao và táo",
+      "icon": "🚗",
+      "generator": "countObjects",
+      "config": { "count": 10, "min": 1, "max": 5, "choiceCount": 3 }
+    },
+    {
+      "id": "daily-2026-11-06-gin-logic",
+      "child": "gin",
+      "subject": "math",
+      "category": "logic",
+      "title": "Màu tiếp theo",
+      "subtitle": "Nhìn rồi chọn màu",
+      "icon": "🎨",
+      "generator": "patternNext",
+      "config": { "count": 10, "kind": "color" }
+    },
+    {
+      "id": "daily-2026-11-06-gin-number",
+      "child": "gin",
+      "subject": "math",
+      "category": "number",
+      "title": "Số nào lớn hơn",
+      "subtitle": "Hai số, chọn số lớn",
+      "icon": "🔼",
+      "generator": "compareNumbers",
+      "config": { "count": 10, "min": 1, "max": 5, "mode": "larger" }
+    },
+    {
+      "id": "daily-2026-11-06-gin-geo",
+      "child": "gin",
+      "subject": "math",
+      "category": "geometry",
+      "title": "Chạm đúng màu",
+      "subtitle": "Đỏ, vàng, xanh",
+      "icon": "🔴",
+      "generator": "colorMatch",
+      "config": { "count": 10 }
+    },
+    {
+      "id": "daily-2026-11-06-gin-vi",
+      "child": "gin",
+      "subject": "vietnamese",
+      "category": "letters",
+      "title": "Nghe chữ to",
+      "subtitle": "a, o, e và vài chữ",
+      "icon": "🅰️",
+      "generator": "viLetters",
+      "config": { "count": 10, "choices": 3, "set": "gin", "mode": "hear" }
+    },
+    {
+      "id": "daily-2026-11-06-gin-en",
+      "child": "gin",
+      "subject": "english",
+      "category": "listen",
+      "title": "Tap what you hear",
+      "subtitle": "Colors first",
+      "icon": "🎧",
+      "generator": "enListen",
+      "config": { "set": "gin", "count": 16, "seed": "2026-11-06", "choices": 3, "gradual": true }
+    }
+  ]
+}

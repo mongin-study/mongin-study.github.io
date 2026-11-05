@@ -76,7 +76,7 @@
     ex({ id: "gin-bigger", child: "gin", category: "number", title: "Số nào lớn hơn", subtitle: "Hai số, chọn số lớn", icon: "🔼", generator: "compareNumbers", config: { count: 4, min: 1, max: 10, mode: "larger" } }),
     ex({ id: "gin-smaller", child: "gin", category: "number", title: "Số nào nhỏ hơn", subtitle: "Hai số, chọn số bé", icon: "🔽", generator: "compareNumbers", config: { count: 4, min: 1, max: 10, mode: "smaller" } }),
     ex({ id: "gin-order", child: "gin", category: "number", title: "Xếp từ bé đến lớn", subtitle: "Chạm đúng thứ tự", icon: "1️⃣", generator: "orderNumbers", config: { count: 4, n: 3, min: 1, max: 5 } }),
-    ex({ id: "gin-next", child: "gin", category: "number", title: "Số tiếp theo", subtitle: "Đếm thêm một", icon: "➡️", generator: "sequence", config: { count: 4, steps: [1], length: 3, min: 1, max: 10, input: "choice", choiceCount: 3 } }),
+    ex({ id: "gin-next", child: "gin", category: "number", title: "Số tiếp theo", subtitle: "Đếm thêm một", icon: "➡️", generator: "sequence", config: { count: 4, steps: [1], length: 3, digits: 1, min: 1, max: 9, input: "choice", choiceCount: 3 } }),
 
     ex({ id: "gin-find-shape", child: "gin", category: "geometry", title: "Tìm hình", subtitle: "Tròn, vuông, tam giác", icon: "⭕", generator: "findShape", config: { count: 4, set: "basic" } }),
     ex({ id: "gin-color", child: "gin", category: "geometry", title: "Màu giống", subtitle: "Chạm đúng màu", icon: "🎨", generator: "colorMatch", config: { count: 4 } }),

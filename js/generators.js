@@ -431,6 +431,10 @@
         var length = cfg.length || 4;
         var max = cfg.max != null ? cfg.max : (digits === 1 ? 9 : 100);
         var min = cfg.min != null ? cfg.min : 0;
+        if (digits !== 2 && max <= 10) {
+          digits = 1;
+          max = Math.min(max, 9);
+        }
         if (digits === 1) {
           max = Math.min(max, 9);
           min = Math.max(0, Math.min(min, max));
@@ -740,7 +744,8 @@
 
     countSides: function (cfg) {
       return makeQuestions(cfg, function () {
-        var bank = shapeSet(cfg.set || "all");
+        var bank = shapeSet(cfg.set || "all").filter(function (s) { return s.sides >= 3; });
+        if (!bank.length) return null;
         var shape = pick(bank);
         var color = pick(COLORS);
         var ans = shape.sides;
@@ -983,7 +988,7 @@
           prompt: prompt,
           speak: prompt,
           variant: "cards",
-          explain: mode === "bigger" ? "Cái to hơn là cái lớn." : "Cái nhỏ hơn là cái bé.",
+          explain: mode === "bigger" ? "Hai hình giống nhau. Cái to hơn là hình lớn hơn." : "Hai hình giống nhau. Cái nhỏ hơn là hình bé hơn.",
           options: shuffle([
             { shape: shape.id, color: color, size: 120, correct: bigCorrect },
             { shape: shape.id, color: color, size: 62, correct: !bigCorrect }
@@ -1038,6 +1043,7 @@
           nextS = shapes[1];
         }
         var ink = "#3b82f6";
+        var shapeNames = { circle: "hình tròn", square: "hình vuông", triangle: "hình tam giác", star: "ngôi sao" };
         return qChoice({
           prompt: "Hình tiếp theo là hình nào?",
           speak: "Nhìn quy luật hình, chọn hình tiếp theo",
@@ -1045,7 +1051,7 @@
             layout: "pattern",
             pieces: seqS.map(function (s) { return { shape: s, color: ink }; }).concat([{ mystery: true }])
           },
-          explain: "Hình tiếp theo lặp theo quy luật.",
+          explain: "Hình tiếp theo là " + (shapeNames[nextS] || "hình tiếp theo") + ".",
           columns: 3,
           options: shuffle(shapes).map(function (s) {
             return { shape: s, color: ink, size: 64, correct: s === nextS };

@@ -112,7 +112,11 @@
       state.destroy();
       state.destroy = null;
     }
-    HV.speech.cancel();
+  }
+
+  function routeKey(route) {
+    route = route || {};
+    return [route.name, route.child || "", route.subject || "", route.category || "", route.level || "", route.id || ""].join("/");
   }
 
   function toast(msg) {
@@ -506,7 +510,6 @@
   function sessionTarget(child, baseLen, entry) {
     var listen = entry && (entry.generator === "enListen" || (entry.category === "listen" && subjectOf(entry) === "english"));
     if (child === "gin" && listen) return 16;
-    if (child === "gin") return Math.max(baseLen, Math.round(baseLen * 1.5));
     return 10;
   }
 
@@ -733,13 +736,16 @@
       }
       session.celebrate = session.crossed || unlockedNow ? "jingle" : "fanfare";
       celebrateResult(stars, session.celebrate);
-      if (stars > 0 && HV.engine && HV.engine.praise) {
+      if (stars > 0 && HV.engine && HV.engine.praise && !session.praiseQueued) {
         var praiseLang = subjectOf(session.entry) === "english" ? "en" : "vi";
         session.endLine = HV.engine.praise(child, praiseLang);
         session.endLang = praiseLang;
+        session.praiseQueued = true;
         setTimeout(function () {
-          if (HV.speech) HV.speech.speak(session.endLine, { lang: praiseLang });
-        }, 1100);
+          if (!state.session || state.session.phase !== "result" || state.session.praiseSaid) return;
+          state.session.praiseSaid = true;
+          if (HV.speech) HV.speech.speak(state.session.endLine, { lang: state.session.endLang });
+        }, 700);
       }
     }
     var award = session.award || { note: "" };
@@ -826,6 +832,7 @@
     copy.appendChild(el("h1", { text: week.stars + " sao" }));
     copy.appendChild(el("p", { class: "lede", text: week.exercisesDone + " bài · đúng " + week.correct + "/" + week.answered }));
     copy.appendChild(subjectPills(week.bySubject));
+    copy.appendChild(rankBoard(child));
     copy.appendChild(el("p", { class: "fine", text: "Bố mẹ xem cuối tuần để thưởng. Mốc thưởng tính tổng sao mọi môn." }));
     hero.appendChild(copy);
     var cast = el("div", { class: "board-cast" });
@@ -850,6 +857,30 @@
     });
     root.appendChild(pastBox);
     return root;
+  }
+
+  function rankBoard(active) {
+    var start = U.weekStart(U.todayStr());
+    var rows = ["mon", "gin"].map(function (id) {
+      return { id: id, name: HV.kids[id].name, stars: S.summarizeWeek(id, start).stars };
+    }).sort(function (a, b) {
+      if (b.stars !== a.stars) return b.stars - a.stars;
+      return a.name < b.name ? -1 : 1;
+    });
+    var box = el("div", { class: "rank-row" });
+    var place = 1;
+    rows.forEach(function (row, index) {
+      if (index > 0 && row.stars < rows[index - 1].stars) place = index + 1;
+      var card = el("div", { class: "rank-card" + (row.id === active ? " is-you" : "") });
+      card.appendChild(el("span", { class: "rank-place", text: String(place) }));
+      card.appendChild(kidPhoto(row.id, "sm"));
+      card.appendChild(el("div", { class: "rank-copy" }, [
+        el("strong", { text: row.name }),
+        el("span", { text: row.stars + " sao" })
+      ]));
+      box.appendChild(card);
+    });
+    return box;
   }
 
   function dayRow(week) {
@@ -1072,7 +1103,9 @@
 
   function onRoute() {
     var route = parseRoute();
+    var changed = routeKey(route) !== routeKey(state.route);
     var sameQuiz = route.name === "play" && state.route.name === "play" && state.route.id === route.id && state.session && state.session.phase === "quiz";
+    if (changed && HV.speech) HV.speech.cancel();
     state.route = route;
     if (route.name === "play") {
       if (!sameQuiz) beginSession(route.id);

@@ -105,7 +105,7 @@
     if (HV.audio) HV.audio.fanfare();
     var line = HV.engine && HV.engine.praise ? HV.engine.praise(play.child) : "Giỏi quá!";
     play.praise = line;
-    if (HV.speech) HV.speech.speak(line, { lang: "vi", chain: true });
+    if (HV.speech) HV.speech.speak(line, { lang: "vi" });
     if (HV.ui && HV.ui.render) HV.ui.render();
   }
 
@@ -130,11 +130,12 @@
       play.open = [];
       play.lock = false;
       if (HV.audio) HV.audio.correct();
-      if (HV.engine && HV.engine.shouldVoicePraise && HV.engine.shouldVoicePraise()) {
+      var finished = play.cards.every(function (c) { return c.matched; });
+      if (!finished && HV.engine && HV.engine.shouldVoicePraise && HV.engine.shouldVoicePraise()) {
         var cheer = HV.engine.praise ? HV.engine.praise(play.child) : "Mon ơi giỏi quá!";
         if (HV.speech) HV.speech.speak(cheer, { lang: "vi" });
       }
-      if (play.cards.every(function (c) { return c.matched; })) finish();
+      if (finished) finish();
       else if (HV.ui && HV.ui.render) HV.ui.render();
       return;
     }
