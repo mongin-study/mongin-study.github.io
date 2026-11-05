@@ -505,11 +505,9 @@
 
   function sessionTarget(child, baseLen, entry) {
     var listen = entry && (entry.generator === "enListen" || (entry.category === "listen" && subjectOf(entry) === "english"));
-    if (child === "gin" && listen) return Math.max(16, baseLen);
+    if (child === "gin" && listen) return 16;
     if (child === "gin") return Math.max(baseLen, Math.round(baseLen * 1.5));
-    if (baseLen >= 16 && baseLen <= 20) return baseLen;
-    if (baseLen > 20) return 20;
-    return 18;
+    return 10;
   }
 
   function generatedPool(entry, count) {
@@ -585,6 +583,7 @@
       state.session = { missing: true, id: id };
       return;
     }
+    if (HV.engine && HV.engine.beginSessionPraise) HV.engine.beginSessionPraise();
     var questions = expandQuestions(entry, materialize(entry));
     if (!questions.length) {
       state.session = { empty: true, entry: entry };
@@ -734,6 +733,14 @@
       }
       session.celebrate = session.crossed || unlockedNow ? "jingle" : "fanfare";
       celebrateResult(stars, session.celebrate);
+      if (stars > 0 && HV.engine && HV.engine.praise) {
+        var praiseLang = subjectOf(session.entry) === "english" ? "en" : "vi";
+        session.endLine = HV.engine.praise(child, praiseLang);
+        session.endLang = praiseLang;
+        setTimeout(function () {
+          if (HV.speech) HV.speech.speak(session.endLine, { lang: praiseLang });
+        }, 1100);
+      }
     }
     var award = session.award || { note: "" };
     var stars = session.stars;
@@ -742,7 +749,7 @@
     card.appendChild(burst());
     card.appendChild(resultHero(child));
     card.appendChild(el("p", { class: "result-stars", text: U.starText(session.stars) }));
-    card.appendChild(el("h2", { text: resultHeadline(session.stars, child) }));
+    card.appendChild(el("h2", { text: session.endLine || resultHeadline(session.stars, child) }));
     card.appendChild(el("p", { class: "lede", text: "Đúng lần đầu " + session.correct + "/" + total + " câu." }));
     if (award.note) card.appendChild(el("p", { class: "lede", text: award.note }));
     card.appendChild(el("p", { class: "lede", text: "Tuần này: " + weekStars(child) + " sao." }));

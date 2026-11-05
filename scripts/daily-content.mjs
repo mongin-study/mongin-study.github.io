@@ -41,7 +41,7 @@ function upsert(child) {
   ex.generator = "enListen";
   ex.config = {
     set: child === "mon" ? "mon" : "gin",
-    count: child === "gin" ? 16 : 18,
+    count: child === "gin" ? 16 : 10,
     seed: date,
     choices: child === "mon" ? 4 : 3,
     gradual: child !== "mon"

@@ -339,12 +339,43 @@
       "Cún Vàng vẫy đuôi cho Gin!"
     ]
   };
-  var praiseBag = { mon: [], gin: [] };
+  var PRAISE_EN = [
+    "Bingo!",
+    "Hurrah!",
+    "Awesome!",
+    "Well done!",
+    "Yay!",
+    "Great job!",
+    "You did it!",
+    "Super!",
+    "Fantastic!",
+    "Nice work!"
+  ];
+  var praiseBag = { mon: [], gin: [], en: [] };
+  var correctHeard = 0;
 
-  function praise(child) {
-    var key = child === "gin" ? "gin" : "mon";
+  function fitsMon(line) {
+    var s = String(line || "");
+    if (/gin/i.test(s)) return false;
+    return /mon|elsa|cún vàng|cun vang/i.test(s);
+  }
+
+  function fitsGin(line) {
+    var s = String(line || "");
+    return !/mon|elsa/i.test(s);
+  }
+
+  function praiseList(child, lang) {
+    if (lang === "en") return PRAISE_EN.slice();
     var daily = Array.isArray(HV.dailyPraise) ? HV.dailyPraise : [];
-    var list = PRAISE.concat(PRAISE_EXTRA[key] || []).concat(daily);
+    if (child === "mon") return PRAISE_EXTRA.mon.filter(fitsMon).concat(daily.filter(fitsMon));
+    return PRAISE.concat(PRAISE_EXTRA.gin || []).concat(daily.filter(fitsGin));
+  }
+
+  function praise(child, lang) {
+    var key = lang === "en" ? "en" : (child === "gin" ? "gin" : "mon");
+    var list = praiseList(child, lang);
+    if (!list.length) list = lang === "en" ? ["Yay!"] : (child === "gin" ? ["Gin ơi giỏi quá!"] : ["Mon ơi giỏi quá!"]);
     if (!praiseBag[key].length) praiseBag[key] = HV.util.shuffle(list);
     var line = praiseBag[key].pop();
     if (line === praiseBag.last && praiseBag[key].length) {
@@ -354,6 +385,11 @@
     }
     praiseBag.last = line;
     return line;
+  }
+
+  function shouldVoicePraise() {
+    correctHeard += 1;
+    return correctHeard % 5 === 0;
   }
 
   function voiceFor(child) {
@@ -434,7 +470,10 @@
       lockInputs();
       firstSuccess = !!first;
       var showExplain = !!text && (!good || opts.hard);
-      var line = good ? praise(child) : (lang === "en" ? "Not quite" : "Chưa đúng");
+      var voicePraise = good && !opts.isLast && shouldVoicePraise();
+      var line = !good
+        ? (lang === "en" ? "Not quite" : "Chưa đúng")
+        : (voicePraise ? praise(child, lang) : (lang === "en" ? "Yes!" : "Đúng!"));
       var face = good ? el("img", {
         class: "praise-face",
         src: "assets/kids/" + (child === "gin" ? "gin" : "mon") + ".webp",
@@ -455,23 +494,33 @@
         })
       ]);
       container.appendChild(bar);
-      var sayLang = good ? "vi" : lang;
       afterSound(good ? HV.audio.correct : HV.audio.wrong, function () {
         if (settled) return;
-        var firstSay = good ? speakNow(line, "vi") : speakNow(text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"), sayLang);
-        firstSay.then(function (sec) {
-          if (settled) return;
-          if (good && showExplain) {
-            return speakNow(text, "vi", true).then(function (more) {
-              if (settled) return;
-              pending = setTimeout(function () { finish(firstSuccess); }, Math.max(700, Math.round((more || 1) * 1000) + 400));
-              if (opts.track) opts.track(pending);
-            });
-          }
-          if (!good) return;
-          pending = setTimeout(function () { finish(firstSuccess); }, Math.max(600, Math.round(sec * 1000) + 400));
+        function later(sec) {
+          if (settled || !good) return;
+          var wait = voicePraise || showExplain
+            ? Math.max(600, Math.round((sec || 0.4) * 1000) + 400)
+            : 650;
+          pending = setTimeout(function () { finish(firstSuccess); }, wait);
           if (opts.track) opts.track(pending);
-        });
+        }
+        if (!good) {
+          speakNow(text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"), lang);
+          return;
+        }
+        if (voicePraise) {
+          speakNow(line, lang).then(function (sec) {
+            if (settled) return;
+            if (showExplain) return speakNow(text, lang, true).then(later);
+            later(sec);
+          });
+          return;
+        }
+        if (showExplain) {
+          speakNow(text, lang).then(later);
+          return;
+        }
+        later(0.2);
       });
     }
 
@@ -504,7 +553,7 @@
             btn.classList.add("is-correct");
             showFeedback(true, question.explain, attempts === 1);
           } else if (attempts + 1 < maxAttempts) {
-            softWrong(btn, "Thử lại nhé");
+            softWrong(btn, lang === "en" ? "Try again." : "Thử lại nhé");
           } else {
             attempts += 1;
             btn.classList.add("is-wrong");
@@ -769,7 +818,14 @@
   HV.engine = {
     normalize: normalize,
     mount: mount,
-    praise: praise,
-    resetPraise: function () { praiseBag.mon = []; praiseBag.gin = []; praiseBag.last = ""; }
+    praise: function (child, lang) { return praise(child, lang); },
+    shouldVoicePraise: shouldVoicePraise,
+    beginSessionPraise: function () { correctHeard = 0; },
+    resetPraise: function () {
+      praiseBag.mon = [];
+      praiseBag.gin = [];
+      praiseBag.en = [];
+      praiseBag.last = "";
+    }
   };
 })(globalThis.HV = globalThis.HV || {});

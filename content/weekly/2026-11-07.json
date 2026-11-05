@@ -535,9 +535,9 @@
       "subject": "vietnamese",
       "kind": "choice",
       "lang": "vi",
-      "prompt": "mờ e me huyền mẹ. Tiếng nào đúng?",
-      "speak": "mờ e me huyền mẹ",
-      "explain": "Âm mờ, vần e, dấu huyền, tiếng mẹ.",
+      "prompt": "mờ e me nặng mẹ. Tiếng nào đúng?",
+      "speak": "mờ e me nặng mẹ",
+      "explain": "Âm mờ, vần e, dấu nặng, tiếng mẹ.",
       "choices": [
         {
           "text": "me",

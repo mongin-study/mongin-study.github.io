@@ -135,6 +135,8 @@ PHRASES = [
     "Chạm vào tất cả hình màu",
     "rồi bấm Xong",
     "Tìm hai thẻ giống nhau.",
+    "mờ e me nặng mẹ",
+    "Âm mờ, vần e, dấu nặng, tiếng mẹ.",
     "Đổi được sticker rồi!",
     "Đếm thêm",
     "Đếm lùi",

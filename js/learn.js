@@ -53,7 +53,7 @@
     { say: "bờ a ba", word: "ba", other: ["bà", "bá", "be"], scene: "b + a" },
     { say: "bờ a ba huyền bà", word: "bà", other: ["ba", "bá", "bả"], scene: "b + a + huyền" },
     { say: "mờ a ma sắc má", word: "má", other: ["ma", "mà", "mẹ"], scene: "m + a + sắc" },
-    { say: "mờ e me huyền mẹ", word: "mẹ", other: ["me", "bé", "má"], scene: "m + e + huyền" },
+    { say: "mờ e me nặng mẹ", word: "mẹ", other: ["me", "bé", "má"], scene: "m + e + nặng" },
     { say: "bờ e be sắc bé", word: "bé", other: ["be", "bè", "mẹ"], scene: "b + e + sắc" },
     { say: "bờ o bo huyền bò", word: "bò", other: ["bo", "bó", "cá"], scene: "b + o + huyền" },
     { say: "cờ a ca sắc cá", word: "cá", other: ["ca", "cà", "bò"], scene: "c + a + sắc" },
@@ -663,7 +663,7 @@
   enEx({ id: "mon-en-family", child: "mon", category: "family", title: "Family", subtitle: "Mom and dad", icon: "👩", generator: "enFamily", config: { count: 4 } });
   enEx({ id: "mon-en-fruits", child: "mon", category: "fruits", title: "Fruits", subtitle: "Apple and banana", icon: "🍎", generator: "enFruits", config: { count: 4 } });
   enEx({ id: "mon-en-body", child: "mon", category: "body", title: "My body", subtitle: "Eye, ear, hand", icon: "✋", generator: "enBody", config: { count: 4 } });
-  enEx({ id: "mon-en-listen", child: "mon", category: "listen", title: "Tap what you hear", subtitle: "a red apple", icon: "🎧", generator: "enListen", config: { count: 18, choices: 4, set: "mon" } });
+  enEx({ id: "mon-en-listen", child: "mon", category: "listen", title: "Tap what you hear", subtitle: "a red apple", icon: "🎧", generator: "enListen", config: { count: 10, choices: 4, set: "mon" } });
 
   enEx({ id: "gin-en-letters", child: "gin", category: "letters", title: "A B C", subtitle: "Ba chữ đầu", icon: "🅰️", generator: "enLetters", config: { count: 3, choices: 3, set: "abc" } });
   enEx({ id: "gin-en-colors", child: "gin", category: "colors", title: "Colors", subtitle: "Red, yellow, blue", icon: "🎨", generator: "enColors", config: { count: 4, choices: 3, set: "easy" } });

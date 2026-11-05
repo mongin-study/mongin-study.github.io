@@ -78,6 +78,7 @@
       firstTry: deck.pairs.length,
       done: false
     };
+    if (HV.engine && HV.engine.beginSessionPraise) HV.engine.beginSessionPraise();
     if (HV.speech) HV.speech.speak("Tìm hai thẻ giống nhau.", { lang: "vi" });
     if (HV.ui && HV.ui.render) HV.ui.render();
   }
@@ -129,8 +130,10 @@
       play.open = [];
       play.lock = false;
       if (HV.audio) HV.audio.correct();
-      var cheer = HV.engine && HV.engine.praise ? HV.engine.praise(play.child) : "Đúng rồi!";
-      if (HV.speech) HV.speech.speak(cheer, { lang: "vi" });
+      if (HV.engine && HV.engine.shouldVoicePraise && HV.engine.shouldVoicePraise()) {
+        var cheer = HV.engine.praise ? HV.engine.praise(play.child) : "Mon ơi giỏi quá!";
+        if (HV.speech) HV.speech.speak(cheer, { lang: "vi" });
+      }
       if (play.cards.every(function (c) { return c.matched; })) finish();
       else if (HV.ui && HV.ui.render) HV.ui.render();
       return;

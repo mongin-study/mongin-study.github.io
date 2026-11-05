@@ -440,7 +440,7 @@
       "subtitle": "Tap what you hear",
       "icon": "🎧",
       "generator": "enListen",
-      "config": { "set": "mon", "count": 18, "seed": "2026-11-05", "choices": 4, "gradual": false },
+      "config": { "set": "mon", "count": 10, "seed": "2026-11-05", "choices": 4, "gradual": false },
       "questions": [
         {
           "kind": "choice",
