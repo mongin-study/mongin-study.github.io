@@ -19,7 +19,8 @@ import edge_tts
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets" / "audio"
 VOICE = "vi-VN-HoaiMyNeural"
-RATE = "-6%"
+RATE = "-10%"
+PITCH = "+28Hz"
 
 NAMES = {
     "mon": "Mon",
@@ -472,8 +473,8 @@ PRAISE = [
     "Gin làm được rồi!",
     "Cún Vàng vẫy đuôi cho Gin!",
 ]
-PRAISE_RATE = "-10%"
-PRAISE_PITCH = "+12Hz"
+PRAISE_RATE = "+8%"
+PRAISE_PITCH = "+36Hz"
 
 
 async def synth(text, dest: Path, sem: asyncio.Semaphore, rate=RATE, pitch="+0Hz", force=False):
@@ -495,8 +496,9 @@ async def synth(text, dest: Path, sem: asyncio.Semaphore, rate=RATE, pitch="+0Hz
 
 async def main():
     corpus = []
-    if len(sys.argv) > 1:
-        corpus = json.loads(Path(sys.argv[1]).read_text())
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if args:
+        corpus = json.loads(Path(args[0]).read_text(encoding="utf-8"))
     clips = {}
 
     def add(say):
@@ -545,8 +547,8 @@ async def main():
                 add(question.get("speak"))
                 add(question.get("explain"))
                 add(question.get("prompt"))
-    if len(sys.argv) > 2:
-        for phrase in json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")):
+    if len(args) > 1:
+        for phrase in json.loads(Path(args[1]).read_text(encoding="utf-8")):
             add(phrase)
     # Dynamic lines are composed from number and phrase clips.
     # Keep every word so an unseen sentence can still be spoken from clips.
@@ -568,7 +570,7 @@ async def main():
         manifest[key] = "assets/audio/" + name
         jobs.append((say, OUT / name))
 
-    sem = asyncio.Semaphore(6)
+    sem = asyncio.Semaphore(8)
     made = 0
     skipped = 0
     failed = 0
@@ -580,8 +582,8 @@ async def main():
             dest,
             sem,
             rate=PRAISE_RATE if styled else RATE,
-            pitch=PRAISE_PITCH if styled else "+0Hz",
-            force=styled,
+            pitch=PRAISE_PITCH if styled else PITCH,
+            force=styled or "--force" in sys.argv,
         )
         if status == "ok":
             made += 1
@@ -597,7 +599,7 @@ async def main():
     await asyncio.gather(*(run(s, d) for s, d in jobs))
     print(f"failed {failed}", flush=True)
     manifest = {k: v for k, v in manifest.items() if (OUT / Path(v).name).exists()}
-    doc = {"voice": VOICE, "rate": RATE, "clips": manifest}
+    doc = {"voice": VOICE, "rate": RATE, "pitch": PITCH, "praiseRate": PRAISE_RATE, "praisePitch": PRAISE_PITCH, "clips": manifest}
     (OUT / "manifest.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     keep = {Path(v).name for v in manifest.values()}
     removed = 0

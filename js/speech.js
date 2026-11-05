@@ -167,6 +167,7 @@
       if (c.state === "suspended") c.resume().catch(function () {});
       var t = c.currentTime + 0.03;
       var start = t;
+      var lastSrc = null;
       bufs.forEach(function (buf, idx) {
         if (!buf) return;
         var src = c.createBufferSource();
@@ -175,12 +176,24 @@
         src.connect(c.destination);
         src.start(t);
         sources.push(src);
+        lastSrc = src;
         var gap = 0.04;
         if (idx + 1 < keys.length && isNumberKey(keys[idx]) && isNumberKey(keys[idx + 1])) gap = 0.09;
         t += buf.duration / rate + gap;
       });
       last = { mode: "clips", lang: (opts && opts.lang) || "vi", norm: norm, keys: keys.slice() };
-      return Math.max(0.3, t - start);
+      var dur = Math.max(0.3, t - start);
+      return new Promise(function (resolve) {
+        var finished = false;
+        function done() {
+          if (finished) return;
+          finished = true;
+          resolve(dur);
+        }
+        if (lastSrc) lastSrc.onended = done;
+        else done();
+        setTimeout(done, Math.ceil(dur * 1000) + 80);
+      });
     });
   }
 
@@ -240,22 +253,33 @@
   }
 
   function speakVi(norm, opts, my) {
-    if (!window.speechSynthesis || !norm) return;
-    whenVoices().then(function (voices) {
-      if (my !== epoch) return;
+    if (!window.speechSynthesis || !norm) return Promise.resolve(0);
+    var guess = guessSeconds(norm);
+    return whenVoices().then(function (voices) {
+      if (my !== epoch) return 0;
       var voice = pickVoice(voices);
-      if (!voice) return;
-      try {
-        window.speechSynthesis.cancel();
-        var u = new SpeechSynthesisUtterance(norm);
-        u.lang = "vi-VN";
-        u.voice = voice;
-        u.rate = opts && opts.rate ? opts.rate : 0.92;
-        u.pitch = opts && opts.pitch ? opts.pitch : 1.04;
-        u.onerror = function () {};
-        window.speechSynthesis.speak(u);
-        last = { mode: "vi", norm: norm, keys: [], voice: voice.name || voice.lang };
-      } catch (e) {}
+      if (!voice) return guess;
+      return new Promise(function (resolve) {
+        var done = false;
+        function finish() {
+          if (done) return;
+          done = true;
+          resolve(guess);
+        }
+        try {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(norm);
+          u.lang = "vi-VN";
+          u.voice = voice;
+          u.rate = opts && opts.rate ? Math.max(0.85, opts.rate) : 0.9;
+          u.pitch = opts && opts.pitch ? Math.max(1.05, opts.pitch) : 1.25;
+          u.onend = finish;
+          u.onerror = finish;
+          window.speechSynthesis.speak(u);
+          last = { mode: "vi", norm: norm, keys: [], voice: voice.name || voice.lang };
+          setTimeout(finish, guess * 1000 + 700);
+        } catch (e) { finish(); }
+      });
     });
   }
 
@@ -278,24 +302,35 @@
   }
 
   function speakEnVoice(norm, opts, my) {
-    if (!window.speechSynthesis || !norm) return;
-    whenVoices().then(function (voices) {
-      if (my !== epoch) return;
+    if (!window.speechSynthesis || !norm) return Promise.resolve(0);
+    var guess = guessSeconds(norm);
+    return whenVoices().then(function (voices) {
+      if (my !== epoch) return 0;
       var voice = pickEnVoice(voices);
-      if (!voice) return;
+      if (!voice) return guess;
       var lang = String(voice.lang || "").toLowerCase();
-      if (lang.indexOf("en") !== 0) return;
-      try {
-        window.speechSynthesis.cancel();
-        var u = new SpeechSynthesisUtterance(norm);
-        u.lang = "en-US";
-        u.voice = voice;
-        u.rate = opts && opts.rate ? opts.rate : 0.92;
-        u.pitch = opts && opts.pitch ? opts.pitch : 1.02;
-        u.onerror = function () {};
-        window.speechSynthesis.speak(u);
-        last = { mode: "en", norm: norm, keys: [], voice: voice.name || voice.lang };
-      } catch (e) {}
+      if (lang.indexOf("en") !== 0) return guess;
+      return new Promise(function (resolve) {
+        var done = false;
+        function finish() {
+          if (done) return;
+          done = true;
+          resolve(guess);
+        }
+        try {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(norm);
+          u.lang = "en-US";
+          u.voice = voice;
+          u.rate = opts && opts.rate ? Math.min(1.15, opts.rate + 0.08) : 1.05;
+          u.pitch = opts && opts.pitch ? opts.pitch : 1.15;
+          u.onend = finish;
+          u.onerror = finish;
+          window.speechSynthesis.speak(u);
+          last = { mode: "en", norm: norm, keys: [], voice: voice.name || voice.lang };
+          setTimeout(finish, guess * 1000 + 700);
+        } catch (e) { finish(); }
+      });
     });
   }
 
@@ -304,14 +339,26 @@
     return Math.max(0.8, Math.min(4.2, 0.45 + words * 0.38));
   }
 
+  var chain = Promise.resolve();
+
   function speak(text, opts) {
-    if (!enabled() || !text) {
+    opts = opts || {};
+    if (!opts.chain) {
       cancel();
-      return Promise.resolve(0);
+      chain = Promise.resolve();
     }
-    cancel();
-    if (HV.audio && HV.audio.cut) HV.audio.cut();
     var my = epoch;
+    var job = chain.then(function () {
+      if (my !== epoch) return 0;
+      return speakBody(text, opts, my);
+    });
+    chain = job.then(function () {}, function () {});
+    return job;
+  }
+
+  function speakBody(text, opts, my) {
+    if (!enabled() || !text) return Promise.resolve(0);
+    if (!opts.chain && HV.audio && HV.audio.cut) HV.audio.cut();
     var lang = opts && opts.lang === "en" ? "en" : "vi";
     if (lang === "en") {
       var enNorm = normalizeEn(text);
@@ -320,15 +367,14 @@
         if (my !== epoch) return 0;
         if (enManifest[enNorm]) {
           return playKeys([enNorm], opts, my, enNorm, enManifest).catch(function () {
-            if (my === epoch) speakEnVoice(enNorm, opts, my);
-            return guessSeconds(enNorm);
+            if (my !== epoch) return 0;
+            return speakEnVoice(enNorm, opts, my);
           });
         }
-        speakEnVoice(enNorm, opts, my);
-        return guessSeconds(enNorm);
+        return speakEnVoice(enNorm, opts, my);
       }).catch(function () {
-        if (my === epoch) speakEnVoice(enNorm, opts, my);
-        return guessSeconds(enNorm);
+        if (my !== epoch) return 0;
+        return speakEnVoice(enNorm, opts, my);
       });
     }
     var norm = normalize(text);
@@ -336,17 +382,14 @@
     return loadManifest().then(function () {
       if (my !== epoch) return 0;
       var keys = tokenize(norm);
-      if (!keys) {
-        speakVi(norm, opts, my);
-        return guessSeconds(norm);
-      }
+      if (!keys) return speakVi(norm, opts, my);
       return playKeys(keys, opts, my, norm).catch(function () {
-        if (my === epoch) speakVi(norm, opts, my);
-        return guessSeconds(norm);
+        if (my !== epoch) return 0;
+        return speakVi(norm, opts, my);
       });
     }).catch(function () {
-      if (my === epoch) speakVi(norm, opts, my);
-      return guessSeconds(norm);
+      if (my !== epoch) return 0;
+      return speakVi(norm, opts, my);
     });
   }
 

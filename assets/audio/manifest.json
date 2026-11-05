@@ -1,6 +1,9 @@
 {
   "voice": "vi-VN-HoaiMyNeural",
-  "rate": "-6%",
+  "rate": "-10%",
+  "pitch": "+28Hz",
+  "praiseRate": "+8%",
+  "praisePitch": "+36Hz",
   "clips": {
     "a": "assets/audio/86f7e437faa5.mp3",
     "a ha đúng rồi": "assets/audio/724b582c5220.mp3",

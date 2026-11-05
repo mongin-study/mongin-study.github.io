@@ -16,7 +16,8 @@ import edge_tts
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets" / "audio" / "en"
 VOICE = "en-US-AnaNeural"
-RATE = "-5%"
+RATE = "+6%"
+PITCH = "+4Hz"
 
 
 def normalize(text):
@@ -53,11 +54,12 @@ def trim(path: Path):
 
 
 async def synth(text, dest, sem):
-    if dest.exists() and dest.stat().st_size > 800:
+    force = "--force" in sys.argv
+    if dest.exists() and dest.stat().st_size > 800 and not force:
         return "skip"
     try:
         async with sem:
-            await edge_tts.Communicate(text, VOICE, rate=RATE).save(str(dest))
+            await edge_tts.Communicate(text, VOICE, rate=RATE, pitch=PITCH).save(str(dest))
         trim(dest)
         return "ok"
     except Exception as exc:
@@ -87,7 +89,7 @@ async def main():
         name = fid(key) + ".mp3"
         manifest[key] = "assets/audio/en/" + name
         jobs.append((say, OUT / name))
-    sem = asyncio.Semaphore(6)
+    sem = asyncio.Semaphore(8)
     counts = {"ok": 0, "skip": 0, "fail": 0}
 
     async def run(say, dest):
@@ -98,7 +100,7 @@ async def main():
     await asyncio.gather(*(run(s, d) for s, d in jobs))
     manifest = {k: v for k, v in manifest.items() if (OUT / Path(v).name).exists()}
     (OUT / "manifest.json").write_text(
-        json.dumps({"voice": VOICE, "rate": RATE, "clips": manifest}, ensure_ascii=False, indent=2) + "\n",
+        json.dumps({"voice": VOICE, "rate": RATE, "pitch": PITCH, "clips": manifest}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     print("clips", len(manifest), counts, flush=True)

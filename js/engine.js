@@ -392,10 +392,10 @@
       });
     }
 
-    function speakNow(text, forceLang) {
+    function speakNow(text, forceLang, chain) {
       var optsVoice = voiceFor(child);
       optsVoice.lang = forceLang || lang;
-      if (HV.audio.cut) HV.audio.cut();
+      if (chain) optsVoice.chain = true;
       var spoken = HV.speech.speak(text, optsVoice);
       return Promise.resolve(spoken).then(function (sec) {
         return typeof sec === "number" && sec > 0 ? sec : 1.1;
@@ -462,7 +462,7 @@
         firstSay.then(function (sec) {
           if (settled) return;
           if (good && showExplain) {
-            return speakNow(text, "vi").then(function (more) {
+            return speakNow(text, "vi", true).then(function (more) {
               if (settled) return;
               pending = setTimeout(function () { finish(firstSuccess); }, Math.max(700, Math.round((more || 1) * 1000) + 400));
               if (opts.track) opts.track(pending);
