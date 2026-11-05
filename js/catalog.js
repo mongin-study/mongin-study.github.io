@@ -43,7 +43,7 @@
     ex({ id: "mon-bond-10", child: "mon", category: "logic", title: "Số liên kết đến 10", subtitle: "Hai số cộng lại thành 10", icon: "🔗", generator: "numberBond", config: { count: 5, total: 10 } }),
     ex({ id: "mon-bond-20", child: "mon", category: "logic", title: "Số liên kết đến 20", subtitle: "Hai số cộng lại thành 20", icon: "🌟", generator: "numberBond", config: { count: 5, total: 20 } }),
     ex({ id: "mon-missing", child: "mon", category: "logic", title: "Điền số còn thiếu", subtitle: "Tìm số trong phép cộng", icon: "⬜", generator: "missingPart", config: { count: 5, max: 20 } }),
-    ex({ id: "mon-sequence", child: "mon", category: "logic", title: "Dãy số", subtitle: "Nhìn quy luật rồi tìm số sau", icon: "➡️", generator: "sequence", config: { count: 5, steps: [2, 3, 4, 5, 10], length: 4, max: 80, input: "choice" } }),
+    ex({ id: "mon-sequence", child: "mon", category: "logic", title: "Dãy số", subtitle: "Một chữ số: 1, 3, 5, 7", icon: "➡️", generator: "sequence", config: { count: 5, steps: [1, 2], length: 4, digits: 1, max: 9, input: "choice" } }),
     ex({ id: "mon-odd-one", child: "mon", category: "logic", title: "Tìm số khác nhóm", subtitle: "Số nào không cùng quy luật", icon: "🔎", generator: "oddOneOut", config: { count: 5, mode: "number" } }),
     ex({ id: "mon-compare-expr", child: "mon", category: "logic", title: "Phép nào lớn hơn", subtitle: "So sánh hai phép tính", icon: "⚖️", generator: "compareExpr", config: { count: 5 } }),
 
@@ -51,7 +51,7 @@
     ex({ id: "mon-compare", child: "mon", category: "number", title: "So sánh hai số", subtitle: "Số lớn hơn", icon: "🔼", generator: "compareNumbers", config: { count: 5, min: 0, max: 100, mode: "larger" } }),
     ex({ id: "mon-skip", child: "mon", category: "number", title: "Đếm cách 2, 5, 10", subtitle: "Đếm nhảy cóc", icon: "🦘", generator: "skipCount", config: { count: 5, steps: [2, 5, 10] } }),
     ex({ id: "mon-place", child: "mon", category: "number", title: "Hàng chục, hàng đơn vị", subtitle: "Tách số thành chục và đơn vị", icon: "🧱", generator: "placeValue", config: { count: 5 } }),
-    ex({ id: "mon-pattern-num", child: "mon", category: "number", title: "Quy luật số", subtitle: "Thêm đều 2, 5 hoặc 10", icon: "📈", generator: "sequence", config: { count: 5, steps: [2, 5, 10], length: 4, max: 100, align: true, input: "choice" } }),
+    ex({ id: "mon-pattern-num", child: "mon", category: "number", title: "Dãy hai chữ số", subtitle: "Khó hơn · thêm 2, 5 hoặc 10", icon: "📈", generator: "sequence", config: { count: 5, steps: [2, 5, 10], length: 4, digits: 2, min: 10, max: 99, align: true, input: "choice" } }),
 
     ex({ id: "mon-shape-name", child: "mon", category: "geometry", title: "Đây là hình gì", subtitle: "Gọi tên hình", icon: "🔷", generator: "shapeName", config: { count: 5, set: "all" } }),
     ex({ id: "mon-sides", child: "mon", category: "geometry", title: "Đếm cạnh", subtitle: "Cạnh là nét thẳng quanh hình", icon: "📏", generator: "countSides", config: { count: 5, set: "all" } }),

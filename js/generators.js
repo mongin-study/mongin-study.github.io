@@ -425,20 +425,34 @@
 
     sequence: function (cfg) {
       return makeQuestions(cfg, function () {
-        var steps = cfg.steps && cfg.steps.length ? cfg.steps : [1, 2, 5, 10];
+        var digits = Number(cfg.digits) || 0;
+        var steps = cfg.steps && cfg.steps.length ? cfg.steps : (digits === 1 ? [1, 2] : [1, 2, 5, 10]);
         var step = pick(steps);
         var length = cfg.length || 4;
-        var max = cfg.max || 100;
+        var max = cfg.max != null ? cfg.max : (digits === 1 ? 9 : 100);
         var min = cfg.min != null ? cfg.min : 0;
+        if (digits === 1) {
+          max = Math.min(max, 9);
+          min = Math.max(0, Math.min(min, max));
+        }
+        if (digits === 2) {
+          min = Math.max(min, 10);
+          max = Math.min(max, 99);
+        }
         var startMax = max - step * length;
         if (startMax < min) return null;
-        var start = rnd(Math.max(min, step > 1 ? 0 : min), startMax);
-        if (cfg.align) start = start - (start % step);
+        var start = rnd(min, startMax);
+        if (cfg.align) {
+          start = start - (start % step);
+          if (start < min) start = min + ((step - (min % step)) % step);
+        }
         if (start < min) start = min;
         var terms = [];
         for (var i = 0; i < length; i++) terms.push(start + i * step);
         var ans = start + length * step;
-        if (ans > max || terms.some(function (n) { return n < 0; })) return null;
+        if (ans > max || terms.some(function (n) { return n < min || n < 0; })) return null;
+        if (digits === 1 && (ans > 9 || terms.some(function (n) { return n > 9; }))) return null;
+        if (digits === 2 && (ans < 10 || terms.some(function (n) { return n < 10; }))) return null;
         var shown = terms.join(" , ") + " , ?";
         var speakBits = terms.map(read).join(", ");
         var speak = speakBits + ". Số tiếp theo là số nào?";
@@ -452,7 +466,9 @@
             explain: "Cộng thêm " + step + ". Số tiếp theo là " + ans + "."
           });
         }
-        var nums = numberChoices(ans, cfg.choiceCount || 3, Math.max(0, ans - 8), Math.min(max, ans + 8));
+        var lo = Math.max(digits === 2 ? 10 : 0, ans - 8);
+        var hi = Math.min(digits === 1 ? 9 : max, ans + 8);
+        var nums = numberChoices(ans, cfg.choiceCount || 3, lo, hi);
         return qChoice({
           prompt: "Chọn số tiếp theo",
           speak: speak,

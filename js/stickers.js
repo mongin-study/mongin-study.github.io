@@ -6,15 +6,39 @@
   var KEY = "hoc-vui-stickers";
 
   var CATALOG = [
-    { id: "elsa-snow", name: "Elsa tuyết", emoji: "❄️", cost: 8, who: "mon", group: "Elsa" },
-    { id: "elsa-dress", name: "Váy Elsa", emoji: "👗", cost: 16, who: "mon", group: "Elsa" },
-    { id: "elsa-crown", name: "Vương miện Elsa", emoji: "👑", cost: 28, who: "mon", group: "Elsa", rare: true },
-    { id: "hero-mask", name: "Mặt nạ anh hùng", emoji: "🎭", cost: 8, who: "gin", group: "Anh hùng" },
-    { id: "hero-cape", name: "Áo choàng", emoji: "🦸", cost: 16, who: "gin", group: "Anh hùng" },
-    { id: "hero-bolt", name: "Tia sét vàng", emoji: "⚡", cost: 28, who: "gin", group: "Anh hùng", rare: true },
-    { id: "puppy-sit", name: "Cún Vàng ngồi", emoji: "🐶", cost: 8, who: "both", group: "Cún Vàng" },
-    { id: "puppy-heart", name: "Cún Vàng và tim", emoji: "💛", cost: 16, who: "both", group: "Cún Vàng" },
-    { id: "puppy-gold", name: "Cún Vàng hiếm", emoji: "🌟", cost: 28, who: "both", group: "Cún Vàng", rare: true }
+    { id: "elsa-plain", name: "Elsa thường", emoji: "👸", cost: 6, tier: "easy", who: "mon", group: "Elsa" },
+    { id: "elsa-smile", name: "Elsa vui", emoji: "😊", cost: 6, tier: "easy", who: "mon", group: "Elsa" },
+    { id: "elsa-glitter", name: "Elsa lấp lánh", emoji: "✨", cost: 6, tier: "easy", who: "mon", group: "Elsa" },
+    { id: "elsa-ice", name: "Elsa băng", emoji: "🧊", cost: 8, tier: "easy", who: "mon", group: "Elsa" },
+    { id: "elsa-snow", name: "Elsa tuyết", emoji: "❄️", cost: 8, tier: "easy", who: "mon", group: "Elsa" },
+    { id: "elsa-wand", name: "Elsa đũa phép", emoji: "🪄", cost: 8, tier: "easy", who: "mon", group: "Elsa" },
+    { id: "elsa-heart", name: "Elsa trái tim", emoji: "💖", cost: 12, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-blue", name: "Elsa váy xanh", emoji: "👗💙", cost: 12, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-flake", name: "Elsa bông tuyết", emoji: "❄️", cost: 14, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-purple", name: "Elsa váy tím", emoji: "👗💜", cost: 14, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-olaf", name: "Elsa và Olaf", emoji: "⛄", cost: 14, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-dress", name: "Váy Elsa", emoji: "👗", cost: 16, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-pink", name: "Elsa váy hồng", emoji: "👗💗", cost: 16, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-anna", name: "Elsa và Anna", emoji: "👭", cost: 16, tier: "mid", who: "mon", group: "Elsa" },
+    { id: "elsa-magic", name: "Elsa phép thuật", emoji: "🪄", cost: 24, tier: "rare", who: "mon", group: "Elsa" },
+    { id: "elsa-sven", name: "Elsa và Sven", emoji: "🦌", cost: 24, tier: "rare", who: "mon", group: "Elsa" },
+    { id: "elsa-star", name: "Elsa ngôi sao", emoji: "⭐", cost: 24, tier: "rare", who: "mon", group: "Elsa" },
+    { id: "elsa-rainbow", name: "Elsa cầu vồng", emoji: "🌈", cost: 26, tier: "rare", who: "mon", group: "Elsa" },
+    { id: "elsa-crown", name: "Vương miện Elsa", emoji: "👑", cost: 28, tier: "rare", who: "mon", group: "Elsa" },
+    { id: "elsa-castle", name: "Elsa lâu đài", emoji: "🏰", cost: 28, tier: "rare", who: "mon", group: "Elsa" },
+    { id: "elsa-princess", name: "Elsa công chúa", emoji: "👸👑", cost: 40, tier: "legend", who: "mon", group: "Elsa" },
+    { id: "elsa-trio", name: "Elsa, Anna và Olaf", emoji: "👭", cost: 44, tier: "legend", who: "mon", group: "Elsa" },
+    { id: "elsa-queen", name: "Nữ hoàng băng", emoji: "👑❄️", cost: 48, tier: "legend", who: "mon", group: "Elsa" },
+    { id: "elsa-sky", name: "Elsa bầu trời sao", emoji: "🌌", cost: 52, tier: "legend", who: "mon", group: "Elsa" },
+    { id: "elsa-legend", name: "Elsa huyền thoại", emoji: "🌟", cost: 60, tier: "legend", who: "mon", group: "Elsa" },
+    { id: "hero-mask", name: "Mặt nạ anh hùng", emoji: "🎭", cost: 8, tier: "easy", who: "gin", group: "Anh hùng" },
+    { id: "hero-cape", name: "Áo choàng", emoji: "🦸", cost: 16, tier: "mid", who: "gin", group: "Anh hùng" },
+    { id: "hero-bolt", name: "Tia sét vàng", emoji: "⚡", cost: 28, tier: "rare", who: "gin", group: "Anh hùng" },
+    { id: "puppy-nap", name: "Cún Vàng ngủ", emoji: "🐶", cost: 6, tier: "easy", who: "both", group: "Cún Vàng" },
+    { id: "puppy-sit", name: "Cún Vàng ngồi", emoji: "🐶", cost: 8, tier: "easy", who: "both", group: "Cún Vàng" },
+    { id: "puppy-heart", name: "Cún Vàng và tim", emoji: "💛", cost: 16, tier: "mid", who: "both", group: "Cún Vàng" },
+    { id: "puppy-gold", name: "Cún Vàng hiếm", emoji: "🌟", cost: 28, tier: "rare", who: "both", group: "Cún Vàng" },
+    { id: "puppy-crown", name: "Cún Vàng vương miện", emoji: "🐶👑", cost: 40, tier: "legend", who: "both", group: "Cún Vàng" }
   ];
 
   function empty() {
@@ -66,6 +90,22 @@
     return CATALOG.filter(function (s) { return s.who === child || s.who === "both"; });
   }
 
+  function tierOf(sticker) {
+    if (sticker.tier === "legend" || sticker.tier === "rare" || sticker.tier === "mid" || sticker.tier === "easy") return sticker.tier;
+    if (sticker.cost >= 40) return "legend";
+    if (sticker.cost >= 24) return "rare";
+    if (sticker.cost >= 12) return "mid";
+    return "easy";
+  }
+
+  function tierText(sticker) {
+    var tier = tierOf(sticker);
+    if (tier === "legend") return "siêu hiếm";
+    if (tier === "rare") return "hiếm";
+    if (tier === "mid") return "vừa";
+    return "dễ";
+  }
+
   function buy(child, sticker) {
     var data = read();
     if (data[child].owned.indexOf(sticker.id) >= 0) return;
@@ -82,11 +122,19 @@
   }
 
   function card(child) {
-    var owned = read()[child].owned.length;
+    var ownedIds = read()[child].owned;
+    var mine = visible(child);
+    var owned = mine.filter(function (s) { return ownedIds.indexOf(s.id) >= 0; }).length;
+    var elsaLeft = mine.filter(function (s) {
+      return s.group === "Elsa" && ownedIds.indexOf(s.id) < 0;
+    }).length;
+    var blurb = child === "mon"
+      ? "Còn " + elsaLeft + " sticker Elsa · đã có " + owned + "/" + mine.length
+      : "Đổi được " + spendable(child) + " sao · đã có " + owned + " sticker";
     return el("button", { class: "week-card sticker-card", "data-go": "#/stickers/" + child }, [
       el("span", { class: "pay-badge", text: "Mới" }),
       el("h2", { text: "Album sticker ⭐" }),
-      el("p", { text: "Đổi được " + spendable(child) + " sao · đã có " + owned + " sticker" })
+      el("p", { text: blurb })
     ]);
   }
 
@@ -100,25 +148,38 @@
         el("span", { text: "Sao đổi được: " + spendable(child) })
       ])
     ]));
-    root.appendChild(el("p", { class: "lede", text: "Dùng sao em kiếm tuần này để đổi sticker." }));
-    var grid = el("div", { class: "sticker-grid" });
-    visible(child).forEach(function (sticker) {
-      var has = data.owned.indexOf(sticker.id) >= 0;
-      var afford = spendable(child) >= sticker.cost;
-      var cell = el("article", { class: "sticker" + (has ? " is-owned" : "") + (sticker.rare ? " is-rare" : "") });
-      cell.appendChild(el("span", { class: "sticker-emoji", text: sticker.emoji }));
-      cell.appendChild(el("strong", { text: sticker.name }));
-      cell.appendChild(el("p", { text: sticker.group + (sticker.rare ? " · hiếm" : "") }));
-      if (has) cell.appendChild(el("p", { class: "pay-badge", text: "Đã có" }));
-      else cell.appendChild(el("button", {
-        class: "btn" + (afford ? " btn-primary" : ""),
-        disabled: afford ? null : true,
-        text: afford ? "Đổi " + sticker.cost + " sao" : "Cần " + sticker.cost + " sao",
-        onClick: function () { buy(child, sticker); }
-      }));
-      grid.appendChild(cell);
+    var mine = visible(child);
+    var elsaAll = mine.filter(function (s) { return s.group === "Elsa"; });
+    var elsaOwned = elsaAll.filter(function (s) { return data.owned.indexOf(s.id) >= 0; }).length;
+    root.appendChild(el("p", { class: "lede", text: child === "mon"
+      ? "Elsa đã có " + elsaOwned + "/" + elsaAll.length + ". Còn nhiều sticker mới để sưu."
+      : "Dùng sao em kiếm tuần này để đổi sticker." }));
+    ["Elsa", "Anh hùng", "Cún Vàng"].forEach(function (group) {
+      var items = mine.filter(function (s) { return s.group === group; }).slice().sort(function (a, b) {
+        return a.cost - b.cost;
+      });
+      if (!items.length) return;
+      root.appendChild(el("h2", { class: "sticker-head", text: group }));
+      var grid = el("div", { class: "sticker-grid" });
+      items.forEach(function (sticker) {
+        var has = data.owned.indexOf(sticker.id) >= 0;
+        var afford = spendable(child) >= sticker.cost;
+        var tier = tierOf(sticker);
+        var cell = el("article", { class: "sticker" + (has ? " is-owned" : "") + (tier === "rare" ? " is-rare" : "") + (tier === "legend" ? " is-legend" : "") });
+        cell.appendChild(el("span", { class: "sticker-emoji" + (Array.from(sticker.emoji).length > 1 ? " is-duo" : ""), text: sticker.emoji }));
+        cell.appendChild(el("strong", { text: sticker.name }));
+        cell.appendChild(el("p", { text: tierText(sticker) }));
+        if (has) cell.appendChild(el("p", { class: "pay-badge", text: "Đã có" }));
+        else cell.appendChild(el("button", {
+          class: "btn" + (afford ? " btn-primary" : ""),
+          disabled: afford ? null : true,
+          text: afford ? "Đổi " + sticker.cost + " sao" : "Cần " + sticker.cost + " sao",
+          onClick: function () { buy(child, sticker); }
+        }));
+        grid.appendChild(cell);
+      });
+      root.appendChild(grid);
     });
-    root.appendChild(grid);
     return root;
   }
 

@@ -145,13 +145,10 @@
       "generator": "sequence",
       "config": {
         "count": 4,
-        "steps": [
-          2,
-          5,
-          10
-        ],
+        "steps": [1, 2],
         "length": 4,
-        "max": 80,
+        "digits": 1,
+        "max": 9,
         "input": "choice"
       },
       "subject": "math"

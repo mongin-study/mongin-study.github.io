@@ -125,7 +125,7 @@ For Mon’s English, add `"level": 1` to `4` so the daily card sits at her curre
       "title": "Dãy số băng",
       "icon": "➡️",
       "generator": "sequence",
-      "config": { "count": 4, "steps": [2, 5, 10], "max": 80, "input": "choice" }
+      "config": { "count": 4, "steps": [1, 2], "digits": 1, "max": 9, "input": "choice" }
     }
   ]
 }
