@@ -411,6 +411,8 @@
       "title": "Elsa's snow",
       "subtitle": "Tap what you hear",
       "icon": "🎧",
+      "generator": "enListen",
+      "config": { "set": "mon", "count": 18, "seed": "2026-11-05", "choices": 4, "gradual": false },
       "questions": [
         {
           "kind": "choice",
@@ -720,6 +722,8 @@
       "title": "Superhero",
       "subtitle": "Listen and tap",
       "icon": "🎧",
+      "generator": "enListen",
+      "config": { "set": "gin", "count": 16, "seed": "2026-11-05", "choices": 3, "gradual": true },
       "questions": [
         {
           "kind": "choice",

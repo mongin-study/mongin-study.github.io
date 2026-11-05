@@ -370,12 +370,30 @@ def probe(path: Path) -> float:
         return 0
 
 
-async def synth(text, dest: Path, sem: asyncio.Semaphore):
-    if dest.exists() and dest.stat().st_size > 800:
+# Cheerful praise: a little slower, a little higher, one clip per exclamation.
+PRAISE = [
+    "Yahoooo!",
+    "Ui ôi đỉnh thế!",
+    "Yahiii giỏi quá!",
+    "Woaaa siêu quá!",
+    "Tuyệt cú mèo!",
+    "Hoan hô bé!",
+    "Đỉnh của chóp!",
+    "Giỏi xuất sắc luôn!",
+    "Elsa khen Mon giỏi quá!",
+    "Cún Vàng vẫy đuôi rồi nè!",
+    "Siêu anh hùng Gin đỉnh quá!",
+]
+PRAISE_RATE = "-10%"
+PRAISE_PITCH = "+12Hz"
+
+
+async def synth(text, dest: Path, sem: asyncio.Semaphore, rate=RATE, pitch="+0Hz", force=False):
+    if dest.exists() and dest.stat().st_size > 800 and not force:
         return "skip"
     try:
         async with sem:
-            comm = edge_tts.Communicate(text, VOICE, rate=RATE)
+            comm = edge_tts.Communicate(text, VOICE, rate=rate, pitch=pitch)
             await comm.save(str(dest))
         trim(dest)
         if dest.stat().st_size < 400:
@@ -404,6 +422,13 @@ async def main():
         clips.setdefault(word, word)
     for phrase in PHRASES:
         add(phrase)
+    praise_says = {}
+    for phrase in PRAISE:
+        key = normalize(phrase)
+        if not key:
+            continue
+        praise_says[key] = phrase
+        clips[key] = phrase
     if len(sys.argv) > 2:
         for phrase in json.loads(Path(sys.argv[2]).read_text(encoding="utf-8")):
             add(phrase)
@@ -413,6 +438,11 @@ async def main():
         for word in normalize(line).split():
             if word and word not in clips:
                 clips[word] = say_for(word, word)
+    prev_path = OUT / "manifest.json"
+    if prev_path.exists():
+        prev = json.loads(prev_path.read_text(encoding="utf-8"))
+        for key in (prev.get("clips") or {}):
+            clips.setdefault(key, say_for(key, key))
 
     OUT.mkdir(parents=True, exist_ok=True)
     jobs = []
@@ -428,7 +458,15 @@ async def main():
     failed = 0
     async def run(say, dest):
         nonlocal made, skipped, failed
-        status = await synth(say, dest, sem)
+        styled = say in praise_says.values() or normalize(say) in praise_says
+        status = await synth(
+            say,
+            dest,
+            sem,
+            rate=PRAISE_RATE if styled else RATE,
+            pitch=PRAISE_PITCH if styled else "+0Hz",
+            force=styled,
+        )
         if status == "ok":
             made += 1
         elif status == "fail":

@@ -36,14 +36,31 @@ function add(s) {
   "Thứ tự đúng đang hiện ở trên.", "Cần chọn đúng", "Cần đúng"
 ].forEach(add);
 
-const daily = JSON.parse(fs.readFileSync(new URL("../content/daily/2026-11-02.json", import.meta.url), "utf8"));
-(daily.exercises || []).forEach((ex) => {
-  (ex.questions || []).forEach((q) => {
-    add(q.speak);
-    add(q.explain);
-    add(q.prompt);
+const dailyDir = new URL("../content/daily/", import.meta.url);
+for (const name of fs.readdirSync(dailyDir)) {
+  if (!name.endsWith(".json")) continue;
+  const daily = JSON.parse(fs.readFileSync(new URL(name, dailyDir), "utf8"));
+  (daily.exercises || []).forEach((ex) => {
+    (ex.questions || []).forEach((q) => {
+      add(q.speak);
+      add(q.explain);
+      add(q.prompt);
+    });
   });
-});
+}
+[
+  "Yahoooo!",
+  "Ui ôi đỉnh thế!",
+  "Yahiii giỏi quá!",
+  "Woaaa siêu quá!",
+  "Tuyệt cú mèo!",
+  "Hoan hô bé!",
+  "Đỉnh của chóp!",
+  "Giỏi xuất sắc luôn!",
+  "Elsa khen Mon giỏi quá!",
+  "Cún Vàng vẫy đuôi rồi nè!",
+  "Siêu anh hùng Gin đỉnh quá!"
+].forEach(add);
 
 for (const ex of HV.catalog) {
   const gen = HV.generators[ex.generator];

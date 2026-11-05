@@ -287,11 +287,34 @@
     return bits;
   }
 
-  function praise(child, lang) {
-    var list = lang === "en"
-      ? (child === "gin" ? ["Yes!", "Great!", "Yay!"] : ["Yes!", "Great!", "Correct!", "Wonderful!"])
-      : (child === "gin" ? ["Đúng rồi!", "Giỏi quá!", "Tuyệt!"] : ["Đúng rồi!", "Giỏi quá!", "Chính xác!", "Tuyệt lắm!"]);
-    return list[Math.floor(Math.random() * list.length)];
+  var PRAISE = [
+    "Yahoooo!",
+    "Ui ôi đỉnh thế!",
+    "Yahiii giỏi quá!",
+    "Woaaa siêu quá!",
+    "Tuyệt cú mèo!",
+    "Hoan hô bé!",
+    "Đỉnh của chóp!",
+    "Giỏi xuất sắc luôn!"
+  ];
+  var PRAISE_EXTRA = {
+    mon: ["Elsa khen Mon giỏi quá!", "Cún Vàng vẫy đuôi rồi nè!"],
+    gin: ["Siêu anh hùng Gin đỉnh quá!"]
+  };
+  var praiseBag = { mon: [], gin: [] };
+
+  function praise(child) {
+    var key = child === "gin" ? "gin" : "mon";
+    var list = PRAISE.concat(PRAISE_EXTRA[key]);
+    if (!praiseBag[key].length) praiseBag[key] = HV.util.shuffle(list);
+    var line = praiseBag[key].pop();
+    if (line === praiseBag.last && praiseBag[key].length) {
+      var swap = praiseBag[key].pop();
+      praiseBag[key].push(line);
+      line = swap;
+    }
+    praiseBag.last = line;
+    return line;
   }
 
   function voiceFor(child) {
@@ -330,17 +353,29 @@
       });
     }
 
-    function speakNow(text) {
+    function speakNow(text, forceLang) {
       var optsVoice = voiceFor(child);
-      optsVoice.lang = lang;
-      HV.speech.speak(text, optsVoice);
+      optsVoice.lang = forceLang || lang;
+      if (HV.audio.cut) HV.audio.cut();
+      var spoken = HV.speech.speak(text, optsVoice);
+      return Promise.resolve(spoken).then(function (sec) {
+        return typeof sec === "number" && sec > 0 ? sec : 1.1;
+      }).catch(function () { return 1.1; });
+    }
+
+    function afterSound(play, then) {
+      var dur = 0;
+      try { dur = play() || 0; } catch (e) { dur = 0; }
+      var timer = setTimeout(then, Math.round(dur * 1000) + 40);
+      if (opts.track) opts.track(timer);
     }
 
     function showFeedback(good, text, first) {
       lockInputs();
       firstSuccess = !!first;
+      var line = good ? praise(child) : (lang === "en" ? "Not quite" : "Chưa đúng");
       var bar = el("div", { class: "feedback " + (good ? "is-good" : "is-bad"), role: "status" }, [
-        el("strong", { text: good ? praise(child, lang) : (lang === "en" ? "Not quite" : "Chưa đúng") }),
+        el("strong", { text: line }),
         text ? el("p", { text: text }) : null,
         el("button", {
           class: "btn btn-next",
@@ -349,24 +384,30 @@
         })
       ]);
       container.appendChild(bar);
-      if (good) HV.audio.correct();
-      else HV.audio.wrong();
-      var sayText = good ? bar.querySelector("strong").textContent : (text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"));
-      speakNow(sayText);
-      pending = setTimeout(function () { finish(firstSuccess); }, good ? 1100 : 2400);
-      if (opts.track) opts.track(pending);
+      var sayText = good ? line : (text || (lang === "en" ? "Try again." : "Chưa đúng, mình xem đáp án nhé"));
+      var sayLang = good ? "vi" : lang;
+      afterSound(good ? HV.audio.correct : HV.audio.wrong, function () {
+        if (settled) return;
+        speakNow(sayText, sayLang).then(function (sec) {
+          if (settled) return;
+          pending = setTimeout(function () { finish(firstSuccess); }, Math.max(600, Math.round(sec * 1000) + 400));
+          if (opts.track) opts.track(pending);
+        });
+      });
     }
 
     function softWrong(node, say) {
       attempts += 1;
       busy = true;
       if (node) node.classList.add("is-wrong");
-      HV.audio.wrong();
-      speakNow(say || (lang === "en" ? "Try again." : "Thử lại nhé"));
+      afterSound(HV.audio.wrong, function () {
+        if (settled) return;
+        speakNow(say || (lang === "en" ? "Try again." : "Thử lại nhé"), lang);
+      });
       setTimeout(function () {
         busy = false;
         if (node) node.classList.remove("is-wrong");
-      }, 550);
+      }, 700);
     }
 
     var onKey = function () {};

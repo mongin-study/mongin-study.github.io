@@ -163,9 +163,10 @@
     return Promise.all(keys.map(function (key) {
       return loadBuffer(assetUrl(map[key]));
     })).then(function (bufs) {
-      if (my !== epoch) return;
+      if (my !== epoch) return 0;
       if (c.state === "suspended") c.resume().catch(function () {});
       var t = c.currentTime + 0.03;
+      var start = t;
       bufs.forEach(function (buf, idx) {
         if (!buf) return;
         var src = c.createBufferSource();
@@ -179,6 +180,7 @@
         t += buf.duration / rate + gap;
       });
       last = { mode: "clips", lang: (opts && opts.lang) || "vi", norm: norm, keys: keys.slice() };
+      return Math.max(0.3, t - start);
     });
   }
 
@@ -297,45 +299,54 @@
     });
   }
 
+  function guessSeconds(text) {
+    var words = String(text || "").trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(0.8, Math.min(4.2, 0.45 + words * 0.38));
+  }
+
   function speak(text, opts) {
     if (!enabled() || !text) {
       cancel();
-      return;
+      return Promise.resolve(0);
     }
     cancel();
+    if (HV.audio && HV.audio.cut) HV.audio.cut();
     var my = epoch;
     var lang = opts && opts.lang === "en" ? "en" : "vi";
     if (lang === "en") {
       var enNorm = normalizeEn(text);
-      if (!enNorm) return;
-      loadEn().then(function () {
-        if (my !== epoch) return;
+      if (!enNorm) return Promise.resolve(0);
+      return loadEn().then(function () {
+        if (my !== epoch) return 0;
         if (enManifest[enNorm]) {
-          playKeys([enNorm], opts, my, enNorm, enManifest).catch(function () {
+          return playKeys([enNorm], opts, my, enNorm, enManifest).catch(function () {
             if (my === epoch) speakEnVoice(enNorm, opts, my);
+            return guessSeconds(enNorm);
           });
-          return;
         }
         speakEnVoice(enNorm, opts, my);
+        return guessSeconds(enNorm);
       }).catch(function () {
         if (my === epoch) speakEnVoice(enNorm, opts, my);
+        return guessSeconds(enNorm);
       });
-      return;
     }
     var norm = normalize(text);
-    if (!norm) return;
-    loadManifest().then(function () {
-      if (my !== epoch) return;
+    if (!norm) return Promise.resolve(0);
+    return loadManifest().then(function () {
+      if (my !== epoch) return 0;
       var keys = tokenize(norm);
       if (!keys) {
         speakVi(norm, opts, my);
-        return;
+        return guessSeconds(norm);
       }
-      playKeys(keys, opts, my, norm).catch(function () {
+      return playKeys(keys, opts, my, norm).catch(function () {
         if (my === epoch) speakVi(norm, opts, my);
+        return guessSeconds(norm);
       });
     }).catch(function () {
       if (my === epoch) speakVi(norm, opts, my);
+      return guessSeconds(norm);
     });
   }
 

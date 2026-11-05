@@ -43,7 +43,7 @@
   ];
 
   function makeQuestions(cfg, build) {
-    var count = Math.max(1, Math.min(8, cfg.count || 5));
+    var count = Math.max(1, Math.min(24, cfg.count || 5));
     var out = [];
     var guard = 0;
     while (out.length < count && guard < count * 20) {

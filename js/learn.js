@@ -153,6 +153,7 @@
       explain: spec.explain || "",
       scene: spec.scene || null,
       columns: spec.columns || (n === 3 ? 3 : 2),
+      variant: spec.variant === "cards" ? "cards" : "",
       choices: spec.options
     };
   }
@@ -300,21 +301,239 @@
     });
   }
 
-  function enListen(bank, count, howMany) {
-    return take(bank, count).map(function (item) {
-      var others = shuffle(bank.filter(function (x) { return x.name !== item.name; })).slice(0, howMany - 1);
-      var options = shuffle([{ emoji: item.emoji, correct: true }].concat(others.map(function (x) {
-        return { emoji: x.emoji, correct: false };
-      })));
-      return choiceQ({
-        lang: "en",
-        prompt: "Tap what you hear",
-        speak: "Tap the " + item.name + ".",
-        explain: "It is the " + item.name + ".",
-        columns: howMany === 3 ? 3 : 2,
-        options: options
+  function hashSeed(text) {
+    var h = 2166136261;
+    String(text || "").split("").forEach(function (ch) {
+      h ^= ch.charCodeAt(0);
+      h = Math.imul(h, 16777619);
+    });
+    return h >>> 0;
+  }
+
+  function makeRand(seed) {
+    if (!seed) return Math.random;
+    var x = hashSeed(seed) || 1;
+    return function () {
+      x = (Math.imul(x, 1664525) + 1013904223) >>> 0;
+      return x / 4294967296;
+    };
+  }
+
+  function seededShuffle(arr, rand) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(rand() * (i + 1));
+      var tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+    return a;
+  }
+
+  var LISTEN_THEMES = {
+    colors: [
+      { id: "red", name: "red", emoji: "🍎", color: "#ef4444" },
+      { id: "blue", name: "blue", emoji: "🔵", color: "#3b82f6" },
+      { id: "yellow", name: "yellow", emoji: "⭐", color: "#eab308" },
+      { id: "green", name: "green", emoji: "🍏", color: "#22c55e" },
+      { id: "orange", name: "orange", emoji: "🍊", color: "#f97316" },
+      { id: "purple", name: "purple", emoji: "🍇", color: "#a855f7" },
+      { id: "pink", name: "pink", emoji: "🌸", color: "#ec4899" },
+      { id: "black", name: "black", emoji: "🖤", color: "#111827" },
+      { id: "white", name: "white", emoji: "☁️", color: "#f8fafc" },
+      { id: "brown", name: "brown", emoji: "🐻", color: "#92400e" }
+    ],
+    animals: [
+      { id: "cat", name: "cat", emoji: "🐱" },
+      { id: "dog", name: "dog", emoji: "🐶" },
+      { id: "bird", name: "bird", emoji: "🐦" },
+      { id: "fish", name: "fish", emoji: "🐟" },
+      { id: "cow", name: "cow", emoji: "🐄" },
+      { id: "duck", name: "duck", emoji: "🦆" },
+      { id: "pig", name: "pig", emoji: "🐷" },
+      { id: "rabbit", name: "rabbit", emoji: "🐰" },
+      { id: "lion", name: "lion", emoji: "🦁" },
+      { id: "frog", name: "frog", emoji: "🐸" },
+      { id: "bear", name: "bear", emoji: "🐻" },
+      { id: "monkey", name: "monkey", emoji: "🐵" }
+    ],
+    fruits: [
+      { id: "apple", name: "apple", emoji: "🍎" },
+      { id: "banana", name: "banana", emoji: "🍌" },
+      { id: "orange-fruit", name: "orange", emoji: "🍊" },
+      { id: "grape", name: "grape", emoji: "🍇" },
+      { id: "mango", name: "mango", emoji: "🥭" },
+      { id: "watermelon", name: "watermelon", emoji: "🍉" },
+      { id: "strawberry", name: "strawberry", emoji: "🍓" },
+      { id: "peach", name: "peach", emoji: "🍑" }
+    ],
+    vehicles: [
+      { id: "car", name: "car", emoji: "🚗" },
+      { id: "bus", name: "bus", emoji: "🚌" },
+      { id: "truck", name: "truck", emoji: "🚚" },
+      { id: "train", name: "train", emoji: "🚂" },
+      { id: "plane", name: "plane", emoji: "✈️" },
+      { id: "boat", name: "boat", emoji: "⛵" }
+    ],
+    body: [
+      { id: "eye", name: "eye", emoji: "👁️" },
+      { id: "ear", name: "ear", emoji: "👂" },
+      { id: "nose", name: "nose", emoji: "👃" },
+      { id: "mouth", name: "mouth", emoji: "👄" },
+      { id: "hand", name: "hand", emoji: "✋" },
+      { id: "foot", name: "foot", emoji: "🦶" }
+    ],
+    toys: [
+      { id: "balloon", name: "balloon", emoji: "🎈" },
+      { id: "teddy", name: "teddy", emoji: "🧸" },
+      { id: "ball", name: "ball", emoji: "⚽" },
+      { id: "kite", name: "kite", emoji: "🪁" },
+      { id: "dice", name: "dice", emoji: "🎲" },
+      { id: "yoyo", name: "yo-yo", emoji: "🪀" }
+    ],
+    shapes: [
+      { id: "circle", name: "circle", shape: "circle", color: "#3b82f6" },
+      { id: "square", name: "square", shape: "square", color: "#ef4444" },
+      { id: "triangle", name: "triangle", shape: "triangle", color: "#22c55e" },
+      { id: "star-shape", name: "star", shape: "star", color: "#eab308" },
+      { id: "heart", name: "heart", shape: "heart", color: "#ec4899" },
+      { id: "diamond", name: "diamond", shape: "diamond", color: "#a855f7" }
+    ],
+    numbers: [
+      { id: "n1", name: "one", emoji: "1️⃣" },
+      { id: "n2", name: "two", emoji: "2️⃣" },
+      { id: "n3", name: "three", emoji: "3️⃣" },
+      { id: "n4", name: "four", emoji: "4️⃣" },
+      { id: "n5", name: "five", emoji: "5️⃣" },
+      { id: "n6", name: "six", emoji: "6️⃣" },
+      { id: "n7", name: "seven", emoji: "7️⃣" },
+      { id: "n8", name: "eight", emoji: "8️⃣" },
+      { id: "n9", name: "nine", emoji: "9️⃣" },
+      { id: "n10", name: "ten", emoji: "🔟" }
+    ],
+    heroes: [
+      { id: "hero", name: "superhero", emoji: "🦸" },
+      { id: "lightning", name: "lightning", emoji: "⚡" },
+      { id: "hero-star", name: "star", emoji: "⭐" },
+      { id: "shield", name: "shield", emoji: "🛡️" },
+      { id: "crown", name: "crown", emoji: "👑" },
+      { id: "mask", name: "mask", emoji: "🎭" }
+    ]
+  };
+
+  var MON_LISTEN = [
+    { id: "m-red-apple", say: "a red apple", explain: "a red apple", emoji: "🍎", color: "#ef4444" },
+    { id: "m-yellow-banana", say: "a yellow banana", explain: "a yellow banana", emoji: "🍌", color: "#eab308" },
+    { id: "m-green-pear", say: "a green pear", explain: "a green pear", emoji: "🍐", color: "#22c55e" },
+    { id: "m-orange", say: "an orange", explain: "an orange", emoji: "🍊", color: "#f97316" },
+    { id: "m-purple-grapes", say: "purple grapes", explain: "purple grapes", emoji: "🍇", color: "#a855f7" },
+    { id: "m-pink-flower", say: "a pink flower", explain: "a pink flower", emoji: "🌸", color: "#ec4899" },
+    { id: "m-brown-bear", say: "a brown bear", explain: "a brown bear", emoji: "🐻", color: "#92400e" },
+    { id: "m-black-cat", say: "a black cat", explain: "a black cat", emoji: "🐱", color: "#111827" },
+    { id: "m-white-cloud", say: "a white cloud", explain: "a white cloud", emoji: "☁️", color: "#f8fafc" },
+    { id: "m-blue-bus", say: "a blue bus", explain: "a blue bus", emoji: "🚌", color: "#3b82f6" },
+    { id: "m-red-car", say: "a red car", explain: "a red car", emoji: "🚗", color: "#ef4444" },
+    { id: "m-yellow-train", say: "a yellow train", explain: "a yellow train", emoji: "🚂", color: "#eab308" },
+    { id: "m-green-boat", say: "a green boat", explain: "a green boat", emoji: "⛵", color: "#22c55e" },
+    { id: "m-blue-plane", say: "a blue plane", explain: "a blue plane", emoji: "✈️", color: "#3b82f6" },
+    { id: "m-pink-heart", say: "a pink heart", explain: "a pink heart", emoji: "💗", color: "#ec4899" },
+    { id: "m-yellow-star", say: "a yellow star", explain: "a yellow star", emoji: "⭐", color: "#eab308" },
+    { id: "m-red-balloon", say: "a red balloon", explain: "a red balloon", emoji: "🎈", color: "#ef4444" },
+    { id: "m-brown-teddy", say: "a brown teddy", explain: "a brown teddy", emoji: "🧸", color: "#92400e" },
+    { id: "m-blue-ball", say: "a blue ball", explain: "a blue ball", emoji: "⚽", color: "#3b82f6" },
+    { id: "m-green-frog", say: "a green frog", explain: "a green frog", emoji: "🐸", color: "#22c55e" },
+    { id: "m-yellow-duck", say: "a yellow duck", explain: "a yellow duck", emoji: "🦆", color: "#eab308" },
+    { id: "m-orange-fish", say: "an orange fish", explain: "an orange fish", emoji: "🐟", color: "#f97316" },
+    { id: "m-red-hero", say: "a red superhero", explain: "a red superhero", emoji: "🦸", color: "#ef4444" },
+    { id: "m-blue-shield", say: "a blue shield", explain: "a blue shield", emoji: "🛡️", color: "#3b82f6" }
+  ];
+
+  function listenCard(item, correct) {
+    var card = { correct: !!correct };
+    if (item.emoji) card.emoji = item.emoji;
+    if (item.color) card.color = item.color;
+    if (item.shape) {
+      card.shape = item.shape;
+      card.size = 110;
+    }
+    return card;
+  }
+
+  function listenQuestion(item, pool, howMany, rand, ginWord) {
+    var rest = seededShuffle(pool.filter(function (x) {
+      if (x.id === item.id) return false;
+      if (item.emoji && x.emoji === item.emoji && !x.shape) return false;
+      return true;
+    }), rand);
+    var picks = [];
+    rest.forEach(function (x) {
+      if (picks.length >= howMany - 1) return;
+      picks.push(x);
+    });
+    var say = ginWord ? ("Tap the " + item.name + ".") : item.say;
+    var explain = ginWord ? ("It is the " + item.name + ".") : ("It is " + (item.explain || item.say) + ".");
+    var options = seededShuffle([listenCard(item, true)].concat(picks.map(function (x) {
+      return listenCard(x, false);
+    })), rand);
+    return choiceQ({
+      lang: "en",
+      prompt: "Tap what you hear",
+      speak: say,
+      explain: explain,
+      variant: "cards",
+      columns: howMany === 3 ? 3 : 2,
+      options: options
+    });
+  }
+
+  function themeOrder(rand) {
+    var names = Object.keys(LISTEN_THEMES);
+    return seededShuffle(names, rand);
+  }
+
+  function ginListen(count, rand) {
+    var order = themeOrder(rand);
+    var seq = [];
+    order.forEach(function (theme) {
+      seededShuffle(LISTEN_THEMES[theme], rand).forEach(function (item) {
+        seq.push({ item: item, pool: LISTEN_THEMES[theme] });
       });
     });
+    var out = [];
+    var used = {};
+    var guard = 0;
+    var i = 0;
+    while (out.length < count && seq.length && guard < count * 6) {
+      guard += 1;
+      var row = seq[i % seq.length];
+      i += 1;
+      if (used[row.item.id] && i <= seq.length) continue;
+      if (out.length && out[out.length - 1].speak === ("Tap the " + row.item.name + ".")) continue;
+      var howMany = out.length < Math.ceil(count * 0.34) ? 2 : out.length < Math.ceil(count * 0.67) ? 3 : 4;
+      if (row.pool.length < howMany) howMany = Math.max(2, row.pool.length);
+      out.push(listenQuestion(row.item, row.pool, howMany, rand, true));
+      used[row.item.id] = true;
+      if (i >= seq.length && out.length < count) {
+        used = {};
+      }
+    }
+    return out;
+  }
+
+  function monListen(count, rand, howMany) {
+    var seq = seededShuffle(MON_LISTEN, rand);
+    var out = [];
+    var guard = 0;
+    var i = 0;
+    while (out.length < count && seq.length && guard < count * 4) {
+      guard += 1;
+      var item = seq[i % seq.length];
+      i += 1;
+      if (out.length && out[out.length - 1].speak === item.say) continue;
+      out.push(listenQuestion(item, MON_LISTEN, howMany || 4, rand, false));
+      if (i >= seq.length) i = 0;
+    }
+    return out;
   }
 
   HV.generators.enLetters = function (cfg) {
@@ -392,8 +611,28 @@
   };
 
   HV.generators.enListen = function (cfg) {
-    var pool = cfg.set === "easy" ? ANIMALS.slice(0, 4).concat(COLORS.slice(0, 4)) : ANIMALS.concat(COLORS.slice(0, 4));
-    return enListen(pool, cfg.count || 4, cfg.choices || 3);
+    cfg = cfg || {};
+    var set = cfg.set === "mon" ? "mon" : "gin";
+    var rand = makeRand(cfg.seed || "");
+    if (set === "mon") return monListen(cfg.count || 12, rand, cfg.choices || 4);
+    return ginListen(cfg.count || 16, rand);
+  };
+
+  HV.listenSpeaks = function () {
+    var lines = [];
+    function add(s) { if (s) lines.push(s); }
+    Object.keys(LISTEN_THEMES).forEach(function (theme) {
+      LISTEN_THEMES[theme].forEach(function (item) {
+        add("Tap the " + item.name + ".");
+        add("It is the " + item.name + ".");
+      });
+    });
+    MON_LISTEN.forEach(function (item) {
+      add(item.say);
+      add("It is " + (item.explain || item.say) + ".");
+    });
+    add("Tap what you hear");
+    return lines;
   };
 
   function ex(partial) {
@@ -424,12 +663,12 @@
   enEx({ id: "mon-en-family", child: "mon", category: "family", title: "Family", subtitle: "Mom and dad", icon: "👩", generator: "enFamily", config: { count: 4 } });
   enEx({ id: "mon-en-fruits", child: "mon", category: "fruits", title: "Fruits", subtitle: "Apple and banana", icon: "🍎", generator: "enFruits", config: { count: 4 } });
   enEx({ id: "mon-en-body", child: "mon", category: "body", title: "My body", subtitle: "Eye, ear, hand", icon: "✋", generator: "enBody", config: { count: 4 } });
-  enEx({ id: "mon-en-listen", child: "mon", category: "listen", title: "Tap what you hear", subtitle: "Listening", icon: "🎧", generator: "enListen", config: { count: 4, choices: 3 } });
+  enEx({ id: "mon-en-listen", child: "mon", category: "listen", title: "Tap what you hear", subtitle: "a red apple", icon: "🎧", generator: "enListen", config: { count: 18, choices: 4, set: "mon" } });
 
   enEx({ id: "gin-en-letters", child: "gin", category: "letters", title: "A B C", subtitle: "Ba chữ đầu", icon: "🅰️", generator: "enLetters", config: { count: 3, choices: 3, set: "abc" } });
   enEx({ id: "gin-en-colors", child: "gin", category: "colors", title: "Colors", subtitle: "Red, yellow, blue", icon: "🎨", generator: "enColors", config: { count: 4, choices: 3, set: "easy" } });
   enEx({ id: "gin-en-animals", child: "gin", category: "animals", title: "Animals", subtitle: "Cat and dog", icon: "🐶", generator: "enAnimals", config: { count: 4, choices: 3, set: "easy" } });
-  enEx({ id: "gin-en-listen", child: "gin", category: "listen", title: "Listen and tap", subtitle: "Nghe rồi chạm", icon: "🎧", generator: "enListen", config: { count: 3, choices: 3, set: "easy" } });
+  enEx({ id: "gin-en-listen", child: "gin", category: "listen", title: "Tap what you hear", subtitle: "Colors, animals, heroes", icon: "🎧", generator: "enListen", config: { count: 16, set: "gin", gradual: true } });
 
   function pushSpeak(list, lang, text) {
     if (text) list.push({ lang: lang, text: String(text) });
@@ -500,6 +739,7 @@
       pushSpeak(lines, "en", "Tap the " + item.name + ".");
       pushSpeak(lines, "en", "It is the " + item.name + ".");
     });
+    if (HV.listenSpeaks) HV.listenSpeaks().forEach(function (s) { pushSpeak(lines, "en", s); });
     return lines;
   };
 })(globalThis.HV = globalThis.HV || {});

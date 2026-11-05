@@ -429,15 +429,105 @@
     return state.daily.exercises.filter(function (ex) { return ex.id === id; })[0] || null;
   }
 
-  function materialize(entry) {
+  function materialize(entry, count) {
     try {
       var list = [];
-      if (entry.questions && entry.questions.length) list = entry.questions;
-      else if (entry.generator && HV.generators[entry.generator]) list = HV.generators[entry.generator](entry.config || {});
+      if (entry.questions && entry.questions.length && !count) list = entry.questions;
+      else if (entry.generator && HV.generators[entry.generator]) {
+        var cfg = Object.assign({}, entry.config || {});
+        if (count) cfg.count = count;
+        list = HV.generators[entry.generator](cfg);
+      }
       return list.map(HV.engine.normalize).filter(Boolean);
     } catch (e) {
       return [];
     }
+  }
+
+  function questionKey(q) {
+    var mark = "";
+    if (q.choices) {
+      q.choices.forEach(function (c) {
+        if (c.correct) mark += (c.text || "") + (c.emoji || "") + (c.shape || "") + (c.color || "");
+      });
+    }
+    return [q.kind, q.lang, q.speak, q.prompt, q.answer, q.word, mark].join("§");
+  }
+
+  function sessionTarget(child, baseLen, entry) {
+    var listen = entry && (entry.generator === "enListen" || (entry.category === "listen" && subjectOf(entry) === "english"));
+    if (child === "gin" && listen) return Math.max(16, baseLen);
+    if (child === "gin") return Math.max(baseLen, Math.round(baseLen * 1.5));
+    if (baseLen >= 16 && baseLen <= 20) return baseLen;
+    if (baseLen > 20) return 20;
+    return 18;
+  }
+
+  function generatedPool(entry, count) {
+    var out = [];
+    var seen = {};
+    function takeList(list) {
+      (list || []).forEach(function (q) {
+        var key = questionKey(q);
+        if (!key || seen[key]) return;
+        seen[key] = true;
+        out.push(q);
+      });
+    }
+    function take(gen, cfg) {
+      if (!gen || !HV.generators[gen]) return;
+      try {
+        var next = Object.assign({}, cfg || {}, { count: count });
+        takeList((HV.generators[gen](next) || []).map(HV.engine.normalize).filter(Boolean));
+      } catch (e) {}
+    }
+    var subject = subjectOf(entry);
+    if (entry.generator) take(entry.generator, entry.config);
+    (state.daily.exercises || []).forEach(function (ex) {
+      if (!ex || ex === entry || ex.child !== entry.child || subjectOf(ex) !== subject || ex.category !== entry.category) return;
+      takeList((ex.questions || []).map(HV.engine.normalize).filter(Boolean));
+      if (ex.generator) take(ex.generator, ex.config);
+    });
+    if (out.length < count) {
+      HV.catalog.forEach(function (ex) {
+        if (!ex || ex.child !== entry.child || subjectOf(ex) !== subject || ex.category !== entry.category) return;
+        if (ex.generator) take(ex.generator, ex.config);
+      });
+    }
+    return out;
+  }
+
+  function expandQuestions(entry, base) {
+    var child = entry.child === "gin" ? "gin" : "mon";
+    var target = sessionTarget(child, base.length, entry);
+    if (base.length >= target) return base.slice(0, target);
+    var seen = {};
+    base.forEach(function (q) { seen[questionKey(q)] = true; });
+    var extra = generatedPool(entry, target + 8).filter(function (q) {
+      var key = questionKey(q);
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+    var out = base.slice();
+    extra = U.shuffle(extra);
+    extra.forEach(function (q) {
+      if (out.length >= target) return;
+      if (out.length && questionKey(out[out.length - 1]) === questionKey(q)) return;
+      out.push(q);
+    });
+    var cycle = U.shuffle(out.slice());
+    var guard = 0;
+    var i = 0;
+    while (out.length < target && cycle.length > 1 && guard < target * 12) {
+      guard += 1;
+      var q = cycle[i % cycle.length];
+      i += 1;
+      if (questionKey(q) === questionKey(out[out.length - 1])) continue;
+      out.push(q);
+      if (i % cycle.length === 0) cycle = U.shuffle(cycle);
+    }
+    return out.slice(0, target);
   }
 
   function beginSession(id) {
@@ -446,7 +536,7 @@
       state.session = { missing: true, id: id };
       return;
     }
-    var questions = materialize(entry);
+    var questions = expandQuestions(entry, materialize(entry));
     if (!questions.length) {
       state.session = { empty: true, entry: entry };
       return;
@@ -544,6 +634,10 @@
     var stars = S.starsFor(correct, total);
     if (!session.recorded) {
       var before = weekStars(child);
+      var unlockBefore = null;
+      if (child === "mon" && subjectOf(session.entry) === "english") {
+        unlockBefore = S.englishLevels(child).unlocked;
+      }
       session.record = S.recordRound(child, {
         id: session.entry.id,
         title: session.entry.title,
@@ -565,7 +659,15 @@
           if (before < target && after >= target) session.crossed = HV.rewards[child][i];
         });
       }
-      HV.audio.fanfare();
+      var unlockedNow = false;
+      if (child === "mon" && subjectOf(session.entry) === "english" && unlockBefore) {
+        var afterLevels = S.englishLevels(child).unlocked;
+        [2, 3, 4].forEach(function (n) {
+          if (afterLevels[n] && !unlockBefore[n]) unlockedNow = true;
+        });
+      }
+      session.celebrate = session.crossed || unlockedNow ? "jingle" : "fanfare";
+      celebrateResult(stars, session.celebrate);
     }
     root.appendChild(topbar({ title: "Xong bài rồi", sub: HV.kids[child].name, back: "#/c/" + child, child: child }));
     var card = el("div", { class: "result-card" });
@@ -610,7 +712,7 @@
   function burst() {
     var box = el("div", { class: "confetti", "aria-hidden": "true" });
     var colors = ["#f6d56a", "#7ec8e3", "#fb7185", "#22c55e", "#a855f7", "#fff"];
-    for (var i = 0; i < 18; i++) {
+    for (var i = 0; i < 36; i++) {
       var bit = el("i");
       bit.style.left = (6 + (i * 5.2) % 90) + "%";
       bit.style.background = colors[i % colors.length];
@@ -712,6 +814,7 @@
     var root = el("section", { class: "parents" });
     root.appendChild(topbar({ title: "Sổ sao của bố mẹ", sub: "Mon và Gin", back: "#/" }));
     root.appendChild(el("p", { class: "lede", text: "Hai iPad dùng chung một sổ. Khi có mạng, sao gộp lại ở đây." }));
+    root.appendChild(soundSetting());
     root.appendChild(syncLine());
     var grid = el("div", { class: "parents-grid" });
     grid.appendChild(parentKid("mon"));
@@ -720,6 +823,28 @@
     root.appendChild(backupBox());
     root.appendChild(el("p", { class: "fine", text: "1 sao: đúng một phần. 2 sao: đúng từ 60%. 3 sao: đúng hết ngay lần đầu. Chơi lại vẫn được cộng sao." }));
     return root;
+  }
+
+  function soundSetting() {
+    var on = S.data().settings.sound !== false;
+    return el("div", { class: "sound-setting" }, [
+      el("p", { text: "Âm thanh hiệu ứng" }),
+      el("button", {
+        class: "btn sound-toggle" + (on ? " btn-primary" : ""),
+        "data-act": "toggle-sound",
+        "data-setting": "sound",
+        "aria-pressed": String(on),
+        text: on ? "Đang bật" : "Đang tắt"
+      })
+    ]);
+  }
+
+  function celebrateResult(stars, kind) {
+    var lead = stars > 0 ? HV.audio.star() : 0;
+    setTimeout(function () {
+      if (kind === "jingle") HV.audio.jingle();
+      else HV.audio.fanfare();
+    }, Math.round((lead || 0) * 1000) + 30);
   }
 
   function parentKid(child) {
@@ -879,7 +1004,11 @@
       document.querySelectorAll('[data-setting="' + key + '"]').forEach(function (btn) {
         btn.setAttribute("aria-pressed", String(on));
         btn.classList.toggle("is-off", !on);
-        if (key === "sound") btn.textContent = on ? "🔔" : "🔕";
+        if (key === "sound" && btn.classList.contains("icon-btn")) btn.textContent = on ? "🔔" : "🔕";
+        if (key === "sound" && btn.classList.contains("sound-toggle")) {
+          btn.textContent = on ? "Đang bật" : "Đang tắt";
+          btn.classList.toggle("btn-primary", on);
+        }
       });
     });
   }
@@ -903,6 +1032,13 @@
   }
 
   function onClick(e) {
+    HV.audio.unlock();
+    var btn = e.target.closest("button");
+    if (btn && !btn.closest(".stage") && !btn.classList.contains("choice")) {
+      if (btn.classList.contains("kid-mon")) HV.audio.bark();
+      else if (btn.classList.contains("kid-gin")) HV.audio.vroom();
+      else if (!btn.classList.contains("speak-btn")) HV.audio.tap();
+    }
     var goEl = e.target.closest("[data-go]");
     if (goEl) {
       var dest = goEl.getAttribute("data-go");

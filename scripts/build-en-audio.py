@@ -69,6 +69,13 @@ async def synth(text, dest, sem):
 async def main():
     lines = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     clips = {}
+    manifest_path = OUT / "manifest.json"
+    if manifest_path.exists():
+        prev = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for key, rel in (prev.get("clips") or {}).items():
+            clips[key] = key
+            # Keep the previous spoken line only as a fallback; new lines overwrite.
+            clips[key] = key
     for line in lines:
         key = normalize(line)
         if key:
