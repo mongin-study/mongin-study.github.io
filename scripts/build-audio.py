@@ -529,11 +529,20 @@ async def main():
         except Exception:
             continue
         for line in daily.get("praise") or []:
+            if re.match(r"(?i)^(bingo|hurrah|awesome|yay|well done|great job|super|fantastic|nice work|you did it)\b", str(line or "").strip()):
+                continue
             key = normalize(line)
             if not key:
                 continue
             praise_says[key] = line
             clips[key] = line
+        for ex in daily.get("exercises") or []:
+            for question in ex.get("questions") or []:
+                if not isinstance(question, dict) or question.get("lang") == "en":
+                    continue
+                add(question.get("speak"))
+                add(question.get("explain"))
+                add(question.get("prompt"))
     for path in sorted((ROOT / "content" / "weekly").glob("*.json")):
         try:
             paper = json.loads(path.read_text(encoding="utf-8"))

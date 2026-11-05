@@ -508,6 +508,10 @@
   }
 
   function sessionTarget(child, baseLen, entry) {
+    var authored = entry && Array.isArray(entry.questions) ? entry.questions.length : 0;
+    // A hand-written daily set of about ten stays that long. Catalog listening
+    // for Gin can still grow to a longer tap session.
+    if (authored >= 8 && authored <= 12 && !entry.generator) return authored;
     var listen = entry && (entry.generator === "enListen" || (entry.category === "listen" && subjectOf(entry) === "english"));
     if (child === "gin" && listen) return 16;
     return 10;

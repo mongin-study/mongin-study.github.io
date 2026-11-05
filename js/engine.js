@@ -354,29 +354,45 @@
   var praiseBag = { mon: [], gin: [], en: [] };
   var correctHeard = 0;
 
+  function isEnglishCheer(line) {
+    return /^(bingo|hurrah|awesome|yay|well done|great job|super|fantastic|nice work|you did it)\b/i.test(String(line || "").trim());
+  }
+
   function fitsMon(line) {
     var s = String(line || "");
-    if (/gin/i.test(s)) return false;
+    if (isEnglishCheer(s) || /gin/i.test(s)) return false;
     return /mon|elsa|cún vàng|cun vang/i.test(s);
   }
 
   function fitsGin(line) {
     var s = String(line || "");
+    if (isEnglishCheer(s)) return false;
     return !/mon|elsa/i.test(s);
   }
 
+  function englishCheerFor(child, line) {
+    if (!isEnglishCheer(line)) return false;
+    var s = String(line);
+    if (child === "mon") return /mon|elsa|puppy|snow|princess/i.test(s) && !/gin/i.test(s);
+    return !/mon|elsa|princess|puppy|snow/i.test(s);
+  }
+
   function praiseList(child, lang) {
-    if (lang === "en") return PRAISE_EN.slice();
     var daily = Array.isArray(HV.dailyPraise) ? HV.dailyPraise : [];
-    if (child === "mon") return PRAISE_EXTRA.mon.filter(fitsMon).concat(daily.filter(fitsMon));
-    return PRAISE.concat(PRAISE_EXTRA.gin || []).concat(daily.filter(fitsGin));
+    if (lang === "en") {
+      var extra = daily.filter(function (line) { return englishCheerFor(child, line); });
+      return PRAISE_EN.concat(extra);
+    }
+    var viDaily = daily.filter(function (line) { return !isEnglishCheer(line); });
+    if (child === "mon") return PRAISE_EXTRA.mon.filter(fitsMon).concat(viDaily.filter(fitsMon));
+    return PRAISE.concat(PRAISE_EXTRA.gin || []).concat(viDaily.filter(fitsGin));
   }
 
   function praise(child, lang) {
-    var key = lang === "en" ? "en" : (child === "gin" ? "gin" : "mon");
+    var key = lang === "en" ? ("en-" + (child === "gin" ? "gin" : "mon")) : (child === "gin" ? "gin" : "mon");
     var list = praiseList(child, lang);
     if (!list.length) list = lang === "en" ? ["Yay!"] : (child === "gin" ? ["Gin ơi giỏi quá!"] : ["Mon ơi giỏi quá!"]);
-    if (!praiseBag[key].length) praiseBag[key] = HV.util.shuffle(list);
+    if (!praiseBag[key] || !praiseBag[key].length) praiseBag[key] = HV.util.shuffle(list);
     var line = praiseBag[key].pop();
     if (line === praiseBag.last && praiseBag[key].length) {
       var swap = praiseBag[key].pop();
@@ -494,6 +510,10 @@
         })
       ]);
       container.appendChild(bar);
+      try {
+        var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        bar.scrollIntoView({ block: "nearest", inline: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+      } catch (e) {}
       afterSound(good ? HV.audio.correct : HV.audio.wrong, function () {
         if (settled) return;
         function later(sec) {
@@ -822,9 +842,7 @@
     shouldVoicePraise: shouldVoicePraise,
     beginSessionPraise: function () { correctHeard = 0; },
     resetPraise: function () {
-      praiseBag.mon = [];
-      praiseBag.gin = [];
-      praiseBag.en = [];
+      Object.keys(praiseBag).forEach(function (k) { praiseBag[k] = []; });
       praiseBag.last = "";
     }
   };

@@ -219,6 +219,12 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
     display: block;
   }
   .top-title span { font-size: 13px; }
+  .prompt { font-size: clamp(18px, 4.8vw, 24px); }
+  .scene-equation { font-size: clamp(22px, 6.2vw, 36px); letter-spacing: 0; overflow-wrap: anywhere; }
+  .scene-digit { font-size: clamp(64px, 18vw, 96px); }
+  .dots { gap: 6px; }
+  .dots i { width: 11px; height: 11px; }
+  .feedback { scroll-margin-bottom: 16px; }
 }
 .avatar-board { width: 148px; height: auto; border-radius: 50%; object-fit: cover; }
 .kid-kicker { margin-top: 8px; font-weight: 800; }
@@ -517,7 +523,7 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .token { min-width: 84px; font-size: 32px; }
 .tray-hint { color: var(--muted); font-weight: 800; align-self: center; }
 .select-count { text-align: center; font-weight: 800; font-size: 20px; }
-.feedback { border-radius: 20px; padding: 12px 14px; font-weight: 800; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.feedback { border-radius: 20px; padding: 12px 14px; font-weight: 800; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; scroll-margin-bottom: 12px; }
 .praise-face { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid #f6d56a; flex: none; }
 .hop-line { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; justify-content: center; }
 .hop-line i { min-width: 36px; height: 36px; border-radius: 50%; background: white; display: grid; place-items: center; font-style: normal; }
