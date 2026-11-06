@@ -244,12 +244,12 @@
     storyAdd("Gin", "Mon", "chiếc ô tô đồ chơi"),
     storyAdd("bà", "Mon", "quả bóng bay"),
     storyAdd("ông", "Gin", "cây bút màu"),
-    storyAdd("Cún Vàng", "Gin", "cái bánh"),
+    storyAdd("Pom", "Gin", "cái bánh"),
     storyGive("Mon", "Gin", "quả táo"),
     storyGive("Mẹ Vy", "Mon", "cái kẹo"),
     storyGive("Bố Hà", "Gin", "cây bút màu"),
     storyGive("Gin", "Mon", "quả bóng bay"),
-    storyEat("Cún Vàng", "cái bánh"),
+    storyEat("Pom", "cái bánh"),
     storyEat("Gin", "cái kẹo")
   ];
 

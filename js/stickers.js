@@ -34,11 +34,11 @@
     { id: "hero-mask", name: "Mặt nạ anh hùng", emoji: "🎭", cost: 8, tier: "easy", who: "gin", group: "Anh hùng" },
     { id: "hero-cape", name: "Áo choàng", emoji: "🦸", cost: 16, tier: "mid", who: "gin", group: "Anh hùng" },
     { id: "hero-bolt", name: "Tia sét vàng", emoji: "⚡", cost: 28, tier: "rare", who: "gin", group: "Anh hùng" },
-    { id: "puppy-nap", name: "Cún Vàng ngủ", emoji: "🐶", cost: 6, tier: "easy", who: "both", group: "Cún Vàng" },
-    { id: "puppy-sit", name: "Cún Vàng ngồi", emoji: "🐶", cost: 8, tier: "easy", who: "both", group: "Cún Vàng" },
-    { id: "puppy-heart", name: "Cún Vàng và tim", emoji: "💛", cost: 16, tier: "mid", who: "both", group: "Cún Vàng" },
-    { id: "puppy-gold", name: "Cún Vàng hiếm", emoji: "🌟", cost: 28, tier: "rare", who: "both", group: "Cún Vàng" },
-    { id: "puppy-crown", name: "Cún Vàng vương miện", emoji: "🐶👑", cost: 40, tier: "legend", who: "both", group: "Cún Vàng" }
+    { id: "puppy-nap", name: "Pom ngủ", emoji: "🐶", cost: 6, tier: "easy", who: "both", group: "Pom" },
+    { id: "puppy-sit", name: "Pom ngồi", emoji: "🐶", cost: 8, tier: "easy", who: "both", group: "Pom" },
+    { id: "puppy-heart", name: "Pom và tim", emoji: "💛", cost: 16, tier: "mid", who: "both", group: "Pom" },
+    { id: "puppy-gold", name: "Pom hiếm", emoji: "🌟", cost: 28, tier: "rare", who: "both", group: "Pom" },
+    { id: "puppy-crown", name: "Pom vương miện", emoji: "🐶👑", cost: 40, tier: "legend", who: "both", group: "Pom" }
   ];
 
   function empty() {
@@ -154,7 +154,7 @@
     root.appendChild(el("p", { class: "lede", text: child === "mon"
       ? "Elsa đã có " + elsaOwned + "/" + elsaAll.length + ". Còn nhiều sticker mới để sưu."
       : "Dùng sao em kiếm tuần này để đổi sticker." }));
-    ["Elsa", "Anh hùng", "Cún Vàng"].forEach(function (group) {
+    ["Elsa", "Anh hùng", "Pom"].forEach(function (group) {
       var items = mine.filter(function (s) { return s.group === group; }).slice().sort(function (a, b) {
         return a.cost - b.cost;
       });

@@ -2,7 +2,7 @@
 
 Learning practice for two children on a shared pair of iPads. After a child is chosen, the app offers three subjects: **Toán**, **Tiếng Anh**, and **Tiếng Việt** (đánh vần). The whole site is static HTML, CSS, and JavaScript: open `index.html` with any static server, or host it on GitHub Pages. There is no build step. Regenerating spoken clips is optional (`scripts/build-audio.py`, `scripts/build-en-audio.py`).
 
-- **Mon** (6, tiền tiểu học) — ice, snow, and a golden puppy. Balanced math, English, and Vietnamese grade-1 phonics (chữ cái, dấu thanh, vần, đánh vần).
+- **Mon** (6, tiền tiểu học) — ice, snow, and Pom. Balanced math, English, and Vietnamese grade-1 phonics (chữ cái, dấu thanh, vần, đánh vần).
 - **Gin** (3) — cars and animals. Counting and shapes, plus very simple letters, colors, and animals.
 
 Live site: [https://mongin-study.github.io](https://mongin-study.github.io)
@@ -135,7 +135,7 @@ For Mon’s English, add `"level": 1` to `4` so the daily card sits at her curre
 
 ### Bài toán có lời
 
-Story problems use the family, not Elsa or a superhero. Elsa and the superhero stay on the pictures and in praise ("Elsa khen Mon giỏi quá!"). Names: **Mẹ Vy**, **Bố Hà**, **Mon**, **Gin**, and sometimes **ông**, **bà**, or **Cún Vàng**. Mon's story may include Gin, and Gin's may include Mon. Objects are everyday things, and the question repeats the same unit noun, then closes with **Vậy**:
+Story problems use the family, not Elsa or a superhero. Elsa and the superhero stay on the pictures and in praise ("Elsa khen Mon giỏi quá!"). Names: **Mẹ Vy**, **Bố Hà**, **Mon**, **Gin**, and sometimes **ông**, **bà**, or **Pom**. Mon's story may include Gin, and Gin's may include Mon. Objects are everyday things, and the question repeats the same unit noun, then closes with **Vậy**:
 
 `Mẹ Vy có 2 cái kẹo, Gin có 2 cái kẹo. Vậy tổng cộng có bao nhiêu cái kẹo?`
 
@@ -199,7 +199,7 @@ firestore.rules         read/write for signed-in users under /families/{fam}/**
 sw.js                   offline cache
 ```
 
-Mon and Gin’s photos are the round avatars on the choose-child screen, in each child’s header, and on the leaderboard (`assets/kids/mon.webp`, `assets/kids/gin.webp`). The golden puppy and the tower stay with Mon, and the toy car stays with Gin. The ice princess and the tiger still show when a round is finished. No studio artwork.
+Mon and Gin’s photos are the round avatars on the choose-child screen, in each child’s header, and on the leaderboard (`assets/kids/mon.webp`, `assets/kids/gin.webp`). Pom and the tower stay with Mon, and the toy car stays with Gin. The ice princess and the tiger still show when a round is finished. No studio artwork.
 
 Nunito is under the SIL Open Font License (`fonts/OFL.txt`).
 

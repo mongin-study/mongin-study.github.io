@@ -58,7 +58,7 @@ for (const name of fs.readdirSync(dailyDir)) {
   "Đỉnh của chóp!",
   "Giỏi xuất sắc luôn!",
   "Elsa khen Mon giỏi quá!",
-  "Cún Vàng vẫy đuôi rồi nè!",
+  "Pom vẫy đuôi rồi nè!",
   "Siêu anh hùng Gin đỉnh quá!"
 ].forEach(add);
 

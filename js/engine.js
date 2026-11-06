@@ -320,12 +320,12 @@
   var PRAISE_EXTRA = {
     mon: [
       "Elsa khen Mon giỏi quá!",
-      "Cún Vàng vẫy đuôi rồi nè!",
+      "Pom vẫy đuôi rồi nè!",
       "Mon ơi giỏi quá!",
       "Mon đúng rồi nè!",
       "Mẹ Vy khen Mon giỏi lắm!",
       "Bố Hà vỗ tay cho Mon!",
-      "Cún Vàng nhảy lên vì Mon!",
+      "Pom nhảy lên vì Mon!",
       "Mon làm được rồi!"
     ],
     gin: [
@@ -336,7 +336,7 @@
       "Bố Hà cười với Gin!",
       "Ô tô của Gin kêu bíp bíp!",
       "Gin làm được rồi!",
-      "Cún Vàng vẫy đuôi cho Gin!"
+      "Pom vẫy đuôi cho Gin!"
     ]
   };
   var PRAISE_EN = [
@@ -361,7 +361,7 @@
   function fitsMon(line) {
     var s = String(line || "");
     if (isEnglishCheer(s) || /gin/i.test(s)) return false;
-    return /mon|elsa|cún vàng|cun vang/i.test(s);
+    return /mon|elsa|pom|cún vàng|cun vang/i.test(s);
   }
 
   function fitsGin(line) {

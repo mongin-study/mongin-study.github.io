@@ -2,7 +2,7 @@
   "date": "2026-11-06",
   "praise": [
     "Elsa vỗ tay cho Mon hôm nay!",
-    "Cún Vàng chạy quanh Mon vì đúng bài!",
+    "Pom chạy quanh Mon vì đúng bài!",
     "Mon ơi bông tuyết cũng vui lắm!",
     "Siêu anh hùng Gin bay lên rồi!",
     "Gin ơi áo choàng tung bay!",
@@ -114,7 +114,7 @@
             "emoji": "🐶"
           },
           "b": {
-            "text": "Cún Vàng"
+            "text": "Pom"
           }
         }
       ]
@@ -233,8 +233,8 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Gin có 6 quả táo, Cún Vàng có 6 quả táo. Vậy tổng cộng có bao nhiêu quả táo?",
-          "speak": "Gin có sáu quả táo, Cún Vàng có sáu quả táo. Vậy tổng cộng có bao nhiêu quả táo?",
+          "prompt": "Gin có 6 quả táo, Pom có 6 quả táo. Vậy tổng cộng có bao nhiêu quả táo?",
+          "speak": "Gin có sáu quả táo, Pom có sáu quả táo. Vậy tổng cộng có bao nhiêu quả táo?",
           "explain": "Sáu cộng sáu. Hai nhóm sáu là mười hai quả táo.",
           "choices": [
             {
@@ -308,8 +308,8 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Mon có 20 cây bút màu. Cún Vàng giấu 6 cây bút màu. Vậy Mon còn bao nhiêu cây bút màu?",
-          "speak": "Mon có hai mươi cây bút màu. Cún Vàng giấu sáu cây bút màu. Vậy Mon còn bao nhiêu cây bút màu?",
+          "prompt": "Mon có 20 cây bút màu. Pom giấu 6 cây bút màu. Vậy Mon còn bao nhiêu cây bút màu?",
+          "speak": "Mon có hai mươi cây bút màu. Pom giấu sáu cây bút màu. Vậy Mon còn bao nhiêu cây bút màu?",
           "explain": "Hai mươi trừ sáu. Hai mươi lùi sáu bước còn mười bốn cây bút màu.",
           "choices": [
             {
@@ -912,7 +912,7 @@
       "child": "mon",
       "subject": "math",
       "category": "geometry",
-      "title": "Hình quanh Cún Vàng",
+      "title": "Hình quanh Pom",
       "subtitle": "Tên hình, cạnh và chỗ đứng",
       "icon": "🔷",
       "questions": [
@@ -1186,9 +1186,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Cún Vàng đang ở đâu?",
-          "speak": "Cún Vàng đang ở đâu?",
-          "explain": "Cún Vàng ở ô phía trên. Chiếc xe ở phía dưới.",
+          "prompt": "Pom đang ở đâu?",
+          "speak": "Pom đang ở đâu?",
+          "explain": "Pom ở ô phía trên. Chiếc xe ở phía dưới.",
           "choices": [
             {
               "text": "Ở trên",
@@ -1222,9 +1222,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Cún Vàng ở bên nào?",
-          "speak": "Cún Vàng ở bên nào? Bên trái hay bên phải?",
-          "explain": "Cún Vàng đứng ở bên trái. Quả bóng bay ở bên phải.",
+          "prompt": "Pom ở bên nào?",
+          "speak": "Pom ở bên nào? Bên trái hay bên phải?",
+          "explain": "Pom đứng ở bên trái. Quả bóng bay ở bên phải.",
           "choices": [
             {
               "text": "Ở bên phải",

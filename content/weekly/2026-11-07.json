@@ -111,8 +111,8 @@
       "subject": "math",
       "kind": "choice",
       "lang": "vi",
-      "prompt": "Bố Hà có 15 quả táo, Cún Vàng ăn 7 quả táo. Vậy còn lại bao nhiêu quả táo?",
-      "speak": "Bố Hà có mười lăm quả táo, Cún Vàng ăn bảy quả táo. Vậy còn lại bao nhiêu quả táo?",
+      "prompt": "Bố Hà có 15 quả táo, Pom ăn 7 quả táo. Vậy còn lại bao nhiêu quả táo?",
+      "speak": "Bố Hà có mười lăm quả táo, Pom ăn bảy quả táo. Vậy còn lại bao nhiêu quả táo?",
       "explain": "Mười lăm trừ bảy bằng tám. Vậy còn tám quả táo.",
       "choices": [
         {

@@ -2,7 +2,7 @@
 // Keep each day's English "Tap what you hear" wired to the listen bank.
 // Existing questions stay first; the generator fills the rest of the session.
 // Math word problems are not generated here. Write them in the daily JSON
-// with Mẹ Vy, Bố Hà, Mon, Gin (sometimes ông, bà, Cún Vàng) and everyday
+// with Mẹ Vy, Bố Hà, Mon, Gin (sometimes ông, bà, Pom) and everyday
 // units, repeating the unit and closing with "Vậy". See README.
 // Optional "memory" array on the same file adds flip-card decks
 // ({ id, child, title, pairs: 3–6 }). It is left in place by this script.
@@ -51,12 +51,12 @@ function upsert(child) {
 const PRAISE_POOL = [
   "Hôm nay Mon tỏa sáng quá!",
   "Gin ơi mẹ tự hào lắm!",
-  "Đúng quá, Cún Vàng nhảy tưng tưng!",
+  "Đúng quá, Pom nhảy tưng tưng!",
   "Bố Hà vỗ tay thật to!",
   "Mẹ Vy ôm một cái nào!",
   "Ôi đúng bài rồi nè!",
   "Giỏi hơn hôm qua rồi!",
-  "Cún Vàng chạy vòng quanh!"
+  "Pom chạy vòng quanh!"
 ];
 if (!Array.isArray(doc.praise) || !doc.praise.length) {
   let n = 0;

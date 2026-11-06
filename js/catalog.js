@@ -99,7 +99,7 @@
   };
 
   HV.kids = {
-    mon: { name: "Mon", age: "6 tuổi", tagline: "Băng tuyết và Cún Vàng" },
+    mon: { name: "Mon", age: "6 tuổi", tagline: "Băng tuyết và Pom" },
     gin: { name: "Gin", age: "3 tuổi", tagline: "Xe hơi và thú" }
   };
 
