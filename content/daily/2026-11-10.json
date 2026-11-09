@@ -5,7 +5,12 @@
     "Bố Hà khen Mon đọc rõ từng tiếng!",
     "Gin ơi, Pom nhảy múa vì Gin giỏi quá!",
     "Mẹ Vy thấy Mon chăm chỉ, hoan hô!",
-    "Hooray, Gin! You did it!"
+    "Hooray, Gin! You did it!",
+    "Elsa thấy Mon đọc nờ thật rõ!",
+    "Pom ngồi cạnh Mon và vẫy đuôi!",
+    "Siêu anh hùng Gin chạm đúng màu rồi!",
+    "Bingo, Mon! Elsa is proud!",
+    "Hurrah, Gin! Super colors!"
   ],
   "memory": [
     {
@@ -475,29 +480,29 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Số tiếp theo là số nào?",
-          "speak": "hai mươi, mười bảy, mười bốn, mười một. Số tiếp theo là số nào?",
-          "explain": "Mỗi lần bớt ba. Mười một trừ ba bằng tám.",
+          "speak": "chín, mười hai, mười lăm, mười tám. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm ba. Mười tám cộng ba bằng hai mươi mốt.",
           "choices": [
             {
-              "text": "8",
+              "text": "20",
+              "correct": false
+            },
+            {
+              "text": "21",
               "correct": true
             },
             {
-              "text": "11",
+              "text": "24",
               "correct": false
             },
             {
-              "text": "5",
-              "correct": false
-            },
-            {
-              "text": "9",
+              "text": "19",
               "correct": false
             }
           ],
           "scene": {
             "layout": "equation",
-            "text": "20, 17, 14, 11, ?"
+            "text": "9, 12, 15, 18, ?"
           }
         },
         {
@@ -560,7 +565,7 @@
           "lang": "vi",
           "prompt": "Số nào không cùng nhóm?",
           "speak": "mười, hai mươi, ba mươi, mười hai. Số nào không cùng nhóm?",
-          "explain": "Các số 5, 10, 15, 20 đều đếm cách năm. Số mười hai không cùng nhóm.",
+          "explain": "Mười, hai mươi và ba mươi đều là số chục. Số mười hai không cùng nhóm.",
           "choices": [
             {
               "text": "30",
@@ -2207,7 +2212,7 @@
       "subject": "english",
       "category": "reading",
       "level": 2,
-      "title": "Sun, pig, and hat",
+      "title": "Mop, fan, and cup",
       "subtitle": "Read, rhyme, spell",
       "icon": "🔤",
       "questions": [
@@ -2216,24 +2221,24 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters s, u, n spell sun. Tap the sun.",
+          "explain": "The letters m, o, p spell mop. Tap the mop.",
           "choices": [
             {
-              "emoji": "🎩",
+              "emoji": "🌀",
               "correct": false
             },
             {
-              "emoji": "☀️",
+              "emoji": "🧹",
               "correct": true
             },
             {
-              "emoji": "🐷",
+              "emoji": "🥤",
               "correct": false
             }
           ],
           "scene": {
             "layout": "digit",
-            "text": "sun"
+            "text": "mop"
           },
           "columns": 3
         },
@@ -2242,24 +2247,24 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters p, i, g spell pig. Tap the pig.",
+          "explain": "The letters f, a, n spell fan. Tap the fan.",
           "choices": [
             {
-              "emoji": "🐷",
+              "emoji": "🌀",
               "correct": true
             },
             {
-              "emoji": "🎩",
+              "emoji": "🪵",
               "correct": false
             },
             {
-              "emoji": "☀️",
+              "emoji": "🍯",
               "correct": false
             }
           ],
           "scene": {
             "layout": "digit",
-            "text": "pig"
+            "text": "fan"
           },
           "columns": 3
         },
@@ -2268,24 +2273,24 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters h, a, t spell hat. Tap the hat.",
+          "explain": "The letters c, u, p spell cup. Tap the cup.",
           "choices": [
             {
-              "emoji": "☀️",
+              "emoji": "🧹",
               "correct": false
             },
             {
-              "emoji": "🎩",
+              "emoji": "🥤",
               "correct": true
             },
             {
-              "emoji": "🐷",
+              "emoji": "🪵",
               "correct": false
             }
           ],
           "scene": {
             "layout": "digit",
-            "text": "hat"
+            "text": "cup"
           },
           "columns": 3
         },
@@ -2294,24 +2299,24 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters d, o, g spell dog. Tap the dog.",
+          "explain": "The letters l, o, g spell log. Tap the log.",
           "choices": [
             {
-              "emoji": "🐷",
+              "emoji": "🍯",
               "correct": false
             },
             {
-              "emoji": "☀️",
+              "emoji": "🌀",
               "correct": false
             },
             {
-              "emoji": "🐶",
+              "emoji": "🪵",
               "correct": true
             }
           ],
           "scene": {
             "layout": "digit",
-            "text": "dog"
+            "text": "log"
           },
           "columns": 3
         },
@@ -2320,44 +2325,44 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters b, e, d spell bed. Tap the bed.",
+          "explain": "The letters j, a, m spell jam. Tap the jam.",
           "choices": [
             {
-              "emoji": "🛏️",
+              "emoji": "🍯",
               "correct": true
             },
             {
-              "emoji": "🐷",
+              "emoji": "🌀",
               "correct": false
             },
             {
-              "emoji": "☀️",
+              "emoji": "🥤",
               "correct": false
             }
           ],
           "scene": {
             "layout": "digit",
-            "text": "bed"
+            "text": "jam"
           },
           "columns": 3
         },
         {
           "kind": "choice",
           "lang": "en",
-          "prompt": "Which word rhymes with sun?",
-          "speak": "Which word rhymes with sun?",
-          "explain": "Sun and run both end with un. Run rhymes with sun.",
+          "prompt": "Which word rhymes with mop?",
+          "speak": "Which word rhymes with mop?",
+          "explain": "Mop and hop both end with op. Hop rhymes with mop.",
           "choices": [
             {
-              "text": "run",
-              "correct": true
-            },
-            {
-              "text": "bed",
+              "text": "cup",
               "correct": false
             },
             {
-              "text": "pig",
+              "text": "hop",
+              "correct": true
+            },
+            {
+              "text": "log",
               "correct": false
             }
           ],
@@ -2366,20 +2371,20 @@
         {
           "kind": "choice",
           "lang": "en",
-          "prompt": "Which word rhymes with hat?",
-          "speak": "Which word rhymes with hat?",
-          "explain": "Hat and cat both end with at. Cat rhymes with hat.",
+          "prompt": "Which word rhymes with fan?",
+          "speak": "Which word rhymes with fan?",
+          "explain": "Fan and can both end with an. Can rhymes with fan.",
           "choices": [
             {
-              "text": "dog",
+              "text": "jam",
               "correct": false
             },
             {
-              "text": "sun",
+              "text": "cup",
               "correct": false
             },
             {
-              "text": "cat",
+              "text": "can",
               "correct": true
             }
           ],
@@ -2388,36 +2393,36 @@
         {
           "kind": "spell",
           "lang": "en",
-          "word": "pig",
+          "word": "mop",
           "prompt": "Listen and spell",
-          "speak": "Spell pig.",
-          "explain": "P, I, G. Those letters spell pig."
+          "speak": "Spell mop.",
+          "explain": "M, O, P. Those letters spell mop."
         },
         {
           "kind": "spell",
           "lang": "en",
-          "word": "sun",
+          "word": "fan",
           "prompt": "Listen and spell",
-          "speak": "Spell sun.",
-          "explain": "S, U, N. Those letters spell sun."
+          "speak": "Spell fan.",
+          "explain": "F, A, N. Those letters spell fan."
         },
         {
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap the word you hear.",
-          "speak": "Is.",
-          "explain": "You heard is. i, s spells the word is.",
+          "speak": "We.",
+          "explain": "You heard we. w, e spells the word we.",
           "choices": [
             {
-              "text": "in",
+              "text": "me",
               "correct": false
             },
             {
-              "text": "is",
+              "text": "we",
               "correct": true
             },
             {
-              "text": "it",
+              "text": "go",
               "correct": false
             }
           ],

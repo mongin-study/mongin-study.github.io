@@ -270,6 +270,40 @@
     return null;
   }
 
+  var SHAPE_VI = {
+    circle: "hình tròn", oval: "hình bầu dục", square: "hình vuông",
+    rectangle: "hình chữ nhật", triangle: "hình tam giác", diamond: "hình thoi",
+    pentagon: "hình ngũ giác", hexagon: "hình lục giác", star: "hình ngôi sao",
+    heart: "hình trái tim"
+  };
+  var SHAPE_EN = {
+    circle: "circle", oval: "oval", square: "square", rectangle: "rectangle",
+    triangle: "triangle", diamond: "diamond", pentagon: "pentagon",
+    hexagon: "hexagon", star: "star", heart: "heart"
+  };
+  var COLOR_VI = {
+    "#ef4444": "đỏ", "#3b82f6": "xanh dương", "#eab308": "vàng",
+    "#22c55e": "xanh lá", "#f97316": "cam", "#a855f7": "tím",
+    "#ec4899": "hồng", "#111827": "đen", "#f8fafc": "trắng", "#92400e": "nâu"
+  };
+  var COLOR_EN = {
+    "#ef4444": "red", "#3b82f6": "blue", "#eab308": "yellow",
+    "#22c55e": "green", "#f97316": "orange", "#a855f7": "purple",
+    "#ec4899": "pink", "#111827": "black", "#f8fafc": "white", "#92400e": "brown"
+  };
+
+  function choiceName(c, lang) {
+    if (!c || c.text) return "";
+    var en = lang === "en";
+    var shape = c.shape ? ((en ? SHAPE_EN : SHAPE_VI)[c.shape] || "") : "";
+    var hex = String(c.color || "").toLowerCase();
+    var color = hex ? ((en ? COLOR_EN : COLOR_VI)[hex] || "") : "";
+    if (!shape && !color) return "";
+    if (shape && color) return en ? (color + " " + shape) : (shape + " màu " + color);
+    if (color) return en ? color : ("màu " + color);
+    return shape;
+  }
+
   function choiceFace(c) {
     var bits = [];
     if (c.emojis && c.emojis.length) {
@@ -577,6 +611,8 @@
       var grid = el("div", { class: "choices cols-" + question.columns + (question.variant === "cards" ? " is-cards" : "") });
       question.choices.forEach(function (choice) {
         var btn = el("button", { class: "choice" }, choiceFace(choice));
+        var spokenName = choiceName(choice, lang);
+        if (spokenName) btn.setAttribute("aria-label", spokenName);
         btn.addEventListener("click", function () {
           if (locked || busy || settled) return;
           if (choice.correct) {
@@ -648,6 +684,8 @@
       var keys = el("div", { class: "keypad" });
       ["1", "2", "3", "4", "5", "6", "7", "8", "9", "←", "0", "✓"].forEach(function (k) {
         var b = el("button", { class: "key" + (k === "✓" ? " is-go" : k === "←" ? " is-del" : ""), text: k });
+        if (k === "←") b.setAttribute("aria-label", lang === "en" ? "Delete" : "Xóa");
+        else if (k === "✓") b.setAttribute("aria-label", lang === "en" ? "Done" : "Xong");
         b.addEventListener("click", function () {
           if (k === "←") back();
           else if (k === "✓") submit();
@@ -731,6 +769,8 @@
         if (item.emoji) face.push(el("span", { class: "choice-emoji", text: item.emoji }));
         if (item.shape || item.color) face.push(HV.art.shape(item.shape || "circle", item.color || "#3b82f6", 72));
         var btn = el("button", { class: "select-item", "aria-pressed": "false" }, face);
+        var spokenName = choiceName(item, lang);
+        if (spokenName) btn.setAttribute("aria-label", spokenName);
         btn.addEventListener("click", function () {
           if (locked || settled) return;
           selected[item.id] = !selected[item.id];
