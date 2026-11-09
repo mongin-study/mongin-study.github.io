@@ -251,8 +251,8 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Mẹ Vy có 15 cây bút màu. Cả nhà ăn hết 6 cây bút màu. Vậy còn lại bao nhiêu cây bút màu?",
-          "speak": "Mẹ Vy có mười lăm cây bút màu. Cả nhà ăn hết sáu cây bút màu. Vậy còn lại bao nhiêu cây bút màu?",
+          "prompt": "Mẹ Vy có 15 cây bút màu. Mẹ Vy cho Gin 6 cây bút màu. Vậy Mẹ Vy còn bao nhiêu cây bút màu?",
+          "speak": "Mẹ Vy có mười lăm cây bút màu. Mẹ Vy cho Gin sáu cây bút màu. Vậy Mẹ Vy còn bao nhiêu cây bút màu?",
           "explain": "Mười lăm trừ sáu. Đếm lùi sáu từ mười lăm: mười bốn, mười ba, mười hai, mười một, mười, chín.",
           "choices": [
             {
@@ -301,8 +301,8 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Mẹ Vy có 16 cây bút màu. Cả nhà ăn hết 4 cây bút màu. Vậy còn lại bao nhiêu cây bút màu?",
-          "speak": "Mẹ Vy có mười sáu cây bút màu. Cả nhà ăn hết bốn cây bút màu. Vậy còn lại bao nhiêu cây bút màu?",
+          "prompt": "Mẹ Vy có 16 cây bút màu. Mẹ Vy cho Gin 4 cây bút màu. Vậy Mẹ Vy còn bao nhiêu cây bút màu?",
+          "speak": "Mẹ Vy có mười sáu cây bút màu. Mẹ Vy cho Gin bốn cây bút màu. Vậy Mẹ Vy còn bao nhiêu cây bút màu?",
           "explain": "Mười sáu trừ bốn. Đếm lùi bốn từ mười sáu: mười lăm, mười bốn, mười ba, mười hai.",
           "choices": [
             {
@@ -1152,7 +1152,7 @@
           "lang": "vi",
           "prompt": "Hình này có mấy đỉnh?",
           "speak": "Đếm các đỉnh, là các mũi nhọn. Có mấy đỉnh?",
-          "explain": "Hình bầu dục không có mũi nhọn nào, nên có không đỉnh.",
+          "explain": "Hình bầu dục không có mũi nhọn, nên không có đỉnh nào.",
           "choices": [
             {
               "text": "5",
@@ -1548,36 +1548,6 @@
             {
               "text": "nậu",
               "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "vi",
-          "prompt": "Đánh vần rồi chọn tiếng đúng",
-          "speak": "nờ ơ nơ hỏi nở",
-          "explain": "Nờ ơ nơ. Thêm dấu hỏi thành nở.",
-          "scene": {
-            "layout": "equation",
-            "text": "n + ơ + hỏi"
-          },
-          "columns": 2,
-          "choices": [
-            {
-              "text": "nỡ",
-              "correct": false
-            },
-            {
-              "text": "bở",
-              "correct": false
-            },
-            {
-              "text": "nởn",
-              "correct": false
-            },
-            {
-              "text": "nở",
-              "correct": true
             }
           ]
         },

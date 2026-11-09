@@ -351,11 +351,21 @@
     "Fantastic!",
     "Nice work!"
   ];
+  var PRAISE_EN_MON = [
+    "Bingo, Mon! Elsa cheers!",
+    "Hurrah, Mon! The golden puppy wags!",
+    "Awesome, snow princess!"
+  ];
+  var PRAISE_EN_GIN = [
+    "Bingo, superhero!",
+    "Hurrah, little hero!",
+    "Yay, cape power!"
+  ];
   var praiseBag = { mon: [], gin: [], en: [] };
   var correctHeard = 0;
 
   function isEnglishCheer(line) {
-    return /^(bingo|hurrah|awesome|yay|well done|great job|super|fantastic|nice work|you did it)\b/i.test(String(line || "").trim());
+    return /^(bingo|hurrah|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it)\b/i.test(String(line || "").trim());
   }
 
   function fitsMon(line) {
@@ -381,7 +391,8 @@
     var daily = Array.isArray(HV.dailyPraise) ? HV.dailyPraise : [];
     if (lang === "en") {
       var extra = daily.filter(function (line) { return englishCheerFor(child, line); });
-      return PRAISE_EN.concat(extra);
+      var own = child === "gin" ? PRAISE_EN_GIN : PRAISE_EN_MON;
+      return own.concat(PRAISE_EN).concat(extra);
     }
     var viDaily = daily.filter(function (line) { return !isEnglishCheer(line); });
     if (child === "mon") return PRAISE_EXTRA.mon.filter(fitsMon).concat(viDaily.filter(fitsMon));

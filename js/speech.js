@@ -33,8 +33,10 @@
     s = s.replace(/[×✕]/g, " nhân ");
     s = s.replace(/[÷]/g, " chia ");
     s = s.replace(/\d+/g, function (n) { return " " + readNum(n) + " "; });
-    s = s.replace(/[?？!！.,;:…"'“”‘’()[\]{}]/g, " ");
-    s = s.replace(/\s+/g, " ").trim().toLowerCase();
+    /* A comma is a real break. Without it, "mười, chín" becomes the word mười chín (19). */
+    s = s.replace(/[,，]/g, " \u0001 ");
+    s = s.replace(/[?？!！.;:…"'“”‘’()[\]{}]/g, " ");
+    s = s.replace(/[ ]+/g, " ").trim().toLowerCase();
     return s;
   }
 
@@ -87,6 +89,20 @@
 
   function tokenize(norm) {
     if (!norm || !manifestKeys.length) return null;
+    var flat = norm.replace(/\u0001/g, " ").replace(/\s+/g, " ").trim();
+    if (flat && manifest[flat]) return [flat];
+    if (norm.indexOf("\u0001") >= 0) {
+      var parts = norm.split("\u0001");
+      var all = [];
+      for (var p = 0; p < parts.length; p++) {
+        var bit = parts[p].replace(/\s+/g, " ").trim();
+        if (!bit) continue;
+        var sub = tokenize(bit);
+        if (!sub) return null;
+        all = all.concat(sub);
+      }
+      return all.length ? all : null;
+    }
     if (manifest[norm]) return [norm];
     var i = 0;
     var out = [];
