@@ -143,6 +143,18 @@ Units: `cái kẹo`, `cái bánh`, `quả táo`, `chiếc ô tô đồ chơi`, `
 
 Each question should include `explain`: one or two short Vietnamese sentences, read aloud after a wrong answer and after a correct answer on a hard exercise. For adding and subtracting small numbers, count on: `Chín cộng tám. Đếm thêm tám từ chín: mười, mười một, ... mười bảy.` Gin’s explanation stays one short sentence. Then run `scripts/build-audio.py` so HoaiMy records the new lines.
 
+### Đánh vần nâng cao (Mon)
+
+Mon's spelling practice has three harder sets in the **Đánh vần** menu, built by the `viSpellPlus` generator in `js/learn.js`:
+
+| Practice | `config.stage` | What it drills |
+| --- | --- | --- |
+| Đánh vần có vần | `van` | vần with two letters: `an, am, ai, ao, eo, ôi, ơi, ui, ong, at…` (cam, táo, mèo, bàn, bóng) |
+| Âm ghép | `ghep` | two-letter onsets: `ch, nh, th, kh, ph, gh, ng, tr, gi, qu` (nhà, chó, thỏ, phở, khỉ) |
+| Thử thách đánh vần | `mix` | both together (chim, chân, trăng, nhện, khăn, giỏi) |
+
+Each question is one of `build` (đánh vần → chọn tiếng), `rhyme` (tiếng có vần gì), `onset` (bắt đầu bằng âm gì), `picture` (tranh → chữ đúng) or `hear` (nghe → chữ đúng). Wrong answers differ by one part — the tone, a look-alike onset, or a near rhyme — so a mistake shows which part she missed. A daily file can use it directly, e.g. `"generator": "viSpellPlus", "config": { "stage": "ghep", "count": 8 }`, or write fixed questions in the same style. Spelling earns ×3 stars.
+
 ### Lời khen mỗi ngày
 
 Add a top-level `praise` array of a few fresh Vietnamese cheers. They join the built-in bank for that day. Record them with the same audio script (cheerful HoaiMy, a bit slower and higher).

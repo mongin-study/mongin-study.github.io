@@ -286,6 +286,163 @@
     });
   };
 
+  // ---- Đánh vần nâng cao: vần, âm ghép, rồi cả hai ----------------------
+  // Each word is [onset, rhyme, tone, picture]. The tone mark is placed by
+  // RHYME_INFO (index of the vowel that carries it), so distractors with
+  // other tones, onsets and rhymes are built rather than typed by hand.
+  var ONSET_NAME = {
+    "": "", b: "bờ", c: "cờ", k: "ca", d: "dờ", "đ": "đờ", g: "gờ", gh: "gờ", h: "hờ", l: "lờ", m: "mờ",
+    n: "nờ", r: "rờ", s: "sờ", t: "tờ", v: "vờ", x: "xờ", ch: "chờ", nh: "nhờ", th: "thờ", kh: "khờ",
+    ph: "phờ", ng: "ngờ", tr: "trờ", gi: "di", qu: "quờ"
+  };
+  var ONSET_LOOKALIKE = {
+    ch: ["tr", "c", "nh"], nh: ["n", "ng", "h"], th: ["t", "tr", "h"], kh: ["k", "h", "c"],
+    ph: ["p", "b", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
+    gh: ["g", "ng", "h"], qu: ["c", "k", "h"]
+  };
+  var RHYME_INFO = {
+    a: ["a", 0], e: ["e", 0], "ê": ["ê", 0], i: ["i", 0], o: ["o", 0], "ô": ["ô", 0], "ơ": ["ơ", 0], u: ["u", 0], "ư": ["ư", 0],
+    an: ["a nờ an", 0], am: ["a mờ am", 0], ai: ["a i ai", 0], ao: ["a o ao", 0], eo: ["e o eo", 0],
+    oi: ["o i oi", 0], "ôi": ["ô i ôi", 0], "ơi": ["ơ i ơi", 0], ui: ["u i ui", 0], on: ["o nờ on", 0],
+    "ôm": ["ô mờ ôm", 0], em: ["e mờ em", 0], im: ["i mờ im", 0], in: ["i nờ in", 0], "ân": ["ớ nờ ân", 0],
+    "âu": ["ớ u âu", 0], "ên": ["ê nờ ên", 0], ong: ["o ngờ ong", 0], "ăng": ["á ngờ ăng", 0],
+    "ơn": ["ơ nờ ơn", 0], "ôn": ["ô nờ ôn", 0], "ơm": ["ơ mờ ơm", 0], "ăn": ["á nờ ăn", 0], at: ["a tờ at", 0], ap: ["a pờ ap", 0]
+  };
+  var TONE_MARK = { ngang: "", "huyền": "̀", "sắc": "́", "hỏi": "̉", "ngã": "̃", "nặng": "̣" };
+  var TONE_LIST = ["ngang", "huyền", "sắc", "hỏi", "ngã", "nặng"];
+  var SPELL_STAGES = {
+    van: [
+      ["c", "am", "ngang", "🍊"], ["t", "ai", "ngang", "👂"], ["t", "ao", "sắc", "🍎"], ["m", "eo", "huyền", "🐱"],
+      ["k", "eo", "nặng", "🍬"], ["b", "ơi", "ngang", "🏊"], ["t", "ôm", "ngang", "🦐"], ["n", "ui", "sắc", "⛰️"],
+      ["s", "ao", "ngang", "⭐"], ["b", "an", "huyền", ""], ["n", "ôi", "huyền", "🍲"], ["c", "on", "ngang", ""],
+      ["l", "ai", "ngang", ""], ["đ", "ôi", "ngang", ""], ["m", "ai", "ngang", ""], ["b", "ong", "sắc", "⚽"],
+      ["c", "ao", "ngang", ""], ["v", "ai", "ngang", ""], ["l", "on", "ngang", ""], ["b", "at", "sắc", "🥣"]
+    ],
+    ghep: [
+      ["nh", "a", "huyền", "🏠"], ["ch", "o", "sắc", "🐶"], ["th", "o", "hỏi", "🐰"], ["nh", "o", "ngang", "🍇"],
+      ["ph", "ơ", "hỏi", "🍜"], ["gh", "ê", "sắc", "🪑"], ["ng", "ô", "ngang", "🌽"], ["tr", "a", "huyền", "🍵"],
+      ["kh", "i", "hỏi", "🐒"], ["gi", "o", "sắc", "💨"], ["qu", "a", "hỏi", ""], ["ch", "e", "ngang", ""],
+      ["th", "ư", "ngang", "✉️"], ["kh", "ê", "sắc", ""], ["tr", "e", "ngang", ""], ["ch", "ơ", "nặng", ""]
+    ],
+    mix: [
+      ["ch", "im", "ngang", "🐦"], ["ch", "ân", "ngang", "🦶"], ["ch", "ai", "ngang", "🍾"], ["ch", "ao", "sắc", "🥣"],
+      ["nh", "ên", "nặng", "🕷️"], ["tr", "âu", "ngang", "🐃"], ["tr", "ăng", "ngang", "🌙"], ["th", "ơm", "ngang", ""],
+      ["kh", "oi", "sắc", ""], ["ng", "ôi", "ngang", ""], ["nh", "an", "ngã", ""], ["th", "am", "hỏi", ""],
+      ["ph", "ao", "ngang", ""], ["gi", "oi", "hỏi", ""], ["kh", "ăn", "ngang", ""], ["ng", "u", "hỏi", "😴"]
+    ]
+  };
+
+  function toned(rhyme, tone) {
+    var info = RHYME_INFO[rhyme] || [rhyme, 0];
+    var mark = TONE_MARK[tone] || "";
+    if (!mark) return rhyme;
+    var at = info[1] + 1;
+    return (rhyme.slice(0, at) + mark + rhyme.slice(at)).normalize("NFC");
+  }
+  function makeWord(onset, rhyme, tone) {
+    return onset + toned(rhyme, tone);
+  }
+  function spellSay(w) {
+    var plain = w[0] + w[1];
+    var full = makeWord(w[0], w[1], w[2]);
+    var rhymeHasEnd = w[1].length > 1 && RHYME_INFO[w[1]];
+    var say = (rhymeHasEnd ? RHYME_INFO[w[1]][0] + ". " : "") + ONSET_NAME[w[0]] + " " + w[1] + " " + plain;
+    if (w[2] !== "ngang") say += " " + w[2] + " " + full;
+    return say;
+  }
+  function spellExplain(w) {
+    var plain = w[0] + w[1];
+    var full = makeWord(w[0], w[1], w[2]);
+    var s = ONSET_NAME[w[0]].charAt(0).toUpperCase() + ONSET_NAME[w[0]].slice(1) + " " + w[1] + " " + plain + ".";
+    if (w[2] !== "ngang") s += " Thêm dấu " + w[2] + " thành " + full + ".";
+    if (w[0].length === 2) s += " Âm " + ONSET_NAME[w[0]] + " viết bằng hai chữ " + w[0].charAt(0) + " và " + w[0].charAt(1) + ".";
+    return s;
+  }
+  function uniq(list) {
+    var seen = {};
+    return list.filter(function (x) { if (!x || seen[x]) return false; seen[x] = true; return true; });
+  }
+  function wordDistractors(w) {
+    // One wrong tone, one look-alike onset, one near rhyme, so each wrong
+    // answer tests a different part of the spelling.
+    var full = makeWord(w[0], w[1], w[2]);
+    var byTone = shuffle(TONE_LIST.filter(function (t) { return t !== w[2]; }).map(function (t) { return makeWord(w[0], w[1], t); }));
+    var byOnset = shuffle((ONSET_LOOKALIKE[w[0]] || ["b", "m", "t", "l", "n"]).filter(function (o) { return o !== w[0]; })
+      .map(function (o) { return makeWord(o, w[1], w[2]); }));
+    var byRhyme = shuffle(Object.keys(RHYME_INFO).filter(function (r) {
+      return r !== w[1] && (r.charAt(0) === w[1].charAt(0) || r.slice(-1) === w[1].slice(-1));
+    }).map(function (r) { return makeWord(w[0], r, w[2]); }));
+    var picked = uniq([byTone[0], byOnset[0], byRhyme[0]].concat(byTone.slice(1), byRhyme.slice(1)))
+      .filter(function (x) { return x !== full; });
+    return picked.slice(0, 3);
+  }
+  function opts(correct, wrongs) {
+    return shuffle([{ text: correct, correct: true }].concat(wrongs.map(function (x) { return { text: x, correct: false }; })));
+  }
+  function spellPlusQuestion(w, type) {
+    var full = makeWord(w[0], w[1], w[2]);
+    if (type === "rhyme" && w[1].length > 1) {
+      var rhymes = uniq(shuffle(Object.keys(RHYME_INFO).filter(function (r) { return r.length > 1 && r !== w[1]; }))).slice(0, 3);
+      return choiceQ({
+        prompt: "Tiếng " + full + " có vần gì?",
+        speak: "Tiếng " + full + " có vần gì?",
+        explain: spellExplain(w) + " Vần là " + w[1] + ": " + RHYME_INFO[w[1]][0] + ".",
+        scene: { layout: "digit", text: full },
+        options: opts(w[1], rhymes)
+      });
+    }
+    if (type === "onset" && w[0].length === 2) {
+      var onsets = uniq((ONSET_LOOKALIKE[w[0]] || []).concat(["n", "h", "t"])).filter(function (o) { return o !== w[0]; }).slice(0, 3);
+      return choiceQ({
+        prompt: "Tiếng " + full + " bắt đầu bằng âm gì?",
+        speak: "Tiếng " + full + " bắt đầu bằng âm gì?",
+        explain: full.charAt(0).toUpperCase() + full.slice(1) + " bắt đầu bằng " + ONSET_NAME[w[0]] + ", viết là " + w[0] + ".",
+        scene: { layout: "digit", text: full },
+        options: opts(w[0], onsets)
+      });
+    }
+    if (type === "picture" && w[3]) {
+      return choiceQ({
+        prompt: "Tranh này là tiếng nào?",
+        speak: "Nhìn tranh. Chữ nào viết đúng?",
+        explain: spellExplain(w),
+        scene: { layout: "emojis", items: [w[3]] },
+        options: opts(full, wordDistractors(w))
+      });
+    }
+    if (type === "hear") {
+      return choiceQ({
+        prompt: "Nghe rồi chọn chữ viết đúng",
+        speak: "Chọn chữ " + full,
+        explain: spellExplain(w),
+        options: opts(full, wordDistractors(w))
+      });
+    }
+    var parts = w[0] + " + " + w[1] + (w[2] !== "ngang" ? " + " + w[2] : "");
+    return choiceQ({
+      prompt: "Đánh vần rồi chọn tiếng đúng",
+      speak: spellSay(w),
+      explain: spellExplain(w),
+      scene: { layout: "equation", text: parts },
+      options: opts(full, wordDistractors(w))
+    });
+  }
+  HV.spellPlus = { stages: SPELL_STAGES, word: makeWord, question: spellPlusQuestion };
+
+  HV.generators.viSpellPlus = function (cfg) {
+    var stage = cfg.stage || "van";
+    var bank = stage === "all" ? SPELL_STAGES.van.concat(SPELL_STAGES.ghep, SPELL_STAGES.mix) : (SPELL_STAGES[stage] || SPELL_STAGES.van);
+    var types = cfg.types || (stage === "ghep" ? ["build", "build", "onset", "picture", "hear"] :
+      stage === "van" ? ["build", "build", "rhyme", "picture", "hear"] : ["build", "rhyme", "onset", "picture", "hear"]);
+    return take(bank, cfg.count || 6).map(function (w, i) {
+      var t = types[i % types.length];
+      if (t === "picture" && !w[3]) t = "build";
+      if (t === "rhyme" && w[1].length < 2) t = "build";
+      if (t === "onset" && w[0].length < 2) t = "build";
+      return spellPlusQuestion(w, t);
+    });
+  };
+
   function enWord(bank, count, howMany, prompt, speakOf) {
     var names = bank.map(function (x) { return x.name; });
     return take(bank, count).map(function (item) {
@@ -649,6 +806,9 @@
   ex({ id: "mon-vi-tones", child: "mon", subject: "vietnamese", category: "tones", title: "Dấu thanh", subtitle: "Sắc, huyền, hỏi, ngã, nặng", icon: "🎵", generator: "viTones", config: { count: 4 } });
   ex({ id: "mon-vi-rhymes", child: "mon", subject: "vietnamese", category: "rhymes", title: "Đọc vần", subtitle: "an, ông, iêng", icon: "🔤", generator: "viRhymes", config: { count: 4 } });
   ex({ id: "mon-vi-spell", child: "mon", subject: "vietnamese", category: "spell", title: "Đánh vần", subtitle: "Âm rồi vần rồi tiếng", icon: "✨", generator: "viSpell", config: { count: 4 } });
+  ex({ id: "mon-vi-spell-van", child: "mon", subject: "vietnamese", category: "spell", title: "Đánh vần có vần", subtitle: "an, am, ai, ao, eo, ôi…", icon: "🧩", generator: "viSpellPlus", config: { stage: "van", count: 8 } });
+  ex({ id: "mon-vi-spell-ghep", child: "mon", subject: "vietnamese", category: "spell", title: "Âm ghép", subtitle: "ch, nh, th, kh, ph, tr, ng…", icon: "🔗", generator: "viSpellPlus", config: { stage: "ghep", count: 8 } });
+  ex({ id: "mon-vi-spell-mix", child: "mon", subject: "vietnamese", category: "spell", title: "Thử thách đánh vần", subtitle: "Âm ghép, vần và dấu", icon: "🏆", generator: "viSpellPlus", config: { stage: "mix", count: 8 } });
   ex({ id: "mon-vi-words", child: "mon", subject: "vietnamese", category: "words", title: "Chữ và tranh", subtitle: "Chọn chữ đúng", icon: "🖼️", generator: "viWords", config: { count: 4 } });
   ex({ id: "mon-vi-sentences", child: "mon", subject: "vietnamese", category: "words", title: "Đọc câu ngắn", subtitle: "Nhìn tranh, chọn câu", icon: "📘", generator: "viSentences", config: { count: 3 } });
 

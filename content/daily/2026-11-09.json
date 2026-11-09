@@ -1583,6 +1583,939 @@
       ]
     },
     {
+      "id": "daily-2026-11-09-mon-vi-van",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Vần an, am, ai, ao",
+      "subtitle": "Đánh vần vần trước, rồi ghép",
+      "icon": "🧩",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a mờ am. cờ am cam",
+          "explain": "Cờ am cam.",
+          "scene": {
+            "layout": "equation",
+            "text": "c + am"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "nam",
+              "correct": false
+            },
+            {
+              "text": "cam",
+              "correct": true
+            },
+            {
+              "text": "cạm",
+              "correct": false
+            },
+            {
+              "text": "cim",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a i ai. tờ ai tai",
+          "explain": "Tờ ai tai.",
+          "scene": {
+            "layout": "equation",
+            "text": "t + ai"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "tai",
+              "correct": true
+            },
+            {
+              "text": "ti",
+              "correct": false
+            },
+            {
+              "text": "tải",
+              "correct": false
+            },
+            {
+              "text": "bai",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a o ao. tờ ao tao sắc táo",
+          "explain": "Tờ ao tao. Thêm dấu sắc thành táo.",
+          "scene": {
+            "layout": "equation",
+            "text": "t + ao + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "tào",
+              "correct": false
+            },
+            {
+              "text": "tát",
+              "correct": false
+            },
+            {
+              "text": "láo",
+              "correct": false
+            },
+            {
+              "text": "táo",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a nờ an. bờ an ban huyền bàn",
+          "explain": "Bờ an ban. Thêm dấu huyền thành bàn.",
+          "scene": {
+            "layout": "equation",
+            "text": "b + an + huyền"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "bàn",
+              "correct": true
+            },
+            {
+              "text": "làn",
+              "correct": false
+            },
+            {
+              "text": "bạn",
+              "correct": false
+            },
+            {
+              "text": "bài",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng mèo có vần gì?",
+          "speak": "Tiếng mèo có vần gì?",
+          "explain": "Mờ eo meo. Thêm dấu huyền thành mèo. Vần là eo: e o eo.",
+          "scene": {
+            "layout": "digit",
+            "text": "mèo"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ap",
+              "correct": false
+            },
+            {
+              "text": "ơi",
+              "correct": false
+            },
+            {
+              "text": "eo",
+              "correct": true
+            },
+            {
+              "text": "im",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "e o eo. ca eo keo nặng kẹo",
+          "explain": "Ca eo keo. Thêm dấu nặng thành kẹo.",
+          "scene": {
+            "layout": "equation",
+            "text": "k + eo + nặng"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "kạo",
+              "correct": false
+            },
+            {
+              "text": "kẻo",
+              "correct": false
+            },
+            {
+              "text": "tẹo",
+              "correct": false
+            },
+            {
+              "text": "kẹo",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Bờ ơi bơi.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🏊"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "bơi",
+              "correct": true
+            },
+            {
+              "text": "bợi",
+              "correct": false
+            },
+            {
+              "text": "bui",
+              "correct": false
+            },
+            {
+              "text": "mơi",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ tôm",
+          "explain": "Tờ ôm tôm.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "môm",
+              "correct": false
+            },
+            {
+              "text": "tỗm",
+              "correct": false
+            },
+            {
+              "text": "tam",
+              "correct": false
+            },
+            {
+              "text": "tôm",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng núi có vần gì?",
+          "speak": "Tiếng núi có vần gì?",
+          "explain": "Nờ ui nui. Thêm dấu sắc thành núi. Vần là ui: u i ui.",
+          "scene": {
+            "layout": "digit",
+            "text": "núi"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "an",
+              "correct": false
+            },
+            {
+              "text": "ui",
+              "correct": true
+            },
+            {
+              "text": "ơn",
+              "correct": false
+            },
+            {
+              "text": "ôn",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Bờ ong bong. Thêm dấu sắc thành bóng.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "⚽"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "bòng",
+              "correct": false
+            },
+            {
+              "text": "móng",
+              "correct": false
+            },
+            {
+              "text": "bóng",
+              "correct": true
+            },
+            {
+              "text": "bắng",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-09-mon-vi-ghep",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Âm ghép ch, nh, th",
+      "subtitle": "Hai chữ, một âm",
+      "icon": "🔗",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "nhờ a nha huyền nhà",
+          "explain": "Nhờ a nha. Thêm dấu huyền thành nhà. Âm nhờ viết bằng hai chữ n và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "nh + a + huyền"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "nhà",
+              "correct": true
+            },
+            {
+              "text": "nhã",
+              "correct": false
+            },
+            {
+              "text": "hà",
+              "correct": false
+            },
+            {
+              "text": "nhào",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "nhờ o nho",
+          "explain": "Nhờ o nho. Âm nhờ viết bằng hai chữ n và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "nh + o"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "nhong",
+              "correct": false
+            },
+            {
+              "text": "nho",
+              "correct": true
+            },
+            {
+              "text": "ho",
+              "correct": false
+            },
+            {
+              "text": "nhò",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "chờ o cho sắc chó",
+          "explain": "Chờ o cho. Thêm dấu sắc thành chó. Âm chờ viết bằng hai chữ c và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "ch + o + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "chéo",
+              "correct": false
+            },
+            {
+              "text": "chó",
+              "correct": true
+            },
+            {
+              "text": "có",
+              "correct": false
+            },
+            {
+              "text": "chỏ",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng thỏ bắt đầu bằng âm gì?",
+          "speak": "Tiếng thỏ bắt đầu bằng âm gì?",
+          "explain": "Thỏ bắt đầu bằng thờ, viết là th.",
+          "scene": {
+            "layout": "digit",
+            "text": "thỏ"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "t",
+              "correct": false
+            },
+            {
+              "text": "h",
+              "correct": false
+            },
+            {
+              "text": "th",
+              "correct": true
+            },
+            {
+              "text": "tr",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "chờ e che",
+          "explain": "Chờ e che. Âm chờ viết bằng hai chữ c và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "ch + e"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "chè",
+              "correct": false
+            },
+            {
+              "text": "che",
+              "correct": true
+            },
+            {
+              "text": "nhe",
+              "correct": false
+            },
+            {
+              "text": "chem",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Khờ i khi. Thêm dấu hỏi thành khỉ. Âm khờ viết bằng hai chữ k và h.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🐒"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "cỉ",
+              "correct": false
+            },
+            {
+              "text": "khỉ",
+              "correct": true
+            },
+            {
+              "text": "khì",
+              "correct": false
+            },
+            {
+              "text": "khổi",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "phờ ơ phơ hỏi phở",
+          "explain": "Phờ ơ phơ. Thêm dấu hỏi thành phở. Âm phờ viết bằng hai chữ p và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "ph + ơ + hỏi"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "phờ",
+              "correct": false
+            },
+            {
+              "text": "pở",
+              "correct": false
+            },
+            {
+              "text": "phở",
+              "correct": true
+            },
+            {
+              "text": "phởm",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng ghế bắt đầu bằng âm gì?",
+          "speak": "Tiếng ghế bắt đầu bằng âm gì?",
+          "explain": "Ghế bắt đầu bằng gờ, viết là gh.",
+          "scene": {
+            "layout": "digit",
+            "text": "ghế"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "g",
+              "correct": false
+            },
+            {
+              "text": "h",
+              "correct": false
+            },
+            {
+              "text": "gh",
+              "correct": true
+            },
+            {
+              "text": "ng",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Ngờ ô ngô. Âm ngờ viết bằng hai chữ n và g.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🌽"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ngố",
+              "correct": false
+            },
+            {
+              "text": "ngôm",
+              "correct": false
+            },
+            {
+              "text": "ngô",
+              "correct": true
+            },
+            {
+              "text": "nô",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ trà",
+          "explain": "Trờ a tra. Thêm dấu huyền thành trà. Âm trờ viết bằng hai chữ t và r.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "tràt",
+              "correct": false
+            },
+            {
+              "text": "chà",
+              "correct": false
+            },
+            {
+              "text": "tra",
+              "correct": false
+            },
+            {
+              "text": "trà",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-09-mon-vi-mix",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Thử thách: chim, chân, trăng",
+      "subtitle": "Âm ghép, vần và dấu",
+      "icon": "🏆",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "i mờ im. chờ im chim",
+          "explain": "Chờ im chim. Âm chờ viết bằng hai chữ c và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "ch + im"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "cim",
+              "correct": false
+            },
+            {
+              "text": "chim",
+              "correct": true
+            },
+            {
+              "text": "chôm",
+              "correct": false
+            },
+            {
+              "text": "chịm",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "ớ nờ ân. chờ ân chân",
+          "explain": "Chờ ân chân. Âm chờ viết bằng hai chữ c và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "ch + ân"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "chon",
+              "correct": false
+            },
+            {
+              "text": "chần",
+              "correct": false
+            },
+            {
+              "text": "chân",
+              "correct": true
+            },
+            {
+              "text": "trân",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Chờ ai chai. Âm chờ viết bằng hai chữ c và h.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🍾"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "chat",
+              "correct": false
+            },
+            {
+              "text": "cai",
+              "correct": false
+            },
+            {
+              "text": "chại",
+              "correct": false
+            },
+            {
+              "text": "chai",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng trâu bắt đầu bằng âm gì?",
+          "speak": "Tiếng trâu bắt đầu bằng âm gì?",
+          "explain": "Trâu bắt đầu bằng trờ, viết là tr.",
+          "scene": {
+            "layout": "digit",
+            "text": "trâu"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "r",
+              "correct": false
+            },
+            {
+              "text": "tr",
+              "correct": true
+            },
+            {
+              "text": "ch",
+              "correct": false
+            },
+            {
+              "text": "t",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "á ngờ ăng. trờ ăng trăng",
+          "explain": "Trờ ăng trăng. Âm trờ viết bằng hai chữ t và r.",
+          "scene": {
+            "layout": "equation",
+            "text": "tr + ăng"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "trăng",
+              "correct": true
+            },
+            {
+              "text": "trẳng",
+              "correct": false
+            },
+            {
+              "text": "trong",
+              "correct": false
+            },
+            {
+              "text": "tăng",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Nhờ ên nhên. Thêm dấu nặng thành nhện. Âm nhờ viết bằng hai chữ n và h.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🕷️"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "nhện",
+              "correct": true
+            },
+            {
+              "text": "nện",
+              "correct": false
+            },
+            {
+              "text": "nhệ",
+              "correct": false
+            },
+            {
+              "text": "nhến",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng thơm có vần gì?",
+          "speak": "Tiếng thơm có vần gì?",
+          "explain": "Thờ ơm thơm. Âm thờ viết bằng hai chữ t và h. Vần là ơm: ơ mờ ơm.",
+          "scene": {
+            "layout": "digit",
+            "text": "thơm"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ơm",
+              "correct": true
+            },
+            {
+              "text": "im",
+              "correct": false
+            },
+            {
+              "text": "ên",
+              "correct": false
+            },
+            {
+              "text": "ân",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "á nờ ăn. khờ ăn khăn",
+          "explain": "Khờ ăn khăn. Âm khờ viết bằng hai chữ k và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "kh + ăn"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "kăn",
+              "correct": false
+            },
+            {
+              "text": "khăng",
+              "correct": false
+            },
+            {
+              "text": "khắn",
+              "correct": false
+            },
+            {
+              "text": "khăn",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ giỏi",
+          "explain": "Di oi gioi. Thêm dấu hỏi thành giỏi. Âm di viết bằng hai chữ g và i.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "giủi",
+              "correct": false
+            },
+            {
+              "text": "dỏi",
+              "correct": false
+            },
+            {
+              "text": "gioi",
+              "correct": false
+            },
+            {
+              "text": "giỏi",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "ngờ u ngu hỏi ngủ",
+          "explain": "Ngờ u ngu. Thêm dấu hỏi thành ngủ. Âm ngờ viết bằng hai chữ n và g.",
+          "scene": {
+            "layout": "equation",
+            "text": "ng + u + hỏi"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ghủ",
+              "correct": false
+            },
+            {
+              "text": "ngủi",
+              "correct": false
+            },
+            {
+              "text": "ngủ",
+              "correct": true
+            },
+            {
+              "text": "ngú",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "daily-2026-11-09-mon-en",
       "child": "mon",
       "subject": "english",
