@@ -5,7 +5,16 @@
     "Bố Hà khen Mon đọc vần eo, ôi thật rõ!",
     "Gin ơi, Pom vẫy đuôi vì Gin chạm đúng chữ!",
     "Mẹ Vy thơm Gin một cái nào!",
-    "Elsa thấy Mon đọc trờ, ngờ giỏi lắm!"
+    "Elsa thấy Mon đọc trờ, ngờ giỏi lắm!",
+    "Mon ơi Rapunzel cũng vỗ tay cho Mon!",
+    "Pom ngồi cạnh Mon vì Mon đúng bài!",
+    "Gin ơi siêu áo choàng tung bay!",
+    "Bingo, Mon! Rapunzel claps for you!",
+    "Hurrah, Mon! Elsa loves this one!",
+    "Awesome, snow princess Mon!",
+    "Bingo, little hero!",
+    "Hurrah, superhero Gin!",
+    "Yay, cape power today!"
   ],
   "memory": [
     {
@@ -388,29 +397,29 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Số tiếp theo là số nào?",
-          "speak": "hai, bốn, sáu, tám. Số tiếp theo là số nào?",
-          "explain": "Mỗi lần thêm hai. Tám cộng hai bằng mười.",
+          "speak": "bốn, sáu, tám, mười. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm hai. Mười cộng hai bằng mười hai.",
           "choices": [
-            {
-              "text": "10",
-              "correct": true
-            },
-            {
-              "text": "12",
-              "correct": false
-            },
             {
               "text": "11",
               "correct": false
             },
             {
-              "text": "9",
+              "text": "12",
+              "correct": true
+            },
+            {
+              "text": "14",
+              "correct": false
+            },
+            {
+              "text": "13",
               "correct": false
             }
           ],
           "scene": {
             "layout": "equation",
-            "text": "2, 4, 6, 8, ?"
+            "text": "4, 6, 8, 10, ?"
           }
         },
         {
@@ -446,58 +455,58 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Số tiếp theo là số nào?",
-          "speak": "mười, hai mươi, ba mươi, bốn mươi. Số tiếp theo là số nào?",
-          "explain": "Mỗi lần thêm mười. Bốn mươi cộng mười bằng năm mươi.",
+          "speak": "năm, mười lăm, hai mươi lăm, ba mươi lăm. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm mười. Ba mươi lăm cộng mười bằng bốn mươi lăm.",
           "choices": [
             {
-              "text": "60",
+              "text": "40",
               "correct": false
             },
             {
-              "text": "50",
+              "text": "45",
               "correct": true
             },
             {
-              "text": "49",
+              "text": "55",
               "correct": false
             },
             {
-              "text": "51",
+              "text": "36",
               "correct": false
             }
           ],
           "scene": {
             "layout": "equation",
-            "text": "10, 20, 30, 40, ?"
+            "text": "5, 15, 25, 35, ?"
           }
         },
         {
           "kind": "choice",
           "lang": "vi",
           "prompt": "Số tiếp theo là số nào?",
-          "speak": "hai mươi, mười tám, mười sáu, mười bốn. Số tiếp theo là số nào?",
-          "explain": "Mỗi lần bớt hai. Mười bốn trừ hai bằng mười hai.",
+          "speak": "sáu, năm, bốn, ba. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần bớt một. Ba trừ một bằng hai.",
           "choices": [
             {
-              "text": "11",
+              "text": "1",
               "correct": false
             },
             {
-              "text": "14",
+              "text": "4",
               "correct": false
             },
             {
-              "text": "12",
+              "text": "2",
               "correct": true
             },
             {
-              "text": "13",
+              "text": "5",
               "correct": false
             }
           ],
           "scene": {
             "layout": "equation",
-            "text": "20, 18, 16, 14, ?"
+            "text": "6, 5, 4, 3, ?"
           }
         },
         {
@@ -669,9 +678,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Số 16 là số chẵn hay số lẻ?",
-          "speak": "Số mười sáu là số chẵn hay số lẻ?",
-          "explain": "Số mười sáu chia đều thành các cặp, không dư. Đó là số chẵn.",
+          "prompt": "Số 22 là số chẵn hay số lẻ?",
+          "speak": "Số hai mươi hai là số chẵn hay số lẻ?",
+          "explain": "Số hai mươi hai chia đều thành các cặp, không dư. Đó là số chẵn.",
           "choices": [
             {
               "text": "Lẻ",
@@ -684,7 +693,7 @@
           ],
           "scene": {
             "layout": "pairs",
-            "count": 16
+            "count": 22
           }
         },
         {
@@ -770,30 +779,30 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Số liền sau 39 là số nào?",
-          "speak": "Số liền sau ba mươi chín là số nào?",
-          "explain": "Thêm một: ba mươi chín thêm một là bốn mươi.",
+          "prompt": "Số liền sau 47 là số nào?",
+          "speak": "Số liền sau bốn mươi bảy là số nào?",
+          "explain": "Thêm một: bốn mươi bảy thêm một là bốn mươi tám.",
           "choices": [
             {
-              "text": "40",
+              "text": "48",
               "correct": true
             },
             {
-              "text": "49",
+              "text": "57",
               "correct": false
             },
             {
-              "text": "38",
+              "text": "46",
               "correct": false
             },
             {
-              "text": "30",
+              "text": "40",
               "correct": false
             }
           ],
           "scene": {
             "layout": "digit",
-            "text": "39"
+            "text": "47"
           }
         },
         {
@@ -2380,18 +2389,18 @@
         {
           "kind": "spell",
           "lang": "en",
-          "word": "sun",
+          "word": "hat",
           "prompt": "Listen and spell",
-          "speak": "Spell sun.",
-          "explain": "S, U, N. Those letters spell sun."
+          "speak": "Spell hat.",
+          "explain": "H, A, T. Those letters spell hat."
         },
         {
           "kind": "spell",
           "lang": "en",
-          "word": "bed",
+          "word": "pig",
           "prompt": "Listen and spell",
-          "speak": "Spell bed.",
-          "explain": "B, E, D. Those letters spell bed."
+          "speak": "Spell pig.",
+          "explain": "P, I, G. Those letters spell pig."
         },
         {
           "kind": "choice",
@@ -2422,19 +2431,322 @@
       "child": "mon",
       "subject": "english",
       "category": "listen",
-      "title": "Pom plays in the snow",
+      "title": "Gold crown and new pictures",
       "subtitle": "Tap what you hear",
       "icon": "🎧",
       "level": 2,
-      "questions": [],
-      "generator": "enListen",
-      "config": {
-        "set": "mon",
-        "count": 10,
-        "seed": "2026-11-11",
-        "choices": 4,
-        "gradual": false
-      }
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a gold crown",
+          "explain": "It is a gold crown. Gold is the color, and the picture is a crown.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "👑",
+              "color": "#d4a017",
+              "correct": true
+            },
+            {
+              "emoji": "🦋",
+              "color": "#ec4899",
+              "correct": false
+            },
+            {
+              "emoji": "🚲",
+              "color": "#3b82f6",
+              "correct": false
+            },
+            {
+              "emoji": "🦕",
+              "color": "#22c55e",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a pink butterfly",
+          "explain": "It is a pink butterfly. Pink is the color, and the picture is a butterfly.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🦋",
+              "color": "#ec4899",
+              "correct": true
+            },
+            {
+              "emoji": "🚲",
+              "color": "#3b82f6",
+              "correct": false
+            },
+            {
+              "emoji": "🦕",
+              "color": "#22c55e",
+              "correct": false
+            },
+            {
+              "emoji": "🦊",
+              "color": "#f97316",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a blue bicycle",
+          "explain": "It is a blue bicycle. Blue is the color, and the picture is a bicycle.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🚲",
+              "color": "#3b82f6",
+              "correct": true
+            },
+            {
+              "emoji": "🦕",
+              "color": "#22c55e",
+              "correct": false
+            },
+            {
+              "emoji": "🦊",
+              "color": "#f97316",
+              "correct": false
+            },
+            {
+              "emoji": "🍪",
+              "color": "#92400e",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a green dinosaur",
+          "explain": "It is a green dinosaur. Green is the color, and the picture is a dinosaur.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🦕",
+              "color": "#22c55e",
+              "correct": true
+            },
+            {
+              "emoji": "🦊",
+              "color": "#f97316",
+              "correct": false
+            },
+            {
+              "emoji": "🍪",
+              "color": "#92400e",
+              "correct": false
+            },
+            {
+              "emoji": "☂️",
+              "color": "#a855f7",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "an orange fox",
+          "explain": "It is an orange fox. Orange is the color, and the picture is a fox.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🦊",
+              "color": "#f97316",
+              "correct": true
+            },
+            {
+              "emoji": "🍪",
+              "color": "#92400e",
+              "correct": false
+            },
+            {
+              "emoji": "☂️",
+              "color": "#a855f7",
+              "correct": false
+            },
+            {
+              "emoji": "🔔",
+              "color": "#eab308",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a brown cookie",
+          "explain": "It is a brown cookie. Brown is the color, and the picture is a cookie.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🍪",
+              "color": "#92400e",
+              "correct": true
+            },
+            {
+              "emoji": "☂️",
+              "color": "#a855f7",
+              "correct": false
+            },
+            {
+              "emoji": "🔔",
+              "color": "#eab308",
+              "correct": false
+            },
+            {
+              "emoji": "🚩",
+              "color": "#ef4444",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a purple umbrella",
+          "explain": "It is a purple umbrella. Purple is the color, and the picture is an umbrella.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "☂️",
+              "color": "#a855f7",
+              "correct": true
+            },
+            {
+              "emoji": "🔔",
+              "color": "#eab308",
+              "correct": false
+            },
+            {
+              "emoji": "🚩",
+              "color": "#ef4444",
+              "correct": false
+            },
+            {
+              "emoji": "🦉",
+              "color": "#f8fafc",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a yellow bell",
+          "explain": "It is a yellow bell. Yellow is the color, and the picture is a bell.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🔔",
+              "color": "#eab308",
+              "correct": true
+            },
+            {
+              "emoji": "🚩",
+              "color": "#ef4444",
+              "correct": false
+            },
+            {
+              "emoji": "🦉",
+              "color": "#f8fafc",
+              "correct": false
+            },
+            {
+              "emoji": "👑",
+              "color": "#d4a017",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a red flag",
+          "explain": "It is a red flag. Red is the color, and the picture is a flag.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🚩",
+              "color": "#ef4444",
+              "correct": true
+            },
+            {
+              "emoji": "🦉",
+              "color": "#f8fafc",
+              "correct": false
+            },
+            {
+              "emoji": "👑",
+              "color": "#d4a017",
+              "correct": false
+            },
+            {
+              "emoji": "🦋",
+              "color": "#ec4899",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "a white owl",
+          "explain": "It is a white owl. White is the color, and the picture is an owl.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🦉",
+              "color": "#f8fafc",
+              "correct": true
+            },
+            {
+              "emoji": "👑",
+              "color": "#d4a017",
+              "correct": false
+            },
+            {
+              "emoji": "🦋",
+              "color": "#ec4899",
+              "correct": false
+            },
+            {
+              "emoji": "🚲",
+              "color": "#3b82f6",
+              "correct": false
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "daily-2026-11-11-gin-arith",
@@ -3296,21 +3608,21 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Số nào lớn hơn?",
-          "speak": "Bảy và ba. Số nào lớn hơn?",
-          "explain": "Bảy lớn hơn ba.",
+          "speak": "Chín và một. Số nào lớn hơn?",
+          "explain": "Chín lớn hơn một.",
           "choices": [
             {
-              "text": "7",
-              "correct": true
+              "text": "1",
+              "correct": false
             },
             {
-              "text": "3",
-              "correct": false
+              "text": "9",
+              "correct": true
             }
           ],
           "scene": {
             "layout": "equation",
-            "text": "7    3"
+            "text": "9    1"
           }
         },
         {
@@ -3401,9 +3713,9 @@
           "kind": "order",
           "lang": "vi",
           "prompt": "Xếp từ bé đến lớn",
-          "speak": "Xếp từ bé đến lớn",
+          "speak": "Xếp một, ba và bốn từ bé đến lớn.",
           "hint": "Số bé đứng trước",
-          "explain": "Thứ tự là một, rồi ba, rồi bốn.",
+          "explain": "Số một đứng trước, rồi đến ba, rồi đến bốn.",
           "tokens": [
             {
               "text": "4",
@@ -3423,9 +3735,9 @@
           "kind": "order",
           "lang": "vi",
           "prompt": "Xếp từ bé đến lớn",
-          "speak": "Xếp từ bé đến lớn",
+          "speak": "Xếp hai, ba và năm từ bé đến lớn.",
           "hint": "Số bé đứng trước",
-          "explain": "Thứ tự là hai, rồi ba, rồi năm.",
+          "explain": "Số hai đứng trước, rồi đến ba, rồi đến năm.",
           "tokens": [
             {
               "text": "5",
@@ -4079,17 +4391,378 @@
       "subject": "english",
       "category": "listen",
       "title": "Tap what you hear",
-      "subtitle": "Horses, frogs, fire trucks",
+      "subtitle": "Gold, gray, dinosaurs",
       "icon": "🎧",
-      "questions": [],
-      "generator": "enListen",
-      "config": {
-        "set": "gin",
-        "count": 16,
-        "seed": "2026-11-11",
-        "choices": 3,
-        "gradual": true
-      }
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the gold.",
+          "explain": "It is the gold medal.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🥇",
+              "correct": true
+            },
+            {
+              "emoji": "🥈",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the gray.",
+          "explain": "It is gray.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#6b7280",
+              "size": 110,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#111827",
+              "size": 110,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the silver.",
+          "explain": "It is the silver medal.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🥈",
+              "correct": true
+            },
+            {
+              "emoji": "🥉",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the dinosaur.",
+          "explain": "It is the dinosaur.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🦕",
+              "correct": true
+            },
+            {
+              "emoji": "🐢",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the fox.",
+          "explain": "It is the fox.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🦊",
+              "correct": true
+            },
+            {
+              "emoji": "🐺",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the cake.",
+          "explain": "It is the cake.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🎂",
+              "correct": true
+            },
+            {
+              "emoji": "🧁",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the butterfly.",
+          "explain": "It is the butterfly.",
+          "variant": "cards",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🦋",
+              "correct": true
+            },
+            {
+              "emoji": "🐝",
+              "correct": false
+            },
+            {
+              "emoji": "🐞",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the zebra.",
+          "explain": "It is the zebra.",
+          "variant": "cards",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🐴",
+              "correct": false
+            },
+            {
+              "emoji": "🦓",
+              "correct": true
+            },
+            {
+              "emoji": "🐄",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the helicopter.",
+          "explain": "It is the helicopter.",
+          "variant": "cards",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "✈️",
+              "correct": false
+            },
+            {
+              "emoji": "🚗",
+              "correct": false
+            },
+            {
+              "emoji": "🚁",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the giraffe.",
+          "explain": "It is the giraffe.",
+          "variant": "cards",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🦒",
+              "correct": true
+            },
+            {
+              "emoji": "🐘",
+              "correct": false
+            },
+            {
+              "emoji": "🐪",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the panda.",
+          "explain": "It is the panda.",
+          "variant": "cards",
+          "columns": 3,
+          "choices": [
+            {
+              "emoji": "🐻",
+              "correct": false
+            },
+            {
+              "emoji": "🐨",
+              "correct": false
+            },
+            {
+              "emoji": "🐼",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the owl.",
+          "explain": "It is the owl.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🐦",
+              "correct": false
+            },
+            {
+              "emoji": "🦆",
+              "correct": false
+            },
+            {
+              "emoji": "🐧",
+              "correct": false
+            },
+            {
+              "emoji": "🦉",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the bicycle.",
+          "explain": "It is the bicycle.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🚲",
+              "correct": true
+            },
+            {
+              "emoji": "🛴",
+              "correct": false
+            },
+            {
+              "emoji": "🚗",
+              "correct": false
+            },
+            {
+              "emoji": "🚌",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the umbrella.",
+          "explain": "It is the umbrella.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🎩",
+              "correct": false
+            },
+            {
+              "emoji": "☂️",
+              "correct": true
+            },
+            {
+              "emoji": "👢",
+              "correct": false
+            },
+            {
+              "emoji": "🧤",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the cookie.",
+          "explain": "It is the cookie.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🍩",
+              "correct": false
+            },
+            {
+              "emoji": "🍦",
+              "correct": false
+            },
+            {
+              "emoji": "🍪",
+              "correct": true
+            },
+            {
+              "emoji": "🍬",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the bell.",
+          "explain": "It is the bell.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🥁",
+              "correct": false
+            },
+            {
+              "emoji": "🎺",
+              "correct": false
+            },
+            {
+              "emoji": "🎸",
+              "correct": false
+            },
+            {
+              "emoji": "🔔",
+              "correct": true
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -284,12 +284,14 @@
   var COLOR_VI = {
     "#ef4444": "đỏ", "#3b82f6": "xanh dương", "#eab308": "vàng",
     "#22c55e": "xanh lá", "#f97316": "cam", "#a855f7": "tím",
-    "#ec4899": "hồng", "#111827": "đen", "#f8fafc": "trắng", "#92400e": "nâu"
+    "#ec4899": "hồng", "#111827": "đen", "#f8fafc": "trắng", "#92400e": "nâu",
+    "#6b7280": "xám", "#d4a017": "vàng kim"
   };
   var COLOR_EN = {
     "#ef4444": "red", "#3b82f6": "blue", "#eab308": "yellow",
     "#22c55e": "green", "#f97316": "orange", "#a855f7": "purple",
-    "#ec4899": "pink", "#111827": "black", "#f8fafc": "white", "#92400e": "brown"
+    "#ec4899": "pink", "#111827": "black", "#f8fafc": "white", "#92400e": "brown",
+    "#6b7280": "gray", "#d4a017": "gold"
   };
 
   function choiceName(c, lang) {

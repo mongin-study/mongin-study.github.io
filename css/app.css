@@ -759,7 +759,8 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
   .kid-card { min-height: 320px; }
 }
 @media (max-width: 720px) {
-  .choices.cols-3, .ex-list, .cat-grid, .today-row, .miles { grid-template-columns: 1fr; }
+  .choices.cols-3 { grid-template-columns: 1fr 1fr; }
+  .ex-list, .cat-grid, .today-row, .miles { grid-template-columns: 1fr; }
   .day-row { gap: 4px; }
   .day-pill strong { font-size: 18px; }
   .avatar-board { width: 88px; }
