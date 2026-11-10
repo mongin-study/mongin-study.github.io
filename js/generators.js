@@ -830,7 +830,7 @@
           ]);
           var ground = pick([
             ["🐱", "Con mèo"],
-            ["🐶", "Cún"],
+            ["🐶", "Pom"],
             ["⚽", "Quả bóng"],
             ["🚗", "Chiếc xe"]
           ]);
@@ -847,7 +847,7 @@
             ]
           });
         }
-        var left = pick([["🚗", "Chiếc xe"], ["🐶", "Cún"], ["🍎", "Quả táo"]]);
+        var left = pick([["🚗", "Chiếc xe"], ["🐶", "Pom"], ["🍎", "Quả táo"]]);
         var right = pick([["🐱", "Con mèo"], ["⭐", "Ngôi sao"], ["⚽", "Quả bóng"]]);
         var askLeft = Math.random() < 0.5;
         var item = askLeft ? left : right;

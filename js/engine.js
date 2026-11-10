@@ -387,7 +387,7 @@
   ];
   var PRAISE_EN_MON = [
     "Bingo, Mon! Elsa cheers!",
-    "Hurrah, Mon! The golden puppy wags!",
+    "Hurrah, Mon! Pom wags his tail!",
     "Awesome, snow princess!"
   ];
   var PRAISE_EN_GIN = [
@@ -405,7 +405,8 @@
   function fitsMon(line) {
     var s = String(line || "");
     if (isEnglishCheer(s) || /gin/i.test(s)) return false;
-    return /mon|elsa|pom|cún vàng|cun vang/i.test(s);
+    if (/cún vàng|cun vang|golden puppy/i.test(s)) return false;
+    return /mon|elsa|pom/i.test(s);
   }
 
   function fitsGin(line) {

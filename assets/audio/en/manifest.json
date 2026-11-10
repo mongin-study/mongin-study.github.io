@@ -1857,7 +1857,11 @@
     "m o p those letters spell mop": "assets/audio/en/b66cf0096b2c.mp3",
     "f a n those letters spell fan": "assets/audio/en/a7bc29da30d1.mp3",
     "we": "assets/audio/en/1643fbebb23c.mp3",
-    "you heard we w e spells the word we": "assets/audio/en/116bd975a715.mp3"
+    "you heard we w e spells the word we": "assets/audio/en/116bd975a715.mp3",
+    "the letters n u t spell nut tap the nut": "assets/audio/en/fc9bf343be1f.mp3",
+    "he": "assets/audio/en/5716147e84bc.mp3",
+    "you heard he h e spells the word he": "assets/audio/en/304a6ab67b79.mp3",
+    "hurrah mon pom wags his tail": "assets/audio/en/99c02749e55b.mp3"
   },
   "pitch": "+4Hz"
 }
