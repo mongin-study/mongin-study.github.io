@@ -298,7 +298,7 @@
   var ONSET_LOOKALIKE = {
     ch: ["tr", "c", "nh"], nh: ["n", "ng", "h"], th: ["t", "tr", "h"], kh: ["k", "h", "c"],
     ph: ["p", "b", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
-    gh: ["g", "ng", "h"], qu: ["c", "k", "h"]
+    gh: ["g", "ng", "h"], qu: ["c", "k", "h"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
   };
   var RHYME_INFO = {
     a: ["a", 0], e: ["e", 0], "ê": ["ê", 0], i: ["i", 0], o: ["o", 0], "ô": ["ô", 0], "ơ": ["ơ", 0], u: ["u", 0], "ư": ["ư", 0],
@@ -316,7 +316,8 @@
       ["k", "eo", "nặng", "🍬"], ["b", "ơi", "ngang", "🏊"], ["t", "ôm", "ngang", "🦐"], ["n", "ui", "sắc", "⛰️"],
       ["s", "ao", "ngang", "⭐"], ["b", "an", "huyền", ""], ["n", "ôi", "huyền", "🍲"], ["c", "on", "ngang", ""],
       ["l", "ai", "ngang", ""], ["đ", "ôi", "ngang", ""], ["m", "ai", "ngang", ""], ["b", "ong", "sắc", "⚽"],
-      ["c", "ao", "ngang", ""], ["v", "ai", "ngang", ""], ["l", "on", "ngang", ""], ["b", "at", "sắc", "🥣"]
+      ["c", "ao", "ngang", ""], ["v", "ai", "ngang", ""], ["l", "on", "ngang", ""], ["b", "at", "sắc", "🥣"],
+      ["h", "eo", "ngang", "🐷"], ["l", "eo", "ngang", ""], ["m", "ôi", "ngang", "👄"], ["g", "ôi", "sắc", ""], ["l", "on", "ngang", "🥫"]
     ],
     ghep: [
       ["nh", "a", "huyền", "🏠"], ["ch", "o", "sắc", "🐶"], ["th", "o", "hỏi", "🐰"], ["nh", "o", "ngang", "🍇"],
@@ -328,7 +329,8 @@
       ["ch", "im", "ngang", "🐦"], ["ch", "ân", "ngang", "🦶"], ["ch", "ai", "ngang", "🍾"], ["ch", "ao", "sắc", "🥣"],
       ["nh", "ên", "nặng", "🕷️"], ["tr", "âu", "ngang", "🐃"], ["tr", "ăng", "ngang", "🌙"], ["th", "ơm", "ngang", ""],
       ["kh", "oi", "sắc", ""], ["ng", "ôi", "ngang", ""], ["nh", "an", "ngã", ""], ["th", "am", "hỏi", ""],
-      ["ph", "ao", "ngang", ""], ["gi", "oi", "hỏi", ""], ["kh", "ăn", "ngang", ""], ["ng", "u", "hỏi", "😴"]
+      ["ph", "ao", "ngang", ""], ["gi", "oi", "hỏi", ""], ["kh", "ăn", "ngang", ""], ["ng", "u", "hỏi", "😴"],
+      ["tr", "ơi", "huyền", ""], ["tr", "eo", "huyền", ""], ["ng", "ôi", "ngang", ""]
     ]
   };
 
