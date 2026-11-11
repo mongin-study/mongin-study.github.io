@@ -74,7 +74,7 @@
       };
     }
     if (layout === "pairs") {
-      return { layout: layout, count: clamp(Number(scene.count) || 0, 0, 30) };
+      return { layout: layout, count: clamp(Number(scene.count) || 0, 0, 40) };
     }
     if (layout === "bond") {
       return {
