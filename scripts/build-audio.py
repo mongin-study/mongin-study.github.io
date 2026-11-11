@@ -27,6 +27,7 @@ NAMES = {
     "gin": "Gin",
     "vy": "Vy",
     "hà": "Hà",
+    "pom": "Pom",
 }
 
 

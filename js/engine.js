@@ -104,6 +104,7 @@
         return {
           id: "c" + i,
           text: c.text != null ? String(c.text).slice(0, 80) : "",
+          label: c.label ? String(c.label).slice(0, 48) : "",
           emoji: c.emoji ? String(c.emoji).slice(0, 8) : "",
           emojis: Array.isArray(c.emojis) ? c.emojis.map(function (e) { return String(e).slice(0, 8); }).slice(0, 12) : [],
           shape: allowShape(c.shape),
@@ -294,12 +295,50 @@
     "#6b7280": "gray", "#d4a017": "gold"
   };
 
+  var EMOJI_EN = {
+    "🍎": "apple", "🍌": "banana", "🍐": "pear", "🍊": "orange", "🍇": "grapes",
+    "🌸": "flower", "🐻": "bear", "🐱": "cat", "🐶": "dog", "☁️": "cloud",
+    "🚌": "bus", "🚗": "car", "🚂": "train", "⛵": "boat", "✈️": "plane",
+    "💗": "heart", "⭐": "star", "🎈": "balloon", "🧸": "teddy", "⚽": "ball",
+    "🐸": "frog", "🦆": "duck", "🐟": "fish", "🦸": "superhero", "🛡️": "shield",
+    "🐦": "bird", "🐄": "cow", "🐷": "pig", "🐰": "rabbit", "🦁": "lion",
+    "🐵": "monkey", "🥭": "mango", "🍉": "watermelon", "🍓": "strawberry", "🍑": "peach",
+    "🍏": "apple", "🚚": "truck", "🪁": "kite", "🎲": "dice", "🪀": "yo-yo",
+    "👁️": "eye", "👂": "ear", "👃": "nose", "👄": "mouth", "✋": "hand", "🦶": "foot",
+    "⚡": "lightning", "👑": "crown", "🎭": "mask", "🖤": "heart", "🔵": "circle",
+    "🚀": "rocket", "🤖": "robot", "🥁": "drum", "🏰": "castle", "🐧": "penguin",
+    "🐯": "tiger", "🐳": "whale", "🚜": "tractor", "🛴": "scooter", "🧤": "mitten",
+    "🌈": "rainbow", "☀️": "sun", "🌙": "moon", "🖍️": "crayon", "🍋": "lemon",
+    "🍒": "cherry", "🥥": "coconut", "🎃": "pumpkin", "🥕": "carrot", "🍅": "tomato",
+    "🍈": "melon", "🌽": "corn", "🧀": "cheese", "🐪": "camel", "🐙": "octopus",
+    "🦜": "parrot", "🎸": "guitar", "🏆": "trophy", "🍭": "lollipop", "🍿": "popcorn",
+    "🐌": "snail", "🐞": "ladybug",
+    "🚢": "ship", "🚩": "flag", "🦀": "crab", "🪥": "brush", "🪄": "wand",
+    "🪞": "mirror", "🐴": "horse", "👗": "dress", "🔑": "key", "❄️": "snowflake",
+    "👘": "gown", "💇": "braid", "🦌": "deer", "🧁": "cupcake", "🐘": "elephant",
+    "🐢": "turtle", "🐚": "shell", "🎫": "ticket", "🌳": "tree", "👟": "shoe",
+    "✏️": "pencil", "🕊️": "bird"
+  };
+  var EMOJI_VI = {
+    "🍎": "quả táo", "🍌": "quả chuối", "🐱": "con mèo", "🐶": "Pom", "🎈": "quả bóng bay",
+    "🚗": "chiếc xe", "⭐": "ngôi sao", "🐸": "con ếch", "🦆": "con vịt", "🐟": "con cá",
+    "🐘": "con voi", "🐢": "con rùa", "🚀": "tên lửa", "🥁": "cái trống", "🐧": "chim cánh cụt",
+    "🚜": "máy kéo", "🦌": "con hươu", "🧁": "bánh", "🌈": "cầu vồng", "❄️": "bông tuyết",
+    "🌳": "cây", "☁️": "đám mây", "✋": "bàn tay", "🐚": "cái vỏ", "🎫": "cái vé",
+    "👟": "đôi giày", "🐰": "con thỏ", "✏️": "bút chì"
+  };
+
   function choiceName(c, lang) {
-    if (!c || c.text) return "";
+    if (!c) return "";
+    if (c.label) return String(c.label);
+    if (c.text) return "";
     var en = lang === "en";
     var shape = c.shape ? ((en ? SHAPE_EN : SHAPE_VI)[c.shape] || "") : "";
     var hex = String(c.color || "").toLowerCase();
     var color = hex ? ((en ? COLOR_EN : COLOR_VI)[hex] || "") : "";
+    var picture = c.emoji ? ((en ? EMOJI_EN : EMOJI_VI)[c.emoji] || "") : "";
+    if (picture && color) return en ? (color + " " + picture) : (picture + " màu " + color);
+    if (picture) return picture;
     if (!shape && !color) return "";
     if (shape && color) return en ? (color + " " + shape) : (shape + " màu " + color);
     if (color) return en ? color : ("màu " + color);
