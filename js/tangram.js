@@ -495,16 +495,26 @@ function leave(hash) {
     if (!session.puzzleMiss) session.firsts += 1;
     var last = session.index >= session.list.length - 1;
     afterSound(HV.audio && HV.audio.correct, function () {
+      if (!session) return;
+      if (last) {
+        session.phase = "done";
+        session.award = roundStars(session.child, session.firsts, session.list.length);
+        if (HV.storage && HV.storage.markPlayed) HV.storage.markPlayed(session.child, "tangram");
+        if (HV.ui && HV.ui.render) HV.ui.render();
+        var line = HV.engine && HV.engine.praise ? HV.engine.praise(session.child, "vi") : "";
+        var explain = (session.award && session.award.note)
+          || ("Đúng lần đầu " + U.readNumber(session.firsts) + " trên " + U.readNumber(session.list.length) + " câu.");
+        var lines = [];
+        if (line) lines.push({ text: line, lang: "vi" });
+        lines.push({ text: explain, lang: "vi" });
+        var job = HV.engine && HV.engine.speakLines ? HV.engine.speakLines(lines) : Promise.resolve();
+        Promise.resolve(job).then(function () {
+          if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
+        });
+        return;
+      }
       praiseThen(function () {
         if (!session) return;
-        if (last) {
-          session.phase = "done";
-          session.award = roundStars(session.child, session.firsts, session.list.length);
-          if (HV.storage && HV.storage.markPlayed) HV.storage.markPlayed(session.child, "tangram");
-          if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
-          if (HV.ui && HV.ui.render) HV.ui.render();
-          return;
-        }
         session.index += 1;
         loadPuzzle();
         if (HV.ui && HV.ui.render) HV.ui.render();

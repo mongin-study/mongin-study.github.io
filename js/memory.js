@@ -116,11 +116,20 @@
       total: total,
       stars: award.stars
     });
-    if (HV.audio) HV.audio.fanfare();
-    var line = HV.engine && HV.engine.praise ? HV.engine.praise(play.child) : "Giỏi quá!";
+    var line = HV.engine && HV.engine.praise ? HV.engine.praise(play.child, "vi") : "Giỏi quá!";
     play.praise = line;
-    if (HV.speech) HV.speech.speak(line, { lang: "vi" });
+    var explain = play.note || ("Đúng lần đầu " + HV.util.readNumber(correct) + " trên " + HV.util.readNumber(total) + " câu.");
+    var lead = HV.audio && HV.audio.star ? (HV.audio.star() || 0) : 0;
     if (HV.ui && HV.ui.render) HV.ui.render();
+    setTimeout(function () {
+      var job = HV.engine && HV.engine.speakLines ? HV.engine.speakLines([
+        { text: line, lang: "vi" },
+        { text: explain, lang: "vi" }
+      ]) : Promise.resolve();
+      Promise.resolve(job).then(function () {
+        if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
+      });
+    }, Math.round(lead * 1000) + 50);
   }
 
   function flip(index) {

@@ -605,11 +605,8 @@
 
   function sessionTarget(child, baseLen, entry) {
     var authored = entry && Array.isArray(entry.questions) ? entry.questions.length : 0;
-    // A hand-written daily set of about ten stays that long. Catalog listening
-    // for Gin can still grow to a longer tap session.
+    // A hand-written daily set of about ten stays that long. Every other bài is 10 câu.
     if (authored >= 8 && authored <= 12 && !entry.generator) return authored;
-    var listen = entry && (entry.generator === "enListen" || (entry.category === "listen" && subjectOf(entry) === "english"));
-    if (child === "gin" && listen) return 16;
     return 10;
   }
 
@@ -835,17 +832,27 @@
         });
       }
       session.celebrate = session.crossed || unlockedNow ? "jingle" : "fanfare";
-      celebrateResult(stars, session.celebrate);
-      if (stars > 0 && HV.engine && HV.engine.praise && !session.praiseQueued) {
+      if (HV.engine && HV.engine.praise && !session.praiseQueued) {
         var praiseLang = subjectOf(session.entry) === "english" ? "en" : "vi";
-        session.endLine = HV.engine.praise(child, praiseLang);
+        session.endLine = stars > 0 ? HV.engine.praise(child, praiseLang) : "";
         session.endLang = praiseLang;
+        session.endExplain = (session.award && session.award.note)
+          || ("Đúng lần đầu " + U.readNumber(correct) + " trên " + U.readNumber(total) + " câu.");
         session.praiseQueued = true;
+        var lines = [];
+        if (session.endLine) lines.push({ text: session.endLine, lang: praiseLang });
+        lines.push({ text: session.endExplain, lang: "vi" });
+        var lead = stars > 0 && HV.audio ? (HV.audio.star() || 0) : 0;
         setTimeout(function () {
           if (!state.session || state.session.phase !== "result" || state.session.praiseSaid) return;
           state.session.praiseSaid = true;
-          if (HV.speech) HV.speech.speak(state.session.endLine, { lang: state.session.endLang });
-        }, 700);
+          var job = HV.engine.speakLines ? HV.engine.speakLines(lines) : Promise.resolve();
+          Promise.resolve(job).then(function () {
+            if (!state.session || state.session.phase !== "result" || !stars || !HV.audio) return;
+            if (state.session.celebrate === "jingle") HV.audio.jingle();
+            else HV.audio.fanfare();
+          });
+        }, Math.round(lead * 1000) + 50);
       }
     }
     var award = session.award || { note: "" };
@@ -1050,14 +1057,6 @@
         text: on ? "Đang bật" : "Đang tắt"
       })
     ]);
-  }
-
-  function celebrateResult(stars, kind) {
-    var lead = stars > 0 ? HV.audio.star() : 0;
-    setTimeout(function () {
-      if (kind === "jingle") HV.audio.jingle();
-      else HV.audio.fanfare();
-    }, Math.round((lead || 0) * 1000) + 30);
   }
 
   function parentKid(child) {

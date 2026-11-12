@@ -848,7 +848,7 @@
   enEx({ id: "gin-en-letters", child: "gin", category: "letters", title: "A B C", subtitle: "Ba chữ đầu", icon: "🅰️", generator: "enLetters", config: { count: 3, choices: 3, set: "abc" } });
   enEx({ id: "gin-en-colors", child: "gin", category: "colors", title: "Colors", subtitle: "Red, yellow, blue", icon: "🎨", generator: "enColors", config: { count: 4, choices: 3, set: "easy" } });
   enEx({ id: "gin-en-animals", child: "gin", category: "animals", title: "Animals", subtitle: "Cat and dog", icon: "🐶", generator: "enAnimals", config: { count: 4, choices: 3, set: "easy" } });
-  enEx({ id: "gin-en-listen", child: "gin", category: "listen", title: "Tap what you hear", subtitle: "Colors, animals, heroes", icon: "🎧", generator: "enListen", config: { count: 16, set: "gin", gradual: true } });
+  enEx({ id: "gin-en-listen", child: "gin", category: "listen", title: "Tap what you hear", subtitle: "Colors, animals, heroes", icon: "🎧", generator: "enListen", config: { count: 10, set: "gin", gradual: true } });
 
   function pushSpeak(list, lang, text) {
     if (text) list.push({ lang: lang, text: String(text) });

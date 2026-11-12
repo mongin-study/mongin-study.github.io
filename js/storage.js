@@ -367,7 +367,7 @@
     if (tier === 0 && monMastered(child, entry)) {
       stars = 0;
       mastered = true;
-      note = "Đã giỏi rồi ⭐ — thử bài khó hơn nhé!";
+      note = "Đã giỏi rồi, thử bài khó hơn nhé!";
     } else if (tier === 0) {
       var today = todayList(child);
       var sub = subjectOfEntry(entry);
@@ -406,7 +406,7 @@
       max: max,
       mastered: mastered,
       badge: tier >= 2 ? "Nhiều sao ×" + tier : "",
-      value: mastered ? "Đã giỏi rồi ⭐ — thử bài khó hơn nhé!" : (tier === 0 ? "đúng hết được 1 sao" : "đến " + max + " sao")
+      value: mastered ? "Đã giỏi rồi, thử bài khó hơn nhé!" : (tier === 0 ? "đúng hết được 1 sao" : "đến " + max + " sao")
     };
   }
 

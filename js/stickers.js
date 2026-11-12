@@ -172,7 +172,7 @@
       else if (HV.audio && HV.audio.fanfare) lead = Number(HV.audio.fanfare()) || 0;
     } catch (e) {}
     if (!HV.speech || !sticker || !sticker.name) return;
-    var delay = Math.round(Math.min(640, Math.max(380, lead * 420)));
+    var delay = Math.round((lead || 0) * 1000) + 60;
     setTimeout(function () {
       HV.speech.speak(sticker.name, { lang: "vi", keepSound: true });
     }, delay);

@@ -468,6 +468,8 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .rod { width: 18px; height: 72px; border-radius: 8px; background: #3b82f6; display: block; }
 .one, .pair-dot { width: 22px; height: 22px; border-radius: 50%; background: #f97316; display: block; }
 .rod.is-empty, .one.is-empty { background: transparent; color: var(--muted); width: auto; height: auto; }
+.scene-odd { flex-direction: column; gap: 6px; }
+.scene-odd .fine { text-align: center; margin: 0; }
 .scene-pairs { display: grid; grid-template-columns: repeat(2, 28px); gap: 8px 16px; justify-content: center; }
 .pair-dot.is-extra { background: #a855f7; }
 .scene-bond { flex-direction: column; }

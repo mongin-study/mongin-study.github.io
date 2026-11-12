@@ -288,6 +288,18 @@
     }, Math.round(dur * 1000) + 30);
   }
 
+  function cheerDone(child, note, correct, total) {
+    var line = HV.engine && HV.engine.praise ? HV.engine.praise(child, "vi") : "";
+    var explain = note || ("Đúng lần đầu " + U.readNumber(correct) + " trên " + U.readNumber(total) + " câu.");
+    var lines = [];
+    if (line) lines.push({ text: line, lang: "vi" });
+    lines.push({ text: explain, lang: "vi" });
+    var job = HV.engine && HV.engine.speakLines ? HV.engine.speakLines(lines) : Promise.resolve();
+    Promise.resolve(job).then(function () {
+      if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
+    });
+  }
+
   function advance() {
     if (!session) return;
     session.index += 1;
@@ -301,8 +313,8 @@
       session.phase = "done";
       session.award = roundStars(session.child, session.firsts, session.items.length);
       if (HV.storage && HV.storage.markPlayed) HV.storage.markPlayed(session.child, "shop");
-      if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
       renderNow();
+      cheerDone(session.child, session.award.note, session.firsts, session.items.length);
       return;
     }
     renderNow();
@@ -318,7 +330,10 @@
       if (session.attempts === 0) session.firsts += 1;
       session.mark = { good: String(value) };
       renderNow();
-      afterSound(HV.audio && HV.audio.correct, function () { praiseThen(advance); });
+      afterSound(HV.audio && HV.audio.correct, function () {
+        if (session && session.index >= session.items.length - 1) advance();
+        else praiseThen(advance);
+      });
       return;
     }
     session.attempts += 1;

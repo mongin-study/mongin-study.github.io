@@ -74,7 +74,7 @@
       };
     }
     if (layout === "pairs") {
-      return { layout: layout, count: clamp(Number(scene.count) || 0, 0, 40) };
+      return { layout: layout, count: clamp(Number(scene.count) || 0, 0, 99) };
     }
     if (layout === "bond") {
       return {
@@ -251,12 +251,29 @@
       return blocks;
     }
     if (scene.layout === "pairs") {
-      var pairs = el("div", { class: "scene scene-pairs" });
-      for (var p = 0; p < scene.count; p++) {
-        var dotp = el("i", { class: p === scene.count - 1 && scene.count % 2 === 1 ? "pair-dot is-extra" : "pair-dot" });
-        pairs.appendChild(dotp);
+      var count = scene.count;
+      function pairDots(howMany) {
+        var pairs = el("div", { class: "scene scene-pairs" });
+        for (var p = 0; p < howMany; p++) {
+          var extra = p === howMany - 1 && howMany % 2 === 1;
+          pairs.appendChild(el("i", { class: extra ? "pair-dot is-extra" : "pair-dot" }));
+        }
+        return pairs;
       }
-      return pairs;
+      /* A full grid of 41 or 63 dots was clamped to 40, so an odd number looked even.
+         Big numbers show the numeral and only the ones place, which has the same parity. */
+      if (count > 20) {
+        var ones = count % 10;
+        var wrap = el("div", { class: "scene scene-odd" });
+        wrap.appendChild(el("div", { class: "scene-digit", text: String(count) }));
+        wrap.appendChild(el("p", {
+          class: "fine",
+          text: ones ? "Hàng đơn vị" : "Hàng đơn vị là 0, không dư"
+        }));
+        if (ones) wrap.appendChild(pairDots(ones));
+        return wrap;
+      }
+      return pairDots(count);
     }
     if (scene.layout === "bond") {
       return el("div", { class: "scene scene-bond" }, [
@@ -473,6 +490,22 @@
     var viDaily = daily.filter(function (line) { return !isEnglishCheer(line); });
     if (child === "mon") return PRAISE_EXTRA.mon.filter(fitsMon).concat(viDaily.filter(fitsMon));
     return PRAISE.concat(PRAISE_EXTRA.gin || []).concat(viDaily.filter(fitsGin));
+  }
+
+  function speakLines(items) {
+    var list = (items || []).filter(function (item) { return item && item.text; });
+    if (!HV.speech || !list.length) return Promise.resolve();
+    var job = Promise.resolve();
+    list.forEach(function (item, index) {
+      job = job.then(function () {
+        return HV.speech.speak(item.text, {
+          lang: item.lang === "en" ? "en" : "vi",
+          chain: index > 0,
+          keepSound: true
+        });
+      });
+    });
+    return job.then(function () {}, function () {});
   }
 
   function praise(child, lang) {
@@ -932,6 +965,7 @@
     normalize: normalize,
     mount: mount,
     praise: function (child, lang) { return praise(child, lang); },
+    speakLines: speakLines,
     shouldVoicePraise: shouldVoicePraise,
     beginSessionPraise: function () { correctHeard = 0; },
     resetPraise: function () {

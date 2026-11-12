@@ -48,6 +48,20 @@
     }, Math.round(dur * 1000) + 40);
   }
 
+  function cheerDone(bag, child, note, correct, total) {
+    var line = HV.engine && HV.engine.praise ? HV.engine.praise(child, "vi") : "";
+    var explain = note || ("Đúng lần đầu " + U.readNumber(correct) + " trên " + U.readNumber(total) + " câu.");
+    var lines = [];
+    if (line) lines.push({ text: line, lang: "vi" });
+    lines.push({ text: explain, lang: "vi" });
+    var job = HV.engine && HV.engine.speakLines ? HV.engine.speakLines(lines) : Promise.resolve();
+    var e = bag.epoch;
+    Promise.resolve(job).then(function () {
+      if (e !== bag.epoch || !bag.session) return;
+      if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
+    });
+  }
+
   function praiseThen(bag, then) {
     var voice = HV.engine && HV.engine.shouldVoicePraise && HV.engine.shouldVoicePraise();
     var line = voice && HV.engine.praise ? HV.engine.praise(bag.session.child, "vi") : "";
@@ -284,8 +298,8 @@
       s.phase = "done";
       s.award = roundStars(s.child, s.firsts, s.total);
       markPlayed(s.child, "nha-so");
-      if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
       renderIf(nha);
+      cheerDone(nha, s.child, s.award.note, s.firsts, s.total);
       return;
     }
     renderIf(nha);
@@ -301,7 +315,10 @@
       if (s.attempts === 0) s.firsts += 1;
       s.mark = { good: String(value) };
       renderIf(nha);
-      afterSound(nha, HV.audio && HV.audio.correct, function () { praiseThen(nha, nhaAdvance); });
+      afterSound(nha, HV.audio && HV.audio.correct, function () {
+        if (nha.session && nha.session.index >= nha.session.items.length - 1) nhaAdvance();
+        else praiseThen(nha, nhaAdvance);
+      });
       return;
     }
     s.attempts += 1;
@@ -572,8 +589,8 @@
       s.phase = "done";
       s.award = roundStars(s.child, s.firsts, s.total);
       markPlayed(s.child, "ma-hinh");
-      if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
       renderIf(ma);
+      cheerDone(ma, s.child, s.award.note, s.firsts, s.total);
       return;
     }
     renderIf(ma);
@@ -591,7 +608,10 @@
       if (s.attempts === 0) s.firsts += 1;
       s.mark = { good: id };
       renderIf(ma);
-      afterSound(ma, HV.audio && HV.audio.correct, function () { praiseThen(ma, maAdvance); });
+      afterSound(ma, HV.audio && HV.audio.correct, function () {
+        if (ma.session && ma.session.index >= ma.session.items.length - 1) maAdvance();
+        else praiseThen(ma, maAdvance);
+      });
       return;
     }
     s.attempts += 1;
@@ -879,8 +899,8 @@
     s.phase = "done";
     s.award = roundStars(s.child, s.firsts, s.total);
     markPlayed(s.child, "noi-so");
-    if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
     renderIf(noi);
+    cheerDone(noi, s.child, s.award.note, s.firsts, s.total);
   }
 
   function noiTap(num) {
@@ -906,20 +926,19 @@
     var done = s.connected >= s.total;
     if (done) s.busy = true;
     renderIf(noi);
-    var voice = HV.engine && HV.engine.shouldVoicePraise && HV.engine.shouldVoicePraise();
-    var line = voice && HV.engine.praise ? HV.engine.praise(s.child, "vi") : "";
-    if (line) {
+    afterSound(noi, HV.audio && HV.audio.correct, function () {
+      if (!noi.session || noi.session !== s) return;
+      if (done) {
+        noiFinish();
+        return;
+      }
+      var voice = HV.engine && HV.engine.shouldVoicePraise && HV.engine.shouldVoicePraise();
+      var line = voice && HV.engine.praise ? HV.engine.praise(s.child, "vi") : "";
+      if (!line) return;
       s.banner = line;
       renderIf(noi);
       say(line);
-    }
-    if (HV.audio && HV.audio.correct) HV.audio.correct();
-    if (!done) return;
-    var e = noi.epoch;
-    setTimeout(function () {
-      if (e !== noi.epoch || !noi.session) return;
-      noiFinish();
-    }, line ? 1100 : 520);
+    });
   }
 
   function noiPlay() {
@@ -1217,8 +1236,8 @@
       s.phase = "done";
       s.award = roundStars(s.child, s.firsts, s.total);
       markPlayed(s.child, "dem-tranh");
-      if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
       renderIf(dem);
+      cheerDone(dem, s.child, s.award.note, s.firsts, s.total);
       return;
     }
     renderIf(dem);
@@ -1234,7 +1253,10 @@
       if (s.attempts === 0) s.firsts += 1;
       s.mark = { good: String(value) };
       renderIf(dem);
-      afterSound(dem, HV.audio && HV.audio.correct, function () { praiseThen(dem, demAdvance); });
+      afterSound(dem, HV.audio && HV.audio.correct, function () {
+        if (dem.session && dem.session.index >= dem.session.items.length - 1) demAdvance();
+        else praiseThen(dem, demAdvance);
+      });
       return;
     }
     s.attempts += 1;
@@ -1269,7 +1291,10 @@
     s.busy = true;
     if (!s.missed) s.firsts += 1;
     renderIf(dem);
-    afterSound(dem, HV.audio && HV.audio.correct, function () { praiseThen(dem, demAdvance); });
+    afterSound(dem, HV.audio && HV.audio.correct, function () {
+      if (dem.session && dem.session.index >= dem.session.items.length - 1) demAdvance();
+      else praiseThen(dem, demAdvance);
+    });
   }
 
   function demOrdinals(scene, kind) {
