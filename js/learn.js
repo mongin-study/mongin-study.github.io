@@ -306,7 +306,18 @@
     oi: ["o i oi", 0], "ôi": ["ô i ôi", 0], "ơi": ["ơ i ơi", 0], ui: ["u i ui", 0], on: ["o nờ on", 0],
     "ôm": ["ô mờ ôm", 0], em: ["e mờ em", 0], im: ["i mờ im", 0], in: ["i nờ in", 0], "ân": ["ớ nờ ân", 0],
     "âu": ["ớ u âu", 0], "ên": ["ê nờ ên", 0], ong: ["o ngờ ong", 0], "ăng": ["á ngờ ăng", 0],
+    "ay": ["a y ay", 0], "ây": ["ớ y ây", 0], "ông": ["ô ngờ ông", 0],
     "ơn": ["ơ nờ ơn", 0], "ôn": ["ô nờ ôn", 0], "ơm": ["ơ mờ ơm", 0], "ăn": ["á nờ ăn", 0], at: ["a tờ at", 0], ap: ["a pờ ap", 0]
+  };
+  // Near-miss rhymes used as wrong answers in the "Tiếng … có vần gì?" question,
+  // so a mistake shows which sound she mixed up.
+  var NEAR_RHYME = {
+    an: ["am", "ăn", "ân", "at"], am: ["an", "ăm", "ơm", "ap"], ai: ["ay", "ao", "oi", "ui"], ao: ["au", "ai", "eo", "oi"],
+    eo: ["ao", "ai", "em", "oi"], oi: ["ôi", "ơi", "ai", "ui"], "ôi": ["ơi", "oi", "ui", "ôm"], "ơi": ["ôi", "oi", "ơn", "ai"],
+    ui: ["oi", "ôi", "in", "ai"], on: ["ôn", "ơn", "an", "ong"], em: ["en", "êm", "im", "eo"], in: ["im", "ên", "ân", "an"],
+    "ân": ["ăn", "an", "ên", "ân"], "ên": ["en", "in", "ân", "ơn"], ong: ["ông", "on", "ăng", "ung"], "ông": ["ong", "ôn", "ôm", "ơng"],
+    "ăng": ["ang", "ăn", "ong", "ân"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
+    "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"]
   };
   var TONE_MARK = { ngang: "", "huyền": "̀", "sắc": "́", "hỏi": "̉", "ngã": "̃", "nặng": "̣" };
   var TONE_LIST = ["ngang", "huyền", "sắc", "hỏi", "ngã", "nặng"];
@@ -317,7 +328,8 @@
       ["s", "ao", "ngang", "⭐"], ["b", "an", "huyền", ""], ["n", "ôi", "huyền", "🍲"], ["c", "on", "ngang", ""],
       ["l", "ai", "ngang", ""], ["đ", "ôi", "ngang", ""], ["m", "ai", "ngang", ""], ["b", "ong", "sắc", "⚽"],
       ["c", "ao", "ngang", ""], ["v", "ai", "ngang", ""], ["l", "on", "ngang", ""], ["b", "at", "sắc", "🥣"],
-      ["h", "eo", "ngang", "🐷"], ["l", "eo", "ngang", ""], ["m", "ôi", "ngang", "👄"], ["g", "ôi", "sắc", ""], ["l", "on", "ngang", "🥫"]
+      ["h", "eo", "ngang", "🐷"], ["l", "eo", "ngang", ""], ["m", "ôi", "ngang", "👄"], ["g", "ôi", "sắc", ""], ["l", "on", "ngang", "🥫"],
+      ["t", "in", "ngang", ""], ["x", "in", "ngang", ""], ["k", "in", "sắc", ""], ["s", "ong", "sắc", "🌊"], ["m", "ong", "ngang", ""]
     ],
     ghep: [
       ["nh", "a", "huyền", "🏠"], ["ch", "o", "sắc", "🐶"], ["th", "o", "hỏi", "🐰"], ["nh", "o", "ngang", "🍇"],
@@ -330,7 +342,8 @@
       ["nh", "ên", "nặng", "🕷️"], ["tr", "âu", "ngang", "🐃"], ["tr", "ăng", "ngang", "🌙"], ["th", "ơm", "ngang", ""],
       ["kh", "oi", "sắc", ""], ["ng", "ôi", "ngang", ""], ["nh", "an", "ngã", ""], ["th", "am", "hỏi", ""],
       ["ph", "ao", "ngang", ""], ["gi", "oi", "hỏi", ""], ["kh", "ăn", "ngang", ""], ["ng", "u", "hỏi", "😴"],
-      ["tr", "ơi", "huyền", ""], ["tr", "eo", "huyền", ""], ["ng", "ôi", "ngang", ""]
+      ["tr", "ơi", "huyền", ""], ["tr", "eo", "huyền", ""], ["ng", "ôi", "ngang", ""],
+      ["qu", "at", "nặng", ""], ["gi", "o", "hỏi", "🧺"]
     ]
   };
 
@@ -384,7 +397,8 @@
   function spellPlusQuestion(w, type) {
     var full = makeWord(w[0], w[1], w[2]);
     if (type === "rhyme" && w[1].length > 1) {
-      var rhymes = uniq(shuffle(Object.keys(RHYME_INFO).filter(function (r) { return r.length > 1 && r !== w[1]; }))).slice(0, 3);
+      var rhymes = uniq((NEAR_RHYME[w[1]] || []).filter(function (r) { return RHYME_INFO[r] && r !== w[1]; })
+        .concat(shuffle(Object.keys(RHYME_INFO).filter(function (r) { return r.length > 1 && r !== w[1]; })))).slice(0, 3);
       return choiceQ({
         prompt: "Tiếng " + full + " có vần gì?",
         speak: "Tiếng " + full + " có vần gì?",
