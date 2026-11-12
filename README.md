@@ -169,6 +169,17 @@ Add a top-level `praise` array of a few fresh Vietnamese cheers. They join the b
 
 Sticker purchases do not change saved scores or the 15/30/50 targets. The album spends only this week’s stars that have not been spent yet, stored in `families/nguyen/stickerAlbums/{mon|gin}`.
 
+### Xếp hình và cửa hàng của Pom
+
+Two play activities sit on the child home screen, and again inside Toán (Xếp hình under Hình học, Cửa hàng under Số học). They do not write the star notebook, Firestore, or the sticker album. Stars drawn at the end follow the same harder-work / easy-cap counts as other rounds, and stay on that screen only.
+
+| Activity | Mon | Gin |
+| --- | --- | --- |
+| Xếp hình vào khung | `#/tangram/mon` — 10 silhouettes (Elsa's castle, Rapunzel's tower, Pom, star, heart, unicorn, and others). Drag triangles, squares, and parallelograms. Tap a piece or **Xoay** to turn it. | `#/tangram/gin` — 4 short puzzles, 2–3 large pieces (shield, house, rocket, superhero). |
+| Cửa hàng của Pom | `#/shop/mon` — 10 questions: exact notes, adding prices, paying 5.000đ, and making change. A wrong answer is explained aloud. | `#/shop/gin` — 6 picture taps: coins, notes, and Pom's ice cream. A second try, same as other Gin questions. |
+
+A correct placement or answer plays the ting. Spoken praise (HoaiMy, and only that child's lines) happens on every 5th success. Play money is 1.000, 2.000, and 5.000 đồng. It is not the sticker album.
+
 ### Bài kiểm tra tuần
 
 `content/weekly/YYYY-MM-DD.json` is the Saturday (Asia/Bangkok) paper. `mon` is about 25 mixed questions; `gin` is 8 listening taps. Each question needs `explain`. If the file is missing, the app builds a fallback from the generators. One try on Saturday, or Sunday if it was missed. Results go to `families/nguyen/weeklyTests` and the parent screen.

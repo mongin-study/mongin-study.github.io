@@ -747,6 +747,119 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
   25% { opacity: 1; transform: translate3d(0, -2px, 0) scale(1); }
   100% { opacity: 0; transform: translate3d(0, -26px, 0) scale(0.85); }
 }
+.shell:has(.tan-play),
+.shell:has(.shop-play) { padding-bottom: 0; }
+.tan-play, .shop-play {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.tan-play {
+  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
+  max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+.tan-play.stage, .shop-play.stage { margin-top: 0; }
+.tan-play .topbar { min-height: 56px; flex: none; }
+.tan-goal {
+  flex: none;
+  text-align: center;
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+}
+.tan-banner {
+  flex: none;
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+  color: var(--accent-deep);
+  overflow-wrap: anywhere;
+}
+.tan-board { flex: 1 1 auto; min-height: 0; width: 100%; }
+.tan-svg { width: 100%; height: 100%; display: block; touch-action: none; }
+.tan-rotate {
+  flex: none;
+  width: 100%;
+  min-height: 72px;
+  border: 0;
+  border-radius: 22px;
+  background: white;
+  box-shadow: var(--shadow);
+  font-size: 28px;
+  font-weight: 800;
+}
+.week-card.tan-entry { background: linear-gradient(160deg, #eef6ff, #c4b5fd); }
+.week-card.shop-entry { background: linear-gradient(160deg, #fff7ed, #fdba74); }
+.shop-sign {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border-radius: 24px;
+  padding: 8px 12px;
+  box-shadow: var(--shadow);
+}
+.shop-sign .illu { width: 84px; flex: none; }
+.shop-sign strong, .shop-sign span { display: block; }
+.shop-sign span { color: var(--muted); font-weight: 800; }
+.goods { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
+.good-card, .goods .choice {
+  flex: 1 1 120px;
+  max-width: 240px;
+}
+.good-emoji { font-size: 64px; line-height: 1; }
+.shop-play.is-gin .good-emoji { font-size: 84px; }
+.price-tag {
+  background: #fff8e4;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-weight: 800;
+}
+.note-face {
+  width: 100%;
+  border-radius: 16px;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+.note-1000 { background: linear-gradient(180deg, #f0fdf4, #86efac); }
+.note-2000 { background: linear-gradient(180deg, #e7f4ff, #7ec8e3); }
+.note-5000 { background: linear-gradient(180deg, #fff8e4, #f6d56a); }
+.note-value { font-size: clamp(26px, 6vw, 40px); }
+.note-unit, .note-face small { font-weight: 800; }
+.shop-hand {
+  min-height: 92px;
+  border-radius: 20px;
+  background: white;
+  border: 3px dashed #d5e2f2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+.note-mini { min-width: 108px; min-height: 84px; flex: 1 1 108px; }
+.shop-sum { text-align: center; font-size: clamp(22px, 4vw, 32px); font-weight: 800; }
+.shop-paid { font-weight: 800; text-align: center; }
+.coin-row { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.coin {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff6, #f6d56a 42%, #e2a51d);
+  box-shadow: inset 0 0 0 4px #f2c14e;
+  display: block;
+}
+.shop-play.is-gin .coin { width: 62px; height: 62px; }
+.shop-play.is-gin .choice { min-height: 132px; }
+.pay-desk { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
 @media (prefers-reduced-motion: reduce) {
   .flakes i, .confetti i, .lanterns i, .is-shake,
   .kid-gin .illu-car, .kid-gin .car-bob, .kid-gin .wheel,

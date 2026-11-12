@@ -1,4 +1,4 @@
-var CACHE = "hoc-vui-v32";
+var CACHE = "hoc-vui-v33";
 var ASSETS = [
   "./",
   "./index.html",
@@ -18,6 +18,8 @@ var ASSETS = [
   "./js/weekly.js",
   "./js/memory.js",
   "./js/stickers.js",
+  "./js/tangram.js",
+  "./js/shop.js",
   "./js/app.js",
   "./content/memory/decks.json",
   "./content/weekly/2026-11-07.json",
@@ -29,6 +31,7 @@ var ASSETS = [
   "./content/daily/2026-11-10.json",
   "./content/daily/2026-11-11.json",
   "./content/daily/2026-11-12.json",
+  "./content/daily/2026-11-13.json",
   "./assets/icons/favicon.svg",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png",

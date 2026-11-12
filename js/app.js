@@ -74,6 +74,8 @@
     if (parts[0] === "weekly" && knownChild(parts[1])) return { name: "weekly", child: parts[1] };
     if (parts[0] === "memory" && knownChild(parts[1])) return { name: "memory", child: parts[1] };
     if (parts[0] === "stickers" && knownChild(parts[1])) return { name: "stickers", child: parts[1] };
+    if (parts[0] === "tangram" && knownChild(parts[1])) return { name: "tangram", child: parts[1] };
+    if (parts[0] === "shop" && knownChild(parts[1])) return { name: "shop", child: parts[1] };
     if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
     if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
     if (parts[0] === "parents") return { name: "parents" };
@@ -295,6 +297,8 @@
     if (HV.weekly) root.appendChild(HV.weekly.card(child));
     if (HV.memory) root.appendChild(HV.memory.card(child));
     if (HV.stickers) root.appendChild(HV.stickers.card(child));
+    if (HV.tangram) root.appendChild(HV.tangram.card(child));
+    if (HV.shop) root.appendChild(HV.shop.card(child));
     root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
@@ -468,6 +472,8 @@
     var here = HV.catalog.filter(function (ex) {
       return ex.child === child && subjectOf(ex) === subject && ex.category === category;
     });
+    if (subject === "math" && category === "geometry" && HV.tangram) list.appendChild(HV.tangram.lesson(child));
+    if (subject === "math" && category === "arithmetic" && HV.shop) list.appendChild(HV.shop.lesson(child));
     orderedExercises(child, here).forEach(function (ex) {
       var best = stats.byExercise[ex.id] ? stats.byExercise[ex.id].bestStars : 0;
       list.appendChild(exerciseCard(child, ex, best));
@@ -1097,6 +1103,8 @@
     else if (route.name === "weekly" && HV.weekly) shell.appendChild(HV.weekly.view(route.child));
     else if (route.name === "memory" && HV.memory) shell.appendChild(HV.memory.view(route.child));
     else if (route.name === "stickers" && HV.stickers) shell.appendChild(HV.stickers.view(route.child));
+    else if (route.name === "tangram" && HV.tangram) shell.appendChild(HV.tangram.view(route.child));
+    else if (route.name === "shop" && HV.shop) shell.appendChild(HV.shop.view(route.child));
     else if (route.name === "parents") shell.appendChild(viewParents());
     else shell.appendChild(viewHome());
     root.appendChild(shell);
