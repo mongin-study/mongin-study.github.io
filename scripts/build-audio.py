@@ -82,6 +82,8 @@ def say_for(key, original=None):
     raw = key
     for src, dst in NAMES.items():
         raw = re.sub(rf"\b{src}\b", dst, raw)
+    if original and re.search(r"\bX\b", original):
+        raw = re.sub(r"\bx\b", "X", raw)
     if original and re.search(r"[?？]", original):
         raw += "?"
     return raw
@@ -445,6 +447,23 @@ PHRASES = [
     "Chạm que kem.",
     "Que kem đây.",
     "Chọn tờ tiền đã nhé.",
+    "Điền số thích hợp vào mỗi ngôi nhà.",
+    "Vẽ hình theo mã.",
+    "Nối các số theo thứ tự.",
+    "Đếm và điền số thích hợp.",
+    "Đếm trong vườn.",
+    "Đếm trong phòng.",
+    "cây",
+    "bông sen",
+    "bọ rùa",
+    "chiếc đèn",
+    "con chuồn chuồn",
+    "gấu bông",
+    "mặt trời",
+    "quyển sách",
+    "dấu X",
+    "hình ô van",
+    "mặt trăng",
 ]
 
 

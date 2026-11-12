@@ -77,6 +77,10 @@
     if (parts[0] === "stickers" && knownChild(parts[1])) return { name: "stickers", child: parts[1] };
     if (parts[0] === "tangram" && knownChild(parts[1])) return { name: "tangram", child: parts[1] };
     if (parts[0] === "shop" && knownChild(parts[1])) return { name: "shop", child: parts[1] };
+    if (parts[0] === "nha-so" && knownChild(parts[1])) return { name: "nha-so", child: parts[1] };
+    if (parts[0] === "ma-hinh" && knownChild(parts[1])) return { name: "ma-hinh", child: parts[1] };
+    if (parts[0] === "noi-so" && knownChild(parts[1])) return { name: "noi-so", child: parts[1] };
+    if (parts[0] === "dem-tranh" && knownChild(parts[1])) return { name: "dem-tranh", child: parts[1] };
     if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
     if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
     if (parts[0] === "parents") return { name: "parents" };
@@ -315,6 +319,10 @@
     if (subject === "math") {
       if (HV.tangram) ids.push("tangram");
       if (HV.shop) ids.push("shop");
+      if (HV.nhaSo) ids.push("nha-so");
+      if (HV.maHinh) ids.push("ma-hinh");
+      if (HV.noiSo) ids.push("noi-so");
+      if (HV.demTranh) ids.push("dem-tranh");
     }
     return ids;
   }
@@ -325,7 +333,11 @@
       if (ex.child === child && subjectOf(ex) === subject && ex.category === category) ids.push(ex.id);
     });
     if (subject === "math" && category === "geometry" && HV.tangram) ids.push("tangram");
+    if (subject === "math" && category === "geometry" && HV.maHinh) ids.push("ma-hinh");
     if (subject === "math" && category === "arithmetic" && HV.shop) ids.push("shop");
+    if (subject === "math" && category === "arithmetic" && HV.nhaSo) ids.push("nha-so");
+    if (subject === "math" && category === "arithmetic" && HV.noiSo) ids.push("noi-so");
+    if (subject === "math" && category === "arithmetic" && HV.demTranh) ids.push("dem-tranh");
     return ids;
   }
 
@@ -359,6 +371,10 @@
     if (HV.stickers) root.appendChild(HV.stickers.card(child));
     if (HV.tangram) root.appendChild(HV.tangram.card(child));
     if (HV.shop) root.appendChild(HV.shop.card(child));
+    if (HV.nhaSo) root.appendChild(HV.nhaSo.card(child));
+    if (HV.maHinh) root.appendChild(HV.maHinh.card(child));
+    if (HV.noiSo) root.appendChild(HV.noiSo.card(child));
+    if (HV.demTranh) root.appendChild(HV.demTranh.card(child));
     root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
@@ -543,6 +559,10 @@
       return ex.child === child && subjectOf(ex) === subject && ex.category === category;
     });
     if (subject === "math" && category === "geometry" && HV.tangram) list.appendChild(HV.tangram.lesson(child));
+    if (subject === "math" && category === "geometry" && HV.maHinh) list.appendChild(HV.maHinh.lesson(child));
+    if (subject === "math" && category === "arithmetic" && HV.nhaSo) list.appendChild(HV.nhaSo.lesson(child));
+    if (subject === "math" && category === "arithmetic" && HV.noiSo) list.appendChild(HV.noiSo.lesson(child));
+    if (subject === "math" && category === "arithmetic" && HV.demTranh) list.appendChild(HV.demTranh.lesson(child));
     if (subject === "math" && category === "arithmetic" && HV.shop) list.appendChild(HV.shop.lesson(child));
     orderedExercises(child, here).forEach(function (ex) {
       var best = stats.byExercise[ex.id] ? stats.byExercise[ex.id].bestStars : 0;
@@ -1176,6 +1196,10 @@
     else if (route.name === "stickers" && HV.stickers) shell.appendChild(HV.stickers.view(route.child));
     else if (route.name === "tangram" && HV.tangram) shell.appendChild(HV.tangram.view(route.child));
     else if (route.name === "shop" && HV.shop) shell.appendChild(HV.shop.view(route.child));
+    else if (route.name === "nha-so" && HV.nhaSo) shell.appendChild(HV.nhaSo.view(route.child));
+    else if (route.name === "ma-hinh" && HV.maHinh) shell.appendChild(HV.maHinh.view(route.child));
+    else if (route.name === "noi-so" && HV.noiSo) shell.appendChild(HV.noiSo.view(route.child));
+    else if (route.name === "dem-tranh" && HV.demTranh) shell.appendChild(HV.demTranh.view(route.child));
     else if (route.name === "parents") shell.appendChild(viewParents());
     else shell.appendChild(viewHome());
     root.appendChild(shell);
