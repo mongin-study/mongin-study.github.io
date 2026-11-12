@@ -202,6 +202,7 @@
       var prow = el("div", { class: "scene scene-pattern" });
       scene.pieces.forEach(function (p) {
         if (p.mystery) prow.appendChild(el("div", { class: "mystery", text: "?" }));
+        else if (p.emoji) prow.appendChild(el("div", { class: "pattern-cell is-emoji", text: p.emoji }));
         else prow.appendChild(el("div", { class: "pattern-cell" }, HV.art.shape(p.shape || "circle", p.color, 58)));
       });
       return prow;
@@ -334,7 +335,13 @@
     "🪞": "mirror", "🐴": "horse", "👗": "dress", "🔑": "key", "❄️": "snowflake",
     "👘": "gown", "💇": "braid", "🦌": "deer", "🧁": "cupcake", "🐘": "elephant",
     "🐢": "turtle", "🐚": "shell", "🎫": "ticket", "🌳": "tree", "👟": "shoe",
-    "✏️": "pencil", "🕊️": "bird"
+    "✏️": "pencil", "🕊️": "bird",
+    "🥝": "kiwi", "🍩": "donut", "🍦": "ice cream", "🍬": "candy",
+    "🥦": "broccoli", "🍆": "eggplant", "🥨": "pretzel", "🌶️": "chili", "🥒": "pickle",
+    "⚔️": "sword", "👢": "boot", "⛑️": "helmet", "🏅": "medal",
+    "🦄": "unicorn", "🏮": "lantern", "🌹": "rose", "🍃": "leaf", "🌰": "acorn", "🎀": "ribbon",
+    "🐍": "snake", "👍": "thumb", "🌱": "plant", "🕐": "clock",
+    "👜": "bag", "⛰️": "mountain", "💨": "wind"
   };
   var EMOJI_VI = {
     "🍎": "quả táo", "🍌": "quả chuối", "🐱": "con mèo", "🐶": "Pom", "🎈": "quả bóng bay",
@@ -342,7 +349,10 @@
     "🐘": "con voi", "🐢": "con rùa", "🚀": "tên lửa", "🥁": "cái trống", "🐧": "chim cánh cụt",
     "🚜": "máy kéo", "🦌": "con hươu", "🧁": "bánh", "🌈": "cầu vồng", "❄️": "bông tuyết",
     "🌳": "cây", "☁️": "đám mây", "✋": "bàn tay", "🐚": "cái vỏ", "🎫": "cái vé",
-    "👟": "đôi giày", "🐰": "con thỏ", "✏️": "bút chì"
+    "👟": "đôi giày", "🐰": "con thỏ", "✏️": "bút chì",
+    "🦸": "siêu anh hùng", "🛡️": "cái khiên", "🎀": "chiếc nơ",
+    "🦄": "kỳ lân", "👜": "cái túi", "⛰️": "núi", "💨": "gió", "🌰": "hạt",
+    "🐯": "con hổ", "🌸": "hoa", "🍊": "quả cam"
   };
 
   function choiceName(c, lang) {

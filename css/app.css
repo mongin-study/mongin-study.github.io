@@ -488,6 +488,7 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .bond-parts { display: flex; gap: 24px; }
 .bond-parts .is-q { background: #fff7d6; }
 .mystery, .pattern-cell { width: 64px; height: 64px; max-width: 18%; border-radius: 16px; display: grid; place-items: center; background: white; font-size: 28px; font-weight: 800; }
+.pattern-cell.is-emoji { font-size: 36px; line-height: 1; }
 .scene-pattern { gap: 8px; width: 100%; }
 
 .choices { display: grid; gap: 12px; }
@@ -1100,6 +1101,9 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
 .ws-play.is-gin .ws-box .ws-icon { width: 52px; height: 52px; }
 .ws-play.is-gin .ws-box b { font-size: 32px; }
 @media (max-width: 420px) {
+  .mystery, .pattern-cell { width: 52px; height: 52px; font-size: 22px; }
+  .pattern-cell.is-emoji { font-size: 30px; }
+  .scene-pattern { gap: 6px; }
   .ws-stamp { flex-basis: 84px; min-height: 100px; }
   .ws-hit { width: 52px; height: 52px; }
   .ws-box { min-width: 58px; }
