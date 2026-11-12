@@ -1695,15 +1695,15 @@
           "lang": "vi",
           "prompt": "Tiếng mây có vần gì?",
           "speak": "Tiếng mây có vần gì?",
-          "explain": "Mây có vần ay. Dấu huyền nằm trên a.",
+          "explain": "Mây có vần ây. Chữ â có mũ. Mây là thanh ngang.",
           "choices": [
             {
               "text": "ay",
-              "correct": true
+              "correct": false
             },
             {
               "text": "ây",
-              "correct": false
+              "correct": true
             },
             {
               "text": "ai",
@@ -1818,15 +1818,15 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Đánh vần rồi chọn tiếng đúng",
-          "speak": "mờ ây may sắc máy",
-          "explain": "Mờ ây may. Thêm dấu sắc thành máy.",
+          "speak": "mờ ây mây sắc mấy",
+          "explain": "Mờ ây mây. Thêm dấu sắc thành mấy.",
           "choices": [
             {
               "text": "mây",
               "correct": false
             },
             {
-              "text": "máy",
+              "text": "mấy",
               "correct": true
             },
             {
@@ -1835,6 +1835,10 @@
             },
             {
               "text": "mày",
+              "correct": false
+            },
+            {
+              "text": "máy",
               "correct": false
             }
           ],
@@ -1879,7 +1883,7 @@
           "lang": "vi",
           "prompt": "Nghe rồi chọn chữ viết đúng",
           "speak": "mây",
-          "explain": "Mờ ay may. Thêm dấu huyền thành mây.",
+          "explain": "Mờ ây mây. Chữ â có mũ. Mây là thanh ngang.",
           "choices": [
             {
               "text": "may",
@@ -1905,7 +1909,7 @@
           "lang": "vi",
           "prompt": "Tranh này là tiếng nào?",
           "speak": "Nhìn tranh. Chữ nào viết đúng?",
-          "explain": "Mờ ay may. Thêm dấu huyền thành mây. Đây là đám mây.",
+          "explain": "Mờ ây mây. Chữ â có mũ. Mây là thanh ngang. Đây là đám mây.",
           "choices": [
             {
               "text": "máy",
@@ -1947,8 +1951,8 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Đánh vần rồi chọn tiếng đúng",
-          "speak": "di ây giây huyền giày",
-          "explain": "Di ây giây. Thêm dấu huyền thành giày. Âm di viết bằng hai chữ g và i.",
+          "speak": "di ay giay huyền giày",
+          "explain": "Di ay giay. Thêm dấu huyền thành giày. Âm di viết bằng hai chữ g và i.",
           "choices": [
             {
               "text": "giáy",
@@ -1969,7 +1973,7 @@
           ],
           "scene": {
             "layout": "equation",
-            "text": "gi + ây + huyền"
+            "text": "gi + ay + huyền"
           },
           "columns": 2
         },
@@ -2068,7 +2072,7 @@
           "lang": "vi",
           "prompt": "Tranh này là tiếng nào?",
           "speak": "Nhìn tranh. Chữ nào viết đúng?",
-          "explain": "Di ây giây. Thêm dấu huyền thành giày. Đây là đôi giày.",
+          "explain": "Di ay giay. Thêm dấu huyền thành giày. Đây là đôi giày.",
           "choices": [
             {
               "text": "giáy",
