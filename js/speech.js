@@ -374,7 +374,7 @@
 
   function speakBody(text, opts, my) {
     if (!enabled() || !text) return Promise.resolve(0);
-    if (!opts.chain && HV.audio && HV.audio.cut) HV.audio.cut();
+    if (!opts.chain && !opts.keepSound && HV.audio && HV.audio.cut) HV.audio.cut();
     var lang = opts && opts.lang === "en" ? "en" : "vi";
     if (lang === "en") {
       var enNorm = normalizeEn(text);

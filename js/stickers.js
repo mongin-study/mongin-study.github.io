@@ -165,6 +165,19 @@
     return "dễ";
   }
 
+  function delight(sticker) {
+    var lead = 0;
+    try {
+      if (HV.audio && HV.audio.wish) lead = Number(HV.audio.wish()) || 0;
+      else if (HV.audio && HV.audio.fanfare) lead = Number(HV.audio.fanfare()) || 0;
+    } catch (e) {}
+    if (!HV.speech || !sticker || !sticker.name) return;
+    var delay = Math.round(Math.min(640, Math.max(380, lead * 420)));
+    setTimeout(function () {
+      HV.speech.speak(sticker.name, { lang: "vi", keepSound: true });
+    }, delay);
+  }
+
   function buy(child, sticker) {
     var data = read();
     if (data[child].owned.indexOf(sticker.id) >= 0) return;
@@ -175,8 +188,7 @@
     data[child].spends.push(spend);
     write(data);
     if (HV.cloud && HV.cloud.saveAlbumAdd) HV.cloud.saveAlbumAdd(child, sticker.id, spend);
-    if (HV.audio) HV.audio.fanfare();
-    if (HV.speech) HV.speech.speak("Đổi được sticker rồi!", { lang: "vi" });
+    delight(sticker);
     if (HV.ui && HV.ui.render) HV.ui.render();
   }
 

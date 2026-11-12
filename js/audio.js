@@ -147,6 +147,25 @@
         { f: 2093, t: 0.12, d: 0.16, g: 0.02 }
       ]);
     },
+    wish: function () {
+      try {
+        var c = context();
+        if (!c || !enabled()) return 0;
+        var t = c.currentTime + 0.02;
+        noise(t, 0.5, 0.012, 780, 0.45);
+        noise(t + 0.06, 0.62, 0.008, 1500, 0.35);
+        glide(300, 494, t + 0.04, 0.46, "sine", 0.046);
+        glide(494, 370, t + 0.5, 0.48, "sine", 0.034);
+        glide(450, 740, t + 0.08, 0.55, "triangle", 0.01);
+        [1047, 1319, 1568, 2093, 1568, 1319].forEach(function (f, i) {
+          tone(f, t + 0.16 + i * 0.16, 0.32, "sine", 0.02);
+          tone(f * 2, t + 0.16 + i * 0.16, 0.14, "triangle", 0.005);
+        });
+        return 1.3;
+      } catch (e) {
+        return 0;
+      }
+    },
     fanfare: function () {
       try {
         var c = context();

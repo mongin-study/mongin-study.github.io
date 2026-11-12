@@ -570,6 +570,9 @@ async def main():
         clips.setdefault(word, word)
     for phrase in PHRASES:
         add(phrase)
+    sticker_js = (ROOT / "js" / "stickers.js").read_text(encoding="utf-8")
+    for name in re.findall(r'name:\s*"([^"]+)"', sticker_js):
+        add(name)
     praise_says = {}
     for phrase in PRAISE:
         key = normalize(phrase)
