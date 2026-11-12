@@ -202,9 +202,15 @@
     var blurb = child === "mon"
       ? "Mới: Rapunzel và kỳ lân · Elsa còn " + elsaLeft + " · đã có " + owned + "/" + mine.length
       : "Đổi được " + spendable(child) + " sao · đã có " + owned + " sticker";
-    return el("button", { class: "week-card sticker-card", "data-go": "#/stickers/" + child }, [
-      el("span", { class: "pay-badge", text: "Mới" }),
-      el("h2", { text: "Album sticker ⭐" }),
+    var played = ownedIds.length > 0;
+    return el("button", {
+      class: "week-card sticker-card" + (played ? " is-played" : " is-new"),
+      "data-go": "#/stickers/" + child,
+      "data-state": played ? "played" : "new"
+    }, [
+      el("span", { class: "ex-icon act-icon", "aria-hidden": "true", text: "⭐" }),
+      played ? null : el("span", { class: "pay-badge", text: "Mới" }),
+      el("h2", { text: "Album sticker" }),
       el("p", { text: blurb })
     ]);
   }

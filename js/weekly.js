@@ -125,17 +125,20 @@
   function card(child) {
     var st = status(child);
     var waiting = !st.open && !st.result;
+    var played = !!st.result;
     var btn = el("button", {
-      class: "week-card" + (waiting ? " is-wait" : ""),
-      "data-go": "#/weekly/" + child
+      class: "week-card" + (waiting ? " is-wait" : "") + (played ? " is-played" : waiting ? "" : " is-new"),
+      "data-go": "#/weekly/" + child,
+      "data-state": played ? "played" : waiting ? "wait" : "new"
     });
+    btn.appendChild(el("span", { class: "ex-icon act-icon", "aria-hidden": "true", text: st.result && st.result.icon ? st.result.icon : "🏆" }));
     if (st.result && st.result.medal && st.result.medal !== "none") {
       btn.appendChild(el("p", { class: "kicker", text: "Bài kiểm tra tuần" }));
-      btn.appendChild(el("h2", { text: st.result.icon + " Huy chương " + st.result.medalName }));
+      btn.appendChild(el("h2", { text: "Huy chương " + st.result.medalName }));
       btn.appendChild(el("p", { text: st.result.percent + "% · " + st.result.bonus + " sao thưởng" }));
     } else if (st.open) {
       btn.appendChild(el("p", { class: "kicker", text: child === "gin" ? "8 câu nghe" : "Thứ Bảy · một lần" }));
-      btn.appendChild(el("h2", { text: "Bài kiểm tra tuần 🏆" }));
+      btn.appendChild(el("h2", { text: "Bài kiểm tra tuần" }));
       btn.appendChild(el("p", { text: st.result ? "Xem kết quả tuần này" : "Bắt đầu khi sẵn sàng. Không có giờ giới hạn." }));
     } else {
       btn.appendChild(el("p", { class: "kicker", text: "Thói quen cuối tuần" }));

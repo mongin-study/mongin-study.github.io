@@ -459,6 +459,72 @@
     var epoch = Number(data().kids[child].resetEpoch) || 0;
     data().kids[child] = { daily: {}, resetEpoch: epoch };
     save();
+    var bag = readPlayed();
+    if (bag[child]) {
+      bag[child] = {};
+      try { localStorage.setItem(PLAYED_KEY, JSON.stringify(bag)); } catch (e) {}
+    }
+  }
+
+  /* Finished-once marks for activities that never enter the score notebook.
+     This key stays on the device. It is not part of the score sync. */
+  var PLAYED_KEY = "hoc-vui-played";
+
+  function emptyPlayed() {
+    return { mon: {}, gin: {} };
+  }
+
+  function readPlayed() {
+    try {
+      var raw = localStorage.getItem(PLAYED_KEY);
+      if (!raw) return emptyPlayed();
+      var saved = JSON.parse(raw);
+      if (!saved || typeof saved !== "object") return emptyPlayed();
+      if (!saved.mon || typeof saved.mon !== "object") saved.mon = {};
+      if (!saved.gin || typeof saved.gin !== "object") saved.gin = {};
+      return saved;
+    } catch (e) {
+      return emptyPlayed();
+    }
+  }
+
+  function markPlayed(child, id) {
+    if (child !== "mon" && child !== "gin") return false;
+    var key = String(id || "");
+    if (!key || key.length > 80) return false;
+    var bag = readPlayed();
+    if (bag[child][key]) return true;
+    bag[child][key] = Date.now();
+    try {
+      localStorage.setItem(PLAYED_KEY, JSON.stringify(bag));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function completionIndex(child) {
+    var ever = {};
+    var today = {};
+    var flags = {};
+    try {
+      var kid = data().kids && data().kids[child];
+      var todayDate = U.todayStr();
+      var daily = kid && kid.daily ? kid.daily : {};
+      Object.keys(daily).forEach(function (date) {
+        var items = (daily[date] && daily[date].items) || [];
+        items.forEach(function (item) {
+          if (!item || !item.id) return;
+          ever[String(item.id)] = true;
+          if (date === todayDate) today[String(item.id)] = true;
+        });
+      });
+      var saved = (readPlayed()[child]) || {};
+      Object.keys(saved).forEach(function (id) {
+        if (saved[id]) flags[String(id)] = true;
+      });
+    } catch (e) {}
+    return { ever: ever, today: today, flags: flags };
   }
 
   function exportPayload() {
@@ -598,6 +664,8 @@
     setTargets: setTargets,
     setSetting: setSetting,
     resetChild: resetChild,
+    markPlayed: markPlayed,
+    completionIndex: completionIndex,
     exportPayload: exportPayload,
     previewImport: previewImport,
     importPayload: importPayload,

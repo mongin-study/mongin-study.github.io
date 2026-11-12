@@ -43,10 +43,24 @@
     });
   }
 
+  function deckPlayed(child, deck) {
+    var daily = String(deck.id || "").indexOf("daily-") === 0;
+    return HV.fresh ? HV.fresh.done(child, "memory-" + deck.id, { daily: daily }) : false;
+  }
+
   function card(child) {
-    return el("button", { class: "week-card memory-card", "data-go": "#/memory/" + child }, [
-      el("span", { class: "pay-badge", text: "Mới" }),
-      el("h2", { text: "Trí nhớ lật thẻ 🃏" }),
+    var decks = decksFor(child);
+    var played = !!(decks.length && HV.fresh && HV.fresh.allDone(child, decks.map(function (deck) {
+      return { id: "memory-" + deck.id, daily: String(deck.id || "").indexOf("daily-") === 0 };
+    })));
+    return el("button", {
+      class: "week-card memory-card" + (played ? " is-played" : " is-new"),
+      "data-go": "#/memory/" + child,
+      "data-state": played ? "played" : "new"
+    }, [
+      el("span", { class: "ex-icon act-icon", "aria-hidden": "true", text: "🃏" }),
+      played ? null : el("span", { class: "pay-badge", text: "Mới" }),
+      el("h2", { text: "Trí nhớ lật thẻ" }),
       el("p", { text: child === "gin" ? "3–4 cặp màu, con vật, xe" : "4–6 cặp số, chữ và màu · nhiều sao" })
     ]);
   }
@@ -222,13 +236,18 @@
     ]));
     var list = el("div", { class: "ex-list" });
     decksFor(child).forEach(function (deck) {
-      var fresh = String(deck.id || "").indexOf("daily-") === 0;
-      list.appendChild(el("button", { class: "ex-card", onClick: function () { start(child, deck); } }, [
+      var daily = String(deck.id || "").indexOf("daily-") === 0;
+      var played = deckPlayed(child, deck);
+      list.appendChild(el("button", {
+        class: "ex-card" + (played ? " is-played" : " is-new"),
+        "data-state": played ? "played" : "new",
+        onClick: function () { start(child, deck); }
+      }, [
         el("span", { class: "ex-icon", text: "🃏" }),
         el("span", { class: "ex-copy" }, [
           el("strong", { text: deck.title }),
           el("small", { text: deck.pairs.length + " cặp" }),
-          fresh ? el("span", { class: "pay-badge", text: "Mới" }) : null
+          daily && !played ? el("span", { class: "pay-badge", text: "Mới" }) : null
         ])
       ]));
     });

@@ -300,6 +300,7 @@
     if (session.index >= session.items.length) {
       session.phase = "done";
       session.award = roundStars(session.child, session.firsts, session.items.length);
+      if (HV.storage && HV.storage.markPlayed) HV.storage.markPlayed(session.child, "shop");
       if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
       renderNow();
       return;
@@ -573,16 +574,31 @@
     return playView();
   }
 
+  function playedMark(child) {
+    return HV.fresh && HV.fresh.done(child, "shop");
+  }
+
   function card(child) {
-    return el("button", { class: "week-card shop-entry", "data-go": "#/shop/" + child }, [
-      el("span", { class: "pay-badge", text: "Mới" }),
+    var played = playedMark(child);
+    return el("button", {
+      class: "week-card shop-entry" + (played ? " is-played" : " is-new"),
+      "data-go": "#/shop/" + child,
+      "data-state": played ? "played" : "new"
+    }, [
+      el("span", { class: "ex-icon act-icon", "aria-hidden": "true", text: "🍦" }),
+      played ? null : el("span", { class: "pay-badge", text: "Mới" }),
       el("h2", { text: "Cửa hàng của Pom" }),
       el("p", { text: child === "gin" ? "Chạm tờ tiền và số" : "Đếm, cộng và trả lại tiền · 10 câu" })
     ]);
   }
 
   function lesson(child) {
-    return el("button", { class: "ex-card", "data-go": "#/shop/" + child }, [
+    var played = playedMark(child);
+    return el("button", {
+      class: "ex-card" + (played ? " is-played" : " is-new"),
+      "data-go": "#/shop/" + child,
+      "data-state": played ? "played" : "new"
+    }, [
       el("span", { class: "ex-icon", text: "🍦" }),
       el("span", { class: "ex-copy" }, [
         el("strong", { text: "Cửa hàng của Pom" }),

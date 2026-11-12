@@ -19,6 +19,7 @@
     pendingImport: null,
     sync: { state: "local", detail: "Máy này" }
   };
+  var freshCache = null;
 
   function syncLabel() {
     if (state.sync.state === "online") return "Đã đồng bộ";
@@ -271,11 +272,70 @@
     });
   }
 
+  function freshIndex(child) {
+    if (!freshCache || freshCache.child !== child) {
+      freshCache = { child: child, idx: S.completionIndex(child) };
+    }
+    return freshCache.idx;
+  }
+
+  function freshDone(child, id, opts) {
+    var key = String(id || "");
+    if (!key) return false;
+    var idx = freshIndex(child);
+    var daily = (opts && opts.daily) || key.indexOf("daily-") === 0;
+    if (daily) return !!idx.today[key];
+    return !!idx.ever[key] || !!idx.flags[key];
+  }
+
+  function freshAll(child, ids) {
+    if (!ids || !ids.length) return false;
+    for (var i = 0; i < ids.length; i++) {
+      var item = ids[i];
+      if (item && typeof item === "object") {
+        if (!freshDone(child, item.id, { daily: !!item.daily })) return false;
+      } else if (!freshDone(child, item)) return false;
+    }
+    return true;
+  }
+
+  function freshClass(done, neutral) {
+    if (neutral) return "";
+    return done ? " is-played" : " is-new";
+  }
+
+  function subjectActivityIds(child, subject) {
+    var ids = [];
+    HV.catalog.forEach(function (ex) {
+      if (ex.child === child && subjectOf(ex) === subject) ids.push(ex.id);
+    });
+    (state.daily.exercises || []).forEach(function (ex) {
+      if (ex.child === child && subjectOf(ex) === subject) ids.push(ex.id);
+    });
+    if (subject === "math") {
+      if (HV.tangram) ids.push("tangram");
+      if (HV.shop) ids.push("shop");
+    }
+    return ids;
+  }
+
+  function categoryActivityIds(child, subject, category) {
+    var ids = [];
+    HV.catalog.forEach(function (ex) {
+      if (ex.child === child && subjectOf(ex) === subject && ex.category === category) ids.push(ex.id);
+    });
+    if (subject === "math" && category === "geometry" && HV.tangram) ids.push("tangram");
+    if (subject === "math" && category === "arithmetic" && HV.shop) ids.push("shop");
+    return ids;
+  }
+
   function exerciseCard(child, ex, best) {
     var offer = child === "mon" ? S.cardOffer(child, ex) : null;
+    var played = freshDone(child, ex.id);
     return el("button", {
-      class: "ex-card" + (offer && offer.tier >= 2 ? " is-rich" : "") + (offer && offer.mastered ? " is-mastered" : ""),
-      "data-go": "#/play/" + encodeURIComponent(ex.id)
+      class: "ex-card" + (offer && offer.tier >= 2 ? " is-rich" : "") + (offer && offer.mastered ? " is-mastered" : "") + freshClass(played),
+      "data-go": "#/play/" + encodeURIComponent(ex.id),
+      "data-state": played ? "played" : "new"
     }, [
       el("span", { class: "ex-icon", text: ex.icon || "✏️" }),
       el("span", { class: "ex-copy" }, [
@@ -305,7 +365,8 @@
       var mine = HV.catalog.filter(function (ex) { return ex.child === child && subjectOf(ex) === sub.id; });
       var stars = stats.bySubject && stats.bySubject[sub.id] ? stats.bySubject[sub.id].stars : 0;
       var rich = child === "mon" && mine.some(function (ex) { return S.monTier(ex) >= 2; });
-      grid.appendChild(el("button", { class: "subject-card subject-" + sub.id + (rich ? " is-rich" : ""), "data-go": "#/c/" + child + "/" + sub.id }, [
+      var played = freshAll(child, subjectActivityIds(child, sub.id));
+      grid.appendChild(el("button", { class: "subject-card subject-" + sub.id + (rich ? " is-rich" : "") + freshClass(played), "data-go": "#/c/" + child + "/" + sub.id, "data-state": played ? "played" : "new" }, [
         el("span", { class: "cat-icon", text: sub.icon }),
         el("span", { class: "cat-name", text: sub.title }),
         el("span", { class: "cat-blurb", text: sub.blurb[child] || "" }),
@@ -343,11 +404,18 @@
         ? (prog.reason[info.level] === "accuracy" ? "Mở vì đúng " + acc + "%" : stats.stars + " sao · đúng " + acc + "%")
         : "Cần " + gate + " sao Anh, hoặc đúng hơn 85% ở cấp " + (info.level - 1);
       var levelTier = info.level >= 4 ? 3 : info.level === 3 ? 2 : info.level === 1 ? 0 : 1;
+      var levelIds = HV.catalog.filter(function (ex) {
+        return ex.child === child && subjectOf(ex) === "english" && (ex.level || 1) === info.level;
+      }).map(function (ex) { return ex.id; });
+      var played = freshAll(child, levelIds);
+      var levelIcons = { 1: "🌱", 2: "🔤", 3: "📚", 4: "📗" };
       var card = el("button", {
-        class: "level-card" + (open ? "" : " is-locked") + (prog.suggested === info.level ? " is-now" : "") + (levelTier >= 2 ? " is-rich" : ""),
+        class: "level-card" + (open ? "" : " is-locked") + (prog.suggested === info.level ? " is-now" : "") + (levelTier >= 2 ? " is-rich" : "") + freshClass(played, !open),
         "data-go": open ? "#/c/mon/english/lv/" + info.level : "",
+        "data-state": open ? (played ? "played" : "new") : "locked",
         disabled: open ? null : true
       }, [
+        el("span", { class: "cat-icon", text: levelIcons[info.level] || "🔤" }),
         el("span", { class: "cat-name", text: (open ? "" : "🔒 ") + info.title }),
         el("span", { class: "cat-blurb", text: info.blurb }),
         levelTier >= 2 ? el("span", { class: "pay-badge", text: "Nhiều sao ×" + levelTier }) : null,
@@ -411,7 +479,8 @@
       }).length;
       var catStats = stats.byCategory[subject + ":" + cat.id] || { stars: 0 };
       var tier = child === "mon" ? categoryTier(child, subject, cat.id) : 1;
-      grid.appendChild(el("button", { class: "cat-card" + (tier >= 2 ? " is-rich" : ""), "data-go": "#/c/" + child + "/" + subject + "/" + cat.id }, [
+      var played = freshAll(child, categoryActivityIds(child, subject, cat.id));
+      grid.appendChild(el("button", { class: "cat-card" + (tier >= 2 ? " is-rich" : "") + freshClass(played), "data-go": "#/c/" + child + "/" + subject + "/" + cat.id, "data-state": played ? "played" : "new" }, [
         el("span", { class: "cat-icon", text: cat.icon }),
         el("span", { class: "cat-name", text: cat.title }),
         el("span", { class: "cat-blurb", text: (cat.blurb && cat.blurb[child]) || "" }),
@@ -445,7 +514,8 @@
     orderedExercises(child, list).forEach(function (ex) {
       var best = S.todayBest(child, ex.id);
       var offer = child === "mon" ? S.cardOffer(child, ex) : null;
-      row.appendChild(el("button", { class: "today-card" + (offer && offer.tier >= 2 ? " is-rich" : ""), "data-go": "#/play/" + encodeURIComponent(ex.id) }, [
+      var played = freshDone(child, ex.id, { daily: true });
+      row.appendChild(el("button", { class: "today-card" + (offer && offer.tier >= 2 ? " is-rich" : "") + freshClass(played), "data-go": "#/play/" + encodeURIComponent(ex.id), "data-state": played ? "played" : "new" }, [
         el("span", { class: "ribbon", text: best == null ? "Mới" : "Đã chơi" }),
         el("span", { class: "today-icon", text: ex.icon || "✨" }),
         el("span", { class: "today-subject", text: subjectMeta(subjectOf(ex)).short }),
@@ -1086,6 +1156,7 @@
   }
 
   function render() {
+    freshCache = null;
     cleanup();
     var route = state.route;
     var child = route.child || (state.session && state.session.entry && state.session.entry.child) || "";
@@ -1333,6 +1404,12 @@
       return { date: date, exercises: [], pending: false, error: true };
     });
   }
+
+  HV.fresh = {
+    done: freshDone,
+    allDone: freshAll,
+    className: function (done) { return done ? "is-played" : "is-new"; }
+  };
 
   HV.ui = {
     render: render,

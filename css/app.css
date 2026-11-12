@@ -310,7 +310,58 @@ body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
   flex-direction: column;
   gap: 4px;
 }
-.cat-icon, .ex-icon, .today-icon { font-size: 40px; }
+.cat-icon, .ex-icon, .today-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 18px;
+  font-size: 40px;
+  line-height: 1;
+}
+.is-new .cat-icon,
+.is-new .ex-icon,
+.is-new .today-icon {
+  background: radial-gradient(circle at 50% 42%, #fff8d0 0%, #ffe27a 64%, #ffc83d 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+    0 0 0 3px rgba(255, 236, 170, 0.95),
+    0 0 10px 1px rgba(255, 186, 40, 0.8);
+  animation: new-icon-glow 1.6s ease-in-out infinite;
+}
+.is-new .cat-icon::after,
+.is-new .ex-icon::after,
+.is-new .today-icon::after {
+  content: "✦";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  line-height: 1;
+  color: #c4840a;
+  text-shadow: 0 0 4px #fff;
+  pointer-events: none;
+  animation: new-spark 1.6s ease-in-out infinite;
+}
+.subject-card.is-played .cat-name,
+.cat-card.is-played .cat-name,
+.level-card.is-played .cat-name,
+.today-card.is-played .today-title,
+.ex-card.is-played .ex-copy > strong,
+.week-card.is-played > h2 {
+  color: #5e6878;
+}
+.today-card.is-played .ribbon {
+  background: #d5dbe3;
+  color: #5e6878;
+}
+.today-card.is-new .ribbon {
+  background: #f0b429;
+  color: #3b2a05;
+}
 .cat-name, .today-title { font-size: 26px; font-weight: 800; }
 .cat-blurb, .cat-meta { color: var(--muted); font-weight: 700; }
 .ex-card { flex-direction: row; align-items: center; gap: 12px; min-height: 104px; }
@@ -537,6 +588,22 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .spark-b { right: 0; bottom: 16%; animation-delay: .3s; }
 .spark-c { left: 20%; bottom: 0; animation-delay: .6s; }
 .week-card { width: 100%; text-align: left; border: 0; border-radius: 28px; padding: 16px 18px; margin: 4px 0 14px; background: linear-gradient(160deg, #fff8e4, #f6d56a); box-shadow: var(--shadow); }
+.week-card:has(.act-icon) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 2px;
+  align-items: center;
+}
+.week-card .act-icon { grid-column: 1; grid-row: 1 / span 4; align-self: center; }
+.week-card:has(.act-icon) > h2,
+.week-card:has(.act-icon) > p,
+.week-card:has(.act-icon) > .pay-badge {
+  grid-column: 2;
+  justify-self: start;
+  min-width: 0;
+}
+.week-card:has(.act-icon) > h2 { overflow-wrap: anywhere; }
 .week-card.is-wait { background: white; }
 .week-card h2 { font-size: clamp(26px, 4vw, 36px); }
 .week-q { font-size: clamp(22px, 3vw, 32px); font-weight: 800; }
@@ -705,6 +772,24 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
 @keyframes glow {
   50% { transform: translateY(6px); filter: brightness(1.15); }
 }
+@keyframes new-icon-glow {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+      0 0 0 3px rgba(255, 236, 170, 0.9),
+      0 0 8px 0 rgba(255, 186, 40, 0.7);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 2px #fff,
+      0 0 0 3px rgba(255, 248, 210, 1),
+      0 0 12px 0 rgba(255, 200, 50, 0.95);
+  }
+}
+@keyframes new-spark {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
 @keyframes car-drive {
   0%, 8% { transform: translate3d(0, 0, 0) scaleX(1); }
   42% { transform: translate3d(calc(54cqi - 100% - 12px), -3px, 0) scaleX(1); }
@@ -863,7 +948,9 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .flakes i, .confetti i, .lanterns i, .is-shake,
   .kid-gin .illu-car, .kid-gin .car-bob, .kid-gin .wheel,
-  .kid-mon .pup-hop, .kid-mon .pup-tail, .kid-mon .pup-ear, .kid-mon .pup-heart {
+  .kid-mon .pup-hop, .kid-mon .pup-tail, .kid-mon .pup-ear, .kid-mon .pup-heart,
+  .is-new .cat-icon, .is-new .ex-icon, .is-new .today-icon,
+  .is-new .cat-icon::after, .is-new .ex-icon::after, .is-new .today-icon::after {
     animation: none;
   }
 }

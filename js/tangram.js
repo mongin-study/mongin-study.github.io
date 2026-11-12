@@ -500,6 +500,7 @@ function leave(hash) {
         if (last) {
           session.phase = "done";
           session.award = roundStars(session.child, session.firsts, session.list.length);
+          if (HV.storage && HV.storage.markPlayed) HV.storage.markPlayed(session.child, "tangram");
           if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
           if (HV.ui && HV.ui.render) HV.ui.render();
           return;
@@ -771,16 +772,31 @@ function leave(hash) {
     return boardView();
   }
 
+  function playedMark(child) {
+    return HV.fresh && HV.fresh.done(child, "tangram");
+  }
+
   function card(child) {
-    return el("button", { class: "week-card tan-entry", "data-go": "#/tangram/" + child }, [
-      el("span", { class: "pay-badge", text: "Mới" }),
+    var played = playedMark(child);
+    return el("button", {
+      class: "week-card tan-entry" + (played ? " is-played" : " is-new"),
+      "data-go": "#/tangram/" + child,
+      "data-state": played ? "played" : "new"
+    }, [
+      el("span", { class: "ex-icon act-icon", "aria-hidden": "true", text: "🧩" }),
+      played ? null : el("span", { class: "pay-badge", text: "Mới" }),
       el("h2", { text: "Xếp hình vào khung" }),
       el("p", { text: child === "gin" ? "2–3 miếng to · nhà, khiên, tên lửa" : "Lâu đài, tháp, Pom · 10 hình" })
     ]);
   }
 
   function lesson(child) {
-    return el("button", { class: "ex-card", "data-go": "#/tangram/" + child }, [
+    var played = playedMark(child);
+    return el("button", {
+      class: "ex-card" + (played ? " is-played" : " is-new"),
+      "data-go": "#/tangram/" + child,
+      "data-state": played ? "played" : "new"
+    }, [
       el("span", { class: "ex-icon", text: "🧩" }),
       el("span", { class: "ex-copy" }, [
         el("strong", { text: "Xếp hình vào khung" }),
