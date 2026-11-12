@@ -563,6 +563,7 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .sticker.is-rare { background: linear-gradient(#fff, #fff4cc); }
 .sticker.is-legend { background: linear-gradient(#fff, #efe4ff); box-shadow: 0 0 0 3px #d8b4fe, var(--shadow); }
 .sticker-head { font-size: clamp(26px, 4vw, 34px); margin: 12px 0 8px; }
+.sticker-art { width: min(100%, 132px); height: auto; aspect-ratio: 1; object-fit: contain; display: block; margin: 0 auto 4px; }
 .sticker-emoji { font-size: 56px; display: block; line-height: 1.1; }
 .sticker-emoji.is-duo { font-size: 40px; letter-spacing: 1px; }
 .sticker .btn { width: 100%; min-height: 52px; font-size: 18px; }

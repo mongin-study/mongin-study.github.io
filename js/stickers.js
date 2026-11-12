@@ -31,6 +31,46 @@
     { id: "elsa-queen", name: "Nữ hoàng băng", emoji: "👑❄️", cost: 48, tier: "legend", who: "mon", group: "Elsa" },
     { id: "elsa-sky", name: "Elsa bầu trời sao", emoji: "🌌", cost: 52, tier: "legend", who: "mon", group: "Elsa" },
     { id: "elsa-legend", name: "Elsa huyền thoại", emoji: "🌟", cost: 60, tier: "legend", who: "mon", group: "Elsa" },
+    { id: "rapunzel-smile", name: "Rapunzel cười", emoji: "😊", cost: 6, tier: "easy", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-smile.svg" },
+    { id: "rapunzel-hair", name: "Tóc vàng dài", emoji: "💇", cost: 6, tier: "easy", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-hair.svg" },
+    { id: "rapunzel-flower", name: "Hoa hồng tháp", emoji: "🌸", cost: 6, tier: "easy", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-flower.svg" },
+    { id: "rapunzel-sun", name: "Nắng ban mai", emoji: "☀️", cost: 8, tier: "easy", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-sun.svg" },
+    { id: "rapunzel-ribbon", name: "Nơ tím oải hương", emoji: "🎀", cost: 8, tier: "easy", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-ribbon.svg" },
+    { id: "rapunzel-gown", name: "Váy tím Rapunzel", emoji: "👗", cost: 12, tier: "mid", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-gown.svg" },
+    { id: "rapunzel-braid", name: "Bím tóc vàng", emoji: "💛", cost: 14, tier: "mid", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-braid.svg" },
+    { id: "rapunzel-lantern", name: "Đèn lồng ấm", emoji: "🏮", cost: 14, tier: "mid", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-lantern.svg" },
+    { id: "rapunzel-chameleon", name: "Tắc kè bạn", emoji: "🦎", cost: 14, tier: "mid", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-chameleon.svg" },
+    { id: "rapunzel-wreath", name: "Vòng hoa Rapunzel", emoji: "💐", cost: 16, tier: "mid", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-wreath.svg" },
+    { id: "rapunzel-friend", name: "Rapunzel và tắc kè", emoji: "🦎", cost: 16, tier: "mid", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-friend.svg" },
+    { id: "rapunzel-window", name: "Cửa sổ tháp", emoji: "🪟", cost: 24, tier: "rare", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-window.svg" },
+    { id: "rapunzel-crown", name: "Vương miện hoa", emoji: "👑", cost: 24, tier: "rare", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-crown.svg" },
+    { id: "rapunzel-magic", name: "Tóc phép thuật", emoji: "✨", cost: 26, tier: "rare", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-magic.svg" },
+    { id: "rapunzel-tower", name: "Tháp Rapunzel", emoji: "🏰", cost: 28, tier: "rare", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-tower.svg" },
+    { id: "rapunzel-boat", name: "Thuyền hoa", emoji: "⛵", cost: 28, tier: "rare", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-boat.svg" },
+    { id: "rapunzel-lanterns", name: "Đêm đèn lồng", emoji: "🏮", cost: 40, tier: "legend", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-lanterns.svg" },
+    { id: "rapunzel-princess", name: "Công chúa Rapunzel", emoji: "👸", cost: 48, tier: "legend", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-princess.svg" },
+    { id: "rapunzel-kingdom", name: "Vương quốc đèn", emoji: "🌟", cost: 60, tier: "legend", who: "mon", group: "Rapunzel", src: "assets/stickers/rapunzel-kingdom.svg" },
+    { id: "uni-white", name: "Kỳ lân trắng", emoji: "🦄", cost: 6, tier: "easy", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-white.svg" },
+    { id: "uni-pink", name: "Kỳ lân hồng", emoji: "💗", cost: 6, tier: "easy", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-pink.svg" },
+    { id: "star-smile", name: "Ngôi sao cười", emoji: "⭐", cost: 6, tier: "easy", who: "mon", group: "Kỳ lân", src: "assets/stickers/star-smile.svg" },
+    { id: "uni-baby", name: "Kỳ lân tí hon", emoji: "🦄", cost: 8, tier: "easy", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-baby.svg" },
+    { id: "spark-heart", name: "Tim lấp lánh", emoji: "💖", cost: 8, tier: "easy", who: "mon", group: "Kỳ lân", src: "assets/stickers/spark-heart.svg" },
+    { id: "pony-cream", name: "Pony kem", emoji: "🐴", cost: 8, tier: "easy", who: "mon", group: "Kỳ lân", src: "assets/stickers/pony-cream.svg" },
+    { id: "uni-pastel", name: "Kỳ lân pastel", emoji: "🦄", cost: 12, tier: "mid", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-pastel.svg" },
+    { id: "wand-pink", name: "Đũa phép hồng", emoji: "🪄", cost: 12, tier: "mid", who: "mon", group: "Kỳ lân", src: "assets/stickers/wand-pink.svg" },
+    { id: "uni-mane", name: "Bờm cầu vồng", emoji: "🌈", cost: 14, tier: "mid", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-mane.svg" },
+    { id: "uni-stars", name: "Kỳ lân ngắm sao", emoji: "⭐", cost: 14, tier: "mid", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-stars.svg" },
+    { id: "flower-magic", name: "Hoa phép màu", emoji: "🌷", cost: 14, tier: "mid", who: "mon", group: "Kỳ lân", src: "assets/stickers/flower-magic.svg" },
+    { id: "pony-pink", name: "Pony má hồng", emoji: "🐴", cost: 16, tier: "mid", who: "mon", group: "Kỳ lân", src: "assets/stickers/pony-pink.svg" },
+    { id: "uni-fly", name: "Kỳ lân bay", emoji: "✨", cost: 24, tier: "rare", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-fly.svg" },
+    { id: "rainbow-arch", name: "Cầu vồng kẹo", emoji: "🌈", cost: 24, tier: "rare", who: "mon", group: "Kỳ lân", src: "assets/stickers/rainbow-arch.svg" },
+    { id: "uni-rainbow", name: "Kỳ lân cầu vồng", emoji: "🦄", cost: 26, tier: "rare", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-rainbow.svg" },
+    { id: "wand-star", name: "Đũa sao vàng", emoji: "🪄", cost: 26, tier: "rare", who: "mon", group: "Kỳ lân", src: "assets/stickers/wand-star.svg" },
+    { id: "carriage-flower", name: "Xe ngựa hoa", emoji: "🎠", cost: 28, tier: "rare", who: "mon", group: "Kỳ lân", src: "assets/stickers/carriage-flower.svg" },
+    { id: "uni-cloud", name: "Kỳ lân trên mây", emoji: "☁️", cost: 28, tier: "rare", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-cloud.svg" },
+    { id: "uni-crown", name: "Kỳ lân vương miện", emoji: "👑", cost: 40, tier: "legend", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-crown.svg" },
+    { id: "uni-legend", name: "Kỳ lân huyền thoại", emoji: "🌟", cost: 52, tier: "legend", who: "mon", group: "Kỳ lân", src: "assets/stickers/uni-legend.svg" },
+    { id: "dream-sky", name: "Bầu trời cổ tích", emoji: "🌙", cost: 60, tier: "legend", who: "mon", group: "Kỳ lân", src: "assets/stickers/dream-sky.svg" },
     { id: "hero-mask", name: "Mặt nạ anh hùng", emoji: "🎭", cost: 8, tier: "easy", who: "gin", group: "Anh hùng" },
     { id: "hero-cape", name: "Áo choàng", emoji: "🦸", cost: 16, tier: "mid", who: "gin", group: "Anh hùng" },
     { id: "hero-bolt", name: "Tia sét vàng", emoji: "⚡", cost: 28, tier: "rare", who: "gin", group: "Anh hùng" },
@@ -98,6 +138,25 @@
     return "easy";
   }
 
+  function emojiSpan(sticker) {
+    return el("span", { class: "sticker-emoji" + (Array.from(sticker.emoji).length > 1 ? " is-duo" : ""), text: sticker.emoji });
+  }
+
+  function stickerFace(sticker) {
+    if (!sticker.src) return emojiSpan(sticker);
+    return el("img", {
+      class: "sticker-art",
+      src: sticker.src,
+      alt: sticker.name,
+      width: "200",
+      height: "200",
+      onError: function (ev) {
+        var img = ev.currentTarget;
+        if (img.parentNode) img.parentNode.replaceChild(emojiSpan(sticker), img);
+      }
+    });
+  }
+
   function tierText(sticker) {
     var tier = tierOf(sticker);
     if (tier === "legend") return "siêu hiếm";
@@ -129,7 +188,7 @@
       return s.group === "Elsa" && ownedIds.indexOf(s.id) < 0;
     }).length;
     var blurb = child === "mon"
-      ? "Còn " + elsaLeft + " sticker Elsa · đã có " + owned + "/" + mine.length
+      ? "Mới: Rapunzel và kỳ lân · Elsa còn " + elsaLeft + " · đã có " + owned + "/" + mine.length
       : "Đổi được " + spendable(child) + " sao · đã có " + owned + " sticker";
     return el("button", { class: "week-card sticker-card", "data-go": "#/stickers/" + child }, [
       el("span", { class: "pay-badge", text: "Mới" }),
@@ -152,9 +211,9 @@
     var elsaAll = mine.filter(function (s) { return s.group === "Elsa"; });
     var elsaOwned = elsaAll.filter(function (s) { return data.owned.indexOf(s.id) >= 0; }).length;
     root.appendChild(el("p", { class: "lede", text: child === "mon"
-      ? "Elsa đã có " + elsaOwned + "/" + elsaAll.length + ". Còn nhiều sticker mới để sưu."
+      ? "Elsa đã có " + elsaOwned + "/" + elsaAll.length + ". Rapunzel và kỳ lân mới đang chờ Mon."
       : "Dùng sao em kiếm tuần này để đổi sticker." }));
-    ["Elsa", "Anh hùng", "Pom"].forEach(function (group) {
+    ["Rapunzel", "Kỳ lân", "Elsa", "Anh hùng", "Pom"].forEach(function (group) {
       var items = mine.filter(function (s) { return s.group === group; }).slice().sort(function (a, b) {
         return a.cost - b.cost;
       });
@@ -166,7 +225,7 @@
         var afford = spendable(child) >= sticker.cost;
         var tier = tierOf(sticker);
         var cell = el("article", { class: "sticker" + (has ? " is-owned" : "") + (tier === "rare" ? " is-rare" : "") + (tier === "legend" ? " is-legend" : "") });
-        cell.appendChild(el("span", { class: "sticker-emoji" + (Array.from(sticker.emoji).length > 1 ? " is-duo" : ""), text: sticker.emoji }));
+        cell.appendChild(stickerFace(sticker));
         cell.appendChild(el("strong", { text: sticker.name }));
         cell.appendChild(el("p", { text: tierText(sticker) }));
         if (has) cell.appendChild(el("p", { class: "pay-badge", text: "Đã có" }));
