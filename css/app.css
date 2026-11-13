@@ -628,7 +628,8 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .mem-face .swatch { width: 54px; height: 54px; }
 .mem-card.is-matched { filter: saturate(1.1); }
 .sticker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 12px; }
-.sticker { background: white; border-radius: 22px; padding: 14px 10px; text-align: center; box-shadow: var(--shadow); }
+.sticker { min-width: 0; background: white; border-radius: 22px; padding: 14px 10px; text-align: center; box-shadow: var(--shadow); }
+.sticker strong, .sticker p { overflow-wrap: anywhere; }
 .sticker.is-owned { outline: 3px solid #22c55e; }
 .sticker.is-rare { background: linear-gradient(#fff, #fff4cc); }
 .sticker.is-legend { background: linear-gradient(#fff, #efe4ff); box-shadow: 0 0 0 3px #d8b4fe, var(--shadow); }
