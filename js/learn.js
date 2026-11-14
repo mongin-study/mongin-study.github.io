@@ -314,7 +314,7 @@
   var NEAR_RHYME = {
     an: ["am", "ăn", "ân", "at"], am: ["an", "ăm", "ơm", "ap"], ai: ["ay", "ao", "oi", "ui"], ao: ["au", "ai", "eo", "oi"],
     eo: ["ao", "ai", "em", "oi"], oi: ["ôi", "ơi", "ai", "ui"], "ôi": ["ơi", "oi", "ui", "ôm"], "ơi": ["ôi", "oi", "ơn", "ai"],
-    ui: ["oi", "ôi", "in", "ai"], on: ["ôn", "ơn", "an", "ong"], em: ["en", "êm", "im", "eo"], in: ["im", "ên", "ân", "an"],
+    ui: ["oi", "ôi", "in", "ai"], im: ["in", "em", "ơm", "ôm"], on: ["ôn", "ơn", "an", "ong"], em: ["en", "êm", "im", "eo"], in: ["im", "ên", "ân", "an"],
     "ân": ["ăn", "an", "ên", "ân"], "ên": ["en", "in", "ân", "ơn"], ong: ["ông", "on", "ăng", "ung"], "ông": ["ong", "ôn", "ôm", "ơng"],
     "ăng": ["ang", "ăn", "ong", "ân"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
     "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"]
