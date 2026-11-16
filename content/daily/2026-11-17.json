@@ -1,0 +1,4262 @@
+{
+  "date": "2026-11-17",
+  "praise": [
+    "Elsa tung tuyết vì Mon đọc chữ xờ thật rõ!",
+    "Rapunzel khen Mon ghép vần at, ap giỏi quá!",
+    "Pom vẫy đuôi vì Mon đếm cách đúng rồi!",
+    "Mẹ Vy ôm Gin vì Gin nhớ chữ ơ, ư!",
+    "Bingo, Mon! Elsa claps for the snow!",
+    "Hurrah, Gin! You found the green frog!"
+  ],
+  "memory": [
+    {
+      "id": "daily-2026-11-17-gin-cars",
+      "child": "gin",
+      "title": "Xe cảnh sát, xe cứu thương và máy cày",
+      "pairs": [
+        {
+          "id": "police",
+          "a": {
+            "emoji": "🚓"
+          },
+          "b": {
+            "text": "xe cảnh sát"
+          }
+        },
+        {
+          "id": "ambulance",
+          "a": {
+            "emoji": "🚑"
+          },
+          "b": {
+            "text": "xe cứu thương"
+          }
+        },
+        {
+          "id": "tractor",
+          "a": {
+            "emoji": "🚜"
+          },
+          "b": {
+            "text": "máy cày"
+          }
+        },
+        {
+          "id": "moto",
+          "a": {
+            "emoji": "🏍️"
+          },
+          "b": {
+            "text": "xe máy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-x",
+      "child": "mon",
+      "title": "Xờ, xe, xô, bát, hát và tháp",
+      "pairs": [
+        {
+          "id": "x",
+          "a": {
+            "text": "x"
+          },
+          "b": {
+            "text": "xờ"
+          }
+        },
+        {
+          "id": "xe",
+          "a": {
+            "text": "xe"
+          },
+          "b": {
+            "emoji": "🚗"
+          }
+        },
+        {
+          "id": "xo",
+          "a": {
+            "text": "xô"
+          },
+          "b": {
+            "emoji": "🪣"
+          }
+        },
+        {
+          "id": "bat",
+          "a": {
+            "text": "bát"
+          },
+          "b": {
+            "emoji": "🥣"
+          }
+        },
+        {
+          "id": "hat",
+          "a": {
+            "text": "hát"
+          },
+          "b": {
+            "emoji": "🎤"
+          }
+        },
+        {
+          "id": "thap",
+          "a": {
+            "text": "tháp"
+          },
+          "b": {
+            "emoji": "🗼"
+          }
+        }
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "daily-2026-11-17-mon-arith",
+      "child": "mon",
+      "subject": "math",
+      "category": "arithmetic",
+      "title": "Kẹo, táo và bóng bay nhà mình",
+      "subtitle": "Bài toán có lời",
+      "icon": "🍬",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Mẹ Vy có 6 cái kẹo, Gin có 5 cái kẹo. Vậy tổng cộng có bao nhiêu cái kẹo?",
+          "speak": "Mẹ Vy có sáu cái kẹo, Gin có năm cái kẹo. Vậy tổng cộng có bao nhiêu cái kẹo?",
+          "explain": "Sáu cộng năm. Đếm thêm năm từ sáu: bảy, tám, chín, mười, mười một.",
+          "choices": [
+            {
+              "text": "12",
+              "correct": false
+            },
+            {
+              "text": "10",
+              "correct": false
+            },
+            {
+              "text": "11",
+              "correct": true
+            },
+            {
+              "text": "6",
+              "correct": false
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Bố Hà có 13 quả táo. Bố Hà cho Mon 4 quả táo. Vậy Bố Hà còn bao nhiêu quả táo?",
+          "speak": "Bố Hà có mười ba quả táo. Bố Hà cho Mon bốn quả táo. Vậy Bố Hà còn bao nhiêu quả táo?",
+          "explain": "Mười ba trừ bốn. Đếm lùi bốn từ mười ba: mười hai, mười một, mười, chín.",
+          "choices": [
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "10",
+              "correct": false
+            },
+            {
+              "text": "8",
+              "correct": false
+            },
+            {
+              "text": "9",
+              "correct": true
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Mon có 8 cây bút màu, Gin có 7 cây bút màu. Vậy tổng cộng có bao nhiêu cây bút màu?",
+          "speak": "Mon có tám cây bút màu, Gin có bảy cây bút màu. Vậy tổng cộng có bao nhiêu cây bút màu?",
+          "explain": "Tám cộng bảy. Đếm thêm bảy từ tám: chín, mười, mười một, mười hai, mười ba, mười bốn, mười lăm.",
+          "choices": [
+            {
+              "text": "8",
+              "correct": false
+            },
+            {
+              "text": "14",
+              "correct": false
+            },
+            {
+              "text": "15",
+              "correct": true
+            },
+            {
+              "text": "17",
+              "correct": false
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Mẹ Vy có 15 cái bánh. Mẹ Vy cho Gin 6 cái bánh. Vậy Mẹ Vy còn bao nhiêu cái bánh?",
+          "speak": "Mẹ Vy có mười lăm cái bánh. Mẹ Vy cho Gin sáu cái bánh. Vậy Mẹ Vy còn bao nhiêu cái bánh?",
+          "explain": "Mười lăm trừ sáu. Đếm lùi sáu từ mười lăm: mười bốn, mười ba, mười hai, mười một, mười, chín.",
+          "choices": [
+            {
+              "text": "8",
+              "correct": false
+            },
+            {
+              "text": "11",
+              "correct": false
+            },
+            {
+              "text": "10",
+              "correct": false
+            },
+            {
+              "text": "9",
+              "correct": true
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Bố Hà có 9 quả bóng bay, Mẹ Vy có 6 quả bóng bay. Vậy tổng cộng có bao nhiêu quả bóng bay?",
+          "speak": "Bố Hà có chín quả bóng bay, Mẹ Vy có sáu quả bóng bay. Vậy tổng cộng có bao nhiêu quả bóng bay?",
+          "explain": "Chín cộng sáu. Đếm thêm sáu từ chín: mười, mười một, mười hai, mười ba, mười bốn, mười lăm.",
+          "choices": [
+            {
+              "text": "17",
+              "correct": false
+            },
+            {
+              "text": "15",
+              "correct": true
+            },
+            {
+              "text": "14",
+              "correct": false
+            },
+            {
+              "text": "9",
+              "correct": false
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Gin có 12 chiếc ô tô đồ chơi. Gin cho Mon 5 chiếc ô tô đồ chơi. Vậy Gin còn bao nhiêu chiếc ô tô đồ chơi?",
+          "speak": "Gin có mười hai chiếc ô tô đồ chơi. Gin cho Mon năm chiếc ô tô đồ chơi. Vậy Gin còn bao nhiêu chiếc ô tô đồ chơi?",
+          "explain": "Mười hai trừ năm. Đếm lùi năm từ mười hai: mười một, mười, chín, tám, bảy.",
+          "choices": [
+            {
+              "text": "5",
+              "correct": false
+            },
+            {
+              "text": "8",
+              "correct": false
+            },
+            {
+              "text": "9",
+              "correct": false
+            },
+            {
+              "text": "7",
+              "correct": true
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Bà có 7 quả táo, Mon có 8 quả táo. Vậy tổng cộng có bao nhiêu quả táo?",
+          "speak": "Bà có bảy quả táo, Mon có tám quả táo. Vậy tổng cộng có bao nhiêu quả táo?",
+          "explain": "Bảy cộng tám. Đếm thêm tám từ bảy: tám, chín, mười, mười một, mười hai, mười ba, mười bốn, mười lăm.",
+          "choices": [
+            {
+              "text": "17",
+              "correct": false
+            },
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "16",
+              "correct": false
+            },
+            {
+              "text": "15",
+              "correct": true
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Ông có 16 cái kẹo. ông cho Gin 7 cái kẹo. Vậy ông còn bao nhiêu cái kẹo?",
+          "speak": "Ông có mười sáu cái kẹo. ông cho Gin bảy cái kẹo. Vậy ông còn bao nhiêu cái kẹo?",
+          "explain": "Mười sáu trừ bảy. Đếm lùi bảy từ mười sáu: mười lăm, mười bốn, mười ba, mười hai, mười một, mười, chín.",
+          "choices": [
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "8",
+              "correct": false
+            },
+            {
+              "text": "9",
+              "correct": true
+            },
+            {
+              "text": "11",
+              "correct": false
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Mẹ Vy có 11 cái bánh, Bố Hà có 6 cái bánh. Vậy tổng cộng có bao nhiêu cái bánh?",
+          "speak": "Mẹ Vy có mười một cái bánh, Bố Hà có sáu cái bánh. Vậy tổng cộng có bao nhiêu cái bánh?",
+          "explain": "Mười một cộng sáu. Đếm thêm sáu từ mười một: mười hai, mười ba, mười bốn, mười lăm, mười sáu, mười bảy.",
+          "choices": [
+            {
+              "text": "18",
+              "correct": false
+            },
+            {
+              "text": "11",
+              "correct": false
+            },
+            {
+              "text": "17",
+              "correct": true
+            },
+            {
+              "text": "16",
+              "correct": false
+            }
+          ],
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Mon có 14 cái bánh. Mon cho Pom 6 cái bánh. Vậy Mon còn bao nhiêu cái bánh?",
+          "speak": "Mon có mười bốn cái bánh. Mon cho Pom sáu cái bánh. Vậy Mon còn bao nhiêu cái bánh?",
+          "explain": "Mười bốn trừ sáu. Đếm lùi sáu từ mười bốn: mười ba, mười hai, mười một, mười, chín, tám.",
+          "choices": [
+            {
+              "text": "6",
+              "correct": false
+            },
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "8",
+              "correct": true
+            },
+            {
+              "text": "9",
+              "correct": false
+            }
+          ],
+          "columns": 2
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-logic",
+      "child": "mon",
+      "subject": "math",
+      "category": "logic",
+      "title": "Nhảy cách 2, 5, 10 và số liên kết 20",
+      "subtitle": "Dãy số, điền số còn thiếu",
+      "icon": "🧩",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "hai mươi, hai mươi lăm, ba mươi, ba mươi lăm. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 5, được 40.",
+          "scene": {
+            "layout": "equation",
+            "text": "20 , 25 , 30 , 35 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "40",
+              "correct": true
+            },
+            {
+              "text": "39",
+              "correct": false
+            },
+            {
+              "text": "41",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "bốn mươi bảy, bốn mươi chín, năm mươi mốt, năm mươi ba. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 2, được 55.",
+          "scene": {
+            "layout": "equation",
+            "text": "47 , 49 , 51 , 53 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "55",
+              "correct": true
+            },
+            {
+              "text": "54",
+              "correct": false
+            },
+            {
+              "text": "56",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "mười lăm, hai mươi lăm, ba mươi lăm, bốn mươi lăm. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 10, được 55.",
+          "scene": {
+            "layout": "equation",
+            "text": "15 , 25 , 35 , 45 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "56",
+              "correct": false
+            },
+            {
+              "text": "54",
+              "correct": false
+            },
+            {
+              "text": "55",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "hai mươi, ba mươi, bốn mươi, năm mươi. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 10, được 60.",
+          "scene": {
+            "layout": "equation",
+            "text": "20 , 30 , 40 , 50 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "58",
+              "correct": false
+            },
+            {
+              "text": "59",
+              "correct": false
+            },
+            {
+              "text": "60",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Điền số vào ô trống",
+          "speak": "Tìm số còn thiếu. một cộng số còn thiếu bằng năm",
+          "explain": "1 + 4 = 5",
+          "scene": {
+            "layout": "equation",
+            "text": "1 + ? = 5"
+          },
+          "answer": 4,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Điền số vào ô trống",
+          "speak": "Tìm số còn thiếu. mười hai cộng số còn thiếu bằng mười ba",
+          "explain": "12 + 1 = 13",
+          "scene": {
+            "layout": "equation",
+            "text": "12 + ? = 13"
+          },
+          "answer": 1,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Điền số vào ô trống",
+          "speak": "Tìm số còn thiếu. ba cộng số còn thiếu bằng mười hai",
+          "explain": "3 + 9 = 12",
+          "scene": {
+            "layout": "equation",
+            "text": "? + 3 = 12"
+          },
+          "answer": 9,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Điền số còn thiếu",
+          "speak": "bảy cộng số nào bằng hai mươi?",
+          "explain": "7 + 13 = 20",
+          "scene": {
+            "layout": "bond",
+            "whole": 20,
+            "known": 7
+          },
+          "answer": 13,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Điền số còn thiếu",
+          "speak": "tám cộng số nào bằng hai mươi?",
+          "explain": "8 + 12 = 20",
+          "scene": {
+            "layout": "bond",
+            "whole": 20,
+            "known": 8
+          },
+          "answer": 12,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Điền số còn thiếu",
+          "speak": "sáu cộng số nào bằng hai mươi?",
+          "explain": "6 + 14 = 20",
+          "scene": {
+            "layout": "bond",
+            "whole": 20,
+            "known": 6
+          },
+          "answer": 14,
+          "maxDigits": 2,
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-number",
+      "child": "mon",
+      "subject": "math",
+      "category": "number",
+      "title": "Chẵn lẻ, chục, đếm cách và số liền kề",
+      "subtitle": "Số đến 100",
+      "icon": "🔢",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Số 29 là số chẵn hay số lẻ?",
+          "speak": "Số hai mươi chín là số chẵn hay số lẻ?",
+          "explain": "29 còn thừa 1 chấm, nên là số lẻ.",
+          "scene": {
+            "layout": "pairs",
+            "count": 29
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Chẵn",
+              "correct": false
+            },
+            {
+              "text": "Lẻ",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số 38 là số chẵn hay số lẻ?",
+          "speak": "Số ba mươi tám là số chẵn hay số lẻ?",
+          "explain": "38 chia hết thành từng cặp, nên là số chẵn.",
+          "scene": {
+            "layout": "pairs",
+            "count": 38
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Chẵn",
+              "correct": true
+            },
+            {
+              "text": "Lẻ",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Số này có bao nhiêu đơn vị?",
+          "speak": "Nhìn các chấm đơn vị. Có bao nhiêu đơn vị?",
+          "explain": "Có 4 đơn vị. Số là 64.",
+          "scene": {
+            "layout": "blocks",
+            "tens": 6,
+            "ones": 4
+          },
+          "answer": 4,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Đây là số mấy?",
+          "speak": "Có bốn chục và chín đơn vị. Đây là số mấy?",
+          "explain": "4 chục và 9 đơn vị là 49.",
+          "scene": {
+            "layout": "blocks",
+            "tens": 4,
+            "ones": 9
+          },
+          "answer": 49,
+          "maxDigits": 2,
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đếm cách 10. Số tiếp theo là số nào?",
+          "speak": "Đếm cách mười. mười, hai mươi, ba mươi, bốn mươi. Tiếp theo là số nào?",
+          "explain": "Thêm 10 được 50.",
+          "scene": {
+            "layout": "equation",
+            "text": "10 , 20 , 30 , 40 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "49",
+              "correct": false
+            },
+            {
+              "text": "50",
+              "correct": true
+            },
+            {
+              "text": "51",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đếm cách 2. Số tiếp theo là số nào?",
+          "speak": "Đếm cách hai. sáu, tám, mười, mười hai. Tiếp theo là số nào?",
+          "explain": "Thêm 2 được 14.",
+          "scene": {
+            "layout": "equation",
+            "text": "6 , 8 , 10 , 12 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "14",
+              "correct": true
+            },
+            {
+              "text": "15",
+              "correct": false
+            },
+            {
+              "text": "13",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đếm cách 2. Số tiếp theo là số nào?",
+          "speak": "Đếm cách hai. hai, bốn, sáu, tám. Tiếp theo là số nào?",
+          "explain": "Thêm 2 được 10.",
+          "scene": {
+            "layout": "equation",
+            "text": "2 , 4 , 6 , 8 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "10",
+              "correct": true
+            },
+            {
+              "text": "9",
+              "correct": false
+            },
+            {
+              "text": "11",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào lớn hơn?",
+          "speak": "Trong hai số này, số nào lớn hơn?",
+          "explain": "35 lớn hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "35",
+              "correct": true
+            },
+            {
+              "text": "30",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số liền trước của 60 là số nào?",
+          "speak": "Số liền trước của sáu mươi là số nào?",
+          "explain": "Số liền trước là 59.",
+          "scene": {
+            "layout": "equation",
+            "text": "60"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "57",
+              "correct": false
+            },
+            {
+              "text": "60",
+              "correct": false
+            },
+            {
+              "text": "59",
+              "correct": true
+            },
+            {
+              "text": "61",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số liền sau của 49 là số nào?",
+          "speak": "Số liền sau của bốn mươi chín là số nào?",
+          "explain": "Số liền sau là 50.",
+          "scene": {
+            "layout": "equation",
+            "text": "49"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "50",
+              "correct": true
+            },
+            {
+              "text": "49",
+              "correct": false
+            },
+            {
+              "text": "52",
+              "correct": false
+            },
+            {
+              "text": "51",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-geo",
+      "child": "mon",
+      "subject": "math",
+      "category": "geometry",
+      "title": "Gọi tên hình, đếm cạnh và đối xứng",
+      "subtitle": "Hình học",
+      "icon": "🔷",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Đây là hình gì?",
+          "speak": "Đây là hình gì?",
+          "explain": "Đây là hình chữ nhật.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "rectangle",
+                "color": "#ec4899",
+                "size": 140
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "hình thoi",
+              "correct": false
+            },
+            {
+              "text": "hình chữ nhật",
+              "correct": true
+            },
+            {
+              "text": "hình lục giác",
+              "correct": false
+            },
+            {
+              "text": "hình ngôi sao",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đây là hình gì?",
+          "speak": "Đây là hình gì?",
+          "explain": "Đây là hình trái tim.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "heart",
+                "color": "#ec4899",
+                "size": 140
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "hình tam giác",
+              "correct": false
+            },
+            {
+              "text": "hình tròn",
+              "correct": false
+            },
+            {
+              "text": "hình lục giác",
+              "correct": false
+            },
+            {
+              "text": "hình trái tim",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đây là hình gì?",
+          "speak": "Đây là hình gì?",
+          "explain": "Đây là hình ngôi sao.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "star",
+                "color": "#a855f7",
+                "size": 140
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "hình ngôi sao",
+              "correct": true
+            },
+            {
+              "text": "hình trái tim",
+              "correct": false
+            },
+            {
+              "text": "hình lục giác",
+              "correct": false
+            },
+            {
+              "text": "hình thoi",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình này có mấy cạnh?",
+          "speak": "Đếm các cạnh. Hình này có mấy cạnh?",
+          "explain": "hình ngũ giác có 5 cạnh.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "pentagon",
+                "color": "#eab308",
+                "size": 140
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "5",
+              "correct": true
+            },
+            {
+              "text": "4",
+              "correct": false
+            },
+            {
+              "text": "6",
+              "correct": false
+            },
+            {
+              "text": "3",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình này có mấy cạnh?",
+          "speak": "Đếm các cạnh. Hình này có mấy cạnh?",
+          "explain": "hình lục giác có 6 cạnh.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "hexagon",
+                "color": "#a855f7",
+                "size": 140
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "6",
+              "correct": true
+            },
+            {
+              "text": "4",
+              "correct": false
+            },
+            {
+              "text": "3",
+              "correct": false
+            },
+            {
+              "text": "5",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hai bên vạch đứt có giống nhau không?",
+          "speak": "Nhìn hai bên đường kẻ. Chúng có giống nhau không?",
+          "explain": "Hai bên giống nhau. Đây là đối xứng.",
+          "scene": {
+            "layout": "mirror",
+            "colors": [
+              "#f97316",
+              "#ec4899",
+              "#ec4899",
+              "#ec4899",
+              "#f97316"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Có",
+              "correct": true
+            },
+            {
+              "text": "Không",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hai bên vạch đứt có giống nhau không?",
+          "speak": "Nhìn hai bên đường kẻ. Chúng có giống nhau không?",
+          "explain": "Hai bên không giống nhau.",
+          "scene": {
+            "layout": "mirror",
+            "colors": [
+              "#a855f7",
+              "#ef4444",
+              "#ec4899",
+              "#a855f7",
+              "#ef4444"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Có",
+              "correct": false
+            },
+            {
+              "text": "Không",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chiếc xe ở bên nào?",
+          "speak": "Chiếc xe ở bên nào? Bên trái hay bên phải?",
+          "explain": "Chiếc xe ở bên trái.",
+          "scene": {
+            "layout": "sides",
+            "left": {
+              "emoji": "🚗"
+            },
+            "right": {
+              "emoji": "⭐"
+            }
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Bên trái",
+              "correct": true
+            },
+            {
+              "text": "Bên phải",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Quả bóng ở bên nào?",
+          "speak": "Quả bóng ở bên nào? Bên trái hay bên phải?",
+          "explain": "Quả bóng ở bên phải.",
+          "scene": {
+            "layout": "sides",
+            "left": {
+              "emoji": "🐶"
+            },
+            "right": {
+              "emoji": "⚽"
+            }
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Bên trái",
+              "correct": false
+            },
+            {
+              "text": "Bên phải",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình nào có nhiều cạnh hơn?",
+          "speak": "Hình nào có nhiều cạnh hơn?",
+          "explain": "hình ngũ giác có 5 cạnh, nhiều hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "shape": "pentagon",
+              "color": "#3b82f6",
+              "size": 96,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#22c55e",
+              "size": 96,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-vi",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Đánh vần xa, xe, xô, xu",
+      "subtitle": "Chữ mới: x",
+      "icon": "🅰️",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "xờ a xa",
+          "explain": "Xờ a xa.",
+          "scene": {
+            "layout": "equation",
+            "text": "x + a"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ca",
+              "correct": false
+            },
+            {
+              "text": "xai",
+              "correct": false
+            },
+            {
+              "text": "xa",
+              "correct": true
+            },
+            {
+              "text": "xã",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "xờ e xe",
+          "explain": "Xờ e xe.",
+          "scene": {
+            "layout": "equation",
+            "text": "x + e"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ce",
+              "correct": false
+            },
+            {
+              "text": "xẹ",
+              "correct": false
+            },
+            {
+              "text": "xeo",
+              "correct": false
+            },
+            {
+              "text": "xe",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "xờ ô xô",
+          "explain": "Xờ ô xô.",
+          "scene": {
+            "layout": "equation",
+            "text": "x + ô"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "cô",
+              "correct": false
+            },
+            {
+              "text": "xôn",
+              "correct": false
+            },
+            {
+              "text": "xộ",
+              "correct": false
+            },
+            {
+              "text": "xô",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Xờ e xe.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🚗"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "xé",
+              "correct": false
+            },
+            {
+              "text": "xe",
+              "correct": true
+            },
+            {
+              "text": "ke",
+              "correct": false
+            },
+            {
+              "text": "xem",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Xờ ô xô.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🪣"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "cô",
+              "correct": false
+            },
+            {
+              "text": "xô",
+              "correct": true
+            },
+            {
+              "text": "xộ",
+              "correct": false
+            },
+            {
+              "text": "xôi",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "xờ e xe sắc xé",
+          "explain": "Xờ e xe. Thêm dấu sắc thành xé.",
+          "scene": {
+            "layout": "equation",
+            "text": "x + e + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "xéo",
+              "correct": false
+            },
+            {
+              "text": "cé",
+              "correct": false
+            },
+            {
+              "text": "xè",
+              "correct": false
+            },
+            {
+              "text": "xé",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "xờ u xu",
+          "explain": "Xờ u xu.",
+          "scene": {
+            "layout": "equation",
+            "text": "x + u"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ku",
+              "correct": false
+            },
+            {
+              "text": "xu",
+              "correct": true
+            },
+            {
+              "text": "xâu",
+              "correct": false
+            },
+            {
+              "text": "xủ",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ xa",
+          "explain": "Xờ a xa.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "xa",
+              "correct": true
+            },
+            {
+              "text": "ca",
+              "correct": false
+            },
+            {
+              "text": "xã",
+              "correct": false
+            },
+            {
+              "text": "xam",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ xé",
+          "explain": "Xờ e xe. Thêm dấu sắc thành xé.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "xéo",
+              "correct": false
+            },
+            {
+              "text": "xè",
+              "correct": false
+            },
+            {
+              "text": "ké",
+              "correct": false
+            },
+            {
+              "text": "xé",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ xu",
+          "explain": "Xờ u xu.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "xâu",
+              "correct": false
+            },
+            {
+              "text": "xu",
+              "correct": true
+            },
+            {
+              "text": "xú",
+              "correct": false
+            },
+            {
+              "text": "cu",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-vi-van",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "spell",
+      "title": "Vần at, ap",
+      "subtitle": "bát, hát, cát, đạp, cáp",
+      "icon": "🧩",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a tờ at. bờ at bat sắc bát",
+          "explain": "Bờ at bat. Thêm dấu sắc thành bát.",
+          "scene": {
+            "layout": "equation",
+            "text": "b + at + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "tát",
+              "correct": false
+            },
+            {
+              "text": "bá",
+              "correct": false
+            },
+            {
+              "text": "bạt",
+              "correct": false
+            },
+            {
+              "text": "bát",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Bờ at bat. Thêm dấu sắc thành bát.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🥣"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "bát",
+              "correct": true
+            },
+            {
+              "text": "nát",
+              "correct": false
+            },
+            {
+              "text": "bàt",
+              "correct": false
+            },
+            {
+              "text": "bái",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a tờ at. hờ at hat sắc hát",
+          "explain": "Hờ at hat. Thêm dấu sắc thành hát.",
+          "scene": {
+            "layout": "equation",
+            "text": "h + at + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "nát",
+              "correct": false
+            },
+            {
+              "text": "hát",
+              "correct": true
+            },
+            {
+              "text": "hãt",
+              "correct": false
+            },
+            {
+              "text": "hán",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a tờ at. mờ at mat sắc mát",
+          "explain": "Mờ at mat. Thêm dấu sắc thành mát.",
+          "scene": {
+            "layout": "equation",
+            "text": "m + at + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "mát",
+              "correct": true
+            },
+            {
+              "text": "bát",
+              "correct": false
+            },
+            {
+              "text": "màt",
+              "correct": false
+            },
+            {
+              "text": "máo",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng cát có vần gì?",
+          "speak": "Tiếng cát có vần gì?",
+          "explain": "Cờ at cat. Thêm dấu sắc thành cát. Vần là at: a tờ at.",
+          "scene": {
+            "layout": "digit",
+            "text": "cát"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ap",
+              "correct": false
+            },
+            {
+              "text": "at",
+              "correct": true
+            },
+            {
+              "text": "ây",
+              "correct": false
+            },
+            {
+              "text": "an",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ cát",
+          "explain": "Cờ at cat. Thêm dấu sắc thành cát.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "càt",
+              "correct": false
+            },
+            {
+              "text": "cát",
+              "correct": true
+            },
+            {
+              "text": "cán",
+              "correct": false
+            },
+            {
+              "text": "lát",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a pờ ap. đờ ap đap nặng đạp",
+          "explain": "Đờ ap đap. Thêm dấu nặng thành đạp.",
+          "scene": {
+            "layout": "equation",
+            "text": "đ + ap + nặng"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "đảp",
+              "correct": false
+            },
+            {
+              "text": "đạo",
+              "correct": false
+            },
+            {
+              "text": "tạp",
+              "correct": false
+            },
+            {
+              "text": "đạp",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe rồi chọn chữ viết đúng",
+          "speak": "Chọn chữ cáp",
+          "explain": "Cờ ap cap. Thêm dấu sắc thành cáp.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "cạp",
+              "correct": false
+            },
+            {
+              "text": "máp",
+              "correct": false
+            },
+            {
+              "text": "cáp",
+              "correct": true
+            },
+            {
+              "text": "cám",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng đạp có vần gì?",
+          "speak": "Tiếng đạp có vần gì?",
+          "explain": "Đờ ap đap. Thêm dấu nặng thành đạp. Vần là ap: a pờ ap.",
+          "scene": {
+            "layout": "digit",
+            "text": "đạp"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "am",
+              "correct": false
+            },
+            {
+              "text": "in",
+              "correct": false
+            },
+            {
+              "text": "ap",
+              "correct": true
+            },
+            {
+              "text": "at",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng bàn có vần gì?",
+          "speak": "Tiếng bàn có vần gì?",
+          "explain": "Bờ an ban. Thêm dấu huyền thành bàn. Vần là an: a nờ an.",
+          "scene": {
+            "layout": "digit",
+            "text": "bàn"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "an",
+              "correct": true
+            },
+            {
+              "text": "am",
+              "correct": false
+            },
+            {
+              "text": "ăn",
+              "correct": false
+            },
+            {
+              "text": "ân",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-vi-mix",
+      "child": "mon",
+      "subject": "vietnamese",
+      "category": "words",
+      "title": "Tháp, khát, quạt và câu ngắn",
+      "subtitle": "Âm ghép th, kh, qu, ch, nh, ng và vần at, ap, ay",
+      "icon": "🗼",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Thờ ap thap. Thêm dấu sắc thành tháp. Âm thờ viết bằng hai chữ t và h.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🗼"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "thái",
+              "correct": false
+            },
+            {
+              "text": "thãp",
+              "correct": false
+            },
+            {
+              "text": "tháp",
+              "correct": true
+            },
+            {
+              "text": "táp",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a tờ at. khờ at khat sắc khát",
+          "explain": "Khờ at khat. Thêm dấu sắc thành khát. Âm khờ viết bằng hai chữ k và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "kh + at + sắc"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "hát",
+              "correct": false
+            },
+            {
+              "text": "khát",
+              "correct": true
+            },
+            {
+              "text": "khãt",
+              "correct": false
+            },
+            {
+              "text": "kháo",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng khát bắt đầu bằng âm gì?",
+          "speak": "Tiếng khát bắt đầu bằng âm gì?",
+          "explain": "Khát bắt đầu bằng khờ, viết là kh.",
+          "scene": {
+            "layout": "digit",
+            "text": "khát"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "h",
+              "correct": false
+            },
+            {
+              "text": "k",
+              "correct": false
+            },
+            {
+              "text": "c",
+              "correct": false
+            },
+            {
+              "text": "kh",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a tờ at. quờ at quat nặng quạt",
+          "explain": "Quờ at quat. Thêm dấu nặng thành quạt. Âm quờ viết bằng hai chữ q và u.",
+          "scene": {
+            "layout": "equation",
+            "text": "qu + at + nặng"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "kạt",
+              "correct": false
+            },
+            {
+              "text": "quàt",
+              "correct": false
+            },
+            {
+              "text": "quạt",
+              "correct": true
+            },
+            {
+              "text": "quạn",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng quạt có vần gì?",
+          "speak": "Tiếng quạt có vần gì?",
+          "explain": "Quờ at quat. Thêm dấu nặng thành quạt. Âm quờ viết bằng hai chữ q và u. Vần là at: a tờ at.",
+          "scene": {
+            "layout": "digit",
+            "text": "quạt"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "on",
+              "correct": false
+            },
+            {
+              "text": "at",
+              "correct": true
+            },
+            {
+              "text": "an",
+              "correct": false
+            },
+            {
+              "text": "ap",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tranh này là tiếng nào?",
+          "speak": "Nhìn tranh. Chữ nào viết đúng?",
+          "explain": "Chờ ay chay. Thêm dấu nặng thành chạy. Âm chờ viết bằng hai chữ c và h.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🏃"
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "chãy",
+              "correct": false
+            },
+            {
+              "text": "chạy",
+              "correct": true
+            },
+            {
+              "text": "cạy",
+              "correct": false
+            },
+            {
+              "text": "chạn",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đánh vần rồi chọn tiếng đúng",
+          "speak": "a y ay. nhờ ay nhay hỏi nhảy",
+          "explain": "Nhờ ay nhay. Thêm dấu hỏi thành nhảy. Âm nhờ viết bằng hai chữ n và h.",
+          "scene": {
+            "layout": "equation",
+            "text": "nh + ay + hỏi"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "nhảo",
+              "correct": false
+            },
+            {
+              "text": "nhày",
+              "correct": false
+            },
+            {
+              "text": "ngảy",
+              "correct": false
+            },
+            {
+              "text": "nhảy",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Tiếng ngày bắt đầu bằng âm gì?",
+          "speak": "Tiếng ngày bắt đầu bằng âm gì?",
+          "explain": "Ngày bắt đầu bằng ngờ, viết là ng.",
+          "scene": {
+            "layout": "digit",
+            "text": "ngày"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "ng",
+              "correct": true
+            },
+            {
+              "text": "nh",
+              "correct": false
+            },
+            {
+              "text": "n",
+              "correct": false
+            },
+            {
+              "text": "gh",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đọc rồi chọn tranh đúng",
+          "speak": "Mẹ Vy hát.",
+          "explain": "Câu Mẹ Vy hát. Tranh đúng là hát.",
+          "choices": [
+            {
+              "emoji": "🎤",
+              "label": "hát",
+              "correct": true
+            },
+            {
+              "emoji": "🚲",
+              "label": "đạp xe",
+              "correct": false
+            },
+            {
+              "emoji": "🏃",
+              "label": "chạy",
+              "correct": false
+            },
+            {
+              "emoji": "💃",
+              "label": "nhảy",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "scene": {
+            "layout": "digit",
+            "text": "Mẹ Vy hát."
+          }
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đọc rồi chọn tranh đúng",
+          "speak": "Gin chạy.",
+          "explain": "Câu Gin chạy. Tranh đúng là chạy.",
+          "choices": [
+            {
+              "emoji": "🎤",
+              "label": "hát",
+              "correct": false
+            },
+            {
+              "emoji": "🚲",
+              "label": "đạp xe",
+              "correct": false
+            },
+            {
+              "emoji": "💃",
+              "label": "nhảy",
+              "correct": false
+            },
+            {
+              "emoji": "🏃",
+              "label": "chạy",
+              "correct": true
+            }
+          ],
+          "columns": 2,
+          "scene": {
+            "layout": "digit",
+            "text": "Gin chạy."
+          }
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đọc rồi chọn tranh đúng",
+          "speak": "Mon đạp xe.",
+          "explain": "Câu Mon đạp xe. Tranh đúng là đạp xe.",
+          "choices": [
+            {
+              "emoji": "🚲",
+              "label": "đạp xe",
+              "correct": true
+            },
+            {
+              "emoji": "🏃",
+              "label": "chạy",
+              "correct": false
+            },
+            {
+              "emoji": "💃",
+              "label": "nhảy",
+              "correct": false
+            },
+            {
+              "emoji": "🎤",
+              "label": "hát",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "scene": {
+            "layout": "digit",
+            "text": "Mon đạp xe."
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-mon-en",
+      "child": "mon",
+      "subject": "english",
+      "category": "reading",
+      "title": "Swim, snow, and spoon",
+      "subtitle": "Blends and opposites",
+      "icon": "🏊",
+      "level": 3,
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Read the word. Tap the picture.",
+          "speak": "Read this word.",
+          "explain": "The letters s, w, i, m spell swim. Tap the swim.",
+          "scene": {
+            "layout": "digit",
+            "text": "swim"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🥄",
+              "label": "spoon",
+              "correct": false
+            },
+            {
+              "emoji": "❄️",
+              "label": "snow",
+              "correct": false
+            },
+            {
+              "emoji": "👏",
+              "label": "clap",
+              "correct": false
+            },
+            {
+              "emoji": "🏊",
+              "label": "swim",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Read the word. Tap the picture.",
+          "speak": "Read this word.",
+          "explain": "The letters s, n, o, w spell snow. Tap the snow.",
+          "scene": {
+            "layout": "digit",
+            "text": "snow"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "🏊",
+              "label": "swim",
+              "correct": false
+            },
+            {
+              "emoji": "👏",
+              "label": "clap",
+              "correct": false
+            },
+            {
+              "emoji": "❄️",
+              "label": "snow",
+              "correct": true
+            },
+            {
+              "emoji": "⭐",
+              "label": "star",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Read the word. Tap the picture.",
+          "speak": "Read this word.",
+          "explain": "The letters s, p, o, o, n spell spoon. Tap the spoon.",
+          "scene": {
+            "layout": "digit",
+            "text": "spoon"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "⭐",
+              "label": "star",
+              "correct": false
+            },
+            {
+              "emoji": "❄️",
+              "label": "snow",
+              "correct": false
+            },
+            {
+              "emoji": "🥄",
+              "label": "spoon",
+              "correct": true
+            },
+            {
+              "emoji": "👏",
+              "label": "clap",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Read the word. Tap the picture.",
+          "speak": "Read this word.",
+          "explain": "The letters c, l, a, p spell clap. Tap the clap.",
+          "scene": {
+            "layout": "digit",
+            "text": "clap"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "⭐",
+              "label": "star",
+              "correct": false
+            },
+            {
+              "emoji": "🥄",
+              "label": "spoon",
+              "correct": false
+            },
+            {
+              "emoji": "🏊",
+              "label": "swim",
+              "correct": false
+            },
+            {
+              "emoji": "👏",
+              "label": "clap",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Read the word. Tap the picture.",
+          "speak": "Read this word.",
+          "explain": "The letters s, t, a, r spell star. Tap the star.",
+          "scene": {
+            "layout": "digit",
+            "text": "star"
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "emoji": "❄️",
+              "label": "snow",
+              "correct": false
+            },
+            {
+              "emoji": "🏊",
+              "label": "swim",
+              "correct": false
+            },
+            {
+              "emoji": "⭐",
+              "label": "star",
+              "correct": true
+            },
+            {
+              "emoji": "🥄",
+              "label": "spoon",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "What is the opposite of happy?",
+          "speak": "What is the opposite of happy?",
+          "explain": "The opposite of happy is sad.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "sad",
+              "correct": true
+            },
+            {
+              "text": "tall",
+              "correct": false
+            },
+            {
+              "text": "happy",
+              "correct": false
+            },
+            {
+              "text": "warm",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "What is the opposite of up?",
+          "speak": "What is the opposite of up?",
+          "explain": "The opposite of up is down.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "new",
+              "correct": false
+            },
+            {
+              "text": "dry",
+              "correct": false
+            },
+            {
+              "text": "down",
+              "correct": true
+            },
+            {
+              "text": "up",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "spell",
+          "lang": "en",
+          "word": "swim",
+          "prompt": "Listen and spell",
+          "speak": "Spell swim.",
+          "explain": "S, W, I, M. Those letters spell swim."
+        },
+        {
+          "kind": "spell",
+          "lang": "en",
+          "word": "star",
+          "prompt": "Listen and spell",
+          "speak": "Spell star.",
+          "explain": "S, T, A, R. Those letters spell star."
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap the word you hear.",
+          "speak": "Snow.",
+          "explain": "You heard snow. S, N, O, W spells snow.",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "show",
+              "correct": false
+            },
+            {
+              "text": "snow",
+              "correct": true
+            },
+            {
+              "text": "sew",
+              "correct": false
+            },
+            {
+              "text": "slow",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-arith",
+      "child": "gin",
+      "subject": "math",
+      "category": "arithmetic",
+      "title": "Đếm, nhóm đúng số và nhiều hơn",
+      "subtitle": "Đếm đến 8",
+      "icon": "🍎",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Có bao nhiêu con cá?",
+          "speak": "Đếm các con cá. Có bao nhiêu?",
+          "explain": "Có 6 con cá.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🐟",
+              "🐟",
+              "🐟",
+              "🐟",
+              "🐟",
+              "🐟"
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "6",
+              "correct": true
+            },
+            {
+              "text": "5",
+              "correct": false
+            },
+            {
+              "text": "7",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Có bao nhiêu quả bóng bay?",
+          "speak": "Đếm các quả bóng bay. Có bao nhiêu?",
+          "explain": "Có 3 quả bóng bay.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🎈",
+              "🎈",
+              "🎈"
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "2",
+              "correct": false
+            },
+            {
+              "text": "3",
+              "correct": true
+            },
+            {
+              "text": "4",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Có bao nhiêu bông hoa?",
+          "speak": "Đếm các bông hoa. Có bao nhiêu?",
+          "explain": "Có 6 bông hoa.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🌸",
+              "🌸",
+              "🌸",
+              "🌸",
+              "🌸",
+              "🌸"
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "6",
+              "correct": true
+            },
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "5",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Có bao nhiêu chiếc xe?",
+          "speak": "Đếm các chiếc xe. Có bao nhiêu?",
+          "explain": "Có 6 chiếc xe.",
+          "scene": {
+            "layout": "emojis",
+            "items": [
+              "🚗",
+              "🚗",
+              "🚗",
+              "🚗",
+              "🚗",
+              "🚗"
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "5",
+              "correct": false
+            },
+            {
+              "text": "6",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Nhóm nào có đúng 1 bông hoa?",
+          "speak": "Tìm nhóm có một bông hoa",
+          "explain": "Nhóm đúng có 1 bông hoa.",
+          "scene": {
+            "layout": "digit",
+            "text": "1"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "emojis": [
+                "🌸",
+                "🌸"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "🌸"
+              ],
+              "correct": true
+            },
+            {
+              "emojis": [
+                "🌸",
+                "🌸",
+                "🌸"
+              ],
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Nhóm nào có đúng 5 con cá?",
+          "speak": "Tìm nhóm có năm con cá",
+          "explain": "Nhóm đúng có 5 con cá.",
+          "scene": {
+            "layout": "digit",
+            "text": "5"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "emojis": [
+                "🐟",
+                "🐟",
+                "🐟",
+                "🐟"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "🐟",
+                "🐟",
+                "🐟",
+                "🐟",
+                "🐟"
+              ],
+              "correct": true
+            },
+            {
+              "emojis": [
+                "🐟",
+                "🐟",
+                "🐟",
+                "🐟",
+                "🐟",
+                "🐟"
+              ],
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Nhóm nào có đúng 1 chú cún?",
+          "speak": "Tìm nhóm có một chú cún",
+          "explain": "Nhóm đúng có 1 chú cún.",
+          "scene": {
+            "layout": "digit",
+            "text": "1"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "emojis": [
+                "🐶",
+                "🐶"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "🐶",
+                "🐶",
+                "🐶"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "🐶"
+              ],
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Bên nào nhiều hơn?",
+          "speak": "Bên nào nhiều hơn?",
+          "explain": "Một bên có 5, bên kia có 4.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emojis": [
+                "⭐",
+                "⭐",
+                "⭐",
+                "⭐",
+                "⭐"
+              ],
+              "correct": true
+            },
+            {
+              "emojis": [
+                "⭐",
+                "⭐",
+                "⭐",
+                "⭐"
+              ],
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Bên nào nhiều hơn?",
+          "speak": "Bên nào nhiều hơn?",
+          "explain": "Một bên có 2, bên kia có 3.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emojis": [
+                "⭐",
+                "⭐"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "⭐",
+                "⭐",
+                "⭐"
+              ],
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Bên nào nhiều hơn?",
+          "speak": "Bên nào nhiều hơn?",
+          "explain": "Một bên có 1, bên kia có 5.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "emojis": [
+                "🌸"
+              ],
+              "correct": false
+            },
+            {
+              "emojis": [
+                "🌸",
+                "🌸",
+                "🌸",
+                "🌸",
+                "🌸"
+              ],
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-logic",
+      "child": "gin",
+      "subject": "math",
+      "category": "logic",
+      "title": "Màu, hình xen kẽ và hình giống nhau",
+      "subtitle": "Quy luật",
+      "icon": "🎨",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Màu tiếp theo là màu nào?",
+          "speak": "Nhìn quy luật màu, chọn màu tiếp theo",
+          "explain": "Màu tiếp theo là màu xanh dương.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "circle",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "circle",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "circle",
+                "color": "#22c55e"
+              },
+              {
+                "shape": "circle",
+                "color": "#22c55e"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#22c55e",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#ef4444",
+              "size": 64,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Màu tiếp theo là màu nào?",
+          "speak": "Nhìn quy luật màu, chọn màu tiếp theo",
+          "explain": "Màu tiếp theo là màu cam.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "circle",
+                "color": "#f97316"
+              },
+              {
+                "shape": "circle",
+                "color": "#a855f7"
+              },
+              {
+                "shape": "circle",
+                "color": "#f97316"
+              },
+              {
+                "shape": "circle",
+                "color": "#a855f7"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#a855f7",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#ec4899",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#f97316",
+              "size": 64,
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Màu tiếp theo là màu nào?",
+          "speak": "Nhìn quy luật màu, chọn màu tiếp theo",
+          "explain": "Màu tiếp theo là màu tím.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "circle",
+                "color": "#a855f7"
+              },
+              {
+                "shape": "circle",
+                "color": "#ec4899"
+              },
+              {
+                "shape": "circle",
+                "color": "#a855f7"
+              },
+              {
+                "shape": "circle",
+                "color": "#ec4899"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#ec4899",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#a855f7",
+              "size": 64,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Màu tiếp theo là màu nào?",
+          "speak": "Nhìn quy luật màu, chọn màu tiếp theo",
+          "explain": "Màu tiếp theo là màu xanh lá.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "circle",
+                "color": "#22c55e"
+              },
+              {
+                "shape": "circle",
+                "color": "#22c55e"
+              },
+              {
+                "shape": "circle",
+                "color": "#ef4444"
+              },
+              {
+                "shape": "circle",
+                "color": "#ef4444"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#22c55e",
+              "size": 64,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#ef4444",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#f97316",
+              "size": 64,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình tiếp theo là hình nào?",
+          "speak": "Nhìn quy luật hình, chọn hình tiếp theo",
+          "explain": "Hình tiếp theo là ngôi sao.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "star",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "star",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "circle",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "circle",
+                "color": "#3b82f6"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "triangle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "star",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình tiếp theo là hình nào?",
+          "speak": "Nhìn quy luật hình, chọn hình tiếp theo",
+          "explain": "Hình tiếp theo là hình vuông.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "square",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "star",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "square",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "star",
+                "color": "#3b82f6"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "square",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": true
+            },
+            {
+              "shape": "triangle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "star",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình tiếp theo là hình nào?",
+          "speak": "Nhìn quy luật hình, chọn hình tiếp theo",
+          "explain": "Hình tiếp theo là hình tròn.",
+          "scene": {
+            "layout": "pattern",
+            "pieces": [
+              {
+                "shape": "circle",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "circle",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "star",
+                "color": "#3b82f6"
+              },
+              {
+                "shape": "star",
+                "color": "#3b82f6"
+              },
+              {
+                "mystery": true
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "triangle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "star",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#3b82f6",
+              "size": 64,
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào hình giống hình này",
+          "speak": "Tìm hình giống hình ở trên",
+          "explain": "Hình giống là hình thoi.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "diamond",
+                "color": "#0ea5e9",
+                "size": 120
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "diamond",
+              "color": "#22c55e",
+              "size": 84,
+              "correct": true
+            },
+            {
+              "shape": "star",
+              "color": "#f97316",
+              "size": 84,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#22c55e",
+              "size": 84,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào hình giống hình này",
+          "speak": "Tìm hình giống hình ở trên",
+          "explain": "Hình giống là hình ngôi sao.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "star",
+                "color": "#0ea5e9",
+                "size": 120
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#ec4899",
+              "size": 84,
+              "correct": false
+            },
+            {
+              "shape": "square",
+              "color": "#f97316",
+              "size": 84,
+              "correct": false
+            },
+            {
+              "shape": "star",
+              "color": "#a855f7",
+              "size": 84,
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào hình giống hình này",
+          "speak": "Tìm hình giống hình ở trên",
+          "explain": "Hình giống là hình thoi.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "diamond",
+                "color": "#0ea5e9",
+                "size": 120
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "diamond",
+              "color": "#eab308",
+              "size": 84,
+              "correct": true
+            },
+            {
+              "shape": "square",
+              "color": "#a855f7",
+              "size": 84,
+              "correct": false
+            },
+            {
+              "shape": "triangle",
+              "color": "#22c55e",
+              "size": 84,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-number",
+      "child": "gin",
+      "subject": "math",
+      "category": "number",
+      "title": "Số lớn, số bé và xếp thứ tự",
+      "subtitle": "Số đến 10",
+      "icon": "🔼",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Số nào lớn hơn?",
+          "speak": "Trong hai số này, số nào lớn hơn?",
+          "explain": "3 lớn hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "3",
+              "correct": true
+            },
+            {
+              "text": "1",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào lớn hơn?",
+          "speak": "Trong hai số này, số nào lớn hơn?",
+          "explain": "5 lớn hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "1",
+              "correct": false
+            },
+            {
+              "text": "5",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào lớn hơn?",
+          "speak": "Trong hai số này, số nào lớn hơn?",
+          "explain": "4 lớn hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "3",
+              "correct": false
+            },
+            {
+              "text": "4",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào nhỏ hơn?",
+          "speak": "Trong hai số này, số nào nhỏ hơn?",
+          "explain": "4 nhỏ hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "4",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào nhỏ hơn?",
+          "speak": "Trong hai số này, số nào nhỏ hơn?",
+          "explain": "2 nhỏ hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "8",
+              "correct": false
+            },
+            {
+              "text": "2",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào nhỏ hơn?",
+          "speak": "Trong hai số này, số nào nhỏ hơn?",
+          "explain": "3 nhỏ hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "3",
+              "correct": true
+            },
+            {
+              "text": "7",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "order",
+          "prompt": "Chạm từ số bé đến số lớn",
+          "speak": "Chạm số bé trước, rồi đến số lớn hơn",
+          "explain": "Thứ tự đúng là 2, 4, 6.",
+          "tokens": [
+            {
+              "text": "6",
+              "order": 2
+            },
+            {
+              "text": "4",
+              "order": 1
+            },
+            {
+              "text": "2",
+              "order": 0
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "order",
+          "prompt": "Chạm từ số bé đến số lớn",
+          "speak": "Chạm số bé trước, rồi đến số lớn hơn",
+          "explain": "Thứ tự đúng là 2, 5, 6.",
+          "tokens": [
+            {
+              "text": "5",
+              "order": 1
+            },
+            {
+              "text": "2",
+              "order": 0
+            },
+            {
+              "text": "6",
+              "order": 2
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "hai, ba, bốn. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 1, được 5.",
+          "scene": {
+            "layout": "equation",
+            "text": "2 , 3 , 4 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "6",
+              "correct": false
+            },
+            {
+              "text": "4",
+              "correct": false
+            },
+            {
+              "text": "5",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "ba, bốn, năm. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 1, được 6.",
+          "scene": {
+            "layout": "equation",
+            "text": "3 , 4 , 5 , ?"
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "6",
+              "correct": true
+            },
+            {
+              "text": "7",
+              "correct": false
+            },
+            {
+              "text": "5",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-geo",
+      "child": "gin",
+      "subject": "math",
+      "category": "geometry",
+      "title": "Hình, màu, to nhỏ và trên dưới",
+      "subtitle": "Hình học",
+      "icon": "🔺",
+      "questions": [
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào hình tròn",
+          "speak": "Chạm vào hình tròn",
+          "explain": "Đó là hình tròn.",
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "square",
+              "color": "#ef4444",
+              "size": 92,
+              "correct": false
+            },
+            {
+              "shape": "circle",
+              "color": "#eab308",
+              "size": 92,
+              "correct": true
+            },
+            {
+              "shape": "triangle",
+              "color": "#22c55e",
+              "size": 92,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào hình tam giác",
+          "speak": "Chạm vào hình tam giác",
+          "explain": "Đó là hình tam giác.",
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#a855f7",
+              "size": 92,
+              "correct": false
+            },
+            {
+              "shape": "triangle",
+              "color": "#a855f7",
+              "size": 92,
+              "correct": true
+            },
+            {
+              "shape": "square",
+              "color": "#a855f7",
+              "size": 92,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào hình vuông",
+          "speak": "Chạm vào hình vuông",
+          "explain": "Đó là hình vuông.",
+          "columns": 3,
+          "choices": [
+            {
+              "shape": "triangle",
+              "color": "#3b82f6",
+              "size": 92,
+              "correct": false
+            },
+            {
+              "shape": "square",
+              "color": "#3b82f6",
+              "size": 92,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#eab308",
+              "size": 92,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào màu giống",
+          "speak": "Chạm vào màu giống hình này",
+          "explain": "Đây là màu hồng.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "circle",
+                "color": "#ec4899",
+                "size": 130
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "đỏ",
+              "color": "#ef4444",
+              "correct": false
+            },
+            {
+              "text": "hồng",
+              "color": "#ec4899",
+              "correct": true
+            },
+            {
+              "text": "xanh dương",
+              "color": "#3b82f6",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chạm vào màu giống",
+          "speak": "Chạm vào màu giống hình này",
+          "explain": "Đây là màu xanh dương.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "circle",
+                "color": "#3b82f6",
+                "size": 130
+              }
+            ]
+          },
+          "columns": 3,
+          "choices": [
+            {
+              "text": "xanh dương",
+              "color": "#3b82f6",
+              "correct": true
+            },
+            {
+              "text": "cam",
+              "color": "#f97316",
+              "correct": false
+            },
+            {
+              "text": "đỏ",
+              "color": "#ef4444",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Cái nào to hơn?",
+          "speak": "Cái nào to hơn?",
+          "explain": "Hai hình giống nhau. Cái to hơn là hình lớn hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "shape": "circle",
+              "color": "#ec4899",
+              "size": 120,
+              "correct": true
+            },
+            {
+              "shape": "circle",
+              "color": "#ec4899",
+              "size": 62,
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Cái nào nhỏ hơn?",
+          "speak": "Cái nào nhỏ hơn?",
+          "explain": "Hai hình giống nhau. Cái nhỏ hơn là hình bé hơn.",
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "shape": "heart",
+              "color": "#22c55e",
+              "size": 120,
+              "correct": false
+            },
+            {
+              "shape": "heart",
+              "color": "#22c55e",
+              "size": 62,
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chiếc xe đang ở đâu?",
+          "speak": "Chiếc xe đang ở đâu?",
+          "explain": "Chiếc xe ở phía dưới.",
+          "scene": {
+            "layout": "zones",
+            "zones": [
+              {
+                "emoji": "⭐"
+              },
+              {
+                "emoji": "🚗"
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Ở trên",
+              "correct": false
+            },
+            {
+              "text": "Ở dưới",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đám mây đang ở đâu?",
+          "speak": "Đám mây đang ở đâu?",
+          "explain": "Đám mây ở phía trên.",
+          "scene": {
+            "layout": "zones",
+            "zones": [
+              {
+                "emoji": "☁️"
+              },
+              {
+                "emoji": "⚽"
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Ở trên",
+              "correct": true
+            },
+            {
+              "text": "Ở dưới",
+              "correct": false
+            }
+          ],
+          "lang": "vi"
+        },
+        {
+          "kind": "choice",
+          "prompt": "Hình này có mấy cạnh?",
+          "speak": "Đếm các cạnh. Hình này có mấy cạnh?",
+          "explain": "hình tam giác có 3 cạnh.",
+          "scene": {
+            "layout": "shapes",
+            "shapes": [
+              {
+                "shape": "triangle",
+                "color": "#a855f7",
+                "size": 140
+              }
+            ]
+          },
+          "columns": 2,
+          "choices": [
+            {
+              "text": "2",
+              "correct": false
+            },
+            {
+              "text": "3",
+              "correct": true
+            }
+          ],
+          "lang": "vi"
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-vi",
+      "child": "gin",
+      "subject": "vietnamese",
+      "category": "letters",
+      "title": "Chữ ơ, ư và y",
+      "subtitle": "Nhìn chữ, nghe âm",
+      "icon": "🅰️",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ ơ. Âm của nó là ơ.",
+          "choices": [
+            {
+              "text": "ơ",
+              "correct": true
+            },
+            {
+              "text": "ô",
+              "correct": false
+            },
+            {
+              "text": "o",
+              "correct": false
+            }
+          ],
+          "columns": 3,
+          "scene": {
+            "layout": "digit",
+            "text": "ơ"
+          }
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe và chạm đúng chữ",
+          "speak": "ơ",
+          "explain": "Đó là chữ ơ, âm ơ.",
+          "choices": [
+            {
+              "text": "o",
+              "correct": false
+            },
+            {
+              "text": "ô",
+              "correct": false
+            },
+            {
+              "text": "ơ",
+              "correct": true
+            }
+          ],
+          "columns": 3
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ ư. Âm của nó là ư.",
+          "choices": [
+            {
+              "text": "u",
+              "correct": false
+            },
+            {
+              "text": "ơ",
+              "correct": false
+            },
+            {
+              "text": "ư",
+              "correct": true
+            }
+          ],
+          "columns": 3,
+          "scene": {
+            "layout": "digit",
+            "text": "ư"
+          }
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe và chạm đúng chữ",
+          "speak": "ư",
+          "explain": "Đó là chữ ư, âm ư.",
+          "choices": [
+            {
+              "text": "u",
+              "correct": false
+            },
+            {
+              "text": "ơ",
+              "correct": false
+            },
+            {
+              "text": "ư",
+              "correct": true
+            }
+          ],
+          "columns": 3
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ y. Âm của nó là i dài.",
+          "choices": [
+            {
+              "text": "v",
+              "correct": false
+            },
+            {
+              "text": "i",
+              "correct": false
+            },
+            {
+              "text": "y",
+              "correct": true
+            }
+          ],
+          "columns": 3,
+          "scene": {
+            "layout": "digit",
+            "text": "y"
+          }
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe và chạm đúng chữ",
+          "speak": "i dài",
+          "explain": "Đó là chữ y, âm i dài.",
+          "choices": [
+            {
+              "text": "v",
+              "correct": false
+            },
+            {
+              "text": "y",
+              "correct": true
+            },
+            {
+              "text": "i",
+              "correct": false
+            }
+          ],
+          "columns": 3
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe và chạm đúng chữ",
+          "speak": "o",
+          "explain": "Đó là chữ o, âm o.",
+          "choices": [
+            {
+              "text": "e",
+              "correct": false
+            },
+            {
+              "text": "o",
+              "correct": true
+            },
+            {
+              "text": "ơ",
+              "correct": false
+            }
+          ],
+          "columns": 3
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ u. Âm của nó là u.",
+          "choices": [
+            {
+              "text": "u",
+              "correct": true
+            },
+            {
+              "text": "ư",
+              "correct": false
+            },
+            {
+              "text": "m",
+              "correct": false
+            }
+          ],
+          "columns": 3,
+          "scene": {
+            "layout": "digit",
+            "text": "u"
+          }
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Nghe và chạm đúng chữ",
+          "speak": "bờ",
+          "explain": "Đó là chữ b, âm bờ.",
+          "choices": [
+            {
+              "text": "h",
+              "correct": false
+            },
+            {
+              "text": "b",
+              "correct": true
+            },
+            {
+              "text": "m",
+              "correct": false
+            }
+          ],
+          "columns": 3
+        },
+        {
+          "kind": "choice",
+          "lang": "vi",
+          "prompt": "Đây là chữ gì?",
+          "speak": "Đây là chữ gì?",
+          "explain": "Chữ m. Âm của nó là mờ.",
+          "choices": [
+            {
+              "text": "n",
+              "correct": false
+            },
+            {
+              "text": "m",
+              "correct": true
+            },
+            {
+              "text": "b",
+              "correct": false
+            }
+          ],
+          "columns": 3,
+          "scene": {
+            "layout": "digit",
+            "text": "m"
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-en-colors",
+      "child": "gin",
+      "subject": "english",
+      "category": "colors",
+      "title": "Frog, bee, and whale",
+      "subtitle": "Tap what you hear",
+      "icon": "🎨",
+      "questions": [
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the green frog.",
+          "explain": "It is the green frog.",
+          "choices": [
+            {
+              "emoji": "🐸",
+              "label": "frog",
+              "color": "#22c55e",
+              "correct": true
+            },
+            {
+              "emoji": "🐻",
+              "label": "bear",
+              "color": "#a16207",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the yellow bee.",
+          "explain": "It is the yellow bee.",
+          "choices": [
+            {
+              "emoji": "🐝",
+              "label": "bee",
+              "color": "#eab308",
+              "correct": true
+            },
+            {
+              "emoji": "🐟",
+              "label": "fish",
+              "color": "#3b82f6",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the blue whale.",
+          "explain": "It is the blue whale.",
+          "choices": [
+            {
+              "emoji": "🐳",
+              "label": "whale",
+              "color": "#3b82f6",
+              "correct": true
+            },
+            {
+              "emoji": "🐝",
+              "label": "bee",
+              "color": "#eab308",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the purple butterfly.",
+          "explain": "It is the purple butterfly.",
+          "choices": [
+            {
+              "emoji": "🦋",
+              "label": "butterfly",
+              "color": "#a855f7",
+              "correct": true
+            },
+            {
+              "emoji": "🐸",
+              "label": "frog",
+              "color": "#22c55e",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the pink flower.",
+          "explain": "It is the pink flower.",
+          "choices": [
+            {
+              "emoji": "🌸",
+              "label": "flower",
+              "color": "#ec4899",
+              "correct": true
+            },
+            {
+              "emoji": "🍎",
+              "label": "apple",
+              "color": "#ef4444",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the red apple.",
+          "explain": "It is the red apple.",
+          "choices": [
+            {
+              "emoji": "🌸",
+              "label": "flower",
+              "color": "#ec4899",
+              "correct": false
+            },
+            {
+              "emoji": "🍎",
+              "label": "apple",
+              "color": "#ef4444",
+              "correct": true
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the brown bear.",
+          "explain": "It is the brown bear.",
+          "choices": [
+            {
+              "emoji": "🐻",
+              "label": "bear",
+              "color": "#a16207",
+              "correct": true
+            },
+            {
+              "emoji": "🐳",
+              "label": "whale",
+              "color": "#3b82f6",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the orange fish.",
+          "explain": "It is the orange fish.",
+          "choices": [
+            {
+              "emoji": "🦋",
+              "label": "butterfly",
+              "color": "#a855f7",
+              "correct": false
+            },
+            {
+              "emoji": "🐠",
+              "label": "fish",
+              "color": "#f97316",
+              "correct": true
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the green frog.",
+          "explain": "It is the green frog.",
+          "choices": [
+            {
+              "emoji": "🐸",
+              "label": "frog",
+              "color": "#22c55e",
+              "correct": true
+            },
+            {
+              "emoji": "🐠",
+              "label": "fish",
+              "color": "#f97316",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the blue fish.",
+          "explain": "It is the blue fish.",
+          "choices": [
+            {
+              "emoji": "🐟",
+              "label": "fish",
+              "color": "#3b82f6",
+              "correct": true
+            },
+            {
+              "emoji": "🍎",
+              "label": "apple",
+              "color": "#ef4444",
+              "correct": false
+            }
+          ],
+          "variant": "cards",
+          "columns": 2
+        }
+      ]
+    },
+    {
+      "id": "daily-2026-11-17-gin-en-listen",
+      "child": "gin",
+      "subject": "english",
+      "category": "listen",
+      "title": "Tap what you hear",
+      "subtitle": "Colors, animals, heroes",
+      "icon": "🎧",
+      "questions": [],
+      "generator": "enListen",
+      "config": {
+        "set": "gin",
+        "count": 16,
+        "seed": "2026-11-17",
+        "choices": 3,
+        "gradual": true
+      }
+    },
+    {
+      "id": "daily-2026-11-17-mon-en-listen",
+      "child": "mon",
+      "subject": "english",
+      "category": "listen",
+      "title": "Tap what you hear",
+      "subtitle": "a red apple",
+      "icon": "🎧",
+      "questions": [],
+      "level": 1,
+      "generator": "enListen",
+      "config": {
+        "set": "mon",
+        "count": 10,
+        "seed": "2026-11-17",
+        "choices": 4,
+        "gradual": false
+      }
+    }
+  ]
+}
