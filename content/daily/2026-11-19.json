@@ -399,24 +399,24 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "năm mươi lăm, năm mươi bảy, năm mươi chín, sáu mươi mốt. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 2, được 63.",
+          "speak": "ba, năm, bảy, chín. Số tiếp theo là số nào?",
+          "explain": "Đếm thêm hai. Từ chín đếm: mười, mười một.",
           "scene": {
             "layout": "equation",
-            "text": "55 , 57 , 59 , 61 , ?"
+            "text": "3 , 5 , 7 , 9 , ?"
           },
           "columns": 3,
           "choices": [
             {
-              "text": "63",
+              "text": "11",
               "correct": true
             },
             {
-              "text": "64",
+              "text": "10",
               "correct": false
             },
             {
-              "text": "62",
+              "text": "12",
               "correct": false
             }
           ]
@@ -425,24 +425,24 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "mười tám, hai mươi tư, ba mươi, ba mươi sáu. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 6, được 42.",
+          "speak": "bốn, bảy, mười, mười ba. Số tiếp theo là số nào?",
+          "explain": "Đếm thêm ba. Từ mười ba đếm: mười bốn, mười lăm, mười sáu.",
           "scene": {
             "layout": "equation",
-            "text": "18 , 24 , 30 , 36 , ?"
+            "text": "4 , 7 , 10 , 13 , ?"
           },
           "columns": 3,
           "choices": [
             {
-              "text": "43",
+              "text": "15",
               "correct": false
             },
             {
-              "text": "42",
+              "text": "16",
               "correct": true
             },
             {
-              "text": "41",
+              "text": "17",
               "correct": false
             }
           ]
@@ -451,24 +451,24 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "mười hai, mười tám, hai mươi tư, ba mươi. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 6, được 36.",
+          "speak": "mười lăm, mười tám, hai mươi mốt, hai mươi tư. Số tiếp theo là số nào?",
+          "explain": "Đếm thêm ba. Từ hai mươi tư đếm: hai mươi lăm, hai mươi sáu, hai mươi bảy.",
           "scene": {
             "layout": "equation",
-            "text": "12 , 18 , 24 , 30 , ?"
+            "text": "15 , 18 , 21 , 24 , ?"
           },
           "columns": 3,
           "choices": [
             {
-              "text": "37",
+              "text": "26",
               "correct": false
             },
             {
-              "text": "35",
+              "text": "28",
               "correct": false
             },
             {
-              "text": "36",
+              "text": "27",
               "correct": true
             }
           ]
@@ -478,7 +478,7 @@
           "lang": "vi",
           "prompt": "Điền số còn thiếu",
           "speak": "bốn cộng số nào bằng hai mươi?",
-          "explain": "4 + 16 = 20",
+          "explain": "Hai mươi trừ bốn còn mười sáu. Bốn cộng mười sáu bằng hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
@@ -492,7 +492,7 @@
           "lang": "vi",
           "prompt": "Điền số còn thiếu",
           "speak": "hai cộng số nào bằng hai mươi?",
-          "explain": "2 + 18 = 20",
+          "explain": "Hai mươi trừ hai còn mười tám. Hai cộng mười tám bằng hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
@@ -506,7 +506,7 @@
           "lang": "vi",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. ba cộng số còn thiếu bằng năm",
-          "explain": "3 + 2 = 5",
+          "explain": "Năm trừ ba còn hai. Ba cộng hai bằng năm.",
           "scene": {
             "layout": "equation",
             "text": "3 + ? = 5"
@@ -519,7 +519,7 @@
           "lang": "vi",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. bốn cộng số còn thiếu bằng mười bốn",
-          "explain": "4 + 10 = 14",
+          "explain": "Mười bốn trừ bốn còn mười. Mười cộng bốn bằng mười bốn.",
           "scene": {
             "layout": "equation",
             "text": "? + 4 = 14"
@@ -532,7 +532,7 @@
           "lang": "vi",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. bốn cộng số còn thiếu bằng chín",
-          "explain": "4 + 5 = 9",
+          "explain": "Chín trừ bốn còn năm. Năm cộng bốn bằng chín.",
           "scene": {
             "layout": "equation",
             "text": "? + 4 = 9"
@@ -545,7 +545,7 @@
           "lang": "vi",
           "prompt": "Số nào khác các số còn lại?",
           "speak": "Tìm số không cùng nhóm",
-          "explain": "19 không thuộc dãy đếm cách 5.",
+          "explain": "Mười lăm, hai mươi lăm và ba mươi lăm đếm thêm mười. Mười chín không thuộc dãy đó.",
           "columns": 2,
           "choices": [
             {
@@ -571,23 +571,23 @@
           "lang": "vi",
           "prompt": "Số nào khác các số còn lại?",
           "speak": "Tìm số không cùng nhóm",
-          "explain": "3 không thuộc dãy đếm cách 5.",
+          "explain": "Hai, bốn, sáu là số chẵn, đếm thêm hai. Chín là số lẻ, không thuộc dãy.",
           "columns": 2,
           "choices": [
             {
-              "text": "10",
+              "text": "2",
               "correct": false
             },
             {
-              "text": "25",
+              "text": "4",
               "correct": false
             },
             {
-              "text": "45",
+              "text": "6",
               "correct": false
             },
             {
-              "text": "3",
+              "text": "9",
               "correct": true
             }
           ]
@@ -1921,36 +1921,6 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Tiếng ngày bắt đầu bằng âm gì?",
-          "speak": "Tiếng ngày bắt đầu bằng âm gì?",
-          "explain": "Ngày bắt đầu bằng ngờ, viết là ng.",
-          "scene": {
-            "layout": "digit",
-            "text": "ngày"
-          },
-          "columns": 2,
-          "choices": [
-            {
-              "text": "nh",
-              "correct": false
-            },
-            {
-              "text": "ng",
-              "correct": true
-            },
-            {
-              "text": "gh",
-              "correct": false
-            },
-            {
-              "text": "n",
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "vi",
           "prompt": "Nghe rồi chọn chữ viết đúng",
           "speak": "Chọn chữ giỏi",
           "explain": "Di oi gioi. Thêm dấu hỏi thành giỏi. Âm di viết bằng hai chữ g và i.",
@@ -2670,11 +2640,11 @@
         {
           "kind": "maker",
           "lang": "vi",
-          "prompt": "Làm đủ 3 ngôi sao",
-          "speak": "Hãy làm đủ ba ngôi sao",
-          "explain": "Đủ 3 ngôi sao rồi.",
-          "emoji": "⭐",
-          "answer": 3
+          "prompt": "Làm đủ 4 quả bóng bay",
+          "speak": "Hãy làm đủ bốn quả bóng bay",
+          "explain": "Đủ 4 quả bóng bay rồi.",
+          "emoji": "🎈",
+          "answer": 4
         }
       ]
     },
@@ -3167,7 +3137,7 @@
           "lang": "vi",
           "prompt": "Số nào lớn hơn?",
           "speak": "Trong hai số này, số nào lớn hơn?",
-          "explain": "6 lớn hơn.",
+          "explain": "Sáu lớn hơn ba.",
           "variant": "cards",
           "columns": 2,
           "choices": [
@@ -3186,7 +3156,7 @@
           "lang": "vi",
           "prompt": "Số nào lớn hơn?",
           "speak": "Trong hai số này, số nào lớn hơn?",
-          "explain": "5 lớn hơn.",
+          "explain": "Năm lớn hơn một.",
           "variant": "cards",
           "columns": 2,
           "choices": [
@@ -3205,7 +3175,7 @@
           "lang": "vi",
           "prompt": "Số nào lớn hơn?",
           "speak": "Trong hai số này, số nào lớn hơn?",
-          "explain": "8 lớn hơn.",
+          "explain": "Tám lớn hơn bốn.",
           "variant": "cards",
           "columns": 2,
           "choices": [
@@ -3224,7 +3194,7 @@
           "lang": "vi",
           "prompt": "Số nào nhỏ hơn?",
           "speak": "Trong hai số này, số nào nhỏ hơn?",
-          "explain": "8 nhỏ hơn.",
+          "explain": "Tám nhỏ hơn chín.",
           "variant": "cards",
           "columns": 2,
           "choices": [
@@ -3243,7 +3213,7 @@
           "lang": "vi",
           "prompt": "Số nào nhỏ hơn?",
           "speak": "Trong hai số này, số nào nhỏ hơn?",
-          "explain": "7 nhỏ hơn.",
+          "explain": "Bảy nhỏ hơn chín.",
           "variant": "cards",
           "columns": 2,
           "choices": [
@@ -3262,7 +3232,7 @@
           "lang": "vi",
           "prompt": "Số nào nhỏ hơn?",
           "speak": "Trong hai số này, số nào nhỏ hơn?",
-          "explain": "5 nhỏ hơn.",
+          "explain": "Năm nhỏ hơn mười.",
           "variant": "cards",
           "columns": 2,
           "choices": [
@@ -3323,7 +3293,7 @@
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
           "speak": "năm, sáu, bảy. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 1, được 8.",
+          "explain": "Đếm thêm một từ bảy được tám.",
           "scene": {
             "layout": "equation",
             "text": "5 , 6 , 7 , ?"
@@ -3348,24 +3318,24 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "năm, sáu, bảy. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 1, được 8.",
+          "speak": "hai, ba, bốn. Số tiếp theo là số nào?",
+          "explain": "Đếm thêm một từ bốn được năm.",
           "scene": {
             "layout": "equation",
-            "text": "5 , 6 , 7 , ?"
+            "text": "2 , 3 , 4 , ?"
           },
           "columns": 3,
           "choices": [
             {
-              "text": "9",
+              "text": "6",
               "correct": false
             },
             {
-              "text": "8",
+              "text": "5",
               "correct": true
             },
             {
-              "text": "7",
+              "text": "4",
               "correct": false
             }
           ]
@@ -3919,29 +3889,27 @@
       "id": "daily-2026-11-19-gin-en-colors",
       "child": "gin",
       "subject": "english",
-      "category": "colors",
-      "title": "Tap the colors",
+      "category": "listen",
+      "title": "Snail, horse, and crab",
       "subtitle": "Tap what you hear",
-      "icon": "🎨",
+      "icon": "🐌",
       "questions": [
         {
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the blue.",
-          "explain": "It is the blue.",
+          "speak": "Tap the snail.",
+          "explain": "It is the snail.",
           "columns": 2,
           "variant": "cards",
           "choices": [
             {
-              "correct": false,
-              "emoji": "🍏",
-              "color": "#22c55e"
+              "emoji": "🐶",
+              "correct": false
             },
             {
-              "correct": true,
-              "emoji": "🔵",
-              "color": "#3b82f6"
+              "emoji": "🐌",
+              "correct": true
             }
           ]
         },
@@ -3949,20 +3917,18 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the red.",
-          "explain": "It is the red.",
+          "speak": "Tap the horse.",
+          "explain": "It is the horse.",
           "columns": 2,
           "variant": "cards",
           "choices": [
             {
-              "correct": false,
-              "emoji": "🔵",
-              "color": "#3b82f6"
+              "emoji": "🐱",
+              "correct": false
             },
             {
-              "correct": true,
-              "emoji": "🍎",
-              "color": "#ef4444"
+              "emoji": "🐴",
+              "correct": true
             }
           ]
         },
@@ -3970,212 +3936,187 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the white.",
-          "explain": "It is the white.",
+          "speak": "Tap the tree.",
+          "explain": "It is the tree.",
           "columns": 2,
           "variant": "cards",
           "choices": [
             {
-              "correct": true,
-              "emoji": "☁️",
-              "color": "#f8fafc"
+              "emoji": "🌳",
+              "correct": true
             },
             {
-              "correct": false,
-              "emoji": "🐻",
-              "color": "#92400e"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the purple.",
-          "explain": "It is the purple.",
-          "columns": 2,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": false,
-              "emoji": "🔵",
-              "color": "#3b82f6"
-            },
-            {
-              "correct": true,
-              "emoji": "🍇",
-              "color": "#a855f7"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the orange.",
-          "explain": "It is the orange.",
-          "columns": 3,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": false,
-              "emoji": "🖤",
-              "color": "#111827"
-            },
-            {
-              "correct": true,
-              "emoji": "🍊",
-              "color": "#f97316"
-            },
-            {
-              "correct": false,
-              "emoji": "🍇",
-              "color": "#a855f7"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the brown.",
-          "explain": "It is the brown.",
-          "columns": 3,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": false,
-              "emoji": "🍇",
-              "color": "#a855f7"
-            },
-            {
-              "correct": false,
-              "emoji": "🔵",
-              "color": "#3b82f6"
-            },
-            {
-              "correct": true,
-              "emoji": "🐻",
-              "color": "#92400e"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the black.",
-          "explain": "It is the black.",
-          "columns": 3,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": false,
-              "emoji": "⭐",
-              "color": "#eab308"
-            },
-            {
-              "correct": false,
-              "emoji": "🍇",
-              "color": "#a855f7"
-            },
-            {
-              "correct": true,
-              "emoji": "🖤",
-              "color": "#111827"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the green.",
-          "explain": "It is the green.",
-          "columns": 2,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": false,
-              "emoji": "🍎",
-              "color": "#ef4444"
-            },
-            {
-              "correct": true,
-              "emoji": "🍏",
-              "color": "#22c55e"
-            },
-            {
-              "correct": false,
-              "emoji": "⭐",
-              "color": "#eab308"
-            },
-            {
-              "correct": false,
-              "emoji": "🍇",
-              "color": "#a855f7"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the yellow.",
-          "explain": "It is the yellow.",
-          "columns": 2,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": false,
-              "emoji": "🔵",
-              "color": "#3b82f6"
-            },
-            {
-              "correct": false,
-              "emoji": "🍏",
-              "color": "#22c55e"
-            },
-            {
-              "correct": true,
-              "emoji": "⭐",
-              "color": "#eab308"
-            },
-            {
-              "correct": false,
-              "emoji": "🍎",
-              "color": "#ef4444"
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the pink.",
-          "explain": "It is the pink.",
-          "columns": 2,
-          "variant": "cards",
-          "choices": [
-            {
-              "correct": true,
               "emoji": "🌸",
-              "color": "#ec4899"
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the crab.",
+          "explain": "It is the crab.",
+          "columns": 2,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "🦀",
+              "correct": true
             },
             {
-              "correct": false,
-              "emoji": "🔵",
-              "color": "#3b82f6"
+              "emoji": "🐟",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the ladybug.",
+          "explain": "It is the ladybug.",
+          "columns": 3,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "🐸",
+              "correct": false
             },
             {
-              "correct": false,
-              "emoji": "🍊",
-              "color": "#f97316"
+              "emoji": "🦆",
+              "correct": false
             },
             {
-              "correct": false,
-              "emoji": "🍏",
-              "color": "#22c55e"
+              "emoji": "🐞",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the pencil.",
+          "explain": "It is the pencil.",
+          "columns": 3,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "✏️",
+              "correct": true
+            },
+            {
+              "emoji": "🖍️",
+              "correct": false
+            },
+            {
+              "emoji": "✂️",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the shoe.",
+          "explain": "It is the shoe.",
+          "columns": 3,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "🧤",
+              "correct": false
+            },
+            {
+              "emoji": "🎩",
+              "correct": false
+            },
+            {
+              "emoji": "👟",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the snake.",
+          "explain": "It is the snake.",
+          "columns": 2,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "🐶",
+              "correct": false
+            },
+            {
+              "emoji": "🐱",
+              "correct": false
+            },
+            {
+              "emoji": "🐦",
+              "correct": false
+            },
+            {
+              "emoji": "🐍",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the mirror.",
+          "explain": "It is the mirror.",
+          "columns": 2,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "☀️",
+              "correct": false
+            },
+            {
+              "emoji": "🌙",
+              "correct": false
+            },
+            {
+              "emoji": "🪞",
+              "correct": true
+            },
+            {
+              "emoji": "⭐",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the shell.",
+          "explain": "It is the shell.",
+          "columns": 2,
+          "variant": "cards",
+          "choices": [
+            {
+              "emoji": "🐟",
+              "correct": false
+            },
+            {
+              "emoji": "🦀",
+              "correct": false
+            },
+            {
+              "emoji": "🎈",
+              "correct": false
+            },
+            {
+              "emoji": "🐚",
+              "correct": true
             }
           ]
         }

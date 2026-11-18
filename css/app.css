@@ -578,6 +578,7 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 .tray-hint { color: var(--muted); font-weight: 800; align-self: center; }
 .select-count { text-align: center; font-weight: 800; font-size: 20px; }
 .feedback { border-radius: 20px; padding: 12px 14px; font-weight: 800; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; scroll-margin-bottom: 12px; }
+.feedback p, .feedback .hop-line, .feedback .btn-next { flex: 1 1 100%; }
 .praise-face { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid #f6d56a; flex: none; }
 .hop-line { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; justify-content: center; }
 .hop-line i { min-width: 36px; height: 36px; border-radius: 50%; background: white; display: grid; place-items: center; font-style: normal; }
@@ -645,7 +646,7 @@ body[data-child="gin"] .today h2 { background: rgba(255, 248, 236, 0.96); }
 }
 .feedback.is-good { background: #e5f8ec; color: var(--good); }
 .feedback.is-bad { background: #fdeceb; color: var(--bad); }
-.feedback p { font-weight: 700; color: var(--ink); margin-top: 4px; }
+.feedback p { font-weight: 700; color: var(--ink); margin: 0; line-height: 1.45; font-size: clamp(18px, 2.5vw, 22px); }
 
 .result-card, .parent-card, .backup, .past {
   position: relative;

@@ -335,7 +335,7 @@
     "🪞": "mirror", "🐴": "horse", "👗": "dress", "🔑": "key", "❄️": "snowflake",
     "👘": "gown", "💇": "braid", "🦌": "deer", "🧁": "cupcake", "🐘": "elephant",
     "🐢": "turtle", "🐚": "shell", "🎫": "ticket", "🌳": "tree", "👟": "shoe",
-    "✏️": "pencil", "🕊️": "bird",
+    "✏️": "pencil", "✂️": "scissors", "🎩": "hat", "🕊️": "bird",
     "🥝": "kiwi", "🍩": "donut", "🍦": "ice cream", "🍬": "candy",
     "🥦": "broccoli", "🍆": "eggplant", "🥨": "pretzel", "🌶️": "chili", "🥒": "pickle",
     "⚔️": "sword", "👢": "boot", "⛑️": "helmet", "🏅": "medal",
@@ -349,7 +349,7 @@
     "🐘": "con voi", "🐢": "con rùa", "🚀": "tên lửa", "🥁": "cái trống", "🐧": "chim cánh cụt",
     "🚜": "máy kéo", "🦌": "con hươu", "🧁": "bánh", "🌈": "cầu vồng", "❄️": "bông tuyết",
     "🌳": "cây", "☁️": "đám mây", "✋": "bàn tay", "🐚": "cái vỏ", "🎫": "cái vé",
-    "👟": "đôi giày", "🐰": "con thỏ", "✏️": "bút chì",
+    "👟": "đôi giày", "🐰": "con thỏ", "✏️": "bút chì", "✂️": "cái kéo", "🎩": "cái mũ",
     "🦸": "siêu anh hùng", "🛡️": "cái khiên", "🎀": "chiếc nơ",
     "🦄": "kỳ lân", "👜": "cái túi", "⛰️": "núi", "💨": "gió", "🌰": "hạt",
     "🐯": "con hổ", "🌸": "hoa", "🍊": "quả cam"
