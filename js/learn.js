@@ -298,7 +298,7 @@
   var ONSET_LOOKALIKE = {
     ch: ["tr", "c", "nh"], nh: ["n", "ng", "h"], th: ["t", "tr", "h"], kh: ["k", "h", "c"],
     ph: ["p", "b", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
-    gh: ["g", "ng", "h"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
+    gh: ["g", "ng", "h"], g: ["c", "d", "đ"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
   };
   var RHYME_INFO = {
     a: ["a", 0], e: ["e", 0], "ê": ["ê", 0], i: ["i", 0], o: ["o", 0], "ô": ["ô", 0], "ơ": ["ơ", 0], u: ["u", 0], "ư": ["ư", 0],
@@ -317,7 +317,7 @@
     eo: ["ao", "ai", "em", "oi"], oi: ["ôi", "ơi", "ai", "ui"], "ôi": ["ơi", "oi", "ui", "ôm"], "ơi": ["ôi", "oi", "ơn", "ai"],
     ui: ["oi", "ôi", "in", "ai"], im: ["in", "em", "ơm", "ôm"], on: ["ôn", "ơn", "an", "ong"], em: ["en", "êm", "im", "eo"], in: ["im", "ên", "ân", "an"],
     "ân": ["ăn", "an", "ên", "ân"], "ên": ["en", "in", "ân", "ơn"], ong: ["ông", "on", "ăng", "ung"], "ông": ["ong", "ôn", "ôm", "ơng"],
-    "ăng": ["ang", "ăn", "ong", "ân"], ang: ["ăng", "an", "ong", "am"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
+    "ơm": ["ôm", "ơn", "am", "im"], "ăng": ["ang", "ăn", "ong", "ân"], ang: ["ăng", "an", "ong", "am"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
     "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"]
   };
   var TONE_MARK = { ngang: "", "huyền": "̀", "sắc": "́", "hỏi": "̉", "ngã": "̃", "nặng": "̣" };
