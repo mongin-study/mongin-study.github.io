@@ -297,7 +297,7 @@
   };
   var ONSET_LOOKALIKE = {
     ch: ["tr", "c", "nh"], nh: ["n", "ng", "h"], th: ["t", "tr", "h"], kh: ["k", "h", "c"],
-    ph: ["p", "b", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
+    ph: ["p", "b", "h"], k: ["c", "kh", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
     gh: ["g", "ng", "h"], g: ["c", "d", "đ"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
   };
   var RHYME_INFO = {
@@ -307,7 +307,7 @@
     "ôm": ["ô mờ ôm", 0], em: ["e mờ em", 0], im: ["i mờ im", 0], in: ["i nờ in", 0], "ân": ["ớ nờ ân", 0],
     "âu": ["ớ u âu", 0], "ên": ["ê nờ ên", 0], ong: ["o ngờ ong", 0], "ăng": ["á ngờ ăng", 0],
     "ay": ["a y ay", 0], "ây": ["ớ y ây", 0], "ông": ["ô ngờ ông", 0],
-    ang: ["a ngờ ang", 0],
+    ang: ["a ngờ ang", 0], en: ["e nờ en", 0],
     "ơn": ["ơ nờ ơn", 0], "ôn": ["ô nờ ôn", 0], "ơm": ["ơ mờ ơm", 0], "ăn": ["á nờ ăn", 0], at: ["a tờ at", 0], ap: ["a pờ ap", 0]
   };
   // Near-miss rhymes used as wrong answers in the "Tiếng … có vần gì?" question,
@@ -317,7 +317,7 @@
     eo: ["ao", "ai", "em", "oi"], oi: ["ôi", "ơi", "ai", "ui"], "ôi": ["ơi", "oi", "ui", "ôm"], "ơi": ["ôi", "oi", "ơn", "ai"],
     ui: ["oi", "ôi", "in", "ai"], im: ["in", "em", "ơm", "ôm"], on: ["ôn", "ơn", "an", "ong"], em: ["en", "êm", "im", "eo"], in: ["im", "ên", "ân", "an"],
     "ân": ["ăn", "an", "ên", "ân"], "ên": ["en", "in", "ân", "ơn"], ong: ["ông", "on", "ăng", "ung"], "ông": ["ong", "ôn", "ôm", "ơng"],
-    "ơm": ["ôm", "ơn", "am", "im"], "ăng": ["ang", "ăn", "ong", "ân"], ang: ["ăng", "an", "ong", "am"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
+    "ơm": ["ôm", "ơn", "am", "im"], en: ["ên", "an", "in", "em"], "ăng": ["ang", "ăn", "ong", "ân"], ang: ["ăng", "an", "ong", "am"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
     "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"]
   };
   var TONE_MARK = { ngang: "", "huyền": "̀", "sắc": "́", "hỏi": "̉", "ngã": "̃", "nặng": "̣" };
@@ -333,13 +333,14 @@
       ["t", "in", "ngang", ""], ["x", "in", "ngang", ""], ["k", "in", "sắc", ""], ["s", "ong", "sắc", "🌊"], ["m", "ong", "ngang", ""],
       ["h", "at", "sắc", "🎤"], ["m", "at", "sắc", ""], ["c", "at", "sắc", "🏖️"], ["l", "at", "sắc", ""], ["đ", "ap", "nặng", ""], ["c", "ap", "sắc", ""],
       ["b", "ang", "hỏi", ""], ["v", "ang", "huyền", ""], ["s", "ang", "sắc", ""], ["m", "ang", "ngang", ""], ["l", "ang", "huyền", "🏘️"],
-      ["r", "ăng", "ngang", "🦷"], ["b", "ăng", "ngang", "🧊"], ["m", "ăng", "ngang", "🎋"], ["t", "ăng", "nặng", "🎁"]
+      ["r", "ăng", "ngang", "🦷"], ["b", "ăng", "ngang", "🧊"], ["m", "ăng", "ngang", "🎋"], ["t", "ăng", "nặng", "🎁"],
+      ["s", "en", "ngang", "🪷"], ["đ", "en", "huyền", "💡"], ["l", "en", "ngang", "🧶"], ["n", "ên", "sắc", "🕯️"], ["t", "ên", "ngang", ""], ["l", "ên", "ngang", ""], ["b", "ên", "sắc", ""]
     ],
     ghep: [
       ["nh", "a", "huyền", "🏠"], ["ch", "o", "sắc", "🐶"], ["th", "o", "hỏi", "🐰"], ["nh", "o", "ngang", "🍇"],
       ["ph", "ơ", "hỏi", "🍜"], ["gh", "ê", "sắc", "🪑"], ["ng", "ô", "ngang", "🌽"], ["tr", "a", "huyền", "🍵"],
       ["kh", "i", "hỏi", "🐒"], ["gi", "o", "sắc", "💨"], ["qu", "a", "hỏi", ""], ["ch", "e", "ngang", ""],
-      ["th", "ư", "ngang", "✉️"], ["kh", "ê", "sắc", ""], ["tr", "e", "ngang", ""], ["ch", "ơ", "nặng", ""]
+      ["th", "ư", "ngang", "✉️"], ["kh", "ê", "sắc", ""], ["tr", "e", "ngang", ""], ["ch", "ơ", "nặng", ""], ["k", "e", "hỏi", ""], ["k", "ê", "sắc", ""], ["k", "i", "huyền", ""]
     ],
     mix: [
       ["ch", "im", "ngang", "🐦"], ["ch", "ân", "ngang", "🦶"], ["ch", "ai", "ngang", "🍾"], ["ch", "ao", "sắc", "🥣"],
@@ -347,7 +348,8 @@
       ["kh", "oi", "sắc", ""], ["ng", "ôi", "ngang", ""], ["nh", "an", "ngã", ""], ["th", "am", "hỏi", ""],
       ["ph", "ao", "ngang", ""], ["gi", "oi", "hỏi", ""], ["kh", "ăn", "ngang", ""], ["ng", "u", "hỏi", "😴"],
       ["tr", "ơi", "huyền", ""], ["tr", "eo", "huyền", ""], ["ng", "ôi", "ngang", ""],
-      ["qu", "at", "nặng", ""], ["gi", "o", "hỏi", "🧺"], ["th", "ap", "sắc", "🗼"], ["kh", "at", "sắc", ""], ["ch", "ay", "nặng", "🏃"], ["ng", "ay", "huyền", ""]
+      ["qu", "at", "nặng", ""], ["gi", "o", "hỏi", "🧺"], ["th", "ap", "sắc", "🗼"], ["kh", "at", "sắc", ""], ["ch", "ay", "nặng", "🏃"], ["ng", "ay", "huyền", ""],
+      ["kh", "en", "ngang", ""], ["tr", "ên", "ngang", ""], ["qu", "ên", "ngang", ""]
     ]
   };
 
