@@ -5,8 +5,8 @@
     "Rapunzel khen Mon ghép vần en, ên giỏi quá!",
     "Pom nhảy tưng tưng vì Mon tính đúng rồi!",
     "Mẹ Vy ôm Gin vì Gin nhớ chữ p, q, x!",
-    "Well done, Mon! Elsa claps for the frog!",
-    "Hurrah, Gin! You found the little bee!"
+    "Well done, Mon! Elsa claps for the plum!",
+    "Hurrah, Gin! You found the shield!"
   ],
   "memory": [
     {
@@ -361,9 +361,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Mon có 15 quả táo. Mon ăn hết 7 quả táo. Vậy Mon còn bao nhiêu quả táo?",
-          "speak": "Mon có mười lăm quả táo. Mon ăn hết bảy quả táo. Vậy Mon còn bao nhiêu quả táo?",
-          "explain": "Mười lăm trừ bảy. Đếm lùi bảy từ mười lăm: mười bốn, mười ba, mười hai, mười một, mười, chín, tám.",
+          "prompt": "Pom có 15 quả táo. Pom ăn hết 7 quả táo. Vậy Pom còn bao nhiêu quả táo?",
+          "speak": "Pom có mười lăm quả táo. Pom ăn hết bảy quả táo. Vậy Pom còn bao nhiêu quả táo?",
+          "explain": "Mười lăm trừ bảy. Đếm lùi bảy từ mười lăm: mười bốn, mười ba, mười hai, mười một, mười, chín, tám. Pom còn tám quả táo.",
           "choices": [
             {
               "text": "8",
@@ -425,24 +425,24 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "năm, mười, mười lăm, hai mươi. Số tiếp theo là số nào?",
-          "explain": "Đếm thêm năm. Từ hai mươi đếm: hai mươi mốt, hai mươi hai, hai mươi ba, hai mươi bốn, hai mươi lăm.",
+          "speak": "một, sáu, mười một, mười sáu. Số tiếp theo là số nào?",
+          "explain": "Đếm thêm năm. Từ mười sáu đếm: mười bảy, mười tám, mười chín, hai mươi, hai mươi mốt.",
           "scene": {
             "layout": "equation",
-            "text": "5 , 10 , 15 , 20 , ?"
+            "text": "1 , 6 , 11 , 16 , ?"
           },
           "columns": 3,
           "choices": [
             {
-              "text": "25",
-              "correct": true
-            },
-            {
-              "text": "24",
+              "text": "20",
               "correct": false
             },
             {
-              "text": "26",
+              "text": "21",
+              "correct": true
+            },
+            {
+              "text": "22",
               "correct": false
             }
           ]
@@ -477,14 +477,14 @@
           "kind": "keypad",
           "lang": "vi",
           "prompt": "Điền số còn thiếu",
-          "speak": "bảy cộng số nào bằng hai mươi?",
-          "explain": "Hai mươi trừ bảy còn mười ba. Bảy cộng mười ba bằng hai mươi.",
+          "speak": "chín cộng số nào bằng hai mươi?",
+          "explain": "Hai mươi trừ chín còn mười một. Chín cộng mười một bằng hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
-            "known": 7
+            "known": 9
           },
-          "answer": 13,
+          "answer": 11,
           "maxDigits": 2
         },
         {
@@ -608,7 +608,7 @@
           "lang": "vi",
           "prompt": "Số 48 là số chẵn hay số lẻ?",
           "speak": "Số bốn mươi tám là số chẵn hay số lẻ?",
-          "explain": "48 chia đủ từng cặp, nên là số chẵn.",
+          "explain": "Hàng đơn vị của 48 là 8. Tám chấm chia đủ từng cặp, nên 48 là số chẵn.",
           "scene": {
             "layout": "pairs",
             "count": 48
@@ -630,7 +630,7 @@
           "lang": "vi",
           "prompt": "Số 73 là số chẵn hay số lẻ?",
           "speak": "Số bảy mươi ba là số chẵn hay số lẻ?",
-          "explain": "73 còn thừa 1 chấm, nên là số lẻ.",
+          "explain": "Hàng đơn vị của 73 là 3. Ba còn thừa một chấm, nên 73 là số lẻ.",
           "scene": {
             "layout": "pairs",
             "count": 73
@@ -2077,9 +2077,9 @@
       "child": "mon",
       "subject": "english",
       "category": "reading",
-      "title": "Frog, crab, and star",
+      "title": "Plum, grape, and fish",
       "subtitle": "Blends and opposites",
-      "icon": "🐸",
+      "icon": "🐟",
       "level": 3,
       "questions": [
         {
@@ -2087,31 +2087,31 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters f, r, o, g spell frog. Tap the frog.",
+          "explain": "The letters p, l, u, m spell plum. Tap the plum.",
           "scene": {
             "layout": "digit",
-            "text": "frog"
+            "text": "plum"
           },
           "columns": 2,
           "choices": [
             {
-              "emoji": "🌳",
-              "label": "tree",
+              "emoji": "🍇",
+              "label": "grape",
               "correct": false
             },
             {
-              "emoji": "🐸",
-              "label": "frog",
+              "emoji": "🍑",
+              "label": "plum",
               "correct": true
             },
             {
-              "emoji": "🐌",
-              "label": "snail",
+              "emoji": "🐟",
+              "label": "fish",
               "correct": false
             },
             {
-              "emoji": "🥁",
-              "label": "drum",
+              "emoji": "🚚",
+              "label": "truck",
               "correct": false
             }
           ]
@@ -2121,31 +2121,31 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters c, r, a, b spell crab. Tap the crab.",
+          "explain": "The letters g, r, a, p, e spell grape. Tap the grape.",
           "scene": {
             "layout": "digit",
-            "text": "crab"
+            "text": "grape"
           },
           "columns": 2,
           "choices": [
             {
-              "emoji": "🌳",
-              "label": "tree",
+              "emoji": "🍑",
+              "label": "plum",
               "correct": false
             },
             {
-              "emoji": "🦀",
-              "label": "crab",
+              "emoji": "🍇",
+              "label": "grape",
               "correct": true
             },
             {
-              "emoji": "⭐",
-              "label": "star",
+              "emoji": "🍪",
+              "label": "snack",
               "correct": false
             },
             {
-              "emoji": "🐸",
-              "label": "frog",
+              "emoji": "🐟",
+              "label": "fish",
               "correct": false
             }
           ]
@@ -2155,31 +2155,31 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters s, t, a, r spell star. Tap the star.",
+          "explain": "The letters f, i, s, h spell fish. Tap the fish.",
           "scene": {
             "layout": "digit",
-            "text": "star"
+            "text": "fish"
           },
           "columns": 2,
           "choices": [
             {
-              "emoji": "🌳",
-              "label": "tree",
+              "emoji": "🚚",
+              "label": "truck",
               "correct": false
             },
             {
-              "emoji": "🐌",
-              "label": "snail",
-              "correct": false
-            },
-            {
-              "emoji": "⭐",
-              "label": "star",
+              "emoji": "🐟",
+              "label": "fish",
               "correct": true
             },
             {
-              "emoji": "🥄",
-              "label": "spoon",
+              "emoji": "🍇",
+              "label": "grape",
+              "correct": false
+            },
+            {
+              "emoji": "🍪",
+              "label": "snack",
               "correct": false
             }
           ]
@@ -2189,31 +2189,31 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters s, p, o, o, n spell spoon. Tap the spoon.",
+          "explain": "The letters s, n, a, c, k spell snack. Tap the snack.",
           "scene": {
             "layout": "digit",
-            "text": "spoon"
+            "text": "snack"
           },
           "columns": 2,
           "choices": [
             {
-              "emoji": "🥁",
-              "label": "drum",
+              "emoji": "🐟",
+              "label": "fish",
               "correct": false
             },
             {
-              "emoji": "🥄",
-              "label": "spoon",
+              "emoji": "🍪",
+              "label": "snack",
               "correct": true
             },
             {
-              "emoji": "⭐",
-              "label": "star",
+              "emoji": "🍑",
+              "label": "plum",
               "correct": false
             },
             {
-              "emoji": "⏰",
-              "label": "clock",
+              "emoji": "🚚",
+              "label": "truck",
               "correct": false
             }
           ]
@@ -2223,31 +2223,31 @@
           "lang": "en",
           "prompt": "Read the word. Tap the picture.",
           "speak": "Read this word.",
-          "explain": "The letters s, n, a, i, l spell snail. Tap the snail.",
+          "explain": "The letters t, r, u, c, k spell truck. Tap the truck.",
           "scene": {
             "layout": "digit",
-            "text": "snail"
+            "text": "truck"
           },
           "columns": 2,
           "choices": [
             {
-              "emoji": "🥁",
-              "label": "drum",
+              "emoji": "🍪",
+              "label": "snack",
               "correct": false
             },
             {
-              "emoji": "🦀",
-              "label": "crab",
-              "correct": false
-            },
-            {
-              "emoji": "🐌",
-              "label": "snail",
+              "emoji": "🚚",
+              "label": "truck",
               "correct": true
             },
             {
-              "emoji": "🌳",
-              "label": "tree",
+              "emoji": "🍇",
+              "label": "grape",
+              "correct": false
+            },
+            {
+              "emoji": "🍑",
+              "label": "plum",
               "correct": false
             }
           ]
@@ -2255,39 +2255,39 @@
         {
           "kind": "choice",
           "lang": "en",
-          "prompt": "What is the opposite of day?",
-          "speak": "What is the opposite of day?",
-          "explain": "The opposite of day is night.",
+          "prompt": "What is the opposite of wet?",
+          "speak": "What is the opposite of wet?",
+          "explain": "The opposite of wet is dry.",
           "columns": 2,
           "choices": [
             {
-              "text": "night",
+              "text": "hot",
+              "correct": false
+            },
+            {
+              "text": "cold",
+              "correct": false
+            },
+            {
+              "text": "wet",
+              "correct": false
+            },
+            {
+              "text": "dry",
               "correct": true
-            },
-            {
-              "text": "week",
-              "correct": false
-            },
-            {
-              "text": "sun",
-              "correct": false
-            },
-            {
-              "text": "light",
-              "correct": false
             }
           ]
         },
         {
           "kind": "choice",
           "lang": "en",
-          "prompt": "What is the opposite of happy?",
-          "speak": "What is the opposite of happy?",
-          "explain": "The opposite of happy is sad.",
+          "prompt": "What is the opposite of loud?",
+          "speak": "What is the opposite of loud?",
+          "explain": "The opposite of loud is quiet.",
           "columns": 2,
           "choices": [
             {
-              "text": "happy",
+              "text": "fast",
               "correct": false
             },
             {
@@ -2295,11 +2295,11 @@
               "correct": false
             },
             {
-              "text": "glad",
+              "text": "loud",
               "correct": false
             },
             {
-              "text": "sad",
+              "text": "quiet",
               "correct": true
             }
           ]
@@ -2307,41 +2307,41 @@
         {
           "kind": "spell",
           "lang": "en",
-          "word": "frog",
+          "word": "plum",
           "prompt": "Listen and spell",
-          "speak": "Spell frog.",
-          "explain": "F, R, O, G. Those letters spell frog."
+          "speak": "Spell plum.",
+          "explain": "P, L, U, M. Those letters spell plum."
         },
         {
           "kind": "spell",
           "lang": "en",
-          "word": "crab",
+          "word": "fish",
           "prompt": "Listen and spell",
-          "speak": "Spell crab.",
-          "explain": "C, R, A, B. Those letters spell crab."
+          "speak": "Spell fish.",
+          "explain": "F, I, S, H. Those letters spell fish."
         },
         {
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap the word you hear.",
-          "speak": "Crab.",
-          "explain": "You heard crab. C, R, A, B spells crab.",
+          "speak": "Snack.",
+          "explain": "You heard snack. S, N, A, C, K spells snack.",
           "columns": 2,
           "choices": [
             {
-              "text": "cab",
+              "text": "snake",
               "correct": false
             },
             {
-              "text": "crab",
+              "text": "snack",
               "correct": true
             },
             {
-              "text": "grab",
+              "text": "stack",
               "correct": false
             },
             {
-              "text": "cram",
+              "text": "sack",
               "correct": false
             }
           ]
@@ -2354,7 +2354,7 @@
       "subject": "math",
       "category": "arithmetic",
       "title": "Đếm, nhóm đúng số và nhiều hơn",
-      "subtitle": "Đếm đến 8",
+      "subtitle": "Đếm đến 9",
       "icon": "🍎",
       "questions": [
         {
@@ -2362,10 +2362,13 @@
           "lang": "vi",
           "prompt": "Có bao nhiêu chiếc bánh?",
           "speak": "Đếm các chiếc bánh. Có bao nhiêu?",
-          "explain": "Có 6 chiếc bánh.",
+          "explain": "Có 9 chiếc bánh.",
           "scene": {
             "layout": "emojis",
             "items": [
+              "🍪",
+              "🍪",
+              "🍪",
               "🍪",
               "🍪",
               "🍪",
@@ -2377,15 +2380,15 @@
           "columns": 3,
           "choices": [
             {
-              "text": "5",
+              "text": "8",
               "correct": false
             },
             {
-              "text": "7",
+              "text": "10",
               "correct": false
             },
             {
-              "text": "6",
+              "text": "9",
               "correct": true
             }
           ]
@@ -3218,16 +3221,16 @@
           "lang": "vi",
           "prompt": "Số nào nhỏ hơn?",
           "speak": "Trong hai số này, số nào nhỏ hơn?",
-          "explain": "Một nhỏ hơn sáu.",
+          "explain": "Hai nhỏ hơn chín.",
           "variant": "cards",
           "columns": 2,
           "choices": [
             {
-              "text": "6",
+              "text": "9",
               "correct": false
             },
             {
-              "text": "1",
+              "text": "2",
               "correct": true
             }
           ]
@@ -3566,14 +3569,14 @@
           "columns": 2,
           "choices": [
             {
-              "shape": "circle",
-              "color": "#22c55e",
+              "shape": "triangle",
+              "color": "#3b82f6",
               "size": 120,
               "correct": true
             },
             {
-              "shape": "circle",
-              "color": "#22c55e",
+              "shape": "triangle",
+              "color": "#3b82f6",
               "size": 62,
               "correct": false
             }
@@ -3848,7 +3851,7 @@
           "explain": "Chữ ư. Âm của nó là ư.",
           "choices": [
             {
-              "text": "u",
+              "text": "ô",
               "correct": false
             },
             {
@@ -3874,7 +3877,7 @@
           "explain": "Đó là chữ ư, âm ư.",
           "choices": [
             {
-              "text": "u",
+              "text": "y",
               "correct": false
             },
             {
@@ -3882,7 +3885,7 @@
               "correct": true
             },
             {
-              "text": "ơ",
+              "text": "ô",
               "correct": false
             }
           ],
@@ -3895,21 +3898,21 @@
       "child": "gin",
       "subject": "english",
       "category": "animals",
-      "title": "Bee, cow, and lion",
+      "title": "Shield, cow, and lion",
       "subtitle": "Tap what you hear",
-      "icon": "🐝",
+      "icon": "🛡️",
       "questions": [
         {
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the bee.",
-          "explain": "It is the bee.",
+          "speak": "Tap the shield.",
+          "explain": "It is the shield.",
           "columns": 2,
           "variant": "cards",
           "choices": [
             {
-              "emoji": "🐝",
+              "emoji": "🛡️",
               "correct": true
             },
             {

@@ -330,7 +330,10 @@
     "🍒": "cherry", "🥥": "coconut", "🎃": "pumpkin", "🥕": "carrot", "🍅": "tomato",
     "🍈": "melon", "🌽": "corn", "🧀": "cheese", "🐪": "camel", "🐙": "octopus",
     "🦜": "parrot", "🎸": "guitar", "🏆": "trophy", "🍭": "lollipop", "🍿": "popcorn",
-    "🐌": "snail", "🐞": "ladybug",
+    "🐌": "snail", "🐞": "ladybug", "🐝": "bee", "🐮": "cow", "🐑": "sheep",
+    "☕": "cup", "🕷️": "spider", "🪷": "lotus", "💡": "lamp", "🕯️": "candle",
+    "🪑": "chair", "🧣": "scarf", "🧢": "cap", "🧦": "sock", "🛏️": "bed",
+    "🧶": "yarn", "🍪": "cookie", "🪵": "log", "🪤": "trap", "🥄": "spoon",
     "🚢": "ship", "🚩": "flag", "🦀": "crab", "🪥": "brush", "🪄": "wand",
     "🪞": "mirror", "🐴": "horse", "👗": "dress", "🔑": "key", "❄️": "snowflake",
     "👘": "gown", "💇": "braid", "🦌": "deer", "🧁": "cupcake", "🐘": "elephant",
@@ -352,14 +355,43 @@
     "👟": "đôi giày", "🐰": "con thỏ", "✏️": "bút chì", "✂️": "cái kéo", "🎩": "cái mũ",
     "🦸": "siêu anh hùng", "🛡️": "cái khiên", "🎀": "chiếc nơ",
     "🦄": "kỳ lân", "👜": "cái túi", "⛰️": "núi", "💨": "gió", "🌰": "hạt",
-    "🐯": "con hổ", "🌸": "hoa", "🍊": "quả cam"
+    "🐯": "con hổ", "🌸": "hoa", "🍊": "quả cam",
+    "🐝": "con ong", "🐮": "con bò", "🐑": "con cừu", "☕": "cái cốc",
+    "🕷️": "con nhện", "🪷": "hoa sen", "💡": "cái đèn", "🕯️": "cây nến",
+    "🪑": "cái ghế", "🧣": "cái khăn", "🧢": "cái mũ", "🧦": "chiếc tất",
+    "🛏️": "cái giường", "🧶": "cuộn len", "🍪": "chiếc bánh", "🪵": "thanh gỗ",
+    "🪤": "cái bẫy", "🥄": "cái muỗng", "🍇": "chùm nho", "🍑": "quả đào",
+    "🦁": "con sư tử", "🚌": "xe buýt", "🔑": "chìa khóa", "🌙": "mặt trăng",
+    "☀️": "mặt trời", "🐦": "con chim", "🐄": "con bò"
   };
+
+  function countName(n, name, lang) {
+    if (!name) return "";
+    if (lang === "en") {
+      var words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+      var num = words[n] || String(n);
+      if (n === 1) return num + " " + name;
+      var plural = name;
+      if (name === "fish" || name === "sheep") plural = name;
+      else if (/[^aeiou]y$/.test(name)) plural = name.slice(0, -1) + "ies";
+      else if (/(s|x|ch|sh)$/.test(name)) plural = name + "es";
+      else plural = name + "s";
+      return num + " " + plural;
+    }
+    var vi = HV.util && HV.util.readNumber ? HV.util.readNumber(n) : String(n);
+    return vi + " " + name;
+  }
 
   function choiceName(c, lang) {
     if (!c) return "";
     if (c.label) return String(c.label);
     if (c.text) return "";
     var en = lang === "en";
+    if (c.emojis && c.emojis.length) {
+      var group = (en ? EMOJI_EN : EMOJI_VI)[c.emojis[0]] || "";
+      var uniform = c.emojis.every(function (e) { return e === c.emojis[0]; });
+      if (uniform && group) return countName(c.emojis.length, group, en ? "en" : "vi");
+    }
     var shape = c.shape ? ((en ? SHAPE_EN : SHAPE_VI)[c.shape] || "") : "";
     var hex = String(c.color || "").toLowerCase();
     var color = hex ? ((en ? COLOR_EN : COLOR_VI)[hex] || "") : "";
