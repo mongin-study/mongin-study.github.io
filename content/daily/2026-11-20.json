@@ -6,7 +6,7 @@
     "Pom nhảy tưng tưng vì Mon tính đúng rồi!",
     "Mẹ Vy ôm Gin vì Gin nhớ chữ p, q, x!",
     "Well done, Mon! Elsa claps for the frog!",
-    "Hurray, Gin! You found the little bee!"
+    "Hurrah, Gin! You found the little bee!"
   ],
   "memory": [
     {
@@ -1726,55 +1726,29 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Tiếng răng có vần gì?",
-          "speak": "Tiếng răng có vần gì?",
-          "explain": "Rờ ăng răng. Vần là ăng: á ngờ ăng.",
+          "prompt": "Tiếng đen có vần gì?",
+          "speak": "Tiếng đen có vần gì?",
+          "explain": "Đờ en đen. Vần là en: e nờ en.",
           "scene": {
             "layout": "digit",
-            "text": "răng"
+            "text": "đen"
           },
           "columns": 2,
           "choices": [
             {
-              "text": "ăn",
+              "text": "ên",
               "correct": false
             },
             {
-              "text": "ong",
-              "correct": false
-            },
-            {
-              "text": "ăng",
+              "text": "en",
               "correct": true
             },
             {
-              "text": "ang",
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "vi",
-          "prompt": "Nghe rồi chọn chữ viết đúng",
-          "speak": "Chọn chữ cơm",
-          "explain": "Cờ ơm cơm.",
-          "columns": 2,
-          "choices": [
-            {
-              "text": "cơm",
-              "correct": true
-            },
-            {
-              "text": "nơm",
+              "text": "an",
               "correct": false
             },
             {
-              "text": "cơ",
-              "correct": false
-            },
-            {
-              "text": "cỡm",
+              "text": "on",
               "correct": false
             }
           ]
@@ -1938,36 +1912,6 @@
             },
             {
               "text": "ghến",
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "vi",
-          "prompt": "Tiếng phở bắt đầu bằng âm gì?",
-          "speak": "Tiếng phở bắt đầu bằng âm gì?",
-          "explain": "Phở bắt đầu bằng phờ, viết là ph.",
-          "scene": {
-            "layout": "digit",
-            "text": "phở"
-          },
-          "columns": 2,
-          "choices": [
-            {
-              "text": "ph",
-              "correct": true
-            },
-            {
-              "text": "b",
-              "correct": false
-            },
-            {
-              "text": "h",
-              "correct": false
-            },
-            {
-              "text": "p",
               "correct": false
             }
           ]

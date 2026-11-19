@@ -108,7 +108,7 @@ h3 { font-size: 22px; font-weight: 800; }
 body[data-child="mon"] .topbar { background: rgba(238, 246, 255, 0.9); }
 body[data-child="gin"] .topbar { background: rgba(255, 248, 236, 0.92); }
 .top-title { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.top-title strong { font-size: 22px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-title strong { font-size: 22px; line-height: 1.15; white-space: normal; overflow: visible; text-overflow: unset; overflow-wrap: anywhere; }
 .top-title span { color: var(--muted); font-weight: 700; font-size: 15px; overflow-wrap: anywhere; }
 .icon-btn, .icon-spacer {
   width: 64px;
