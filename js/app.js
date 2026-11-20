@@ -81,6 +81,8 @@
     if (parts[0] === "ma-hinh" && knownChild(parts[1])) return { name: "ma-hinh", child: parts[1] };
     if (parts[0] === "noi-so" && knownChild(parts[1])) return { name: "noi-so", child: parts[1] };
     if (parts[0] === "dem-tranh" && knownChild(parts[1])) return { name: "dem-tranh", child: parts[1] };
+    if (parts[0] === "ke-chuyen" && knownChild(parts[1])) return { name: "ke-chuyen", child: parts[1] };
+    if (parts[0] === "to-mau" && knownChild(parts[1])) return { name: "to-mau", child: parts[1] };
     if (parts[0] === "play" && parts[1]) return { name: "play", id: decodeURIComponent(parts[1]) };
     if (parts[0] === "board" && knownChild(parts[1])) return { name: "board", child: parts[1] };
     if (parts[0] === "parents") return { name: "parents" };
@@ -324,6 +326,8 @@
       if (HV.noiSo) ids.push("noi-so");
       if (HV.demTranh) ids.push("dem-tranh");
     }
+    if (subject === "vietnamese" && child === "mon" && HV.story) ids.push("ke-chuyen");
+    if (subject === "english" && child === "gin" && HV.coloring) ids.push("to-mau");
     return ids;
   }
 
@@ -338,6 +342,8 @@
     if (subject === "math" && category === "arithmetic" && HV.nhaSo) ids.push("nha-so");
     if (subject === "math" && category === "arithmetic" && HV.noiSo) ids.push("noi-so");
     if (subject === "math" && category === "arithmetic" && HV.demTranh) ids.push("dem-tranh");
+    if (subject === "vietnamese" && category === "words" && child === "mon" && HV.story) ids.push("ke-chuyen");
+    if (subject === "english" && category === "colors" && child === "gin" && HV.coloring) ids.push("to-mau");
     return ids;
   }
 
@@ -375,6 +381,14 @@
     if (HV.maHinh) root.appendChild(HV.maHinh.card(child));
     if (HV.noiSo) root.appendChild(HV.noiSo.card(child));
     if (HV.demTranh) root.appendChild(HV.demTranh.card(child));
+    if (HV.story) {
+      var storyCard = HV.story.card(child);
+      if (storyCard) root.appendChild(storyCard);
+    }
+    if (HV.coloring) {
+      var colorCard = HV.coloring.card(child);
+      if (colorCard) root.appendChild(colorCard);
+    }
     root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
@@ -564,6 +578,14 @@
     if (subject === "math" && category === "arithmetic" && HV.noiSo) list.appendChild(HV.noiSo.lesson(child));
     if (subject === "math" && category === "arithmetic" && HV.demTranh) list.appendChild(HV.demTranh.lesson(child));
     if (subject === "math" && category === "arithmetic" && HV.shop) list.appendChild(HV.shop.lesson(child));
+    if (subject === "vietnamese" && category === "words" && HV.story) {
+      var storyLesson = HV.story.lesson(child);
+      if (storyLesson) list.appendChild(storyLesson);
+    }
+    if (subject === "english" && category === "colors" && HV.coloring) {
+      var colorLesson = HV.coloring.lesson(child);
+      if (colorLesson) list.appendChild(colorLesson);
+    }
     orderedExercises(child, here).forEach(function (ex) {
       var best = stats.byExercise[ex.id] ? stats.byExercise[ex.id].bestStars : 0;
       list.appendChild(exerciseCard(child, ex, best));
@@ -1199,6 +1221,8 @@
     else if (route.name === "ma-hinh" && HV.maHinh) shell.appendChild(HV.maHinh.view(route.child));
     else if (route.name === "noi-so" && HV.noiSo) shell.appendChild(HV.noiSo.view(route.child));
     else if (route.name === "dem-tranh" && HV.demTranh) shell.appendChild(HV.demTranh.view(route.child));
+    else if (route.name === "ke-chuyen" && HV.story) shell.appendChild(HV.story.view(route.child));
+    else if (route.name === "to-mau" && HV.coloring) shell.appendChild(HV.coloring.view(route.child));
     else if (route.name === "parents") shell.appendChild(viewParents());
     else shell.appendChild(viewHome());
     root.appendChild(shell);
