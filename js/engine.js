@@ -707,18 +707,30 @@
       });
     }
 
+    function hearAgain(say) {
+      var cue = say || (lang === "en" ? "Try again." : "Thử lại nhé");
+      var job = speakNow(cue, lang);
+      if (child === "gin" && question.speak) {
+        job = job.then(function () {
+          if (settled) return 0;
+          return speakNow(question.speak, lang, true);
+        });
+      }
+      return job.then(function () { return true; }, function () { return true; });
+    }
+
     function softWrong(node, say) {
       attempts += 1;
       busy = true;
       if (node) node.classList.add("is-wrong");
       afterSound(HV.audio.wrong, function () {
         if (settled) return;
-        speakNow(say || (lang === "en" ? "Try again." : "Thử lại nhé"), lang);
+        hearAgain(say).then(function () {
+          if (settled) return;
+          busy = false;
+          if (node) node.classList.remove("is-wrong");
+        });
       });
-      setTimeout(function () {
-        busy = false;
-        if (node) node.classList.remove("is-wrong");
-      }, 700);
     }
 
     var onKey = function () {};
@@ -763,14 +775,14 @@
         display.classList.toggle("is-empty", !entry);
       }
       function pushDigit(d) {
-        if (locked || settled) return;
+        if (locked || settled || busy) return;
         if (entry.length >= question.maxDigits) return;
         entry += String(d);
         sync();
         HV.audio.tap();
       }
       function back() {
-        if (locked || settled) return;
+        if (locked || settled || busy) return;
         entry = entry.slice(0, -1);
         sync();
       }
@@ -785,14 +797,16 @@
           attempts += 1;
           busy = true;
           display.classList.add("is-shake");
-          HV.audio.wrong();
-          speakNow(lang === "en" ? "Try again." : "Chưa đúng, thử lại nhé");
-          setTimeout(function () {
-            busy = false;
-            entry = "";
-            sync();
-            display.classList.remove("is-shake");
-          }, 450);
+          afterSound(HV.audio.wrong, function () {
+            if (settled) return;
+            hearAgain(lang === "en" ? "Try again." : "Chưa đúng, thử lại nhé").then(function () {
+              if (settled) return;
+              busy = false;
+              entry = "";
+              sync();
+              display.classList.remove("is-shake");
+            });
+          });
         } else {
           attempts += 1;
           display.classList.add("is-wrong");
@@ -815,7 +829,7 @@
       container.appendChild(padWrap);
       container.classList.add("is-split");
       onKey = function (e) {
-        if (settled || locked) return;
+        if (settled || locked || busy) return;
         if (e.key >= "0" && e.key <= "9") pushDigit(e.key);
         else if (e.key === "Backspace") { e.preventDefault(); back(); }
         else if (e.key === "Enter") submit();
@@ -968,14 +982,18 @@
         } else if (attempts + 1 < maxAttempts) {
           attempts += 1;
           tray.classList.add("is-shake");
-          HV.audio.wrong();
-          speakNow(lang === "en" ? "Try again." : "Chưa đúng thứ tự, thử lại nhé");
-          setTimeout(function () {
-            pool = question.tokens.slice();
-            placed = [];
-            tray.classList.remove("is-shake");
-            paint();
-          }, 500);
+          locked = true;
+          afterSound(HV.audio.wrong, function () {
+            if (settled) return;
+            hearAgain(lang === "en" ? "Try again." : "Chưa đúng thứ tự, thử lại nhé").then(function () {
+              if (settled) return;
+              pool = question.tokens.slice();
+              placed = [];
+              tray.classList.remove("is-shake");
+              locked = false;
+              paint();
+            });
+          });
         } else {
           attempts += 1;
           placed = expect.slice();
