@@ -35,7 +35,7 @@
     { emoji: "🍎", name: "quả táo" },
     { emoji: "⭐", name: "ngôi sao" },
     { emoji: "🚗", name: "chiếc xe" },
-    { emoji: "🐶", name: "chú cún" },
+    { emoji: "🐶", name: "Pom" },
     { emoji: "🌸", name: "bông hoa" },
     { emoji: "🍪", name: "chiếc bánh" },
     { emoji: "🎈", name: "quả bóng bay" },
@@ -899,11 +899,12 @@
         var item = pick(COUNTABLES);
         var howMany = cfg.choiceCount || 3;
         var nums = numberChoices(n, howMany, Math.max(0, min - 1), Math.max(max + 2, 10));
+        var pom = item.name === "Pom";
         return qChoice({
-          prompt: "Có bao nhiêu " + item.name + "?",
-          speak: "Đếm các " + item.name + ". Có bao nhiêu?",
+          prompt: pom ? "Có bao nhiêu Pom?" : "Có bao nhiêu " + item.name + "?",
+          speak: pom ? "Đếm Pom. Có bao nhiêu?" : "Đếm các " + item.name + ". Có bao nhiêu?",
           scene: { layout: "emojis", items: Array(n).fill(item.emoji) },
-          explain: "Có " + n + " " + item.name + ".",
+          explain: pom ? "Có " + n + " Pom." : "Có " + n + " " + item.name + ".",
           columns: nums.length === 3 ? 3 : 2,
           options: nums.map(function (v) { return { text: String(v), correct: v === n }; })
         });
@@ -915,11 +916,12 @@
         var n = rnd(cfg.min || 1, cfg.max || 5);
         var item = pick(COUNTABLES);
         var nums = numberChoices(n, 3, 1, 6);
+        var pom = item.name === "Pom";
         return qChoice({
-          prompt: "Nhóm nào có đúng " + n + " " + item.name + "?",
-          speak: "Tìm nhóm có " + read(n) + " " + item.name,
+          prompt: pom ? "Nhóm nào có đúng " + n + " Pom?" : "Nhóm nào có đúng " + n + " " + item.name + "?",
+          speak: pom ? "Tìm nhóm có " + read(n) + " Pom" : "Tìm nhóm có " + read(n) + " " + item.name,
           scene: { layout: "digit", text: String(n) },
-          explain: "Nhóm đúng có " + n + " " + item.name + ".",
+          explain: pom ? "Nhóm đúng có " + n + " Pom." : "Nhóm đúng có " + n + " " + item.name + ".",
           columns: 3,
           options: nums.map(function (v) {
             return { emojis: Array(v).fill(item.emoji), correct: v === n };

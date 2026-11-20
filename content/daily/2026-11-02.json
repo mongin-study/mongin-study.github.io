@@ -192,8 +192,8 @@
         },
         {
           "kind": "choice",
-          "prompt": "Có bao nhiêu chú cún?",
-          "speak": "Đếm các chú cún. Có bao nhiêu?",
+          "prompt": "Có bao nhiêu Pom?",
+          "speak": "Đếm Pom. Có bao nhiêu?",
           "scene": {
             "layout": "emojis",
             "items": [
@@ -201,7 +201,7 @@
               "🐶"
             ]
           },
-          "explain": "Có 2 chú cún.",
+          "explain": "Có 2 Pom.",
           "columns": 3,
           "choices": [
             {

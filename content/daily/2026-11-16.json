@@ -2419,9 +2419,9 @@
         },
         {
           "kind": "choice",
-          "prompt": "Có bao nhiêu chú cún?",
-          "speak": "Đếm các chú cún. Có bao nhiêu?",
-          "explain": "Có 6 chú cún.",
+          "prompt": "Có bao nhiêu Pom?",
+          "speak": "Đếm Pom. Có bao nhiêu?",
+          "explain": "Có 6 Pom.",
           "scene": {
             "layout": "emojis",
             "items": [
@@ -2452,9 +2452,9 @@
         },
         {
           "kind": "choice",
-          "prompt": "Có bao nhiêu chú cún?",
-          "speak": "Đếm các chú cún. Có bao nhiêu?",
-          "explain": "Có 4 chú cún.",
+          "prompt": "Có bao nhiêu Pom?",
+          "speak": "Đếm Pom. Có bao nhiêu?",
+          "explain": "Có 4 Pom.",
           "scene": {
             "layout": "emojis",
             "items": [
@@ -2657,9 +2657,9 @@
         },
         {
           "kind": "choice",
-          "prompt": "Nhóm nào có đúng 2 chú cún?",
-          "speak": "Tìm nhóm có hai chú cún",
-          "explain": "Nhóm đúng có 2 chú cún.",
+          "prompt": "Nhóm nào có đúng 2 Pom?",
+          "speak": "Tìm nhóm có hai Pom",
+          "explain": "Nhóm đúng có 2 Pom.",
           "scene": {
             "layout": "digit",
             "text": "2"

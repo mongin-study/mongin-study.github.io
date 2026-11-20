@@ -527,7 +527,8 @@
     if (lang === "en") {
       var extra = daily.filter(function (line) { return englishCheerFor(child, line); });
       var own = child === "gin" ? PRAISE_EN_GIN : PRAISE_EN_MON;
-      return own.concat(PRAISE_EN).concat(extra);
+      var generic = PRAISE_EN.filter(function (line) { return englishCheerFor(child, line); });
+      return own.concat(generic).concat(extra);
     }
     var viDaily = daily.filter(function (line) { return !isEnglishCheer(line); });
     if (child === "mon") return PRAISE_EXTRA.mon.filter(fitsMon).concat(viDaily.filter(fitsMon));
@@ -583,7 +584,7 @@
     var busy = false;
     var locked = false;
     var pending = null;
-    var maxAttempts = child === "gin" ? 2 : 1;
+    var maxAttempts = opts.maxAttempts ? Math.max(1, Number(opts.maxAttempts) || 1) : (child === "gin" ? 2 : 1);
     var firstSuccess = false;
 
     function cleanup() {

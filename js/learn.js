@@ -15,7 +15,7 @@
     { ch: "e", name: "e", sound: "e" },
     { ch: "ê", name: "ê", sound: "ê" },
     { ch: "g", name: "gờ", sound: "gờ" },
-    { ch: "h", name: "hắt", sound: "hắt" },
+    { ch: "h", name: "hát", sound: "hát" },
     { ch: "i", name: "i", sound: "i" },
     { ch: "k", name: "ca", sound: "ca" },
     { ch: "l", name: "lờ", sound: "lờ" },

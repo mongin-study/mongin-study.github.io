@@ -2461,9 +2461,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Có bao nhiêu chú cún?",
-          "speak": "Đếm các chú cún. Có bao nhiêu?",
-          "explain": "Có 5 chú cún.",
+          "prompt": "Có bao nhiêu Pom?",
+          "speak": "Đếm Pom. Có bao nhiêu?",
+          "explain": "Có 5 Pom.",
           "scene": {
             "layout": "emojis",
             "items": [

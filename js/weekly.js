@@ -8,6 +8,16 @@
   var clock = 0;
   var praiseLines = {};
   var justFinished = "";
+  var mountCleanup = null;
+  var playGen = 0;
+
+  function dropMount() {
+    playGen += 1;
+    if (mountCleanup) {
+      mountCleanup();
+      mountCleanup = null;
+    }
+  }
 
   function bkk() {
     var parts = {};
@@ -91,7 +101,8 @@
     take("subtraction", { within: 20, input: "choice" }, "math", 2);
     take("wordProblem", {}, "math", 3);
     take("missingPart", { max: 20 }, "math", 3);
-    take("sequence", { steps: [2, 4, 5, 10], length: 4, max: 60, input: "choice" }, "math", 3);
+    take("sequence", { steps: [1, 2], length: 4, digits: 1, max: 9, input: "choice" }, "math", 2);
+    take("sequence", { steps: [2, 5, 10], length: 4, digits: 2, min: 10, max: 80, align: true, input: "choice" }, "math", 1);
     take("shapeName", { set: "all" }, "math", 2);
     take("countSides", { set: "all" }, "math", 2);
     take("enListen", { set: "mon", count: 3, choices: 4 }, "english", 3);
@@ -154,6 +165,19 @@
     return "Toán";
   }
 
+  function prepareQuestions(list) {
+    var ready = [];
+    (list || []).forEach(function (raw) {
+      if (!raw) return;
+      var q = HV.engine && HV.engine.normalize ? HV.engine.normalize(raw) : raw;
+      if (!q) return;
+      q.subject = raw.subject === "english" || raw.subject === "vietnamese" ? raw.subject : (raw.subject || "math");
+      if (raw.lang === "en") q.lang = "en";
+      ready.push(q);
+    });
+    return ready;
+  }
+
   function paintQuestion() {
     var q = session.questions[session.index];
     var root = el("section", { class: "play" });
@@ -166,72 +190,32 @@
       el("span", { class: "star-pill", text: clockText() })
     ]));
     root.appendChild(el("p", { class: "week-q", text: q.prompt || "" }));
-    if (q.scene && (q.scene.layout === "equation" || q.scene.layout === "digit")) {
-      root.appendChild(el("p", { class: "week-q", text: q.scene.text || "" }));
-    } else if (q.scene && q.scene.layout === "emojis") {
-      root.appendChild(el("p", { class: "week-q", text: (q.scene.items || []).join(" ") }));
+    var stage = el("div", { class: "stage", id: "week-stage" });
+    root.appendChild(stage);
+    var mine = playGen;
+    if (HV.engine && HV.engine.mount) {
+      mountCleanup = HV.engine.mount(stage, q, {
+        child: session.child,
+        maxAttempts: 1,
+        hard: false,
+        isLast: session.index === session.questions.length - 1,
+        onDone: function (first) {
+          if (!session || mine !== playGen) return;
+          session.answers.push({
+            correct: !!first,
+            prompt: q.prompt || "",
+            explain: q.explain || "",
+            subject: q.subject || "math"
+          });
+          advance();
+        }
+      }) || null;
     }
-    if (q.kind === "keypad") {
-      root.appendChild(miniKeypad(q));
-    } else {
-      var grid = el("div", { class: "choices cols-2" });
-      (q.choices || []).forEach(function (choice, idx) {
-        var btn = el("button", { class: "choice", text: choice.text || choice.emoji || "?" });
-        if (choice.emoji && !choice.text) btn.textContent = choice.emoji;
-        btn.addEventListener("click", function () { choose(idx); });
-        grid.appendChild(btn);
-      });
-      root.appendChild(grid);
-    }
-    var voice = { lang: q.lang === "en" ? "en" : "vi", rate: 0.95, pitch: 1 };
+    var voice = session.child === "gin"
+      ? { lang: q.lang === "en" ? "en" : "vi", rate: 0.86, pitch: 1.12 }
+      : { lang: q.lang === "en" ? "en" : "vi", rate: 0.95, pitch: 1.02 };
     if (HV.speech) HV.speech.speak(q.speak || q.prompt, voice);
     return root;
-  }
-
-  function miniKeypad(q) {
-    var entry = "";
-    var wrap = el("div");
-    var display = el("div", { class: "keypad-display is-empty", text: "•" });
-    wrap.appendChild(display);
-    var keys = el("div", { class: "keypad" });
-    function sync() {
-      display.textContent = entry || "•";
-      display.classList.toggle("is-empty", !entry);
-    }
-    "123456789".split("").forEach(function (d) {
-      keys.appendChild(el("button", { class: "key", text: d, onClick: function () {
-        if (entry.length >= (q.maxDigits || 2)) return;
-        entry += d;
-        sync();
-      } }));
-    });
-    keys.appendChild(el("button", { class: "key is-del", text: "⌫", onClick: function () { entry = entry.slice(0, -1); sync(); } }));
-    keys.appendChild(el("button", { class: "key", text: "0", onClick: function () {
-      if (entry.length >= (q.maxDigits || 2)) return;
-      entry += "0";
-      sync();
-    } }));
-    keys.appendChild(el("button", { class: "key is-go", text: "OK", onClick: function () {
-      if (!entry) return;
-      var value = Number(entry);
-      var correct = value === Number(q.answer);
-      session.answers.push({ correct: correct, prompt: q.prompt, explain: q.explain || "", subject: q.subject || "math" });
-      advance();
-    } }));
-    wrap.appendChild(keys);
-    return wrap;
-  }
-
-  function choose(idx) {
-    var q = session.questions[session.index];
-    var choice = (q.choices || [])[idx] || {};
-    session.answers.push({
-      correct: !!choice.correct,
-      prompt: q.prompt,
-      explain: q.explain || "",
-      subject: q.subject || "math"
-    });
-    advance();
   }
 
   function advance() {
@@ -369,7 +353,9 @@
         : "Khoảng 25 câu Toán, Tiếng Anh và Tiếng Việt. Làm một lần trong thứ Bảy hoặc Chủ nhật. Đồng hồ chỉ để xem, không trừ điểm." }));
       intro.appendChild(el("button", { class: "btn btn-primary", text: "Bắt đầu", onClick: function () {
         loadPaper(child, st.week).then(function (questions) {
-          session = { child: child, week: st.week, questions: questions, index: 0, answers: [], started: Date.now() };
+          var ready = prepareQuestions(questions);
+          if (!ready.length) return;
+          session = { child: child, week: st.week, questions: ready, index: 0, answers: [], started: Date.now() };
           clearInterval(clock);
           clock = setInterval(function () {
             var node = document.querySelector(".star-pill");
@@ -414,5 +400,12 @@
     return box;
   }
 
-  HV.weekly = { card: card, view: view, parentPanel: parentPanel, status: status };
+  HV.weekly = {
+    card: card,
+    view: view,
+    parentPanel: parentPanel,
+    status: status,
+    drop: dropMount,
+    playing: function () { return !!(session && session.questions && session.index < session.questions.length); }
+  };
 })(globalThis.HV = globalThis.HV || {});

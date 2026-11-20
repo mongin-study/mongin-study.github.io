@@ -121,6 +121,7 @@
       state.destroy();
       state.destroy = null;
     }
+    if (HV.weekly && HV.weekly.drop) HV.weekly.drop();
   }
 
   function routeKey(route) {
@@ -1469,6 +1470,10 @@
         updateSyncBadge();
         var pill = document.querySelector(".star-pill");
         if (pill && state.session.entry) pill.textContent = "★ " + weekStars(state.session.entry.child);
+        return;
+      }
+      if (state.route.name === "weekly" && HV.weekly && HV.weekly.playing && HV.weekly.playing()) {
+        updateSyncBadge();
         return;
       }
       if (state.route.name === "parents") state.draft = null;

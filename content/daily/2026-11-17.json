@@ -2630,9 +2630,9 @@
         },
         {
           "kind": "choice",
-          "prompt": "Nhóm nào có đúng 5 chú cún?",
-          "speak": "Tìm nhóm có năm chú cún",
-          "explain": "Nhóm đúng có 5 chú cún.",
+          "prompt": "Nhóm nào có đúng 5 Pom?",
+          "speak": "Tìm nhóm có năm Pom",
+          "explain": "Nhóm đúng có 5 Pom.",
           "scene": {
             "layout": "digit",
             "text": "5"

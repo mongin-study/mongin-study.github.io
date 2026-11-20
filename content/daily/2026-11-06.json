@@ -2117,9 +2117,9 @@
         {
           "kind": "choice",
           "lang": "vi",
-          "prompt": "Có bao nhiêu chú cún?",
-          "speak": "Có bao nhiêu chú cún?",
-          "explain": "Có hai chú cún.",
+          "prompt": "Có bao nhiêu Pom?",
+          "speak": "Có bao nhiêu Pom?",
+          "explain": "Có hai Pom.",
           "choices": [
             {
               "text": "2",
@@ -2424,7 +2424,7 @@
           "lang": "vi",
           "prompt": "Chạm vào cái không giống",
           "speak": "Chạm vào cái không giống các bạn",
-          "explain": "Tên lửa khác với các chú cún.",
+          "explain": "Tên lửa khác với Pom.",
           "choices": [
             {
               "emoji": "🐶",

@@ -208,7 +208,7 @@
         }
         if (lastSrc) lastSrc.onended = done;
         else done();
-        setTimeout(done, Math.ceil(dur * 1000) + 80);
+        setTimeout(done, Math.ceil(dur * 1000) + 450);
       });
     });
   }
@@ -277,13 +277,14 @@
       if (!voice) return guess;
       return new Promise(function (resolve) {
         var done = false;
+        var t0 = Date.now();
         function finish() {
           if (done) return;
           done = true;
-          resolve(guess);
+          resolve(Math.max(guess, (Date.now() - t0) / 1000));
         }
         try {
-          window.speechSynthesis.cancel();
+          if (!opts || !opts.chain) window.speechSynthesis.cancel();
           var u = new SpeechSynthesisUtterance(norm);
           u.lang = "vi-VN";
           u.voice = voice;
@@ -293,7 +294,7 @@
           u.onerror = finish;
           window.speechSynthesis.speak(u);
           last = { mode: "vi", norm: norm, keys: [], voice: voice.name || voice.lang };
-          setTimeout(finish, guess * 1000 + 700);
+          setTimeout(finish, 12000);
         } catch (e) { finish(); }
       });
     });
@@ -328,13 +329,14 @@
       if (lang.indexOf("en") !== 0) return guess;
       return new Promise(function (resolve) {
         var done = false;
+        var t0 = Date.now();
         function finish() {
           if (done) return;
           done = true;
-          resolve(guess);
+          resolve(Math.max(guess, (Date.now() - t0) / 1000));
         }
         try {
-          window.speechSynthesis.cancel();
+          if (!opts || !opts.chain) window.speechSynthesis.cancel();
           var u = new SpeechSynthesisUtterance(norm);
           u.lang = "en-US";
           u.voice = voice;
@@ -344,7 +346,7 @@
           u.onerror = finish;
           window.speechSynthesis.speak(u);
           last = { mode: "en", norm: norm, keys: [], voice: voice.name || voice.lang };
-          setTimeout(finish, guess * 1000 + 700);
+          setTimeout(finish, 12000);
         } catch (e) { finish(); }
       });
     });
