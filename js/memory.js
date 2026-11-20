@@ -15,7 +15,7 @@
       ] },
       { id: "gin-animals", child: "gin", title: "Con vật và xe", pairs: [
         { id: "cat", a: { emoji: "🐱" }, b: { text: "mèo" } },
-        { id: "dog", a: { emoji: "🐶" }, b: { text: "cún" } },
+        { id: "dog", a: { emoji: "🐶" }, b: { text: "Pom" } },
         { id: "car", a: { emoji: "🚗" }, b: { text: "xe" } },
         { id: "bus", a: { emoji: "🚌" }, b: { text: "buýt" } }
       ] },
