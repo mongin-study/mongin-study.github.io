@@ -298,7 +298,7 @@
   var ONSET_LOOKALIKE = {
     ch: ["tr", "c", "nh"], nh: ["n", "ng", "h"], th: ["t", "tr", "h"], kh: ["k", "h", "c"],
     ph: ["p", "b", "h"], k: ["c", "kh", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
-    gh: ["g", "ng", "h"], g: ["c", "d", "đ"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
+    gh: ["g", "ng", "h"], s: ["x", "ch", "t"], h: ["kh", "n", "l"], n: ["m", "l", "ng"], t: ["đ", "th", "d"], l: ["n", "r", "t"], m: ["n", "b", "ng"], c: ["g", "t", "đ"], g: ["c", "d", "đ"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
   };
   var RHYME_INFO = {
     a: ["a", 0], e: ["e", 0], "ê": ["ê", 0], i: ["i", 0], o: ["o", 0], "ô": ["ô", 0], "ơ": ["ơ", 0], u: ["u", 0], "ư": ["ư", 0],
@@ -308,6 +308,7 @@
     "âu": ["ớ u âu", 0], "ên": ["ê nờ ên", 0], ong: ["o ngờ ong", 0], "ăng": ["á ngờ ăng", 0],
     "ay": ["a y ay", 0], "ây": ["ớ y ây", 0], "ông": ["ô ngờ ông", 0],
     ang: ["a ngờ ang", 0], en: ["e nờ en", 0],
+    "ăm": ["á mờ ăm", 0], "âm": ["ớ mờ âm", 0],
     "ơn": ["ơ nờ ơn", 0], "ôn": ["ô nờ ôn", 0], "ơm": ["ơ mờ ơm", 0], "ăn": ["á nờ ăn", 0], at: ["a tờ at", 0], ap: ["a pờ ap", 0]
   };
   // Near-miss rhymes used as wrong answers in the "Tiếng … có vần gì?" question,
@@ -318,7 +319,8 @@
     ui: ["oi", "ôi", "in", "ai"], im: ["in", "em", "ơm", "ôm"], on: ["ôn", "ơn", "an", "ong"], em: ["en", "êm", "im", "eo"], in: ["im", "ên", "ân", "an"],
     "ân": ["ăn", "an", "ên", "ân"], "ên": ["en", "in", "ân", "ơn"], ong: ["ông", "on", "ăng", "ung"], "ông": ["ong", "ôn", "ôm", "ơng"],
     "ơm": ["ôm", "ơn", "am", "im"], en: ["ên", "an", "in", "em"], "ăng": ["ang", "ăn", "ong", "ân"], ang: ["ăng", "an", "ong", "am"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
-    "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"]
+    "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"],
+    "ăm": ["am", "âm", "ăn", "ăng"], "âm": ["ăm", "am", "ôm", "ơm"]
   };
   var TONE_MARK = { ngang: "", "huyền": "̀", "sắc": "́", "hỏi": "̉", "ngã": "̃", "nặng": "̣" };
   var TONE_LIST = ["ngang", "huyền", "sắc", "hỏi", "ngã", "nặng"];
