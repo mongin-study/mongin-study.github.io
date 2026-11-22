@@ -1175,6 +1175,7 @@ label.btn { display: inline-grid; place-items: center; position: relative; }
 .paint-svg { width: auto; max-width: 100%; height: auto; max-height: 38vh; margin: 0 auto; display: block; touch-action: manipulation; }
 .paint-board.is-show .paint-svg { outline: 4px solid var(--accent); border-radius: 16px; }
 .paint-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+.paint-swatches.is-wide .paint-swatch { min-height: 64px; }
 .paint-swatch {
   min-height: 84px;
   border-radius: 18px;

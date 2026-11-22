@@ -328,7 +328,7 @@
       if (HV.demTranh) ids.push("dem-tranh");
     }
     if (subject === "vietnamese" && child === "mon" && HV.story) ids.push("ke-chuyen");
-    if (subject === "english" && child === "gin" && HV.coloring) ids.push("to-mau");
+    if (subject === "english" && HV.coloring) ids.push("to-mau");
     return ids;
   }
 
@@ -344,7 +344,7 @@
     if (subject === "math" && category === "arithmetic" && HV.noiSo) ids.push("noi-so");
     if (subject === "math" && category === "arithmetic" && HV.demTranh) ids.push("dem-tranh");
     if (subject === "vietnamese" && category === "words" && child === "mon" && HV.story) ids.push("ke-chuyen");
-    if (subject === "english" && category === "colors" && child === "gin" && HV.coloring) ids.push("to-mau");
+    if (subject === "english" && category === "colors" && HV.coloring) ids.push("to-mau");
     return ids;
   }
 

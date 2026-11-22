@@ -830,7 +830,7 @@
     bank: STORIES
   };
 
-  /* ---------- Tô màu theo lời nghe ---------- */
+  /* ---------- Tô màu theo lời nghe (Mon và Gin) ---------- */
 
   var PAINTS = [
     { id: "red", hex: "#ef4444" },
@@ -842,89 +842,293 @@
     { id: "pink", hex: "#f472b6" },
     { id: "brown", hex: "#a16207" }
   ];
+  // Mon has four more colors, so her listening stretches to "light blue", "gray", "black".
+  var PAINTS_MON = PAINTS.concat([
+    { id: "light blue", hex: "#7dd3fc" },
+    { id: "gray", hex: "#9ca3af" },
+    { id: "black", hex: "#1f2937" },
+    { id: "white", hex: "#ffffff" }
+  ]);
+
+  function paintsFor(child) {
+    return child === "mon" ? PAINTS_MON : PAINTS;
+  }
 
   function hexOf(id) {
     var i;
-    for (i = 0; i < PAINTS.length; i++) if (PAINTS[i].id === id) return PAINTS[i].hex;
+    for (i = 0; i < PAINTS_MON.length; i++) if (PAINTS_MON[i].id === id) return PAINTS_MON[i].hex;
     return "#fff";
   }
 
-  function paint(id, fills) {
-    return (fills && fills[id]) || "#ffffff";
+  function paint(id, fills, dflt) {
+    return (fills && fills[id]) || dflt || "#ffffff";
   }
 
-  function heroSvg(fills) {
-    return '<svg viewBox="0 0 200 260" class="paint-svg" role="img" aria-label="Superhero">' +
-      '<rect width="200" height="260" fill="#fff8ec"/>' +
-      '<g data-part="cape" role="button" aria-label="cape"><path d="M48 78 L18 236 L100 196 L182 236 L152 78 Z" fill="' + paint("cape", fills) + '" stroke="#1d4e89" stroke-width="5" stroke-linejoin="round"/></g>' +
-      '<g data-part="boots" role="button" aria-label="boots"><path d="M62 176 h30 v48 h-40 z M108 176 h30 v48 h-40 z" fill="' + paint("boots", fills) + '" stroke="#1d4e89" stroke-width="5" stroke-linejoin="round"/></g>' +
-      '<rect x="68" y="92" width="64" height="88" rx="16" fill="#fff" stroke="#1d4e89" stroke-width="5"/>' +
-      '<g data-part="star" role="button" aria-label="star"><path d="M100 112 l8 16 h18 l-14 12 6 18 -18 -12 -18 12 6 -18 -14 -12 h18z" fill="' + paint("star", fills) + '" stroke="#1d4e89" stroke-width="4"/></g>' +
-      '<circle cx="100" cy="62" r="32" fill="#fff" stroke="#1d4e89" stroke-width="5"/>' +
-      '<g data-part="mask" role="button" aria-label="mask"><path d="M70 58 h60 v16 q-14 12 -30 0 q-16 12 -30 0z" fill="' + paint("mask", fills) + '" stroke="#1d4e89" stroke-width="4"/></g>' +
-      '<circle cx="88" cy="64" r="4" fill="#1d4e89"/><circle cx="112" cy="64" r="4" fill="#1d4e89"/>' +
+  var INK = "#1d4e89";
+  var BG = "#fff8ec";
+
+  function part(name, inner) {
+    return '<g data-part="' + name + '" role="button" aria-label="' + name + '">' + inner + "</g>";
+  }
+  function svgOpen(w, h, label) {
+    return '<svg viewBox="0 0 ' + w + " " + h + '" class="paint-svg" role="img" aria-label="' + label + '"><rect width="' + w + '" height="' + h + '" fill="' + BG + '"/>';
+  }
+  function stroke(w) {
+    return ' stroke="' + INK + '" stroke-width="' + (w || 5) + '" stroke-linejoin="round" stroke-linecap="round"';
+  }
+
+  function heroSvg(f) {
+    return svgOpen(200, 260, "Superhero") +
+      part("cape", '<path d="M48 78 L18 236 L100 196 L182 236 L152 78 Z" fill="' + paint("cape", f) + '"' + stroke() + "/>") +
+      part("boots", '<path d="M62 176 h30 v48 h-40 z M108 176 h30 v48 h-40 z" fill="' + paint("boots", f) + '"' + stroke() + "/>") +
+      '<rect x="68" y="92" width="64" height="88" rx="16" fill="#fff"' + stroke() + "/>" +
+      part("star", '<path d="M100 112 l8 16 h18 l-14 12 6 18 -18 -12 -18 12 6 -18 -14 -12 h18z" fill="' + paint("star", f) + '"' + stroke(4) + "/>") +
+      '<circle cx="100" cy="62" r="32" fill="#fff"' + stroke() + "/>" +
+      part("mask", '<path d="M70 58 h60 v16 q-14 12 -30 0 q-16 12 -30 0z" fill="' + paint("mask", f) + '"' + stroke(4) + "/>") +
+      '<circle cx="88" cy="64" r="4" fill="' + INK + '"/><circle cx="112" cy="64" r="4" fill="' + INK + '"/></svg>';
+  }
+
+  function pomSvg(f) {
+    return svgOpen(240, 180, "Pom") +
+      part("tail", '<path d="M168 78 q48 -8 36 -48" fill="none" stroke="' + paint("tail", f) + '" stroke-width="16" stroke-linecap="round"/>') +
+      part("body", '<ellipse cx="132" cy="108" rx="58" ry="36" fill="' + paint("body", f) + '"' + stroke() + "/>") +
+      part("ear", '<ellipse cx="62" cy="62" rx="22" ry="30" fill="' + paint("ear", f) + '"' + stroke() + "/>") +
+      '<circle cx="78" cy="86" r="34" fill="#fff"' + stroke() + "/>" +
+      part("collar", '<path d="M58 108 h48 v16 h-48z" fill="' + paint("collar", f) + '"' + stroke(4) + "/>") +
+      part("nose", '<ellipse cx="52" cy="98" rx="16" ry="12" fill="' + paint("nose", f) + '"' + stroke(4) + "/>") +
+      '<circle cx="70" cy="78" r="4" fill="' + INK + '"/></svg>';
+  }
+
+  function shieldSvg(f) {
+    return svgOpen(200, 230, "Shield") +
+      part("shield", '<path d="M36 28 H164 V120 Q164 190 100 214 Q36 190 36 120 Z" fill="' + paint("shield", f) + '"' + stroke() + "/>") +
+      part("star", '<path d="M100 70 l12 24 h26 l-20 16 8 26 -26 -16 -26 16 8 -26 -20 -16 h26z" fill="' + paint("star", f) + '"' + stroke(4) + "/>") +
+      part("handle", '<rect x="78" y="176" width="44" height="28" rx="10" fill="' + paint("handle", f) + '"' + stroke() + "/>") +
       "</svg>";
   }
 
-  function pomSvg(fills) {
-    return '<svg viewBox="0 0 240 180" class="paint-svg" role="img" aria-label="Pom">' +
-      '<rect width="240" height="180" fill="#fff8ec"/>' +
-      '<g data-part="tail" role="button" aria-label="tail"><path d="M168 78 q48 -8 36 -48" fill="none" stroke="' + paint("tail", fills) + '" stroke-width="16" stroke-linecap="round"/></g>' +
-      '<g data-part="body" role="button" aria-label="body"><ellipse cx="132" cy="108" rx="58" ry="36" fill="' + paint("body", fills) + '" stroke="#1d4e89" stroke-width="5"/></g>' +
-      '<g data-part="ear" role="button" aria-label="ear"><ellipse cx="62" cy="62" rx="22" ry="30" fill="' + paint("ear", fills) + '" stroke="#1d4e89" stroke-width="5"/></g>' +
-      '<circle cx="78" cy="86" r="34" fill="#fff" stroke="#1d4e89" stroke-width="5"/>' +
-      '<g data-part="collar" role="button" aria-label="collar"><path d="M58 108 h48 v16 h-48z" fill="' + paint("collar", fills) + '" stroke="#1d4e89" stroke-width="4"/></g>' +
-      '<g data-part="nose" role="button" aria-label="nose"><ellipse cx="52" cy="98" rx="16" ry="12" fill="' + paint("nose", fills) + '" stroke="#1d4e89" stroke-width="4"/></g>' +
-      '<circle cx="70" cy="78" r="4" fill="#1d4e89"/>' +
+  function wheel(cx, cy, r) {
+    return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"';
+  }
+  function wheelsOf(f, spots, r) {
+    return part("wheels", spots.map(function (x) {
+      return wheel(x[0], x[1], r) + ' fill="' + paint("wheels", f) + '"' + stroke(5) + "/>" +
+        wheel(x[0], x[1], Math.round(r / 2.6)) + ' fill="#fff"' + stroke(3) + "/>";
+    }).join(""));
+  }
+
+  function raceCarSvg(f) {
+    return svgOpen(240, 140, "Race car") +
+      part("spoiler", '<path d="M12 48 h34 v10 h-34z M24 58 v14 h10 v-14" fill="' + paint("spoiler", f) + '"' + stroke(4) + "/>") +
+      part("body", '<path d="M14 98 V78 Q14 68 28 66 L70 62 L92 40 Q98 34 108 34 H152 Q162 34 168 42 L186 62 L216 68 Q228 72 228 86 V98 Z" fill="' + paint("body", f) + '"' + stroke() + "/>") +
+      part("stripe", '<rect x="16" y="78" width="210" height="9" fill="' + paint("stripe", f) + '"' + stroke(3) + "/>") +
+      part("window", '<path d="M98 44 L82 62 H130 V40 H108 Q102 40 98 44Z M138 40 H152 Q157 40 161 46 L172 62 H138Z" fill="' + paint("window", f, "#dff1ff") + '"' + stroke(4) + "/>") +
+      wheelsOf(f, [[58, 100], [188, 100]], 20) + "</svg>";
+  }
+
+  function taxiSvg(f) {
+    return svgOpen(240, 140, "Taxi") +
+      part("sign", '<rect x="106" y="22" width="44" height="14" rx="4" fill="' + paint("sign", f) + '"' + stroke(4) + "/>") +
+      part("body", '<path d="M16 98 V80 Q16 70 28 68 L64 66 L84 42 H156 L178 66 L212 70 Q226 74 226 86 V98 Z" fill="' + paint("body", f) + '"' + stroke() + "/>") +
+      part("stripe", '<path d="M18 80 h206 v8 h-206z" fill="' + paint("stripe", f) + '"' + stroke(3) + "/>") +
+      part("window", '<path d="M90 48 L74 66 H122 V48Z M130 48 H152 L168 66 H130Z" fill="' + paint("window", f, "#dff1ff") + '"' + stroke(4) + "/>") +
+      wheelsOf(f, [[60, 100], [186, 100]], 20) + "</svg>";
+  }
+
+  function busSvg(f) {
+    var wins = "";
+    [30, 78, 126, 174].forEach(function (x) { wins += '<rect x="' + x + '" y="38" width="38" height="28" rx="6"/>'; });
+    return svgOpen(260, 150, "Bus") +
+      part("body", '<rect x="12" y="24" width="236" height="92" rx="16" fill="' + paint("body", f) + '"' + stroke() + "/>") +
+      part("stripe", '<rect x="14" y="82" width="232" height="14" fill="' + paint("stripe", f) + '"' + stroke(3) + "/>") +
+      part("windows", '<g fill="' + paint("windows", f, "#dff1ff") + '"' + stroke(4) + ">" + wins + "</g>") +
+      wheelsOf(f, [[66, 118], [196, 118]], 20) + "</svg>";
+  }
+
+  function fireTruckSvg(f) {
+    return svgOpen(260, 150, "Fire truck") +
+      part("ladder", '<path d="M18 36 H150 M18 50 H150 M30 36 V50 M52 36 V50 M74 36 V50 M96 36 V50 M118 36 V50 M140 36 V50" fill="none" stroke="' + paint("ladder", f, "#c7a46a") + '" stroke-width="7" stroke-linecap="round"/>') +
+      part("body", '<path d="M12 62 H160 V112 H12 Z M160 52 H214 L242 82 V112 H160 Z" fill="' + paint("body", f) + '"' + stroke() + "/>") +
+      part("window", '<path d="M170 60 H208 L230 82 H170Z" fill="' + paint("window", f, "#dff1ff") + '"' + stroke(4) + "/>") +
+      part("light", '<rect x="180" y="38" width="26" height="14" rx="6" fill="' + paint("light", f) + '"' + stroke(4) + "/>") +
+      wheelsOf(f, [[56, 116], [198, 116]], 20) + "</svg>";
+  }
+
+  function dumpTruckSvg(f) {
+    return svgOpen(260, 150, "Dump truck") +
+      part("bed", '<path d="M10 44 H150 L160 108 H10 Z" fill="' + paint("bed", f) + '"' + stroke() + "/>") +
+      part("cab", '<path d="M160 56 H206 L240 88 V108 H160 Z" fill="' + paint("cab", f) + '"' + stroke() + "/>") +
+      part("window", '<path d="M170 64 H202 L222 88 H170Z" fill="' + paint("window", f, "#dff1ff") + '"' + stroke(4) + "/>") +
+      wheelsOf(f, [[56, 114], [112, 114], [200, 114]], 18) + "</svg>";
+  }
+
+  function princessSvg(f) {
+    return svgOpen(200, 270, "Ice princess") +
+      part("cape", '<path d="M70 96 L26 250 L100 226 L174 250 L130 96 Z" fill="' + paint("cape", f) + '"' + stroke() + "/>") +
+      part("hair", '<path d="M66 60 Q64 28 100 26 Q136 28 134 60 L150 150 Q144 186 132 168 L128 100 L72 100 L68 168 Q56 186 50 150 Z" fill="' + paint("hair", f) + '"' + stroke() + "/>") +
+      part("dress", '<path d="M80 100 H120 L158 232 Q100 252 42 232 Z" fill="' + paint("dress", f) + '"' + stroke() + "/>") +
+      part("snowflake", '<path d="M100 150 v52 M74 176 h52 M82 158 l36 36 M118 158 l-36 36" fill="none" stroke="' + paint("snowflake", f, "#bfe3ff") + '" stroke-width="7" stroke-linecap="round"/>') +
+      '<circle cx="100" cy="66" r="26" fill="#ffe0cc"' + stroke() + "/>" +
+      '<circle cx="91" cy="68" r="3.5" fill="' + INK + '"/><circle cx="109" cy="68" r="3.5" fill="' + INK + '"/>' +
+      '<path d="M92 80 q8 7 16 0" fill="none"' + stroke(3) + "/>" +
+      part("crown", '<path d="M76 42 L82 22 L92 36 L100 18 L108 36 L118 22 L124 42 Z" fill="' + paint("crown", f) + '"' + stroke(4) + "/>") +
       "</svg>";
   }
 
-  function shieldSvg(fills) {
-    return '<svg viewBox="0 0 200 230" class="paint-svg" role="img" aria-label="Shield">' +
-      '<rect width="200" height="230" fill="#fff8ec"/>' +
-      '<g data-part="shield" role="button" aria-label="shield"><path d="M36 28 H164 V120 Q164 190 100 214 Q36 190 36 120 Z" fill="' + paint("shield", fills) + '" stroke="#1d4e89" stroke-width="5"/></g>' +
-      '<g data-part="star" role="button" aria-label="star"><path d="M100 70 l12 24 h26 l-20 16 8 26 -26 -16 -26 16 8 -26 -20 -16 h26z" fill="' + paint("star", fills) + '" stroke="#1d4e89" stroke-width="4"/></g>' +
-      '<g data-part="handle" role="button" aria-label="handle"><rect x="78" y="176" width="44" height="28" rx="10" fill="' + paint("handle", fills) + '" stroke="#1d4e89" stroke-width="5"/></g>' +
+  function snowmanSvg(f) {
+    return svgOpen(200, 270, "Snowman") +
+      part("arms", '<path d="M54 140 L12 112 M146 140 L188 112 M30 124 l-10 -14 M170 124 l10 -14" fill="none" stroke="' + paint("arms", f, "#8b5e34") + '" stroke-width="8" stroke-linecap="round"/>') +
+      '<circle cx="100" cy="196" r="58" fill="#fff"' + stroke() + "/>" +
+      '<circle cx="100" cy="120" r="40" fill="#fff"' + stroke() + "/>" +
+      part("buttons", '<circle cx="100" cy="168" r="7" fill="' + paint("buttons", f, "#cbd5e1") + '"' + stroke(3) + '/><circle cx="100" cy="196" r="7" fill="' + paint("buttons", f, "#cbd5e1") + '"' + stroke(3) + '/><circle cx="100" cy="224" r="7" fill="' + paint("buttons", f, "#cbd5e1") + '"' + stroke(3) + "/>") +
+      '<circle cx="86" cy="108" r="4" fill="' + INK + '"/><circle cx="114" cy="108" r="4" fill="' + INK + '"/>' +
+      part("nose", '<path d="M100 116 L140 124 L100 130 Z" fill="' + paint("nose", f, "#fb923c") + '"' + stroke(3) + "/>") +
+      part("scarf", '<path d="M62 146 Q100 164 138 146 L138 162 Q100 180 62 162 Z M112 156 L124 196 L106 196 Z" fill="' + paint("scarf", f) + '"' + stroke(4) + "/>") +
+      part("hat", '<path d="M66 90 H134 L124 34 H76 Z M56 90 H144 V100 H56 Z" fill="' + paint("hat", f) + '"' + stroke(4) + "/>") +
+      "</svg>";
+  }
+
+  function castleSvg(f) {
+    return svgOpen(240, 240, "Ice castle") +
+      part("wall", '<rect x="64" y="110" width="112" height="104" fill="' + paint("wall", f) + '"' + stroke() + "/>") +
+      part("towers", '<rect x="24" y="96" width="46" height="118" fill="' + paint("towers", f) + '"' + stroke() + '/><rect x="170" y="96" width="46" height="118" fill="' + paint("towers", f) + '"' + stroke() + '/><rect x="94" y="70" width="52" height="60" fill="' + paint("towers", f) + '"' + stroke() + "/>") +
+      part("roofs", '<path d="M18 98 L47 52 L76 98 Z M164 98 L193 52 L222 98 Z M88 72 L120 22 L152 72 Z" fill="' + paint("roofs", f) + '"' + stroke() + "/>") +
+      part("flag", '<path d="M120 22 V4 L146 12 L120 20" fill="' + paint("flag", f) + '"' + stroke(4) + "/>") +
+      part("door", '<path d="M98 214 V174 Q120 150 142 174 V214 Z" fill="' + paint("door", f) + '"' + stroke() + "/>") +
+      "</svg>";
+  }
+
+  function unicornSvg(f) {
+    return svgOpen(240, 226, "Unicorn") + '<g transform="translate(0 16)">' +
+      part("tail", '<path d="M60 88 Q14 84 20 150 Q34 120 56 112 Z" fill="' + paint("tail", f) + '"' + stroke(4) + "/>") +
+      '<path d="M78 122 V186 M102 126 V186 M150 126 V186 M174 122 V186" fill="none" stroke="' + INK + '" stroke-width="14" stroke-linecap="round"/>' +
+      part("body", '<ellipse cx="120" cy="108" rx="70" ry="40" fill="' + paint("body", f) + '"' + stroke() + "/>") +
+      part("saddle", '<path d="M96 70 Q120 58 144 70 L142 100 H98 Z" fill="' + paint("saddle", f, "#e9d5ff") + '"' + stroke(4) + "/>") +
+      '<path d="M172 90 L196 40 L214 52 L200 112 Z" fill="#fff"' + stroke() + "/>" +
+      '<circle cx="204" cy="58" r="30" fill="#fff"' + stroke() + "/>" +
+      part("horn", '<path d="M198 32 L208 -2 L216 32 Z" fill="' + paint("horn", f) + '"' + stroke(4) + "/>") +
+      part("mane", '<path d="M176 40 Q160 60 170 100 Q182 76 184 56 Z" fill="' + paint("mane", f) + '"' + stroke(4) + "/>") +
+      '<circle cx="212" cy="54" r="4" fill="' + INK + '"/></g></svg>';
+  }
+
+  function penguinSvg(f) {
+    return svgOpen(200, 250, "Penguin") +
+      part("feet", '<path d="M56 226 q20 -16 40 0 z M104 226 q20 -16 40 0 z" fill="' + paint("feet", f, "#fde68a") + '"' + stroke(4) + "/>") +
+      part("body", '<ellipse cx="100" cy="130" rx="64" ry="92" fill="' + paint("body", f, "#e5e7eb") + '"' + stroke() + "/>") +
+      '<ellipse cx="100" cy="152" rx="40" ry="64" fill="#fff"/>' +
+      '<circle cx="84" cy="88" r="5" fill="' + INK + '"/><circle cx="116" cy="88" r="5" fill="' + INK + '"/>' +
+      part("beak", '<path d="M88 100 L112 100 L100 118 Z" fill="' + paint("beak", f, "#fb923c") + '"' + stroke(3) + "/>") +
+      part("scarf", '<path d="M48 124 Q100 146 152 124 L152 144 Q100 166 48 144 Z" fill="' + paint("scarf", f) + '"' + stroke(4) + "/>") +
       "</svg>";
   }
 
   var PICTURES = {
     hero: { title: "Superhero", svg: heroSvg },
     pom: { title: "Pom", svg: pomSvg },
-    shield: { title: "Shield", svg: shieldSvg }
+    shield: { title: "Shield", svg: shieldSvg },
+    racecar: { title: "Race car", svg: raceCarSvg },
+    taxi: { title: "Taxi", svg: taxiSvg },
+    bus: { title: "Bus", svg: busSvg },
+    firetruck: { title: "Fire truck", svg: fireTruckSvg },
+    dumptruck: { title: "Dump truck", svg: dumpTruckSvg },
+    princess: { title: "Ice princess", svg: princessSvg },
+    snowman: { title: "Snowman", svg: snowmanSvg },
+    castle: { title: "Ice castle", svg: castleSvg },
+    unicorn: { title: "Unicorn", svg: unicornSvg },
+    penguin: { title: "Penguin", svg: penguinSvg }
   };
 
-  var COLOR_STEPS = [
-    { pic: "hero", part: "cape", color: "blue", say: "Color the cape blue!" },
-    { pic: "hero", part: "mask", color: "red", say: "Make the mask red!" },
-    { pic: "hero", part: "star", color: "yellow", say: "Color the star yellow!" },
-    { pic: "hero", part: "boots", color: "green", say: "Make the boots green!" },
-    { pic: "pom", part: "ear", color: "brown", say: "Color the ear brown!" },
-    { pic: "pom", part: "nose", color: "pink", say: "Make the nose pink!" },
-    { pic: "pom", part: "collar", color: "orange", say: "Color the collar orange!" },
-    { pic: "shield", part: "shield", color: "purple", say: "Color the shield purple!" },
-    { pic: "shield", part: "star", color: "pink", say: "Make the star pink!" },
-    { pic: "shield", part: "handle", color: "brown", say: "Color the handle brown!" }
-  ];
+  var PART_WORD = {
+    cape: "cape", mask: "mask", star: "star", boots: "boots", ear: "ear", nose: "nose", collar: "collar", shield: "shield",
+    handle: "handle", spoiler: "spoiler", body: "body", stripe: "stripe", window: "window", wheels: "wheels", sign: "sign",
+    windows: "windows", ladder: "ladder", light: "light", bed: "dump bed", cab: "cab", hair: "hair", dress: "dress",
+    snowflake: "snowflake", crown: "crown", arms: "arms", buttons: "buttons", scarf: "scarf", hat: "hat", wall: "wall",
+    towers: "towers", roofs: "roofs", flag: "flag", door: "door", tail: "tail", saddle: "saddle", horn: "horn", mane: "mane",
+    feet: "feet", beak: "beak"
+  };
+  var CAR_WORD = { racecar: "race car", taxi: "taxi", bus: "bus", firetruck: "fire truck", dumptruck: "dump truck" };
+
+  function stepLine(pic, partId, color) {
+    var verb = (partId.length + color.length) % 2 ? "Color" : "Make";
+    var word = PART_WORD[partId] || partId;
+    var plural = /s$/.test(word) && word !== "bus";
+    var target = word === "body" && CAR_WORD[pic] ? "the " + CAR_WORD[pic] : "the " + word;
+    if (verb === "Make") return "Make " + target + " " + color + "!";
+    return "Color " + target + " " + color + "!" + (plural ? "" : "");
+  }
+  function S(pic, partId, color) {
+    return { pic: pic, part: partId, color: color, say: stepLine(pic, partId, color) };
+  }
+
+  var SETS = {
+    gin: [
+      [S("hero", "cape", "blue"), S("hero", "mask", "red"), S("hero", "star", "yellow"), S("hero", "boots", "green"),
+        S("pom", "ear", "brown"), S("pom", "nose", "pink"), S("pom", "collar", "orange"),
+        S("shield", "shield", "purple"), S("shield", "star", "pink"), S("shield", "handle", "brown")],
+      [S("racecar", "body", "red"), S("racecar", "spoiler", "blue"), S("racecar", "stripe", "yellow"),
+        S("bus", "body", "yellow"), S("bus", "windows", "blue"), S("bus", "stripe", "green"),
+        S("firetruck", "body", "red"), S("firetruck", "ladder", "brown"), S("firetruck", "light", "yellow"), S("firetruck", "window", "blue")],
+      [S("taxi", "body", "yellow"), S("taxi", "sign", "red"), S("taxi", "window", "blue"),
+        S("dumptruck", "cab", "orange"), S("dumptruck", "bed", "green"), S("dumptruck", "window", "pink"), S("dumptruck", "wheels", "purple"),
+        S("racecar", "body", "green"), S("racecar", "stripe", "orange"), S("racecar", "spoiler", "pink")],
+      [S("bus", "body", "orange"), S("bus", "windows", "purple"), S("bus", "stripe", "pink"),
+        S("taxi", "body", "blue"), S("taxi", "sign", "yellow"), S("taxi", "stripe", "green"),
+        S("firetruck", "body", "orange"), S("firetruck", "ladder", "blue"), S("firetruck", "light", "pink"), S("firetruck", "window", "green")],
+      [S("hero", "cape", "red"), S("hero", "mask", "yellow"), S("hero", "star", "blue"), S("hero", "boots", "purple"),
+        S("pom", "body", "orange"), S("pom", "collar", "green"), S("pom", "tail", "pink"),
+        S("shield", "shield", "green"), S("shield", "star", "yellow"), S("shield", "handle", "red")]
+    ],
+    mon: [
+      [S("princess", "dress", "light blue"), S("princess", "crown", "yellow"), S("princess", "cape", "purple"), S("princess", "snowflake", "pink"),
+        S("snowman", "hat", "black"), S("snowman", "scarf", "red"), S("snowman", "nose", "orange"),
+        S("castle", "roofs", "blue"), S("castle", "door", "brown"), S("castle", "flag", "green")],
+      [S("unicorn", "mane", "pink"), S("unicorn", "horn", "yellow"), S("unicorn", "tail", "purple"), S("unicorn", "saddle", "red"),
+        S("pom", "ear", "brown"), S("pom", "nose", "black"), S("pom", "collar", "blue"),
+        S("penguin", "body", "black"), S("penguin", "beak", "orange"), S("penguin", "scarf", "green")],
+      [S("snowman", "scarf", "blue"), S("snowman", "hat", "purple"), S("snowman", "buttons", "red"), S("snowman", "arms", "brown"),
+        S("castle", "wall", "gray"), S("castle", "roofs", "red"), S("castle", "flag", "yellow"),
+        S("princess", "hair", "yellow"), S("princess", "dress", "pink"), S("princess", "crown", "orange")],
+      [S("penguin", "body", "blue"), S("penguin", "scarf", "red"), S("penguin", "feet", "orange"),
+        S("unicorn", "mane", "green"), S("unicorn", "tail", "pink"), S("unicorn", "saddle", "purple"),
+        S("castle", "roofs", "purple"), S("castle", "door", "red"), S("castle", "flag", "orange"), S("castle", "towers", "light blue")]
+    ]
+  };
+
+  function setPictures(steps) {
+    var seen = [];
+    steps.forEach(function (step) { if (seen.indexOf(step.pic) < 0) seen.push(step.pic); });
+    return seen;
+  }
 
   var colorBag = makeBag("to-mau", "#/to-mau/");
+  var setCursor = { mon: null, gin: null };
+
+  function dayNumber() {
+    return Math.floor(Date.now() / 86400000);
+  }
 
   function colorNow() {
     return colorBag.session.steps[colorBag.session.index];
   }
 
-  function colorBegin(child) {
+  function colorBegin(child, advance) {
+    var sets = SETS[child];
+    if (setCursor[child] == null) setCursor[child] = dayNumber() % sets.length;
+    else if (advance) setCursor[child] = (setCursor[child] + 1) % sets.length;
+    var steps = sets[setCursor[child]].slice();
+    var fills = {};
+    setPictures(steps).forEach(function (id) { fills[id] = {}; });
     colorBag.epoch += 1;
     colorBag.session = {
       child: child,
-      steps: COLOR_STEPS.slice(),
+      steps: steps,
       index: 0,
       firsts: 0,
-      total: COLOR_STEPS.length,
+      total: steps.length,
       phase: "play",
       attempts: 0,
       color: "",
-      fills: { hero: {}, pom: {}, shield: {} },
+      fills: fills,
       banner: "",
       gen: 0,
       praiseLine: "",
@@ -932,7 +1136,7 @@
       gallery: null
     };
     if (HV.engine && HV.engine.beginSessionPraise) HV.engine.beginSessionPraise();
-    say("Color the cape blue!", "en");
+    say(steps[0].say, "en");
   }
 
   function colorAdvance() {
@@ -946,10 +1150,10 @@
     s.color = "";
     if (s.index >= s.steps.length) {
       s.phase = "done";
-      s.award = roundStars("gin", s.firsts, s.total);
-      s.praiseLine = HV.engine && HV.engine.praise ? HV.engine.praise("gin", "en") : "Bingo!";
+      s.award = roundStars(s.child, s.firsts, s.total);
+      s.praiseLine = HV.engine && HV.engine.praise ? HV.engine.praise(s.child, "en") : "Bingo!";
       s.gallery = colorGallery();
-      markPlayed("gin", "to-mau");
+      markPlayed(s.child, "to-mau");
       if (HV.audio && HV.audio.fanfare) HV.audio.fanfare();
       renderIf(colorBag);
       return;
@@ -959,9 +1163,10 @@
   }
 
   function colorGallery() {
+    var s = colorBag.session;
     var row = el("div", { class: "paint-gallery" });
-    ["hero", "pom", "shield"].forEach(function (id) {
-      row.appendChild(html("div", { class: "paint-done" }, PICTURES[id].svg(colorBag.session.fills[id])));
+    setPictures(s.steps).forEach(function (id) {
+      row.appendChild(html("div", { class: "paint-done" }, PICTURES[id].svg(s.fills[id])));
     });
     return row;
   }
@@ -1015,30 +1220,30 @@
     var s = colorBag.session;
     var q = colorNow();
     var root = el("section", {
-      class: "play stage ws-play paint-play is-gin",
+      class: "play stage ws-play paint-play is-" + s.child,
       "data-activity": "to-mau",
       "data-pic": q.pic,
       "data-ask": q.part,
       "data-color": q.color
     });
-    root.appendChild(topbar("gin", "Tô màu", (s.index + 1) + "/" + s.total, function () {
-      colorBag.leave("#/c/gin");
+    root.appendChild(topbar(s.child, "Tô màu", (s.index + 1) + "/" + s.total, function () {
+      colorBag.leave("#/c/" + s.child);
     }, function () { say(q.say, "en"); }));
     root.appendChild(el("p", { class: "prompt paint-prompt", text: q.say }));
     if (s.banner) root.appendChild(el("p", { class: "tan-banner", role: "status", text: s.banner }));
     var board = html("div", { class: "paint-board" + (s.phase === "show" ? " is-show" : "") }, PICTURES[q.pic].svg(s.fills[q.pic]));
     if (s.phase === "play") {
-    function onPaint(event) {
-      var node = event.target.closest ? event.target.closest("[data-part]") : null;
-      if (!node) return;
-      colorApply({ pic: q.pic, part: node.getAttribute("data-part") });
-    }
-    board.addEventListener("click", onPaint);
-    board.addEventListener("pointerup", onPaint);
+      var onPaint = function (event) {
+        var node = event.target.closest ? event.target.closest("[data-part]") : null;
+        if (!node) return;
+        colorApply({ pic: q.pic, part: node.getAttribute("data-part") });
+      };
+      board.addEventListener("click", onPaint);
+      board.addEventListener("pointerup", onPaint);
     }
     root.appendChild(board);
-    var swatches = el("div", { class: "paint-swatches" });
-    PAINTS.forEach(function (swatch) {
+    var swatches = el("div", { class: "paint-swatches" + (s.child === "mon" ? " is-wide" : "") });
+    paintsFor(s.child).forEach(function (swatch) {
       swatches.appendChild(el("button", {
         class: "paint-swatch" + (s.color === swatch.id ? " is-on" : ""),
         style: { background: swatch.hex },
@@ -1062,60 +1267,64 @@
   }
 
   function colorView(child) {
-    if (child !== "gin") {
-      var bounce = el("section", { class: "play" });
-      bounce.appendChild(topbar("gin", "Tô màu", "", function () { location.hash = "#/c/" + child; }, null));
-      bounce.appendChild(el("p", { class: "lede", text: "This one is for Gin." }));
-      return bounce;
-    }
+    if (!SETS[child]) return el("section", { class: "play" });
     if (colorBag.session && colorBag.session.child !== child) {
       colorBag.epoch += 1;
       colorBag.session = null;
     }
-    if (!colorBag.session) colorBegin(child);
+    if (!colorBag.session) colorBegin(child, false);
     if (colorBag.session.phase === "done") return doneView(colorBag, "câu", "en");
     return colorPlay();
   }
 
   colorBag.replay = function () {
+    var child = colorBag.session ? colorBag.session.child : "gin";
     colorBag.epoch += 1;
     colorBag.session = null;
-    colorBegin("gin");
+    colorBegin(child, true);
     renderIf(colorBag);
   };
 
   function colorAudit() {
     var problems = [];
-    if (COLOR_STEPS.length !== 10) problems.push("steps " + COLOR_STEPS.length);
-    var pics = {};
-    COLOR_STEPS.forEach(function (step) {
-      pics[step.pic] = true;
-      if (!PICTURES[step.pic]) problems.push("pic " + step.pic);
-      else if (PICTURES[step.pic].svg({}).indexOf('data-part="' + step.part + '"') < 0) problems.push("part " + step.part);
-      if (!hexOf(step.color) || step.color === "red" && false) problems.push("color");
-      var known = false;
-      PAINTS.forEach(function (swatch) { if (swatch.id === step.color) known = true; });
-      if (!known) problems.push("swatch " + step.color);
-      if (!step.say) problems.push("say");
+    Object.keys(SETS).forEach(function (child) {
+      var known = paintsFor(child).map(function (p) { return p.id; });
+      SETS[child].forEach(function (steps, i) {
+        var tag = child + i;
+        if (steps.length !== 10) problems.push(tag + " steps " + steps.length);
+        steps.forEach(function (step) {
+          if (!PICTURES[step.pic]) problems.push(tag + " pic " + step.pic);
+          else if (PICTURES[step.pic].svg({}).indexOf('data-part="' + step.part + '"') < 0) problems.push(tag + " part " + step.pic + "." + step.part);
+          if (known.indexOf(step.color) < 0) problems.push(tag + " swatch " + step.color);
+          if (!step.say) problems.push(tag + " say");
+        });
+        if (setPictures(steps).length > 4) problems.push(tag + " pictures");
+      });
     });
-    if (!pics.hero || !pics.pom || !pics.shield) problems.push("pictures");
     return problems;
   }
 
   HV.coloring = {
     card: function (child) {
-      if (child !== "gin") return null;
-      return entryCard(child, "to-mau", "paint-entry", "🎨", "Tô màu theo lời nghe", "Nghe màu, tô siêu anh hùng và Pom");
+      if (!SETS[child]) return null;
+      return entryCard(child, "to-mau", "paint-entry", "🎨", "Tô màu theo lời nghe",
+        child === "mon" ? "Nghe màu, tô công chúa băng, lâu đài, kỳ lân" : "Nghe màu, tô ô tô, xe buýt và Pom");
     },
     lesson: function (child) {
-      if (child !== "gin") return null;
-      return entryLesson(child, "to-mau", "🎨", "Tô màu theo lời nghe", "Color the hat red");
+      if (!SETS[child]) return null;
+      return entryLesson(child, "to-mau", "🎨", "Tô màu theo lời nghe", child === "mon" ? "Color the dress light blue" : "Color the car red");
     },
     view: colorView,
     audit: colorAudit,
     lines: function () {
-      return COLOR_STEPS.map(function (step) { return step.say; }).concat(["Pick a color.", "Listen again.", "Next"]);
+      var out = ["Pick a color.", "Listen again.", "Next"];
+      Object.keys(SETS).forEach(function (child) {
+        SETS[child].forEach(function (steps) { steps.forEach(function (step) { out.push(step.say); }); });
+      });
+      return out;
     },
-    steps: COLOR_STEPS
+    steps: SETS.gin[0],
+    sets: SETS,
+    pictures: PICTURES
   };
 })(globalThis.HV = globalThis.HV || {});
