@@ -800,29 +800,8 @@
     }
   ];
 
-  var DOT_GIN = [
-    {
-      id: "car",
-      title: "Chiếc xe",
-      speak: "Chiếc xe.",
-      fill: "#ef4444",
-      pts: [[40, 320], [70, 150], [160, 80], [260, 160], [290, 340]]
-    },
-    {
-      id: "shield",
-      title: "Cái khiên",
-      speak: "Cái khiên.",
-      fill: "#60a5fa",
-      pts: [[50, 50], [270, 50], [270, 200], [160, 380], [50, 200]]
-    },
-    {
-      id: "dog",
-      title: "Con chó",
-      speak: "Con chó.",
-      fill: "#f0b429",
-      pts: [[40, 220], [110, 120], [200, 60], [290, 160], [150, 360]]
-    }
-  ];
+  // Gin connects 1 to 10 too (parent request 2026-11-23): easy shapes, big dots.
+  var DOT_GIN = DOT_MON.filter(function (pic) { return pic.id === "star" || pic.id === "heart" || pic.id === "butterfly"; });
 
   var dotCursor = { mon: 0, gin: 0 };
   var noi = makeBag("noi-so", "#/noi-so/");
@@ -1012,9 +991,9 @@
     });
     if (DOT_GIN.length !== 3) problems.push("gin pics");
     DOT_GIN.forEach(function (pic) {
-      if (pic.pts.length !== 5) problems.push(pic.id + " dots");
+      if (pic.pts.length !== 10) problems.push(pic.id + " dots");
       var gap = dotMin(pic.pts);
-      if (gap < 90) problems.push(pic.id + " gap " + gap.toFixed(0));
+      if (gap < 64) problems.push(pic.id + " gap " + gap.toFixed(0));
     });
     return problems;
   }
@@ -1022,12 +1001,12 @@
   HV.noiSo = {
     card: function (child) {
       return entryCard(child, "noi-so", "dot-entry", "🔢", "Nối số", child === "gin"
-        ? "Nối 1 đến 5 · xe, khiên, chó"
+        ? "Nối 1 đến 10 · sao, tim, bướm"
         : "Nối 1 đến 10 · Pom, Elsa, sao");
     },
     lesson: function (child) {
       return entryLesson(child, "noi-so", "🔢", "Nối số", child === "gin"
-        ? "Chấm to, nối 1 đến 5"
+        ? "Chấm to, nối 1 đến 10"
         : "Nối theo thứ tự, hiện hình");
     },
     view: noiView,
