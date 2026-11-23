@@ -292,13 +292,13 @@
   // other tones, onsets and rhymes are built rather than typed by hand.
   var ONSET_NAME = {
     "": "", b: "bờ", c: "cờ", k: "ca", d: "dờ", "đ": "đờ", g: "gờ", gh: "gờ", h: "hờ", l: "lờ", m: "mờ",
-    n: "nờ", r: "rờ", s: "sờ", t: "tờ", v: "vờ", x: "xờ", ch: "chờ", nh: "nhờ", th: "thờ", kh: "khờ",
+    n: "nờ", p: "pờ", r: "rờ", s: "sờ", t: "tờ", v: "vờ", x: "xờ", ch: "chờ", nh: "nhờ", th: "thờ", kh: "khờ",
     ph: "phờ", ng: "ngờ", tr: "trờ", gi: "di", qu: "quờ"
   };
   var ONSET_LOOKALIKE = {
     ch: ["tr", "c", "nh"], nh: ["n", "ng", "h"], th: ["t", "tr", "h"], kh: ["k", "h", "c"],
     ph: ["p", "b", "h"], k: ["c", "kh", "h"], ng: ["n", "nh", "gh"], tr: ["ch", "t", "r"], gi: ["d", "g", "r"],
-    gh: ["g", "ng", "h"], s: ["x", "ch", "t"], h: ["kh", "n", "l"], n: ["m", "l", "ng"], t: ["đ", "th", "d"], l: ["n", "r", "t"], m: ["n", "b", "ng"], c: ["g", "t", "đ"], g: ["c", "d", "đ"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
+    gh: ["g", "ng", "h"], p: ["b", "ph", "d"], s: ["x", "ch", "t"], h: ["kh", "n", "l"], n: ["m", "l", "ng"], t: ["đ", "th", "d"], l: ["n", "r", "t"], m: ["n", "b", "ng"], c: ["g", "t", "đ"], g: ["c", "d", "đ"], qu: ["c", "k", "h"], x: ["s", "c", "k"], r: ["d", "gi", "l"], d: ["đ", "b", "p"], "đ": ["d", "b", "t"]
   };
   var RHYME_INFO = {
     a: ["a", 0], e: ["e", 0], "ê": ["ê", 0], i: ["i", 0], o: ["o", 0], "ô": ["ô", 0], "ơ": ["ơ", 0], u: ["u", 0], "ư": ["ư", 0],
@@ -309,7 +309,7 @@
     "ay": ["a y ay", 0], "ây": ["ớ y ây", 0], "ông": ["ô ngờ ông", 0],
     ang: ["a ngờ ang", 0], en: ["e nờ en", 0],
     "ăm": ["á mờ ăm", 0], "âm": ["ớ mờ âm", 0],
-    "ơn": ["ơ nờ ơn", 0], "ôn": ["ô nờ ôn", 0], "ơm": ["ơ mờ ơm", 0], "ăn": ["á nờ ăn", 0], at: ["a tờ at", 0], ap: ["a pờ ap", 0]
+    "ơn": ["ơ nờ ơn", 0], ia: ["i a ia", 0], ua: ["u a ua", 0], "ôn": ["ô nờ ôn", 0], "ơm": ["ơ mờ ơm", 0], "ăn": ["á nờ ăn", 0], at: ["a tờ at", 0], ap: ["a pờ ap", 0]
   };
   // Near-miss rhymes used as wrong answers in the "Tiếng … có vần gì?" question,
   // so a mistake shows which sound she mixed up.
@@ -321,6 +321,7 @@
     "ơm": ["ôm", "ơn", "am", "im"], en: ["ên", "an", "in", "em"], "ăng": ["ang", "ăn", "ong", "ân"], ang: ["ăng", "an", "ong", "am"], at: ["ap", "ăt", "an", "ât"], ap: ["at", "am", "ăp", "âp"], ay: ["ây", "ai", "ao", "au"],
     "ây": ["ay", "âu", "ân", "ai"], "âu": ["ao", "au", "ây", "ân"], "ăn": ["an", "ân", "ăng", "ăm"], "ôm": ["om", "ôn", "ơm", "ôi"],
     "ăm": ["am", "âm", "ăn", "ăng"], "âm": ["ăm", "am", "ôm", "ơm"],
+    ia: ["ua", "ai", "iu", "ay"], ua: ["ia", "ai", "ao", "au"],
     "ơn": ["ôn", "on", "ơm", "ân"], "ôn": ["on", "ơn", "ôm", "ông"]
   };
   var TONE_MARK = { ngang: "", "huyền": "̀", "sắc": "́", "hỏi": "̉", "ngã": "̃", "nặng": "̣" };
@@ -338,6 +339,7 @@
       ["b", "ang", "hỏi", ""], ["v", "ang", "huyền", ""], ["s", "ang", "sắc", ""], ["m", "ang", "ngang", ""], ["l", "ang", "huyền", "🏘️"],
       ["r", "ăng", "ngang", "🦷"], ["b", "ăng", "ngang", "🧊"], ["m", "ăng", "ngang", "🎋"], ["t", "ăng", "nặng", "🎁"],
       ["g", "âu", "sắc", "🐻"], ["s", "âu", "ngang", "🐛"], ["c", "âu", "huyền", "🌉"], ["đ", "âu", "huyền", ""], ["n", "âu", "ngang", ""],
+      ["b", "ia", "huyền", "📕"], ["m", "ia", "sắc", ""], ["đ", "ia", "ngã", "🍽️"], ["t", "ia", "ngang", ""], ["c", "ua", "ngang", "🦀"], ["v", "ua", "ngang", "👑"], ["m", "ua", "sắc", "💃"], ["m", "ua", "ngang", "🛒"],
       ["l", "ơn", "sắc", ""], ["s", "ơn", "ngang", "🎨"], ["h", "ơn", "ngang", ""],
       ["s", "en", "ngang", "🪷"], ["đ", "en", "huyền", "💡"], ["l", "en", "ngang", "🧶"], ["n", "ên", "sắc", "🕯️"], ["t", "ên", "ngang", ""], ["l", "ên", "ngang", ""], ["b", "ên", "sắc", ""]
     ],
@@ -349,7 +351,7 @@
     ],
     mix: [
       ["ch", "im", "ngang", "🐦"], ["ch", "ân", "ngang", "🦶"], ["ch", "ai", "ngang", "🍾"], ["ch", "ao", "sắc", "🥣"],
-      ["nh", "ên", "nặng", "🕷️"], ["tr", "âu", "ngang", "🐃"], ["tr", "ăng", "ngang", "🌙"], ["th", "ơm", "ngang", ""],
+      ["nh", "ên", "nặng", "🕷️"], ["tr", "âu", "ngang", "🐃"], ["tr", "ăng", "ngang", "🌙"], ["th", "ia", "huyền", "🥄"], ["ch", "ua", "ngang", "🍋"], ["ch", "ua", "huyền", ""], ["ch", "ia", "ngang", ""], ["th", "ơm", "ngang", ""],
       ["kh", "oi", "sắc", ""], ["ng", "ôi", "ngang", ""], ["nh", "an", "ngã", ""], ["th", "am", "hỏi", ""],
       ["ph", "ao", "ngang", ""], ["gi", "oi", "hỏi", ""], ["kh", "ăn", "ngang", ""], ["ng", "u", "hỏi", "😴"],
       ["tr", "ơi", "huyền", ""], ["tr", "eo", "huyền", ""], ["ng", "ôi", "ngang", ""],
