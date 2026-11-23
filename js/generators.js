@@ -431,12 +431,13 @@
         var length = cfg.length || 4;
         var max = cfg.max != null ? cfg.max : (digits === 1 ? 9 : 100);
         var min = cfg.min != null ? cfg.min : 0;
+        var cap1 = cfg.allowTen ? 10 : 9;
         if (digits !== 2 && max <= 10) {
           digits = 1;
-          max = Math.min(max, 9);
+          max = Math.min(max, cap1);
         }
         if (digits === 1) {
-          max = Math.min(max, 9);
+          max = Math.min(max, cap1);
           min = Math.max(0, Math.min(min, max));
         }
         if (digits === 2) {
@@ -455,7 +456,7 @@
         for (var i = 0; i < length; i++) terms.push(start + i * step);
         var ans = start + length * step;
         if (ans > max || terms.some(function (n) { return n < min || n < 0; })) return null;
-        if (digits === 1 && (ans > 9 || terms.some(function (n) { return n > 9; }))) return null;
+        if (digits === 1 && (ans > cap1 || terms.some(function (n) { return n > cap1; }))) return null;
         if (digits === 2 && (ans < 10 || terms.some(function (n) { return n < 10; }))) return null;
         var shown = terms.join(" , ") + " , ?";
         var speakBits = terms.map(read).join(", ");

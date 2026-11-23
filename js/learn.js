@@ -857,12 +857,12 @@
   enEx({ id: "mon-en-family", child: "mon", category: "family", title: "Family", subtitle: "Mom and dad", icon: "👩", generator: "enFamily", config: { count: 4 } });
   enEx({ id: "mon-en-fruits", child: "mon", category: "fruits", title: "Fruits", subtitle: "Apple and banana", icon: "🍎", generator: "enFruits", config: { count: 4 } });
   enEx({ id: "mon-en-body", child: "mon", category: "body", title: "My body", subtitle: "Eye, ear, hand", icon: "✋", generator: "enBody", config: { count: 4 } });
-  enEx({ id: "mon-en-listen", child: "mon", category: "listen", title: "Tap what you hear", subtitle: "a red apple", icon: "🎧", generator: "enListen", config: { count: 10, choices: 4, set: "mon" } });
+  enEx({ id: "mon-en-listen", child: "mon", category: "listen", title: "Tap what you hear", subtitle: "a red apple", icon: "🎧", generator: "enListen", config: { count: 10, choices: 5, set: "mon" } });
 
   enEx({ id: "gin-en-letters", child: "gin", category: "letters", title: "A B C", subtitle: "Ba chữ đầu", icon: "🅰️", generator: "enLetters", config: { count: 3, choices: 3, set: "abc" } });
   enEx({ id: "gin-en-colors", child: "gin", category: "colors", title: "Colors", subtitle: "Red, yellow, blue", icon: "🎨", generator: "enColors", config: { count: 4, choices: 3, set: "easy" } });
   enEx({ id: "gin-en-animals", child: "gin", category: "animals", title: "Animals", subtitle: "Cat and dog", icon: "🐶", generator: "enAnimals", config: { count: 4, choices: 3, set: "easy" } });
-  enEx({ id: "gin-en-listen", child: "gin", category: "listen", title: "Tap what you hear", subtitle: "Colors, animals, heroes", icon: "🎧", generator: "enListen", config: { count: 10, set: "gin", gradual: true } });
+  enEx({ id: "gin-en-listen", child: "gin", category: "listen", title: "Tap what you hear", subtitle: "Colors, animals, heroes", icon: "🎧", generator: "enListen", config: { count: 12, set: "gin", gradual: false } });
 
   function pushSpeak(list, lang, text) {
     if (text) list.push({ lang: lang, text: String(text) });

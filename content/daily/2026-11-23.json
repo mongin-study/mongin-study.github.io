@@ -3791,13 +3791,94 @@
         },
         {
           "kind": "choice",
-          "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "ba, bốn, năm. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 1, được 6.",
+          "speak": "bảy, tám, chín. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 1, được 10.",
           "scene": {
             "layout": "equation",
-            "text": "3 , 4 , 5 , ?"
+            "text": "7 , 8 , 9 , ?"
+          },
+          "variant": "",
+          "columns": 3,
+          "choices": [
+            {
+              "text": "8",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            },
+            {
+              "text": "10",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            },
+            {
+              "text": "9",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "sáu, bảy, tám. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 1, được 9.",
+          "scene": {
+            "layout": "equation",
+            "text": "6 , 7 , 8 , ?"
+          },
+          "variant": "",
+          "columns": 3,
+          "choices": [
+            {
+              "text": "9",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            },
+            {
+              "text": "7",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            },
+            {
+              "text": "8",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Chọn số tiếp theo",
+          "speak": "năm, sáu, bảy. Số tiếp theo là số nào?",
+          "explain": "Cộng thêm 1, được 8.",
+          "scene": {
+            "layout": "equation",
+            "text": "5 , 6 , 7 , ?"
           },
           "variant": "",
           "columns": 3,
@@ -3811,39 +3892,6 @@
               "size": 0,
               "correct": false
             },
-            {
-              "text": "6",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            },
-            {
-              "text": "5",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "vi",
-          "prompt": "Chọn số tiếp theo",
-          "speak": "năm, sáu, bảy. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 1, được 8.",
-          "scene": {
-            "layout": "equation",
-            "text": "5 , 6 , 7 , ?"
-          },
-          "variant": "",
-          "columns": 3,
-          "choices": [
             {
               "text": "8",
               "emoji": "",
@@ -3861,99 +3909,46 @@
               "color": "",
               "size": 0,
               "correct": false
-            },
-            {
-              "text": "7",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "lang": "vi",
-          "prompt": "Chọn số tiếp theo",
-          "speak": "bốn, năm, sáu. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 1, được 7.",
-          "scene": {
-            "layout": "equation",
-            "text": "4 , 5 , 6 , ?"
-          },
-          "variant": "",
-          "columns": 3,
-          "choices": [
-            {
-              "text": "8",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "6",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "7",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
             }
           ]
         },
         {
           "kind": "order",
-          "lang": "vi",
           "prompt": "Chạm từ số bé đến số lớn",
           "speak": "Chạm số bé trước, rồi đến số lớn hơn",
-          "explain": "Thứ tự đúng là 4, 5, 6.",
+          "explain": "Thứ tự đúng là 6, 7, 9.",
           "tokens": [
             {
-              "text": "6",
+              "text": "9",
               "order": 2
             },
             {
-              "text": "5",
-              "order": 1
+              "text": "6",
+              "order": 0
             },
             {
-              "text": "4",
-              "order": 0
+              "text": "7",
+              "order": 1
             }
           ]
         },
         {
           "kind": "order",
-          "lang": "vi",
           "prompt": "Chạm từ số bé đến số lớn",
           "speak": "Chạm số bé trước, rồi đến số lớn hơn",
-          "explain": "Thứ tự đúng là 1, 2, 3.",
+          "explain": "Thứ tự đúng là 6, 9, 10.",
           "tokens": [
             {
-              "text": "1",
-              "order": 0
-            },
-            {
-              "text": "3",
+              "text": "10",
               "order": 2
             },
             {
-              "text": "2",
+              "text": "9",
               "order": 1
+            },
+            {
+              "text": "6",
+              "order": 0
             }
           ]
         }
@@ -4656,8 +4651,8 @@
         "set": "gin",
         "count": 16,
         "seed": "2026-11-23",
-        "choices": 3,
-        "gradual": true
+        "choices": 4,
+        "gradual": false
       }
     },
     {
@@ -4675,7 +4670,7 @@
         "set": "mon",
         "count": 10,
         "seed": "2026-11-23",
-        "choices": 4,
+        "choices": 5,
         "gradual": false
       }
     }
