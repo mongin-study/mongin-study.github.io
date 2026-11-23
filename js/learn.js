@@ -700,7 +700,7 @@
       i += 1;
       if (used[row.item.id] && i <= seq.length) continue;
       if (out.length && out[out.length - 1].speak === ("Tap the " + row.item.name + ".")) continue;
-      var howMany = out.length < Math.ceil(count * 0.34) ? 2 : out.length < Math.ceil(count * 0.67) ? 3 : 4;
+      var howMany = gradual ? (out.length < Math.ceil(count * 0.34) ? 2 : out.length < Math.ceil(count * 0.67) ? 3 : 4) : (out.length < Math.ceil(count * 0.34) ? 3 : 4);
       if (row.pool.length < howMany) howMany = Math.max(2, row.pool.length);
       out.push(listenQuestion(row.item, row.pool, howMany, rand, true));
       used[row.item.id] = true;

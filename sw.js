@@ -1,4 +1,4 @@
-var CACHE = "hoc-vui-v56";
+var CACHE = "hoc-vui-v57";
 var ASSETS = [
   "./",
   "./index.html",
