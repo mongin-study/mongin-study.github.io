@@ -344,7 +344,11 @@
     "⚔️": "sword", "👢": "boot", "⛑️": "helmet", "🏅": "medal",
     "🦄": "unicorn", "🏮": "lantern", "🌹": "rose", "🍃": "leaf", "🌰": "acorn", "🎀": "ribbon",
     "🐍": "snake", "👍": "thumb", "🌱": "plant", "🕐": "clock",
-    "👜": "bag", "⛰️": "mountain", "💨": "wind"
+    "👜": "bag", "⛰️": "mountain", "💨": "wind",
+    "🥛": "milk", "🪺": "nest", "🪝": "hook",
+    "🧑‍🚀": "astronaut", "🥷": "ninja", "☄️": "comet", "🪐": "planet",
+    "🧲": "magnet", "🌋": "volcano", "🎺": "trumpet", "🎒": "backpack",
+    "🥪": "sandwich", "🍄": "mushroom"
   };
   var EMOJI_VI = {
     "🍎": "quả táo", "🍌": "quả chuối", "🐱": "con mèo", "🐶": "Pom", "🎈": "quả bóng bay",
@@ -357,6 +361,10 @@
     "🦄": "kỳ lân", "👜": "cái túi", "⛰️": "núi", "💨": "gió", "🌰": "hạt",
     "🐯": "con hổ", "🌸": "hoa", "🍊": "quả cam",
     "🐝": "con ong", "🐮": "con bò", "🐑": "con cừu", "☕": "cái cốc",
+    "🥛": "cốc sữa", "🪺": "tổ chim", "🪝": "cái móc",
+    "🧑‍🚀": "phi hành gia", "🥷": "ninja", "☄️": "sao chổi", "🪐": "hành tinh",
+    "🧲": "nam châm", "🌋": "núi lửa", "🎺": "kèn", "🎒": "ba lô",
+    "🥪": "bánh mì", "🍄": "nấm",
     "🕷️": "con nhện", "🪷": "hoa sen", "💡": "cái đèn", "🕯️": "cây nến",
     "🪑": "cái ghế", "🧣": "cái khăn", "🧢": "cái mũ", "🧦": "chiếc tất",
     "🛏️": "cái giường", "🧶": "cuộn len", "🍪": "chiếc bánh", "🪵": "thanh gỗ",
@@ -499,7 +507,7 @@
   var correctHeard = 0;
 
   function isEnglishCheer(line) {
-    return /^(bingo|hurrah|hurray|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it)\b/i.test(String(line || "").trim());
+    return /^(bingo|hurrah|hurray|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it|bravo)\b/i.test(String(line || "").trim());
   }
 
   function fitsMon(line) {

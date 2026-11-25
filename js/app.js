@@ -1312,9 +1312,12 @@
     if (act === "replay-speech") {
       var session = state.session;
       if (session && session.phase === "quiz") {
+        var q = session.questions[session.index];
         var again = voiceFor(session.entry.child);
-        again.lang = session.questions[session.index].lang === "en" ? "en" : "vi";
-        HV.speech.speak(session.questions[session.index].speak, again);
+        again.lang = q.lang === "en" ? "en" : "vi";
+        var explainNode = document.querySelector("#app .feedback p");
+        var explainLine = explainNode && explainNode.textContent ? explainNode.textContent.trim() : "";
+        HV.speech.speak(explainLine || q.speak, again);
       }
       return;
     }
