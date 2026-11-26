@@ -7,7 +7,9 @@
     "Mẹ Vy ôm Gin vì Gin nhớ chữ l, n, t!",
     "Bố Hà vỗ tay vì Mon đọc ngày, chạy, giày!",
     "Splendid, Mon! Elsa cheers for the sled!",
-    "Hooray, Gin! Pom claps for the dragon!"
+    "Hooray, Gin! Pom claps for the dragon!",
+    "Bingo, Mon! Rapunzel claps for ship and sled!",
+    "Hurrah, Gin! The wizard and the dinosaur cheer!"
   ],
   "memory": [
     {
@@ -419,17 +421,17 @@
         {
           "kind": "choice",
           "prompt": "Chọn số tiếp theo",
-          "speak": "ba mươi lăm, ba mươi chín, bốn mươi ba, bốn mươi bảy. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 4, được 51.",
+          "speak": "ba, sáu, chín, mười hai. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm ba. Đếm thêm ba từ mười hai: mười ba, mười bốn, mười lăm.",
           "scene": {
             "layout": "equation",
-            "text": "35 , 39 , 43 , 47 , ?"
+            "text": "3 , 6 , 9 , 12 , ?"
           },
           "variant": "",
           "columns": 3,
           "choices": [
             {
-              "text": "51",
+              "text": "15",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -438,7 +440,7 @@
               "correct": true
             },
             {
-              "text": "50",
+              "text": "14",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -447,7 +449,7 @@
               "correct": false
             },
             {
-              "text": "52",
+              "text": "16",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -460,17 +462,17 @@
         {
           "kind": "choice",
           "prompt": "Chọn số tiếp theo",
-          "speak": "ba mươi, ba mươi tư, ba mươi tám, bốn mươi hai. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 4, được 46.",
+          "speak": "năm, tám, mười một, mười bốn. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm ba. Đếm thêm ba từ mười bốn: mười lăm, mười sáu, mười bảy.",
           "scene": {
             "layout": "equation",
-            "text": "30 , 34 , 38 , 42 , ?"
+            "text": "5 , 8 , 11 , 14 , ?"
           },
           "variant": "",
           "columns": 3,
           "choices": [
             {
-              "text": "45",
+              "text": "16",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -479,22 +481,22 @@
               "correct": false
             },
             {
-              "text": "47",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "46",
+              "text": "17",
               "emoji": "",
               "emojis": null,
               "shape": "",
               "color": "",
               "size": 0,
               "correct": true
+            },
+            {
+              "text": "18",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
             }
           ]
         },
@@ -502,7 +504,7 @@
           "kind": "choice",
           "prompt": "Chọn số tiếp theo",
           "speak": "bốn mươi ba, bốn mươi sáu, bốn mươi chín, năm mươi hai. Số tiếp theo là số nào?",
-          "explain": "Cộng thêm 3, được 55.",
+          "explain": "Mỗi lần thêm ba. Đếm thêm ba từ năm mươi hai: năm mươi ba, năm mươi bốn, năm mươi lăm.",
           "scene": {
             "layout": "equation",
             "text": "43 , 46 , 49 , 52 , ?"
@@ -543,7 +545,7 @@
           "kind": "keypad",
           "prompt": "Điền số còn thiếu",
           "speak": "mười hai cộng số nào bằng hai mươi?",
-          "explain": "12 + 8 = 20",
+          "explain": "Mười hai cộng số còn thiếu bằng hai mươi. Đếm thêm tám từ mười hai: mười ba, mười bốn, mười lăm, mười sáu, mười bảy, mười tám, mười chín, hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
@@ -556,7 +558,7 @@
           "kind": "keypad",
           "prompt": "Điền số còn thiếu",
           "speak": "tám cộng số nào bằng hai mươi?",
-          "explain": "8 + 12 = 20",
+          "explain": "Tám cộng số còn thiếu bằng hai mươi. Đếm thêm mười hai từ tám: chín, mười, mười một, mười hai, mười ba, mười bốn, mười lăm, mười sáu, mười bảy, mười tám, mười chín, hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
@@ -569,7 +571,7 @@
           "kind": "keypad",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. bảy cộng số còn thiếu bằng mười một",
-          "explain": "7 + 4 = 11",
+          "explain": "Bảy cộng bốn bằng mười một. Đếm thêm bốn từ bảy: tám, chín, mười, mười một.",
           "scene": {
             "layout": "equation",
             "text": "? + 7 = 11"
@@ -581,7 +583,7 @@
           "kind": "keypad",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. một cộng số còn thiếu bằng chín",
-          "explain": "1 + 8 = 9",
+          "explain": "Một cộng tám bằng chín. Đếm thêm tám từ một: hai, ba, bốn, năm, sáu, bảy, tám, chín.",
           "scene": {
             "layout": "equation",
             "text": "1 + ? = 9"
@@ -593,7 +595,7 @@
           "kind": "choice",
           "prompt": "Số nào khác các số còn lại?",
           "speak": "Tìm số không cùng nhóm",
-          "explain": "16 là số chẵn. Các số kia thì khác.",
+          "explain": "Mười sáu ghép được từng cặp, nên là số chẵn. Hai mươi mốt, mười một và mười lăm còn thừa một.",
           "scene": null,
           "variant": "",
           "columns": 2,
@@ -640,7 +642,7 @@
           "kind": "choice",
           "prompt": "Phép nào có kết quả lớn hơn?",
           "speak": "Phép nào lớn hơn? hai cộng tám, hay bốn cộng hai?",
-          "explain": "2 + 8 = 10, lớn hơn.",
+          "explain": "Hai cộng tám bằng mười. Bốn cộng hai bằng sáu. Mười lớn hơn sáu.",
           "scene": null,
           "variant": "cards",
           "columns": 2,
@@ -669,7 +671,7 @@
           "kind": "choice",
           "prompt": "Phép nào có kết quả lớn hơn?",
           "speak": "Phép nào lớn hơn? hai cộng bốn, hay mười hai trừ bốn?",
-          "explain": "12 − 4 = 8, lớn hơn.",
+          "explain": "Mười hai trừ bốn bằng tám. Hai cộng bốn bằng sáu. Tám lớn hơn sáu.",
           "scene": null,
           "variant": "cards",
           "columns": 2,
@@ -705,236 +707,6 @@
       "subtitle": "Chẵn lẻ, chục, đếm cách và số liền kề",
       "icon": "🔢",
       "questions": [
-        {
-          "kind": "choice",
-          "prompt": "Số 51 là số chẵn hay số lẻ?",
-          "speak": "Số năm mươi mốt là số chẵn hay số lẻ?",
-          "explain": "51 còn thừa 1 chấm, nên là số lẻ.",
-          "scene": {
-            "layout": "pairs",
-            "count": 51
-          },
-          "variant": "",
-          "columns": 2,
-          "choices": [
-            {
-              "text": "Chẵn",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "Lẻ",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "prompt": "Số 8 là số chẵn hay số lẻ?",
-          "speak": "Số tám là số chẵn hay số lẻ?",
-          "explain": "8 chia hết thành từng cặp, nên là số chẵn.",
-          "scene": {
-            "layout": "pairs",
-            "count": 8
-          },
-          "variant": "",
-          "columns": 2,
-          "choices": [
-            {
-              "text": "Chẵn",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            },
-            {
-              "text": "Lẻ",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "prompt": "Số nào lớn hơn?",
-          "speak": "Trong hai số này, số nào lớn hơn?",
-          "explain": "69 lớn hơn.",
-          "scene": null,
-          "variant": "cards",
-          "columns": 2,
-          "choices": [
-            {
-              "text": "69",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            },
-            {
-              "text": "8",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "prompt": "Số nào nhỏ hơn?",
-          "speak": "Trong hai số này, số nào nhỏ hơn?",
-          "explain": "10 nhỏ hơn.",
-          "scene": null,
-          "variant": "cards",
-          "columns": 2,
-          "choices": [
-            {
-              "text": "85",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "10",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "prompt": "Đếm cách 10. Số tiếp theo là số nào?",
-          "speak": "Đếm cách mười. ba mươi, bốn mươi, năm mươi, sáu mươi. Tiếp theo là số nào?",
-          "explain": "Thêm 10 được 70.",
-          "scene": {
-            "layout": "equation",
-            "text": "30 , 40 , 50 , 60 , ?"
-          },
-          "variant": "",
-          "columns": 3,
-          "choices": [
-            {
-              "text": "70",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            },
-            {
-              "text": "69",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "71",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "choice",
-          "prompt": "Đếm cách 5. Số tiếp theo là số nào?",
-          "speak": "Đếm cách năm. năm, mười, mười lăm, hai mươi. Tiếp theo là số nào?",
-          "explain": "Thêm 5 được 25.",
-          "scene": {
-            "layout": "equation",
-            "text": "5 , 10 , 15 , 20 , ?"
-          },
-          "variant": "",
-          "columns": 3,
-          "choices": [
-            {
-              "text": "26",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "25",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": true
-            },
-            {
-              "text": "24",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            }
-          ]
-        },
-        {
-          "kind": "keypad",
-          "prompt": "Đây là số mấy?",
-          "speak": "Có năm chục và năm đơn vị. Đây là số mấy?",
-          "explain": "5 chục và 5 đơn vị là 55.",
-          "scene": {
-            "layout": "blocks",
-            "tens": 5,
-            "ones": 5
-          },
-          "answer": 55,
-          "maxDigits": 2
-        },
-        {
-          "kind": "keypad",
-          "prompt": "Số này có bao nhiêu đơn vị?",
-          "speak": "Nhìn các chấm đơn vị. Có bao nhiêu đơn vị?",
-          "explain": "Có 8 đơn vị. Số là 78.",
-          "scene": {
-            "layout": "blocks",
-            "tens": 7,
-            "ones": 8
-          },
-          "answer": 8,
-          "maxDigits": 2
-        },
         {
           "kind": "choice",
           "prompt": "Số liền sau của 8 là số nào?",
@@ -976,6 +748,79 @@
             },
             {
               "text": "11",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số 8 là số chẵn hay số lẻ?",
+          "speak": "Số tám là số chẵn hay số lẻ?",
+          "explain": "8 chia hết thành từng cặp, nên là số chẵn.",
+          "scene": {
+            "layout": "pairs",
+            "count": 8
+          },
+          "variant": "",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Chẵn",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            },
+            {
+              "text": "Lẻ",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đếm cách 5. Số tiếp theo là số nào?",
+          "speak": "Đếm cách năm. năm, mười, mười lăm, hai mươi. Tiếp theo là số nào?",
+          "explain": "Đếm cách năm. Hai mươi thêm năm là hai mươi lăm.",
+          "scene": {
+            "layout": "equation",
+            "text": "5 , 10 , 15 , 20 , ?"
+          },
+          "variant": "",
+          "columns": 3,
+          "choices": [
+            {
+              "text": "26",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            },
+            {
+              "text": "25",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            },
+            {
+              "text": "24",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -1034,6 +879,163 @@
               "correct": true
             }
           ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào nhỏ hơn?",
+          "speak": "Trong hai số này, số nào nhỏ hơn?",
+          "explain": "Mười nhỏ hơn tám mươi lăm.",
+          "scene": null,
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "85",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            },
+            {
+              "text": "10",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số nào lớn hơn?",
+          "speak": "Trong hai số này, số nào lớn hơn?",
+          "explain": "Sáu mươi chín lớn hơn tám.",
+          "scene": null,
+          "variant": "cards",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "69",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            },
+            {
+              "text": "8",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "choice",
+          "prompt": "Đếm cách 10. Số tiếp theo là số nào?",
+          "speak": "Đếm cách mười. ba mươi, bốn mươi, năm mươi, sáu mươi. Tiếp theo là số nào?",
+          "explain": "Đếm cách mười. Sáu mươi thêm mười là bảy mươi.",
+          "scene": {
+            "layout": "equation",
+            "text": "30 , 40 , 50 , 60 , ?"
+          },
+          "variant": "",
+          "columns": 3,
+          "choices": [
+            {
+              "text": "70",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            },
+            {
+              "text": "69",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            },
+            {
+              "text": "71",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            }
+          ]
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Đây là số mấy?",
+          "speak": "Có năm chục và năm đơn vị. Đây là số mấy?",
+          "explain": "5 chục và 5 đơn vị là 55.",
+          "scene": {
+            "layout": "blocks",
+            "tens": 5,
+            "ones": 5
+          },
+          "answer": 55,
+          "maxDigits": 2
+        },
+        {
+          "kind": "choice",
+          "prompt": "Số 51 là số chẵn hay số lẻ?",
+          "speak": "Số năm mươi mốt là số chẵn hay số lẻ?",
+          "explain": "51 còn thừa 1 chấm, nên là số lẻ.",
+          "scene": {
+            "layout": "pairs",
+            "count": 51
+          },
+          "variant": "",
+          "columns": 2,
+          "choices": [
+            {
+              "text": "Chẵn",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": false
+            },
+            {
+              "text": "Lẻ",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
+              "correct": true
+            }
+          ]
+        },
+        {
+          "kind": "keypad",
+          "prompt": "Số này có bao nhiêu đơn vị?",
+          "speak": "Nhìn các chấm đơn vị. Có bao nhiêu đơn vị?",
+          "explain": "Có 8 đơn vị. Số là 78.",
+          "scene": {
+            "layout": "blocks",
+            "tens": 7,
+            "ones": 8
+          },
+          "answer": 8,
+          "maxDigits": 2
         }
       ]
     },
@@ -4689,7 +4691,7 @@
       "child": "gin",
       "subject": "english",
       "category": "listen",
-      "title": "Dragon, castle, and rocket",
+      "title": "Dragon, wizard, and dinosaur",
       "subtitle": "Tap what you hear",
       "icon": "🐉",
       "questions": [
@@ -4701,24 +4703,24 @@
           "explain": "It is the dragon.",
           "choices": [
             {
+              "emoji": "🐉",
+              "label": "dragon",
+              "correct": true
+            },
+            {
               "emoji": "🏰",
               "label": "castle",
               "correct": false
             },
             {
-              "emoji": "🦄",
-              "label": "unicorn",
+              "emoji": "🚀",
+              "label": "rocket",
               "correct": false
             },
             {
-              "emoji": "👑",
-              "label": "crown",
+              "emoji": "🤖",
+              "label": "robot",
               "correct": false
-            },
-            {
-              "emoji": "🐉",
-              "label": "dragon",
-              "correct": true
             }
           ],
           "columns": 2,
@@ -4732,24 +4734,24 @@
           "explain": "It is the castle.",
           "choices": [
             {
+              "emoji": "🚀",
+              "label": "rocket",
+              "correct": false
+            },
+            {
               "emoji": "🤖",
               "label": "robot",
+              "correct": false
+            },
+            {
+              "emoji": "🧙",
+              "label": "wizard",
               "correct": false
             },
             {
               "emoji": "🏰",
               "label": "castle",
               "correct": true
-            },
-            {
-              "emoji": "🐉",
-              "label": "dragon",
-              "correct": false
-            },
-            {
-              "emoji": "👑",
-              "label": "crown",
-              "correct": false
             }
           ],
           "columns": 2,
@@ -4763,13 +4765,13 @@
           "explain": "It is the rocket.",
           "choices": [
             {
-              "emoji": "🤖",
-              "label": "robot",
+              "emoji": "🧙",
+              "label": "wizard",
               "correct": false
             },
             {
-              "emoji": "🐉",
-              "label": "dragon",
+              "emoji": "🦕",
+              "label": "dinosaur",
               "correct": false
             },
             {
@@ -4778,8 +4780,8 @@
               "correct": true
             },
             {
-              "emoji": "👑",
-              "label": "crown",
+              "emoji": "🤖",
+              "label": "robot",
               "correct": false
             }
           ],
@@ -4794,23 +4796,209 @@
           "explain": "It is the robot.",
           "choices": [
             {
-              "emoji": "🐉",
-              "label": "dragon",
-              "correct": false
-            },
-            {
-              "emoji": "🦄",
-              "label": "unicorn",
-              "correct": false
-            },
-            {
-              "emoji": "👑",
-              "label": "crown",
+              "emoji": "🚁",
+              "label": "helicopter",
               "correct": false
             },
             {
               "emoji": "🤖",
               "label": "robot",
+              "correct": true
+            },
+            {
+              "emoji": "🧙",
+              "label": "wizard",
+              "correct": false
+            },
+            {
+              "emoji": "🦕",
+              "label": "dinosaur",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the wizard.",
+          "explain": "It is the wizard.",
+          "choices": [
+            {
+              "emoji": "🧙",
+              "label": "wizard",
+              "correct": true
+            },
+            {
+              "emoji": "🦕",
+              "label": "dinosaur",
+              "correct": false
+            },
+            {
+              "emoji": "🚁",
+              "label": "helicopter",
+              "correct": false
+            },
+            {
+              "emoji": "🏆",
+              "label": "trophy",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the dinosaur.",
+          "explain": "It is the dinosaur.",
+          "choices": [
+            {
+              "emoji": "🚁",
+              "label": "helicopter",
+              "correct": false
+            },
+            {
+              "emoji": "🏆",
+              "label": "trophy",
+              "correct": false
+            },
+            {
+              "emoji": "🐧",
+              "label": "penguin",
+              "correct": false
+            },
+            {
+              "emoji": "🦕",
+              "label": "dinosaur",
+              "correct": true
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the helicopter.",
+          "explain": "It is the helicopter.",
+          "choices": [
+            {
+              "emoji": "🐧",
+              "label": "penguin",
+              "correct": false
+            },
+            {
+              "emoji": "🐙",
+              "label": "octopus",
+              "correct": false
+            },
+            {
+              "emoji": "🚁",
+              "label": "helicopter",
+              "correct": true
+            },
+            {
+              "emoji": "🏆",
+              "label": "trophy",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the trophy.",
+          "explain": "It is the trophy.",
+          "choices": [
+            {
+              "emoji": "🐉",
+              "label": "dragon",
+              "correct": false
+            },
+            {
+              "emoji": "🏆",
+              "label": "trophy",
+              "correct": true
+            },
+            {
+              "emoji": "🐧",
+              "label": "penguin",
+              "correct": false
+            },
+            {
+              "emoji": "🐙",
+              "label": "octopus",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the penguin.",
+          "explain": "It is the penguin.",
+          "choices": [
+            {
+              "emoji": "🐧",
+              "label": "penguin",
+              "correct": true
+            },
+            {
+              "emoji": "🐙",
+              "label": "octopus",
+              "correct": false
+            },
+            {
+              "emoji": "🐉",
+              "label": "dragon",
+              "correct": false
+            },
+            {
+              "emoji": "🏰",
+              "label": "castle",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the octopus.",
+          "explain": "It is the octopus.",
+          "choices": [
+            {
+              "emoji": "🐉",
+              "label": "dragon",
+              "correct": false
+            },
+            {
+              "emoji": "🏰",
+              "label": "castle",
+              "correct": false
+            },
+            {
+              "emoji": "🚀",
+              "label": "rocket",
+              "correct": false
+            },
+            {
+              "emoji": "🐙",
+              "label": "octopus",
               "correct": true
             }
           ],
