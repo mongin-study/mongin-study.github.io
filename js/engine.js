@@ -657,6 +657,7 @@
       lockInputs();
       firstSuccess = !!first;
       var showExplain = !!text && (!good || opts.hard);
+      var holdExplain = false;
       var voicePraise = good && !opts.isLast && shouldVoicePraise();
       var line = !good
         ? (lang === "en" ? "Not quite" : "Chưa đúng")
@@ -669,10 +670,24 @@
       var nextLabel = !good
         ? (lang === "en" ? "Got it" : "Hiểu rồi")
         : (opts.isLast ? (lang === "en" ? "See stars" : "Xem sao") : (lang === "en" ? "Next" : "Tiếp tục"));
+      var explainRow = showExplain ? el("div", { class: "explain-row" }, [
+        el("p", { text: text }),
+        el("button", {
+          class: "icon-btn speak-btn explain-hear",
+          "aria-label": lang === "en" ? "Hear the explanation" : "Nghe lại lời giải",
+          text: "🗣️",
+          onClick: function (ev) {
+            if (ev) ev.stopPropagation();
+            holdExplain = true;
+            if (pending) { clearTimeout(pending); pending = null; }
+            speakNow(text, lang);
+          }
+        })
+      ]) : null;
       var bar = el("div", { class: "feedback " + (good ? "is-good" : "is-bad"), role: "status" }, [
         face,
         el("strong", { text: line }),
-        showExplain ? el("p", { text: text }) : null,
+        explainRow,
         showExplain ? hopAid(question.scene) : null,
         el("button", {
           class: "btn btn-next",
@@ -688,7 +703,7 @@
       afterSound(good ? HV.audio.correct : HV.audio.wrong, function () {
         if (settled) return;
         function later(sec) {
-          if (settled || !good) return;
+          if (settled || !good || holdExplain) return;
           var wait = voicePraise || showExplain
             ? Math.max(600, Math.round((sec || 0.4) * 1000) + 400)
             : 650;

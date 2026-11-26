@@ -1320,9 +1320,7 @@
         var q = session.questions[session.index];
         var again = voiceFor(session.entry.child);
         again.lang = q.lang === "en" ? "en" : "vi";
-        var explainNode = document.querySelector("#app .feedback p");
-        var explainLine = explainNode && explainNode.textContent ? explainNode.textContent.trim() : "";
-        HV.speech.speak(explainLine || q.speak, again);
+        HV.speech.speak(q.speak, again);
       }
       return;
     }
