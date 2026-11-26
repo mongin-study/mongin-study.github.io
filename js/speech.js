@@ -199,16 +199,23 @@
       });
       last = { mode: "clips", lang: (opts && opts.lang) || "vi", norm: norm, keys: keys.slice() };
       var dur = Math.max(0.3, t - start);
+      var minMs = Math.ceil(dur * 1000);
       return new Promise(function (resolve) {
         var finished = false;
+        var started = Date.now();
         function done() {
           if (finished) return;
+          var wait = minMs - (Date.now() - started);
+          if (wait > 40) {
+            setTimeout(done, wait);
+            return;
+          }
           finished = true;
           resolve(dur);
         }
         if (lastSrc) lastSrc.onended = done;
-        else done();
-        setTimeout(done, Math.ceil(dur * 1000) + 450);
+        else setTimeout(done, minMs);
+        setTimeout(done, minMs + 450);
       });
     });
   }

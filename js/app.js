@@ -620,9 +620,12 @@
     var mark = "";
     if (q.choices) {
       q.choices.forEach(function (c) {
-        if (c.correct) mark += (c.text || "") + (c.emoji || "") + (c.shape || "") + (c.color || "");
+        mark += (c.correct ? "*" : "") + (c.text || "") + (c.emoji || "") + (c.shape || "") + (c.color || "") + (c.emojis || []).join("") + "|";
       });
     }
+    if (q.scene && q.scene.text) mark += "#" + q.scene.text;
+    if (q.scene && q.scene.items) mark += "#" + q.scene.items.join("");
+    if (q.tokens) q.tokens.forEach(function (t) { mark += t.text + t.order; });
     return [q.kind, q.lang, q.speak, q.prompt, q.answer, q.word, mark].join("§");
   }
 
@@ -653,11 +656,13 @@
     }
     var subject = subjectOf(entry);
     if (entry.generator) take(entry.generator, entry.config);
-    (state.daily.exercises || []).forEach(function (ex) {
-      if (!ex || ex === entry || ex.child !== entry.child || subjectOf(ex) !== subject || ex.category !== entry.category) return;
-      takeList((ex.questions || []).map(HV.engine.normalize).filter(Boolean));
-      if (ex.generator) take(ex.generator, ex.config);
-    });
+    if (out.length < count) {
+      (state.daily.exercises || []).forEach(function (ex) {
+        if (!ex || ex === entry || ex.child !== entry.child || subjectOf(ex) !== subject || ex.category !== entry.category) return;
+        takeList((ex.questions || []).map(HV.engine.normalize).filter(Boolean));
+        if (ex.generator) take(ex.generator, ex.config);
+      });
+    }
     if (out.length < count) {
       HV.catalog.forEach(function (ex) {
         if (!ex || ex.child !== entry.child || subjectOf(ex) !== subject || ex.category !== entry.category) return;

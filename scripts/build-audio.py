@@ -634,7 +634,7 @@ async def main():
         except Exception:
             continue
         for line in daily.get("praise") or []:
-            if re.match(r"(?i)^(bingo|hurrah|hurray|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it|bravo)\b", str(line or "").strip()):
+            if re.match(r"(?i)^(bingo|hurrah|hurray|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it|bravo|splendid)\b", str(line or "").strip()):
                 continue
             key = normalize(line)
             if not key:

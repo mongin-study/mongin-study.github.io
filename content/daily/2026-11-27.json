@@ -1851,7 +1851,7 @@
       "subject": "vietnamese",
       "category": "spell",
       "title": "Vần ay, ây",
-      "subtitle": "tay, cây, mây, dây, máy",
+      "subtitle": "tay, cây, mây, váy, hay",
       "icon": "🌳",
       "questions": [
         {
@@ -2108,30 +2108,30 @@
           "lang": "vi",
           "prompt": "Tranh này là tiếng nào?",
           "speak": "Nhìn tranh. Chữ nào viết đúng?",
-          "explain": "Rờ au rau.",
+          "explain": "Vờ ay vay. Thêm dấu sắc thành váy.",
           "scene": {
             "layout": "emojis",
             "items": [
-              "🥬"
+              "👗"
             ]
           },
           "columns": 2,
           "variant": "",
           "choices": [
             {
-              "text": "dau",
+              "text": "vay",
               "correct": false
             },
             {
-              "text": "rang",
+              "text": "vây",
               "correct": false
             },
             {
-              "text": "rạu",
+              "text": "váu",
               "correct": false
             },
             {
-              "text": "rau",
+              "text": "váy",
               "correct": true
             }
           ]
@@ -2140,26 +2140,26 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Nghe rồi chọn chữ viết đúng",
-          "speak": "Chọn chữ sóc",
-          "explain": "Sờ oc soc. Thêm dấu sắc thành sóc.",
+          "speak": "Chọn chữ hay",
+          "explain": "Hờ ay hay.",
           "scene": null,
           "columns": 2,
           "variant": "",
           "choices": [
             {
-              "text": "sọc",
+              "text": "hây",
               "correct": false
             },
             {
-              "text": "só",
+              "text": "hau",
               "correct": false
             },
             {
-              "text": "sóc",
+              "text": "hay",
               "correct": true
             },
             {
-              "text": "tóc",
+              "text": "hái",
               "correct": false
             }
           ]

@@ -507,7 +507,7 @@
   var correctHeard = 0;
 
   function isEnglishCheer(line) {
-    return /^(bingo|hurrah|hurray|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it|bravo)\b/i.test(String(line || "").trim());
+    return /^(bingo|hurrah|hurray|hooray|awesome|yay|well done|great job|super|fantastic|nice work|you did it|bravo|splendid)\b/i.test(String(line || "").trim());
   }
 
   function fitsMon(line) {
