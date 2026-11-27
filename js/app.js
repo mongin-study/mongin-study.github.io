@@ -374,6 +374,7 @@
     root.appendChild(topbar({ title: "Chào " + meta.name, sub: "Hôm nay mình học gì?", back: "#/", child: child }));
     root.appendChild(syncLine());
     if (HV.weekly) root.appendChild(HV.weekly.card(child));
+    root.appendChild(todayBlock(child));
     if (HV.memory) root.appendChild(HV.memory.card(child));
     if (HV.stickers) root.appendChild(HV.stickers.card(child));
     if (HV.tangram) root.appendChild(HV.tangram.card(child));
@@ -390,7 +391,6 @@
       var colorCard = HV.coloring.card(child);
       if (colorCard) root.appendChild(colorCard);
     }
-    root.appendChild(todayBlock(child));
     var grid = el("div", { class: "subject-grid" });
     (HV.subjects || []).forEach(function (sub) {
       var mine = HV.catalog.filter(function (ex) { return ex.child === child && subjectOf(ex) === sub.id; });

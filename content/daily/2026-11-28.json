@@ -1,56 +1,56 @@
 {
   "date": "2026-11-28",
   "praise": [
-    "Elsa khen Mon đánh vần bút, nút, lạc thật rõ!",
+    "Elsa khen Mon đếm cách năm thật rõ!",
     "Rapunzel khen Mon ghép vần ut, ac giỏi quá!",
-    "Pom nhảy tưng tưng vì Mon đọc xe, dê, lê!",
-    "Mẹ Vy ôm Gin vì Gin nhớ chữ p, q, x!",
-    "Bố Hà vỗ tay vì Mon đọc nhạc, khác, chút!",
-    "Brilliant, Mon! Elsa cheers for you!",
-    "Superb, Gin! Pom claps for the turtle!",
-    "Terrific, Mon! Rapunzel loves your reading!",
-    "Yippee, Gin! The dolphin and the zebra cheer!"
+    "Pom vẫy đuôi vì Mon đọc chút, nhạc, khác!",
+    "Gin ơi siêu anh hùng chạm đúng hồng hạc!",
+    "Bố Hà vỗ tay vì Gin nhớ chữ p, q, x!",
+    "Bingo, Mon! Elsa loves your counting!",
+    "Hurrah, Mon! Rapunzel claps for you!",
+    "Bingo, little hero! The kangaroo cheers!",
+    "Hurrah, superhero! The eagle is proud!"
   ],
   "memory": [
     {
-      "id": "daily-2026-11-28-gin-sea",
+      "id": "daily-2026-11-28-gin-wild",
       "child": "gin",
-      "title": "Rùa, cá heo, bướm và xe tải",
+      "title": "Hồng hạc, chuột túi, tê giác và đại bàng",
       "pairs": [
         {
-          "id": "turtle",
+          "id": "flamingo",
           "a": {
-            "emoji": "🐢"
+            "emoji": "🦩"
           },
           "b": {
-            "text": "rùa"
+            "text": "hồng hạc"
           }
         },
         {
-          "id": "dolphin",
+          "id": "kangaroo",
           "a": {
-            "emoji": "🐬"
+            "emoji": "🦘"
           },
           "b": {
-            "text": "cá heo"
+            "text": "chuột túi"
           }
         },
         {
-          "id": "butterfly",
+          "id": "rhino",
           "a": {
-            "emoji": "🦋"
+            "emoji": "🦏"
           },
           "b": {
-            "text": "bướm"
+            "text": "tê giác"
           }
         },
         {
-          "id": "truck",
+          "id": "eagle",
           "a": {
-            "emoji": "🚚"
+            "emoji": "🦅"
           },
           "b": {
-            "text": "xe tải"
+            "text": "đại bàng"
           }
         }
       ]
@@ -449,25 +449,25 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "bốn, tám, mười hai, mười sáu. Số tiếp theo là số nào?",
-          "explain": "Mỗi lần thêm bốn. Đếm thêm bốn từ mười sáu: mười bảy, mười tám, mười chín, hai mươi.",
+          "speak": "sáu, mười, mười bốn, mười tám. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm bốn. Đếm thêm bốn từ mười tám: mười chín, hai mươi, hai mươi mốt, hai mươi hai.",
           "scene": {
             "layout": "equation",
-            "text": "4 , 8 , 12 , 16 , ?"
+            "text": "6 , 10 , 14 , 18 , ?"
           },
           "columns": 3,
           "variant": "",
           "choices": [
             {
-              "text": "24",
+              "text": "20",
               "correct": false
             },
             {
-              "text": "20",
+              "text": "22",
               "correct": true
             },
             {
-              "text": "18",
+              "text": "24",
               "correct": false
             }
           ]
@@ -476,25 +476,25 @@
           "kind": "choice",
           "lang": "vi",
           "prompt": "Chọn số tiếp theo",
-          "speak": "hai mươi, mười tám, mười sáu, mười bốn. Số tiếp theo là số nào?",
-          "explain": "Mỗi lần bớt hai. Đếm lùi hai từ mười bốn: mười ba, mười hai.",
+          "speak": "bốn, chín, mười bốn, mười chín. Số tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm năm. Đếm thêm năm từ mười chín: hai mươi, hai mươi mốt, hai mươi hai, hai mươi ba, hai mươi tư.",
           "scene": {
             "layout": "equation",
-            "text": "20 , 18 , 16 , 14 , ?"
+            "text": "4 , 9 , 14 , 19 , ?"
           },
           "columns": 3,
           "variant": "",
           "choices": [
             {
-              "text": "12",
+              "text": "24",
               "correct": true
             },
             {
-              "text": "10",
+              "text": "23",
               "correct": false
             },
             {
-              "text": "13",
+              "text": "25",
               "correct": false
             }
           ]
@@ -503,7 +503,7 @@
           "kind": "keypad",
           "prompt": "Điền số còn thiếu",
           "speak": "mười cộng số nào bằng hai mươi?",
-          "explain": "10 + 10 = 20",
+          "explain": "Mười cộng số nào bằng hai mươi. Đếm thêm mười từ mười: mười một, mười hai, mười ba, mười bốn, mười lăm, mười sáu, mười bảy, mười tám, mười chín, hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
@@ -516,7 +516,7 @@
           "kind": "keypad",
           "prompt": "Điền số còn thiếu",
           "speak": "mười tám cộng số nào bằng hai mươi?",
-          "explain": "18 + 2 = 20",
+          "explain": "Mười tám cộng số nào bằng hai mươi. Đếm thêm hai từ mười tám: mười chín, hai mươi.",
           "scene": {
             "layout": "bond",
             "whole": 20,
@@ -529,7 +529,7 @@
           "kind": "keypad",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. năm cộng số còn thiếu bằng mười ba",
-          "explain": "5 + 8 = 13",
+          "explain": "Năm cộng số còn thiếu bằng mười ba. Đếm thêm tám từ năm: sáu, bảy, tám, chín, mười, mười một, mười hai, mười ba.",
           "scene": {
             "layout": "equation",
             "text": "5 + ? = 13"
@@ -541,7 +541,7 @@
           "kind": "keypad",
           "prompt": "Điền số vào ô trống",
           "speak": "Tìm số còn thiếu. ba cộng số còn thiếu bằng sáu",
-          "explain": "3 + 3 = 6",
+          "explain": "Ba cộng ba bằng sáu. Đếm thêm ba từ ba: bốn, năm, sáu.",
           "scene": {
             "layout": "equation",
             "text": "? + 3 = 6"
@@ -553,7 +553,7 @@
           "kind": "choice",
           "prompt": "Số nào khác các số còn lại?",
           "speak": "Tìm số không cùng nhóm",
-          "explain": "26 không thuộc dãy đếm cách 5.",
+          "explain": "Năm mươi, bốn mươi, ba mươi đếm cách mười. Hai mươi sáu không nằm trong dãy đó.",
           "scene": null,
           "variant": "",
           "columns": 2,
@@ -600,7 +600,7 @@
           "kind": "choice",
           "prompt": "Phép nào có kết quả lớn hơn?",
           "speak": "Phép nào lớn hơn? một cộng tám, hay một cộng sáu?",
-          "explain": "1 + 8 = 9, lớn hơn.",
+          "explain": "Một cộng tám bằng chín. Một cộng sáu bằng bảy. Chín lớn hơn bảy.",
           "scene": null,
           "variant": "cards",
           "columns": 2,
@@ -629,7 +629,7 @@
           "kind": "choice",
           "prompt": "Phép nào có kết quả lớn hơn?",
           "speak": "Phép nào lớn hơn? bảy trừ một, hay bảy cộng năm?",
-          "explain": "7 + 5 = 12, lớn hơn.",
+          "explain": "Bảy trừ một bằng sáu. Bảy cộng năm bằng mười hai. Mười hai lớn hơn sáu.",
           "scene": null,
           "variant": "cards",
           "columns": 2,
@@ -669,7 +669,7 @@
           "kind": "choice",
           "prompt": "Số liền trước của 7 là số nào?",
           "speak": "Số liền trước của bảy là số nào?",
-          "explain": "Số liền trước là 6.",
+          "explain": "Đếm lùi một từ bảy được sáu. Sáu là số liền trước của bảy.",
           "scene": {
             "layout": "equation",
             "text": "7"
@@ -719,7 +719,7 @@
           "kind": "choice",
           "prompt": "Số liền sau của 30 là số nào?",
           "speak": "Số liền sau của ba mươi là số nào?",
-          "explain": "Số liền sau là 31.",
+          "explain": "Đếm thêm một từ ba mươi được ba mươi mốt. Ba mươi mốt là số liền sau.",
           "scene": {
             "layout": "equation",
             "text": "30"
@@ -833,7 +833,7 @@
           "kind": "choice",
           "prompt": "Số nào lớn hơn?",
           "speak": "Trong hai số này, số nào lớn hơn?",
-          "explain": "100 lớn hơn.",
+          "explain": "So một trăm với tám mươi. Một trăm nhiều hơn tám mươi, nên một trăm lớn hơn.",
           "scene": null,
           "variant": "cards",
           "columns": 2,
@@ -862,7 +862,7 @@
           "kind": "choice",
           "prompt": "Số nào nhỏ hơn?",
           "speak": "Trong hai số này, số nào nhỏ hơn?",
-          "explain": "77 nhỏ hơn.",
+          "explain": "So bảy mươi bảy với chín mươi tám. Bảy mươi bảy ít hơn, nên bảy mươi bảy nhỏ hơn.",
           "scene": null,
           "variant": "cards",
           "columns": 2,
@@ -890,26 +890,17 @@
         {
           "kind": "choice",
           "prompt": "Đếm cách 2. Số tiếp theo là số nào?",
-          "speak": "Đếm cách hai. hai, bốn, sáu, tám. Tiếp theo là số nào?",
-          "explain": "Thêm 2 được 10.",
+          "speak": "Đếm cách hai. một, ba, năm, bảy. Tiếp theo là số nào?",
+          "explain": "Mỗi lần thêm hai. Đếm thêm hai từ bảy: tám, chín.",
           "scene": {
             "layout": "equation",
-            "text": "2 , 4 , 6 , 8 , ?"
+            "text": "1 , 3 , 5 , 7 , ?"
           },
           "variant": "",
           "columns": 3,
           "choices": [
             {
-              "text": "11",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "9",
+              "text": "8",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -924,6 +915,15 @@
               "shape": "",
               "color": "",
               "size": 0,
+              "correct": false
+            },
+            {
+              "text": "9",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "",
+              "size": 0,
               "correct": true
             }
           ]
@@ -932,7 +932,7 @@
           "kind": "keypad",
           "prompt": "Số này có bao nhiêu đơn vị?",
           "speak": "Nhìn các chấm đơn vị. Có bao nhiêu đơn vị?",
-          "explain": "Có 9 đơn vị. Số là 29.",
+          "explain": "Đếm các chấm đơn vị, không đếm thanh chục. Có chín chấm, nên có chín đơn vị.",
           "scene": {
             "layout": "blocks",
             "tens": 2,
@@ -945,7 +945,7 @@
           "kind": "keypad",
           "prompt": "Số này có bao nhiêu chục?",
           "speak": "Nhìn các thanh chục. Có bao nhiêu chục?",
-          "explain": "Có 8 chục. Số là 88.",
+          "explain": "Đếm các thanh chục. Có tám thanh, nên có tám chục.",
           "scene": {
             "layout": "blocks",
             "tens": 8,
@@ -958,13 +958,13 @@
           "kind": "keypad",
           "prompt": "Số này có bao nhiêu chục?",
           "speak": "Nhìn các thanh chục. Có bao nhiêu chục?",
-          "explain": "Có 8 chục. Số là 81.",
+          "explain": "Đếm các thanh chục. Có bảy thanh, nên có bảy chục. Các chấm lẻ không tính vào chục.",
           "scene": {
             "layout": "blocks",
-            "tens": 8,
-            "ones": 1
+            "tens": 7,
+            "ones": 4
           },
-          "answer": 8,
+          "answer": 7,
           "maxDigits": 2
         }
       ]
@@ -3965,13 +3965,13 @@
           "kind": "choice",
           "prompt": "Chạm vào màu giống",
           "speak": "Chạm vào màu giống hình này",
-          "explain": "Đây là màu xanh dương.",
+          "explain": "Hình mẫu màu hồng. Chạm vào màu hồng.",
           "scene": {
             "layout": "shapes",
             "shapes": [
               {
                 "shape": "circle",
-                "color": "#3b82f6",
+                "color": "#ec4899",
                 "size": 130
               }
             ]
@@ -3989,22 +3989,22 @@
               "correct": false
             },
             {
-              "text": "đỏ",
+              "text": "hồng",
               "emoji": "",
               "emojis": null,
               "shape": "",
-              "color": "#ef4444",
-              "size": 0,
-              "correct": false
-            },
-            {
-              "text": "xanh dương",
-              "emoji": "",
-              "emojis": null,
-              "shape": "",
-              "color": "#3b82f6",
+              "color": "#ec4899",
               "size": 0,
               "correct": true
+            },
+            {
+              "text": "vàng",
+              "emoji": "",
+              "emojis": null,
+              "shape": "",
+              "color": "#eab308",
+              "size": 0,
+              "correct": false
             }
           ]
         },
@@ -4109,15 +4109,15 @@
           "kind": "choice",
           "prompt": "Quả bóng đang ở đâu?",
           "speak": "Quả bóng đang ở đâu?",
-          "explain": "Quả bóng ở phía dưới.",
+          "explain": "Quả bóng ở phía trên. Mây ở phía dưới.",
           "scene": {
             "layout": "zones",
             "zones": [
               {
-                "emoji": "☁️"
+                "emoji": "⚽"
               },
               {
-                "emoji": "⚽"
+                "emoji": "☁️"
               }
             ]
           },
@@ -4131,7 +4131,7 @@
               "shape": "",
               "color": "",
               "size": 0,
-              "correct": false
+              "correct": true
             },
             {
               "text": "Ở dưới",
@@ -4140,7 +4140,7 @@
               "shape": "",
               "color": "",
               "size": 0,
-              "correct": true
+              "correct": false
             }
           ]
         },
@@ -4186,13 +4186,13 @@
           "kind": "choice",
           "prompt": "Hình này có mấy cạnh?",
           "speak": "Đếm các cạnh. Hình này có mấy cạnh?",
-          "explain": "hình tam giác có 3 cạnh.",
+          "explain": "Hình vuông có bốn cạnh. Đếm: một, hai, ba, bốn.",
           "scene": {
             "layout": "shapes",
             "shapes": [
               {
-                "shape": "triangle",
-                "color": "#a855f7",
+                "shape": "square",
+                "color": "#3b82f6",
                 "size": 140
               }
             ]
@@ -4201,7 +4201,7 @@
           "columns": 2,
           "choices": [
             {
-              "text": "3",
+              "text": "4",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -4210,7 +4210,7 @@
               "correct": true
             },
             {
-              "text": "4",
+              "text": "3",
               "emoji": "",
               "emojis": null,
               "shape": "",
@@ -4513,35 +4513,35 @@
       "child": "gin",
       "subject": "english",
       "category": "listen",
-      "title": "Turtle, dolphin, and butterfly",
+      "title": "Flamingo, kangaroo, and eagle",
       "subtitle": "Tap what you hear",
-      "icon": "🐢",
+      "icon": "🦩",
       "questions": [
         {
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the turtle.",
-          "explain": "It is the turtle.",
+          "speak": "Tap the flamingo.",
+          "explain": "It is the flamingo.",
           "choices": [
             {
-              "emoji": "🦋",
-              "label": "butterfly",
-              "correct": false
-            },
-            {
-              "emoji": "🐢",
-              "label": "turtle",
+              "emoji": "🦩",
+              "label": "flamingo",
               "correct": true
             },
             {
-              "emoji": "🐌",
-              "label": "snail",
+              "emoji": "🦘",
+              "label": "kangaroo",
               "correct": false
             },
             {
-              "emoji": "🐞",
-              "label": "ladybug",
+              "emoji": "🦝",
+              "label": "raccoon",
+              "correct": false
+            },
+            {
+              "emoji": "🐹",
+              "label": "hamster",
               "correct": false
             }
           ],
@@ -4552,89 +4552,27 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the dolphin.",
-          "explain": "It is the dolphin.",
+          "speak": "Tap the kangaroo.",
+          "explain": "It is the kangaroo.",
           "choices": [
             {
-              "emoji": "🐊",
-              "label": "crocodile",
+              "emoji": "🦏",
+              "label": "rhino",
               "correct": false
             },
             {
-              "emoji": "🐞",
-              "label": "ladybug",
-              "correct": false
-            },
-            {
-              "emoji": "🕷️",
-              "label": "spider",
-              "correct": false
-            },
-            {
-              "emoji": "🐬",
-              "label": "dolphin",
-              "correct": true
-            }
-          ],
-          "columns": 2,
-          "variant": "cards"
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the butterfly.",
-          "explain": "It is the butterfly.",
-          "choices": [
-            {
-              "emoji": "🐌",
-              "label": "snail",
-              "correct": false
-            },
-            {
-              "emoji": "🐊",
-              "label": "crocodile",
-              "correct": false
-            },
-            {
-              "emoji": "🦓",
-              "label": "zebra",
-              "correct": false
-            },
-            {
-              "emoji": "🦋",
-              "label": "butterfly",
-              "correct": true
-            }
-          ],
-          "columns": 2,
-          "variant": "cards"
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the giraffe.",
-          "explain": "It is the giraffe.",
-          "choices": [
-            {
-              "emoji": "🦓",
-              "label": "zebra",
-              "correct": false
-            },
-            {
-              "emoji": "🐝",
-              "label": "bee",
-              "correct": false
-            },
-            {
-              "emoji": "🦒",
-              "label": "giraffe",
+              "emoji": "🦘",
+              "label": "kangaroo",
               "correct": true
             },
             {
-              "emoji": "🐌",
-              "label": "snail",
+              "emoji": "🦦",
+              "label": "otter",
+              "correct": false
+            },
+            {
+              "emoji": "🐺",
+              "label": "wolf",
               "correct": false
             }
           ],
@@ -4645,27 +4583,27 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the zebra.",
-          "explain": "It is the zebra.",
+          "speak": "Tap the rhino.",
+          "explain": "It is the rhino.",
           "choices": [
             {
-              "emoji": "🦓",
-              "label": "zebra",
+              "emoji": "🦅",
+              "label": "eagle",
+              "correct": false
+            },
+            {
+              "emoji": "🦎",
+              "label": "lizard",
+              "correct": false
+            },
+            {
+              "emoji": "🦏",
+              "label": "rhino",
               "correct": true
             },
             {
-              "emoji": "🐊",
-              "label": "crocodile",
-              "correct": false
-            },
-            {
-              "emoji": "🐢",
-              "label": "turtle",
-              "correct": false
-            },
-            {
-              "emoji": "🦒",
-              "label": "giraffe",
+              "emoji": "🦭",
+              "label": "seal",
               "correct": false
             }
           ],
@@ -4676,58 +4614,27 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the crocodile.",
-          "explain": "It is the crocodile.",
+          "speak": "Tap the eagle.",
+          "explain": "It is the eagle.",
           "choices": [
             {
-              "emoji": "🦓",
-              "label": "zebra",
+              "emoji": "🦝",
+              "label": "raccoon",
               "correct": false
             },
             {
-              "emoji": "🐊",
-              "label": "crocodile",
-              "correct": true
-            },
-            {
-              "emoji": "🦒",
-              "label": "giraffe",
+              "emoji": "🐹",
+              "label": "hamster",
               "correct": false
             },
             {
-              "emoji": "🐢",
-              "label": "turtle",
-              "correct": false
-            }
-          ],
-          "columns": 2,
-          "variant": "cards"
-        },
-        {
-          "kind": "choice",
-          "lang": "en",
-          "prompt": "Tap what you hear",
-          "speak": "Tap the snail.",
-          "explain": "It is the snail.",
-          "choices": [
-            {
-              "emoji": "🦋",
-              "label": "butterfly",
+              "emoji": "🦩",
+              "label": "flamingo",
               "correct": false
             },
             {
-              "emoji": "🐬",
-              "label": "dolphin",
-              "correct": false
-            },
-            {
-              "emoji": "🐢",
-              "label": "turtle",
-              "correct": false
-            },
-            {
-              "emoji": "🐌",
-              "label": "snail",
+              "emoji": "🦅",
+              "label": "eagle",
               "correct": true
             }
           ],
@@ -4738,27 +4645,27 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the spider.",
-          "explain": "It is the spider.",
+          "speak": "Tap the raccoon.",
+          "explain": "It is the raccoon.",
           "choices": [
             {
-              "emoji": "🦓",
-              "label": "zebra",
-              "correct": false
-            },
-            {
-              "emoji": "🕷️",
-              "label": "spider",
+              "emoji": "🦝",
+              "label": "raccoon",
               "correct": true
             },
             {
-              "emoji": "🐝",
-              "label": "bee",
+              "emoji": "🦦",
+              "label": "otter",
               "correct": false
             },
             {
-              "emoji": "🐬",
-              "label": "dolphin",
+              "emoji": "🐺",
+              "label": "wolf",
+              "correct": false
+            },
+            {
+              "emoji": "🦘",
+              "label": "kangaroo",
               "correct": false
             }
           ],
@@ -4769,27 +4676,27 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the bee.",
-          "explain": "It is the bee.",
+          "speak": "Tap the otter.",
+          "explain": "It is the otter.",
           "choices": [
             {
-              "emoji": "🐬",
-              "label": "dolphin",
+              "emoji": "🦎",
+              "label": "lizard",
               "correct": false
             },
             {
-              "emoji": "🐝",
-              "label": "bee",
+              "emoji": "🦦",
+              "label": "otter",
               "correct": true
             },
             {
-              "emoji": "🐊",
-              "label": "crocodile",
+              "emoji": "🦭",
+              "label": "seal",
               "correct": false
             },
             {
-              "emoji": "🕷️",
-              "label": "spider",
+              "emoji": "🦏",
+              "label": "rhino",
               "correct": false
             }
           ],
@@ -4800,28 +4707,121 @@
           "kind": "choice",
           "lang": "en",
           "prompt": "Tap what you hear",
-          "speak": "Tap the ladybug.",
-          "explain": "It is the ladybug.",
+          "speak": "Tap the lizard.",
+          "explain": "It is the lizard.",
           "choices": [
             {
-              "emoji": "🦒",
-              "label": "giraffe",
+              "emoji": "🐹",
+              "label": "hamster",
               "correct": false
             },
             {
-              "emoji": "🦓",
-              "label": "zebra",
+              "emoji": "🦩",
+              "label": "flamingo",
               "correct": false
             },
             {
-              "emoji": "🐬",
-              "label": "dolphin",
-              "correct": false
-            },
-            {
-              "emoji": "🐞",
-              "label": "ladybug",
+              "emoji": "🦎",
+              "label": "lizard",
               "correct": true
+            },
+            {
+              "emoji": "🦅",
+              "label": "eagle",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the hamster.",
+          "explain": "It is the hamster.",
+          "choices": [
+            {
+              "emoji": "🐺",
+              "label": "wolf",
+              "correct": false
+            },
+            {
+              "emoji": "🦘",
+              "label": "kangaroo",
+              "correct": false
+            },
+            {
+              "emoji": "🦝",
+              "label": "raccoon",
+              "correct": false
+            },
+            {
+              "emoji": "🐹",
+              "label": "hamster",
+              "correct": true
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the wolf.",
+          "explain": "It is the wolf.",
+          "choices": [
+            {
+              "emoji": "🐺",
+              "label": "wolf",
+              "correct": true
+            },
+            {
+              "emoji": "🦭",
+              "label": "seal",
+              "correct": false
+            },
+            {
+              "emoji": "🦏",
+              "label": "rhino",
+              "correct": false
+            },
+            {
+              "emoji": "🦦",
+              "label": "otter",
+              "correct": false
+            }
+          ],
+          "columns": 2,
+          "variant": "cards"
+        },
+        {
+          "kind": "choice",
+          "lang": "en",
+          "prompt": "Tap what you hear",
+          "speak": "Tap the seal.",
+          "explain": "It is the seal.",
+          "choices": [
+            {
+              "emoji": "🦩",
+              "label": "flamingo",
+              "correct": false
+            },
+            {
+              "emoji": "🦭",
+              "label": "seal",
+              "correct": true
+            },
+            {
+              "emoji": "🦅",
+              "label": "eagle",
+              "correct": false
+            },
+            {
+              "emoji": "🦎",
+              "label": "lizard",
+              "correct": false
             }
           ],
           "columns": 2,
