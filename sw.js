@@ -1,4 +1,4 @@
-var CACHE = "hoc-vui-v65";
+var CACHE = "hoc-vui-v66";
 var ASSETS = [
   "./",
   "./index.html",
@@ -27,7 +27,9 @@ var ASSETS = [
   "./content/weekly/2026-11-07.json",
   "./content/weekly/2026-11-14.json",
   "./content/weekly/2026-11-21.json",
+  "./content/weekly/2026-11-28.json",
   "./content/daily/2026-11-21.json",
+  "./content/daily/2026-11-28.json",
   "./js/firebase-sync.js",
   "./content/daily/2026-11-02.json",
   "./content/daily/2026-11-05.json",
